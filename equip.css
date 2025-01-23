@@ -14,8 +14,9 @@
 }
 
 #arena[data-alone-equip='off']>.equips-wrap {
-	opacity: 0;
-	left: auto;
+	right: auto;
+	bottom: 0%;
+	left: 0px;
 }
 
 .equips-wrap>.equips-back {

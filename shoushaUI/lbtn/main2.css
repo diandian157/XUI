@@ -103,32 +103,111 @@
     position:fixed;
 }
 
-/*记录*/
-.jiluButton {
+.jiluButton_new1 {
     display: block;
-	width: 80px;
-	height: 58.6px;
+	--w: 70px;
+	--h: 35px;
+	width: var(--w);
+	height: var(--h);
 	position: absolute;
-	bottom: 14%;
-	left: 0;
-	background-image: url("./images/uibutton/jilu.png");
+	bottom: 25%;
+	left: -10px;
+	background-image: url("./images/uibutton/gongneng (1).png");
 	background-size: 100% 100%;
-	border-radius: 10px;
-	z-index:3;
+	border-radius: 1px;
+	z-index:4;
+	margin-left: 10px;
+
 }
 
-/*换肤*/
-.huanfuButton {
+.huanfuButton_new1 {
     display: block;
-	width: 80px;
-	height: 58.6px;
-	position: absolute;
-	bottom: 2%;
-	left: 0;
-	background-image: url("./images/uibutton/jilu_new.png");
+    --w: 60px;
+    --h: 35px;
+    width: var(--w);
+    height: var(--h);
+    position: absolute;
+    bottom: 25%;
+    left: 165px;
+	background-image: url("./images/uibutton/gongneng (3).png");
 	background-size: 100% 100%;
-	border-radius: 10px;
-	z-index:3;
+	border-radius: 1px;
+	z-index:4;
+	margin-left: 10px;
+
+}
+
+.meiguiButton_new1 {
+   display: block;
+   --w: 40px;
+   --h: 35px;
+   width: var(--w);
+   height: var(--h);
+   position: absolute;
+   bottom: 25%;
+   left: 225px;
+   background-image: url("./images/uibutton/gongneng (5).png");
+	background-size: 100% 100%;
+   z-index:3;
+   margin-left: 10px;
+}
+.meiguiButton_new11 {
+   display: block;
+   --w: 30px;
+   --h: 35px;
+   width: var(--w);
+   height: var(--h);
+   position: absolute;
+   bottom: 25%;
+   left: 265px;
+   background-image: url("./images/uibutton/gongneng (6).png");
+	background-size: 100% 100%;
+   z-index:3;
+   margin-left: 10px;
+}
+
+.xiaolianButton_new1 {
+  display: block;
+  --w: 45px;
+  --h: 35px;
+  width: var(--w);
+  height: var(--h);
+  position: absolute;
+  bottom: 25%;
+  left: 60px;
+  background-image: url("./images/uibutton/gongneng (4).png");
+  background-size: 100% 100%;
+  z-index:3;
+  margin-left: 10px;
+}
+
+
+
+.juliButton_new1 {
+    display: block;
+	--w: 60px;
+	--h: 35px;
+	width: var(--w);
+	height: var(--h);
+	position: absolute;
+	bottom: 25%;
+	left: 105px;
+	background-image: url("./images/uibutton/gongneng (2).png");
+	background-size: 100% 100%;
+	border-radius: 1px;
+	z-index:4;
+	margin-left: 10px;
+
+}
+.bujianSbj1Button_new {
+	--h: 4%;
+	width: 109%;
+	height: var(--h);
+	bottom: 98.1%;
+	left: -7%;
+	background-image: url("./images/uibutton/xinshahengfu.png");
+	background-size: 100% 100%;
+
 }
 
 

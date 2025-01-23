@@ -370,8 +370,17 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
         /*ui.create.div('.lbtn-controls', ui.arena);*/
         //-------原版---------//
         if (lib.config.extension_十周年UI_XPJ == "on") {
-          var node5 = ui.create.div('.huanfuButton', ui.arena, plugin.click.huanfu);
-          var node2 = ui.create.div('.jiluButton', ui.arena, ui.click.pause);
+          var node63 = ui.create.div('.bujianbjButton_new', ui.arena);
+          var node623 = ui.create.div('.bujianSbjButton_new', ui.arena);
+          var node633 = ui.create.div('.fanhuibjButton_new', ui.arena);
+          var node6 = ui.create.div('.huanfuButton_new', ui.arena, ui.click.auto);
+          var node7 = ui.create.div('.jiluButton_new', ui.arena, ui.click.pause);
+          var node8 = ui.create.div('.meiguiButton_new', ui.arena);
+          var node9 = ui.create.div('.xiaolianButton_new', ui.arena);
+          var node61 = ui.create.div('.juliButton_new', ui.arena);
+          var node72 = ui.create.div('.luxiangButton_new', ui.arena);
+          var node83 = ui.create.div('.touxiangButton_new', ui.arena);
+          var node94 = ui.create.div('.huatongButton_new', ui.arena);
           //-------------------//
         } else {
           //-------新版----------//

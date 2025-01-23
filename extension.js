@@ -13,6 +13,73 @@ export default async function () {
 		name,
 		editable: false,
 		content(config, pack) {
+			// 添加出牌音效
+			lib.skill._useCardAudio = {
+				trigger: {
+					player: 'useCard'
+				},
+				forced: true,
+				popup: false,
+				priority: -10,
+				content: function() {
+					// 获取卡牌信息
+					let card = trigger.card;
+					let cardType = get.type(card);
+					let cardName = get.name(card);
+					let cardNature = get.nature(card);
+					
+					// 播放对应音效
+					if(cardType == 'basic') {
+						switch(cardName) {
+							case 'sha':
+								if(cardNature == 'fire') {
+									game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+								} else if(cardNature == 'thunder') {
+									game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+								} else {
+									game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+								}
+								break;
+							case 'shan':
+								game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+								break;
+							case 'tao':
+								game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+								break;
+							case 'jiu':
+								game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+								break;
+							default:
+								game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						}
+					}
+					else if(cardType == 'trick') {
+						if(get.tag(card, 'damage')) {
+							game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						} else if(get.tag(card, 'recover')) {
+							game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						} else {
+							game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						}
+					}
+					else if(cardType == 'equip') {
+						game.playAudio('..', 'extension', '十周年UI', 'audio/armor_equip');
+					}
+					
+					// 添加出牌动画
+					let animation = dcdAnim.playSpine({
+						name: 'effect_card_use',
+						scale: 0.8,
+					}, {
+						parent: player,
+					});
+				}
+			};
+			
+			// 添加到全局技能
+			if(!_status.connectMode) {
+				game.addGlobalSkill('_useCardAudio');
+			}
 			lib.translate.zhangba_skill='丈八';
 			// 添加回合开始音效
 			lib.skill._phaseStartAudio = {
@@ -48,7 +115,7 @@ export default async function () {
 			    // 检测点击的是否是菜单按钮
 			    if(target.classList.contains('menubutton') || 
 			       target.classList.contains('button')) {
-			        game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
+			        game.playAudio('..', 'extension', '十周年UI', 'audio/card_click');
 			    }
 			});
 			// 添加按钮点击反馈
@@ -151,19 +218,6 @@ export default async function () {
 			    player.ChupaizhishiXObserver = ChupaizhishiXObserver;
 			});
 			//-----------目标选中---------//
-			if(config.shoupaikeshi){
-				lib.skill._shoupaikeshi={
-					mode: ["doudizhu",'versus','boss'],
-					locked: true,
-					ai: {
-					    viewHandcard: true,
-					    skillTagFilter: function (player, tag, arg) {
-					        if (game.me == arg) return false;
-					        if (!game.me.getFriends().contains(arg)) return false;
-					    },
-					},
-				};
-			};
 			// 卡牌边框美化
 			if (true) {
 			  if (lib.config.extension_十周年UI_cardkmh && lib.config.extension_十周年UI_cardkmh != "off") {
@@ -11131,133 +11185,11 @@ export default async function () {
 				name: '调试助手(开发用)',
 				init: false,
 			},
-			rightLayout: {
-				name: '右手布局',
-				init: true,
-				update: function () {
-					if (window.decadeUI) ui.arena.dataset.rightLayout = lib.config['extension_十周年UI_rightLayout'] ? 'on' : 'off';
-				}
-			},
-			cardPrettify: {
-				name: '卡牌美化(需重启)',
-				init: 'png',
-				item: {
-					off: '关闭',
-					webp: '彩色卡牌',
-					png: '原十周年',
-					jpg: '新十周年',
-				}
-			},
-			cardkmh: {
-			  name: "卡牌边框(需重启)",
-			  intro: '参考扩展武将美化，重启生效。',
-			  init: "off",
-			  item: {
-			    "off": "关闭",
-			    'kuang1': '大司马',
-			    'kuang2': '大将军',
-			    'kuang3': '国都护',
-			  },
-			},
-			chupaizhishi: {
-				name: '出牌指示特效(需重启)',
-				intro: '此选项可以切换目标指示特效，根据个人喜好自行切换，重启生效',
-			    init: 'dasima',
-				item:{
-				    jiangjun:'将军',
-				    weijiangjun:'卫将军',
-				    cheqijiangjun:'车骑将军',
-				    biaoqijiangjun:'骠骑将军',
-				    dajiangjun:'大将军',
-			        dasima:'大司马',
-					off:'关闭',
-			    },
-				update: function () {
-					if (window.decadeUI) ui.arena.dataset.chupaizhishi = lib.config['extension_十周年UI_chupaizhishi'];
-				}
-			},
-			dynamicBackground: {
-				name: '动态背景',
-				init: 'skin_xiaosha_default',
-				item: {
-					off: '关闭',
-					skin_xiaosha_default: '小杀',
-					skin_chengzhu_城主边框: '城主边框(自行调参数)',
-					skin_caojinyu_惊鸿: '曹金玉-惊鸿倩影-1',
-					skin_caojinyu_倩影: '曹金玉-惊鸿倩影-2',
-					skin_wangrong_云裳花容: '王蓉-云裳花容',
-					skin_baosanniang_漫花剑俏: '鲍三娘-漫花剑俏',
-					skin_baosanniang_舞剑铸缘: '鲍三娘-舞剑铸缘',
-					skin_caiwenji_才颜双绝: '蔡文姬-才颜双绝',
-					skin_caojie_凤历迎春: '曹　节-凤历迎春',
-					skin_caojie_战场绝版: '曹　节-战场绝版',
-					skin_caoying_巾帼花舞: '曹　婴-巾帼花舞',
-					skin_daqiao_清萧清丽: '大　乔-清萧清丽',
-					skin_daqiao_衣垂绿川: '大　乔-衣垂绿川',
-					skin_daqiao_战场绝版: '大　乔-战场绝版',
-					skin_daqiaoxiaoqiao_战场绝版: '大乔小乔-战场绝版',
-					skin_diaochan_玉婵仙子: '貂　蝉-玉婵仙子',
-					skin_diaochan_战场绝版: '貂　蝉-战场绝版',
-					skin_dongbai_娇俏伶俐: '董　白-娇俏伶俐',
-					skin_fuhuanghou_万福千灯: '伏皇后-万福千灯',
-					skin_fanyufeng_斟酒入情: '樊玉凤-斟酒入情',
-					skin_guozhao_雍容尊雅: '郭　照-雍容尊雅',
-					skin_huaman_花俏蛮娇: '花　鬘-花俏蛮娇',
-					skin_huaman_经典形象: '花　鬘-经典形象',
-					skin_hetaihou_鸩毒除患: '何太后-鸩毒除患',
-					skin_hetaihou_蛇蝎为心: '何太后-蛇蝎为心',
-					skin_hetaihou_耀紫迷幻: '何太后-耀紫迷幻',
-					skin_lukang_毁堰破晋: '陆　抗-毁堰破晋',
-					skin_luxun_谋定天下: '陆　逊-谋定天下',
-					skin_luxunlvmeng_清雨踏春: '陆逊吕蒙-清雨踏春',
-					skin_mayunlu_战场绝版: '马云騄-战场绝版',
-					skin_sundengzhoufei_鹊星夕情: '孙登周妃-鹊星夕情',
-					skin_sunluban_宵靥谜君: '孙鲁班-宵靥谜君',
-					skin_sunluyu_娇俏伶俐: '孙鲁育-娇俏伶俐',
-					skin_shuxiangxiang_花好月圆: '蜀香香-花好月圆',
-					skin_shuxiangxiang_花曳心牵: '蜀香香-花曳心牵',
-					skin_wangrong_云裳花容: '王　荣-云裳花容',
-					skin_wangyi_绝色异彩: '王　异-绝色异彩',
-					skin_wangyi_战场绝版: '王　异-战场绝版',
-					skin_wolongzhuge_隆中陇亩: '卧龙诸葛-隆中陇亩',
-					skin_wuxian_锦运福绵: '吴　苋-锦运福绵',
-					skin_wuxian_金玉满堂: '吴　苋-金玉满堂',
-					skin_xiahoushi_端华夏莲: '夏侯氏-端华夏莲',
-					skin_xiahoushi_战场绝版: '夏侯氏-战场绝版',
-					skin_xiaoqiao_花好月圆: '小　乔-花好月圆',
-					skin_xiaoqiao_采莲江南: '小　乔-采莲江南',
-					skin_xinxianying_英装素果: '辛宪英-英装素果',
-					skin_xushi_拈花思君: '徐　氏-拈花思君',
-					skin_xushi_为夫弑敌: '徐　氏-为夫弑敌',
-					skin_zhangchangpu_钟桂香蒲: '张昌蒲-钟桂香蒲',
-					skin_zhangchunhua_花好月圆: '张春华-花好月圆',
-					skin_zhangchunhua_战场绝版: '张春华-战场绝版',
-					skin_zhoufei_晴空暖鸢: '周　妃-晴空暖鸢',
-					skin_zhangqiying_逐鹿天下: '张琪瑛-逐鹿天下',
-					skin_zhangqiying_岁稔年丰: '张琪瑛-岁稔年丰',
-					skin_zhenji_才颜双绝: '甄　姬-才颜双绝',
-					skin_zhenji_洛神御水: '甄　姬-洛神御水',
-					skin_zhugeguo_兰荷艾莲: '诸葛果-兰荷艾莲',
-					skin_zhugeguo_仙池起舞: '诸葛果-仙池起舞',
-					skin_zhugeguo_英装素果: '诸葛果-英装素果',
-					skin_zhugeliang_空城退敌: '诸葛亮-空城退敌',
-					skin_zhouyi_剑舞浏漓: '周　夷-剑舞浏漓',
-					skin_zhangxingcai_凯旋星花: '张星彩-凯旋星花',
-				},
-				update: function () {
-					if (!window.decadeUI) return;
-
-					var item = lib.config['extension_十周年UI_dynamicBackground'];
-					if (!item || item == 'off') {
-						decadeUI.backgroundAnimation.stopSpineAll();
-					}
-					else {
-						var name = item.split('_');
-						var skin = name.splice(name.length - 1, 1)[0]
-						name = name.join('_')
-						decadeUI.backgroundAnimation.play(name, skin);
-					}
-				}
+			FL110: {
+				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
+				"intro": "",
+				"init": true,
+				"clear": true,
 			},
 			dynamicSkin: {
 				name: '动态皮肤',
@@ -11265,7 +11197,7 @@ export default async function () {
 			},
 			dynamicSkinOutcrop: {
 				name: '动皮露头',
-				init: false,
+				init: true,
 				update: function () {
 					if (window.decadeUI) {
 						var enable = lib.config['extension_十周年UI_dynamicSkinOutcrop'];
@@ -11327,14 +11259,14 @@ export default async function () {
 			},
 			playerLineEffect: {
 				name: '玩家指示线特效',
-				init: true,
+				init: false,
 				onclick: function (value) {
 					game.saveConfig('extension_十周年UI_playerLineEffect', value);
 					if (window.decadeUI) decadeUI.config.playerLineEffect = value;
 				},
 			},
 			outcropSkin: {
-				name: "十周年样式露头(需对应素材)",
+				name: "十周年样式露头",
 				init: false,
 				update: function () {
 				  if (window.decadeUI)
@@ -11393,6 +11325,74 @@ export default async function () {
 					}
 				},
 			},
+			gainSkillsVisible: {
+				name: "获得技能显示",
+				init: "off",
+				item: {
+					on: "显示",
+					off: "不显示",
+					othersOn: "显示他人",
+				},
+				update() {
+					if (window.decadeUI) ui.arena.dataset.gainSkillsVisible = lib.config["extension_十周年UI_gainSkillsVisible"];
+				},
+			},
+			FL45: {
+				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
+				"intro": "",
+				"init": true,
+				"clear": true,
+			},
+			duijuetwo: {
+			  name: '22布局',
+			  init: true,
+			  intro:'开启后，还原pc端十周年22新布局（改自武将美化做适配），重启生效。',
+			},
+			rightLayout: {
+				name: '右手布局',
+				init: true,
+				update: function () {
+					if (window.decadeUI) ui.arena.dataset.rightLayout = lib.config['extension_十周年UI_rightLayout'] ? 'on' : 'off';
+				}
+			},
+			cardPrettify: {
+				name: '卡牌美化',
+				init: 'jpg',
+				item: {
+					off: '关闭',
+					webp: '彩色卡牌',
+					png: '原十周年',
+					jpg: '新十周年',
+				}
+			},
+			cardkmh: {
+			  name: "卡牌边框",
+			  intro: '参考扩展武将美化，重启生效。',
+			  init: "off",
+			  item: {
+			    "off": "关闭",
+			    'kuang1': '大司马',
+			    'kuang2': '大将军',
+			    'kuang3': '国都护',
+			  },
+			},
+			chupaizhishi: {
+				name: '出牌指示特效',
+				intro: '此选项可以切换目标指示特效，根据个人喜好自行切换，重启生效',
+			    init: 'off',
+				item:{
+				    jiangjun:'将军',
+				    weijiangjun:'卫将军',
+				    cheqijiangjun:'车骑将军',
+				    biaoqijiangjun:'骠骑将军',
+				    dajiangjun:'大将军',
+			        dasima:'大司马',
+					off:'关闭',
+			    },
+				update: function () {
+					if (window.decadeUI) ui.arena.dataset.chupaizhishi = lib.config['extension_十周年UI_chupaizhishi'];
+				}
+			},
 			borderLevel: {
 				name: '玩家边框等阶',
 				init: 'five',
@@ -11407,18 +11407,6 @@ export default async function () {
 					if (window.decadeUI) ui.arena.dataset.borderLevel = lib.config['extension_十周年UI_borderLevel'];
 				}
 			},
-			gainSkillsVisible: {
-				name: "获得技能显示",
-				init: "off",
-				item: {
-					on: "显示",
-					off: "不显示",
-					othersOn: "显示他人",
-				},
-				update() {
-					if (window.decadeUI) ui.arena.dataset.gainSkillsVisible = lib.config["extension_十周年UI_gainSkillsVisible"];
-				},
-			},
 			playerMarkStyle: {
 				name: '人物标记样式',
 				init: 'decade',
@@ -11430,8 +11418,8 @@ export default async function () {
 				}
 			},
 			newDecadeStyle: {
-				name: '<b><font color="#FF0000">边框样式/界面布局',
-				intro: '<b><font color="#FF0000">切换武将边框样式和界面布局，初始为十周年样式，根据个人喜好自行切换，选择不同的设置后游戏会自动重启以生效新的设置',
+				name: '切换十周年样式',
+				intro: '初始为新十周年样式，根据个人喜好自行切换，选择不同的设置后游戏会自动重启以生效新的设置',
 				init: "on",
 				item: {
 					othersOn: "旧十周年",
@@ -11452,10 +11440,32 @@ export default async function () {
 					}
 				},
 			},
+			loadingStyle: {
+				name: '更换光标+loading框',
+				intro: '可以更换局内选项框以及光标',
+				init: "othersOff",
+				item: {
+					off: "关闭",
+					on: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog2.png);background-size: 100% 100%;"></div>',
+					On: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog1.png);background-size: 100% 100%;"></div>',
+					othersOn: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog3.png);background-size: 100% 100%;"></div>',
+					othersOff: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog4.png);background-size: 100% 100%;"></div>',
+				},
+				update: function () {
+					if (window.decadeUI) ui.arena.dataset.loadingStyle = lib.config["extension_十周年UI_loadingStyle"];
+				},
+			},
+			//手杀UI
+			FL1: {
+				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
+				"intro": "",
+				"init": true,
+				"clear": true,
+			},
 			aloneEquip: {
-				name: '<b><font color=\"#99FF75\">单独装备栏',
-				intro: '<b><font color=\"#99FF75\">切换玩家装备栏为单独装备栏或非单独装备栏，初始为单独装备栏，根据个人喜好调整',
-				init: true,
+				name: '新样式装备栏',
+				intro: '切换玩家装备栏位置，打开在右，仅限新十和一将有效',
+				init: false,
 				update: function () {
 					const config = lib.config['extension_十周年UI_aloneEquip'];
 					if (window.decadeUI) ui.arena.dataset.aloneEquip = config ? 'on' : 'off';
@@ -11477,45 +11487,15 @@ export default async function () {
 					}
 				}
 			},
-			loadingStyle: {
-				name: '<b><font color="#FF6020">更换光标+loading框',
-				intro: '<b><font color="#FF6020">可以更换局内选项框以及光标',
+			XPJ: {
+				name: "新样式小配件",
 				init: "on",
+				intro: "选择切换左下角小配件，仅限新十和一将有效",
 				item: {
-					off: "关闭",
-					on: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog2.png);background-size: 100% 100%;"></div>',
-					On: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog1.png);background-size: 100% 100%;"></div>',
-					othersOn: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog3.png);background-size: 100% 100%;"></div>',
-					othersOff: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog4.png);background-size: 100% 100%;"></div>',
-				},
-				update: function () {
-					if (window.decadeUI) ui.arena.dataset.loadingStyle = lib.config["extension_十周年UI_loadingStyle"];
+					on: "原版",
+					off: "新版",
 				},
 			},
-			FL45: {
-				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
-				"intro": "",
-				"init": true,
-				"clear": true,
-			},
-			duijuetwo: {
-			  name: '22布局',
-			  init: true,
-			  intro:'开启后，还原pc端十周年22新布局（改自武将美化做适配），重启生效。',
-			},
-			"shoupaikeshi":{
-				name:'手牌可视',
-				init:true,
-				intro:'开启后，22和斗地主模式队友的手牌始终对玩家可见（右击或双击武将牌查看），重启生效。',
-			},
-			//手杀UI
-			FL1: {
-				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
-				"intro": "",
-				"init": true,
-				"clear": true,
-			},
-			/*-----进度条-------*/
 			jindutiao: {
 				init: true,
 				intro: "自己回合内显示进度条带素材",
@@ -11556,7 +11536,7 @@ export default async function () {
 			},
 			jindutiaoSet: {
 				name: "进度条高度",
-				init: "27",
+				init: "26",
 				intro: "<li>设置玩家进度条的高度百分比。",
 				item: {
 					"10": "10%",
@@ -11586,33 +11566,7 @@ export default async function () {
 					"39": "39%",
 				},
 			},
-			/*其它美化*/
-			FL4: {
-				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
-				"intro": "",
-				"init": true,
-				"clear": true,
-			},
-			XPJ: {
-				name: "小配件（十周年）",
-				init: "off",
-				intro: "十周年样式下，选择切换左下角小配件",
-				item: {
-					"off": "新版",
-				},
-			},
-			mx_decade_characterDialog: {
-				name: '自由选将筛选框',
-				init: 'default',
-				intro: '更改自由选将筛选框',
-				item: {
-					'default': '默认本体框',
-					'extension-OL-system': '扩展内置框',
-					'offDialog': '关闭筛选框',
-				},
-			},
-			//手杀UI
-			FLInfinity: {
+			FL425: {
 				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
 				"intro": "",
 				"init": true,
@@ -11623,6 +11577,7 @@ export default async function () {
 			intro: '二改萌修十周年UI,有问题不要打扰萌新（转型中）' +
 				'<br>感谢陌提供的技能排列样式' +
 				'<br>部分功能参考扩展《武将美化》'+
+				'<br>https://github.com/diandian157/XUI'+
 				'<br>'+
 				'<br>您仍可以再次创作并分享，但是禁止售卖盈利',
 			author: '萌新（转型中）<br>十周年UI原作者：短歌<br>手杀UI原名：界面美化<br>手杀UI原作者：橙续缘',
