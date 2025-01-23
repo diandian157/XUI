@@ -13,6 +13,124 @@ export default async function () {
 		name,
 		editable: false,
 		content(config, pack) {
+			// 伤害恢复优化
+			window._WJMHHUIFUSHUZITEXIAO = {
+			    shuzi2:{
+			        name: "../../../十周年UI/assets/animation/globaltexiao/huifushuzi/shuzi2",
+			    },
+			};
+			lib.skill._wjmh_huifushuzi_ = {
+			    priority: 10,
+			    forced: true,
+			    trigger: {
+			        player: 'recoverBegin',
+			    },
+			    filter: function (event, player) {
+			        return event.num && event.num > 0 && event.num <= 9;
+			    },
+			    content: function () {
+			        var action;
+			        if (trigger.num > 0 && trigger.num <= 1) action = '1';
+			        else if (trigger.num > 1 && trigger.num <= 2) action = '2';
+			        else if (trigger.num > 2 && trigger.num <= 3) action = '3';
+			        else if (trigger.num > 3 && trigger.num <= 4) action = '4';
+			        else if (trigger.num > 4 && trigger.num <= 5) action = '5';
+			        else if (trigger.num > 5 && trigger.num <= 6) action = '6';
+			        else if (trigger.num > 6 && trigger.num <= 7) action = '7';
+			        else if (trigger.num > 7 && trigger.num <= 8) action = '8';
+			        else if (trigger.num > 8 && trigger.num <= 9) action = '9';
+			        if (action) {
+			            dcdAnim.loadSpine(window._WJMHHUIFUSHUZITEXIAO.shuzi2.name, "skel", function () {
+			                window._WJMHHUIFUSHUZITEXIAO.shuzi2.action = action;
+			                dcdAnim.playSpine(window._WJMHHUIFUSHUZITEXIAO.shuzi2, {
+			                    speed: 0.6,
+			                    scale: 0.5,
+			                    parent: player,
+			                });
+			            });
+			        };
+			    },
+			};
+			window._WJMHXUNISHUZITEXIAO = {
+			    SS_PaiJu_xunishanghai:{
+			        name: "../../../十周年UI/assets/animation/globaltexiao/xunishuzi/SS_PaiJu_xunishanghai",
+			    },
+			};
+			lib.skill._wjmh_xunishuzi_ = {
+			    priority: 10,
+			    forced: true,
+			    trigger: {
+			        player: 'damage',
+			    },
+			    filter: function (event, player) {
+			        if ((event.num != 0 && !event.num) || (event.num < 0 && event.num > 9)) return false;
+			        return event.unreal; // 判断是否是虚拟伤害
+			    },
+			    content: function () {
+			        var action;
+			        if (trigger.num <= 0) action = "play0";
+			        else if (trigger.num > 0 && trigger.num <= 1) action = 'play1';
+			        else if (trigger.num > 1 && trigger.num <= 2) action = 'play2';
+			        else if (trigger.num > 2 && trigger.num <= 3) action = 'play3';
+			        else if (trigger.num > 3 && trigger.num <= 4) action = 'play4';
+			        else if (trigger.num > 4 && trigger.num <= 5) action = 'play5';
+			        else if (trigger.num > 5 && trigger.num <= 6) action = 'play6';
+			        else if (trigger.num > 6 && trigger.num <= 7) action = 'play7';
+			        else if (trigger.num > 7 && trigger.num <= 8) action = 'play8';
+			        else if (trigger.num > 8 && trigger.num <= 9) action = 'play9';
+			        if (action) {
+			            dcdAnim.loadSpine(window._WJMHXUNISHUZITEXIAO.SS_PaiJu_xunishanghai.name, "skel", function () {
+			                window._WJMHXUNISHUZITEXIAO.SS_PaiJu_xunishanghai.action = action;
+			                dcdAnim.playSpine(window._WJMHXUNISHUZITEXIAO.SS_PaiJu_xunishanghai, {
+			                    speed: 0.6,
+			                    scale: 0.5,
+			                    parent: player,
+			                });
+			            });
+			        };
+			    },
+			};
+			window._WJMHSHANGHAISHUZITEXIAO = {
+			    shuzi:{
+			        name: "../../../十周年UI/assets/animation/globaltexiao/shanghaishuzi/shuzi",
+			    }, // OL
+			    SZN_shuzi:{
+			        name: "../../../十周年UI/assets/animation/globaltexiao/shanghaishuzi/SZN_shuzi",
+			    }, // 十周年
+			};
+			lib.skill._wjmh_shanghaishuzi_ = {
+			    priority: 10,
+			    forced: true,
+			    trigger: {
+			        player: 'damageBegin4',
+			    },
+			    filter: function (event, player) {
+			        return event.num && event.num > 1 && event.num <= 9;
+			    },
+			    content: function () {
+			        var action;
+			        if (trigger.num > 1 && trigger.num <= 2) action = '2';
+			        else if (trigger.num > 2 && trigger.num <= 3) action = '3';
+			        else if (trigger.num > 3 && trigger.num <= 4) action = '4';
+			        else if (trigger.num > 4 && trigger.num <= 5) action = '5';
+			        else if (trigger.num > 5 && trigger.num <= 6) action = '6';
+			        else if (trigger.num > 6 && trigger.num <= 7) action = '7';
+			        else if (trigger.num > 7 && trigger.num <= 8) action = '8';
+			        else if (trigger.num > 8 && trigger.num <= 9) action = '9';
+			        if (action) {
+			            var anim = "shuzi";
+			            if (lib.config.extension_十周年UI_shanghaishuzi == "shizhounian") anim = "SZN_shuzi";
+			            dcdAnim.loadSpine(window._WJMHSHANGHAISHUZITEXIAO[anim].name, "skel", function () {
+			                window._WJMHSHANGHAISHUZITEXIAO[anim].action = action;
+			                dcdAnim.playSpine(window._WJMHSHANGHAISHUZITEXIAO[anim], {
+			                    speed: 0.6,
+			                    scale: 0.5,
+			                    parent: player,
+			                });
+			            });
+			        };
+			    },
+			};
 			// 局内交互优化
 			lib.skill._useCardAudio = {
 				trigger: {
@@ -113,10 +231,8 @@ export default async function () {
 			document.body.addEventListener('mousedown', function(e) {
 			    let target = e.target;
 			    if(target.classList.contains('card')) {
-			        if(lib.config.extension_十周年UI_cardClickSound) {
-			            game.playAudio('..', 'extension', '十周年UI', 'audio/card_click');
-			        }
-			    }
+					game.playAudio('..', 'extension', '十周年UI', 'audio/card_click');
+				}
 			});
 			//-----------目标选中---------//
 			lib.element.player.inits = [].concat(lib.element.player.inits || [])
@@ -4982,116 +5098,107 @@ export default async function () {
 					};
 
 					lib.element.player.$damagepop = function (num, nature, font, nobroadcast) {
-						if (typeof num == "number" || typeof num == "string") {
-							game.addVideo("damagepop", this, [num, nature, font]);
-							if (nobroadcast !== false) {
-								game.broadcast(
-									function (player, num, nature, font) {
-										player.$damagepop(num, nature, font);
-									},
-									this,
-									num,
-									nature,
-									font
-								);
-							}
-
-							var node;
-							if (this.popupNodeCache && this.popupNodeCache.length) {
-								node = this.popupNodeCache.shift();
-							} else {
-								node = decadeUI.element.create("damage");
-							}
-
-							if (font) {
-								node.classList.add("normal-font");
-							} else {
-								node.classList.remove("normal-font");
-							}
-
-							if (typeof num == "number") {
-								node.popupNumber = num;
-								if (num == Infinity) {
-									num = "+∞";
-								} else if (num == -Infinity) {
-									num = "-∞";
-								} else if (num > 0) {
-									num = "+" + num;
-								}
-							} else {
-								node.popupNumber = null;
-							}
-
-							node.innerHTML = num;
-							node.dataset.text = node.textContent || node.innerText;
-							node.nature = nature || "soil";
-							this.damagepopups.push(node);
+						if (typeof num == 'number' || typeof num == 'string') {
+						    game.addVideo('damagepop', this, [num, nature, font]);
+						    if (nobroadcast !== false) {
+						        game.broadcast(function (player, num, nature, font) {
+						            player.$damagepop(num, nature, font);
+						        }, this, num, nature, font);
+						    }
+									
+						    var node;
+						    if (this.popupNodeCache && this.popupNodeCache.length) {
+						        node = this.popupNodeCache.shift();
+						    }
+						    else {
+						        node = decadeUI.element.create('damage');
+						    }
+									
+						    if (font) {
+						        node.classList.add('normal-font');
+						    }
+						    else {
+						        node.classList.remove('normal-font');
+						    }
+						    if (typeof num == 'number') {
+						        node.popupNumber = num;
+						        if (num == Infinity) {
+						            num = '+∞';
+						        } else if (num == -Infinity) {
+						            num = '-∞';
+						        } else if (num > 0 && num != Infinity) {
+						            num = '';//回复体力数值赋空
+						        } else if (num <= 0 && num != -Infinity) {
+						            num = '';//伤害体力数值赋空
+						        }
+						        
+						    } else {
+						        node.popupNumber = null;
+						    }
+						    // --------修改结束--------
+									
+						    node.innerHTML = num;
+						    node.dataset.text = node.textContent || node.innerText;
+						    node.nature = nature || 'soil';
+						    this.damagepopups.push(node);
 						}
-
+									
 						if (this.damagepopups.length && !this.damagepopLocked) {
-							var node = this.damagepopups.shift();
-							this.damagepopLocked = true;
-							if (this != node.parentNode) this.appendChild(node);
-
-							var player = this;
-							if (typeof node.popupNumber == "number") {
-								var popupNum = node.popupNumber;
-								if (popupNum < 0) {
-									switch (node.nature) {
-										case "thunder":
-											if (popupNum <= -2) {
-												decadeUI.animation.playSpine({ name: "effect_shoujidonghua", action: "play6" }, { scale: 0.8, parent: player });
-											} else {
-												decadeUI.animation.playSpine({ name: "effect_shoujidonghua", action: "play5" }, { scale: 0.8, parent: player });
-											}
-											break;
-										case "fire":
-											if (popupNum <= -2) {
-												decadeUI.animation.playSpine({ name: "effect_shoujidonghua", action: "play4" }, { scale: 0.8, parent: player });
-											} else {
-												decadeUI.animation.playSpine({ name: "effect_shoujidonghua", action: "play3" }, { scale: 0.8, parent: player });
-											}
-											break;
-										case "water":
-											break;
-										default:
-											if (popupNum <= -2) {
-												decadeUI.animation.playSpine({ name: "effect_shoujidonghua", action: "play2" }, { scale: 0.8, parent: player });
-											} else {
-												decadeUI.animation.playSpine({ name: "effect_shoujidonghua", action: "play1" }, { scale: 0.8, parent: player });
-											}
-											break;
-									}
-								} else {
-									if (node.nature == "wood") {
-										decadeUI.animation.playSpine("effect_zhiliao", {
-											scale: 0.7,
-											parent: player,
-										});
-									}
-								}
-							}
-
-							node.style.animation = "open-fade-in-out 1.2s";
-							setTimeout(
-								function (player, node) {
-									if (!player.popupNodeCache) player.popupNodeCache = [];
-									node.style.animation = "";
-									player.popupNodeCache.push(node);
-								},
-								1210,
-								player,
-								node
-							);
-
-							setTimeout(
-								function (player) {
-									player.damagepopLocked = false;
-									player.$damagepop();
-								},
-								500,
-								player
-							);
+						    var node = this.damagepopups.shift();
+						    this.damagepopLocked = true;
+						    if (this != node.parentNode) this.appendChild(node);
+									
+						    var player = this;
+						    if (typeof node.popupNumber == 'number') {
+						        var popupNum = node.popupNumber;
+						        if (popupNum < 0) {
+						            switch (node.nature) {
+						                case 'thunder':
+						                    if (popupNum <= -2) {
+						                        decadeUI.animation.playSpine({ name: 'effect_shoujidonghua', action: 'play6' }, { scale: 0.8, parent: player });
+						                    }
+						                    else {
+						                        decadeUI.animation.playSpine({ name: 'effect_shoujidonghua', action: 'play5' }, { scale: 0.8, parent: player });
+						                    }
+						                    break;
+						                case 'fire':
+						                    if (popupNum <= -2) {
+						                        decadeUI.animation.playSpine({ name: 'effect_shoujidonghua', action: 'play4' }, { scale: 0.8, parent: player });
+						                    }
+						                    else {
+						                        decadeUI.animation.playSpine({ name: 'effect_shoujidonghua', action: 'play3' }, { scale: 0.8, parent: player });
+						                    }
+						                    break;
+						                case 'water':
+						                    break;
+						                default:
+						                    if (popupNum <= -2) {
+						                        decadeUI.animation.playSpine({ name: 'effect_shoujidonghua', action: 'play2' }, { scale: 0.8, parent: player });
+						                    }
+						                    else {
+						                        decadeUI.animation.playSpine({ name: 'effect_shoujidonghua', action: 'play1' }, { scale: 0.8, parent: player });
+						                    }
+						                    break;
+						            }
+						        }
+						        else {
+						            if (node.nature == 'wood') {
+						                decadeUI.animation.playSpine('effect_zhiliao', { scale: 0.7, parent: player });
+						            }
+						        }
+						    }
+									
+						    node.style.animation = 'open-fade-in-out 1.2s';
+						    setTimeout(function (player, node) {
+						        if (!player.popupNodeCache) player.popupNodeCache = [];
+						        node.style.animation = '';
+						        player.popupNodeCache.push(node);
+						    }, 1210, player, node);
+									
+						    setTimeout(function (player) {
+						        player.damagepopLocked = false;
+						        player.$damagepop();
+						    }, 500, player);
 						}
 					};
 
@@ -11323,7 +11430,7 @@ export default async function () {
 			duijuetwo: {
 			  name: '22布局',
 			  init: true,
-			  intro:'开启后，还原pc端十周年22新布局（改自武将美化做适配），重启生效。',
+			  intro:'开启后，还原pc端十周年22新布局（改自十周年UI做适配），重启生效。',
 			},
 			rightLayout: {
 				name: '右手布局',
@@ -11344,7 +11451,7 @@ export default async function () {
 			},
 			cardkmh: {
 			  name: "卡牌边框",
-			  intro: '参考扩展武将美化，重启生效。',
+			  intro: '参考扩展十周年UI，重启生效。',
 			  init: "off",
 			  item: {
 			    "off": "关闭",
@@ -11552,9 +11659,9 @@ export default async function () {
 		},
 		package: {
 			intro: '二改萌修十周年UI,有问题不要打扰萌新（转型中）' +
+				'<br>仓库：https://github.com/diandian157/XUI'+
 				'<br>感谢陌提供的技能排列样式' +
-				'<br>部分功能参考扩展《武将美化》'+
-				'<br>https://github.com/diandian157/XUI'+
+				'<br>体验完整十周年特效请下载扩展《特效补充》'+
 				'<br>'+
 				'<br>您仍可以再次创作并分享，但是禁止售卖盈利',
 			author: '萌新（转型中）<br>十周年UI原作者：短歌<br>手杀UI原名：界面美化<br>手杀UI原作者：橙续缘',
