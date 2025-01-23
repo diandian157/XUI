@@ -13,7 +13,7 @@ export default async function () {
 		name,
 		editable: false,
 		content(config, pack) {
-			// 添加出牌音效
+			// 局内交互优化
 			lib.skill._useCardAudio = {
 				trigger: {
 					player: 'useCard'
@@ -22,13 +22,10 @@ export default async function () {
 				popup: false,
 				priority: -10,
 				content: function() {
-					// 获取卡牌信息
 					let card = trigger.card;
 					let cardType = get.type(card);
 					let cardName = get.name(card);
 					let cardNature = get.nature(card);
-					
-					// 播放对应音效
 					if(cardType == 'basic') {
 						switch(cardName) {
 							case 'sha':
@@ -65,23 +62,12 @@ export default async function () {
 					else if(cardType == 'equip') {
 						game.playAudio('..', 'extension', '十周年UI', 'audio/armor_equip');
 					}
-					
-					// 添加出牌动画
-					let animation = dcdAnim.playSpine({
-						name: 'effect_card_use',
-						scale: 0.8,
-					}, {
-						parent: player,
-					});
 				}
 			};
-			
-			// 添加到全局技能
 			if(!_status.connectMode) {
 				game.addGlobalSkill('_useCardAudio');
 			}
 			lib.translate.zhangba_skill='丈八';
-			// 添加回合开始音效
 			lib.skill._phaseStartAudio = {
 			    trigger: {
 			        player: 'phaseBegin'
@@ -91,34 +77,26 @@ export default async function () {
 			    priority: -10,
 			    content: function() {
 			        if(player == game.me) {
-			            // 我的回合开始
 			            game.playAudio('..', 'extension', '十周年UI', 'audio/seatRoundState_start');
 			        } 
 			    }
 			};
-			
-			// 添加到全局技能
 			if(!_status.connectMode) {
 			    game.addGlobalSkill('_phaseStartAudio');
 			}
-			// 添加按钮音效处理
 			document.body.addEventListener('mousedown', function(e) {
 			    let target = e.target;
-			    // 检测点击的是否是控制按钮
 			    if(target.closest('#dui-controls')) {
 			        if(target.classList.contains('control') || 
 			           target.parentElement.classList.contains('control')) {
 			            game.playAudio('..', 'extension', '十周年UI', 'audio/BtnSure');
 			        }
 			    }
-			    
-			    // 检测点击的是否是菜单按钮
 			    if(target.classList.contains('menubutton') || 
 			       target.classList.contains('button')) {
 			        game.playAudio('..', 'extension', '十周年UI', 'audio/card_click');
 			    }
 			});
-			// 添加按钮点击反馈
 			document.body.addEventListener('mousedown', function(e) {
 			    let target = e.target;
 			    let control = target.closest('.control');
@@ -132,7 +110,6 @@ export default async function () {
 			        }, 100);
 			    }
 			});
-			// 添加卡牌音效处理
 			document.body.addEventListener('mousedown', function(e) {
 			    let target = e.target;
 			    if(target.classList.contains('card')) {
