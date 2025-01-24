@@ -683,3 +683,128 @@
 	width: 100%;
 	left: 0%;
 }
+
+/* 按钮悬停效果 */
+.dialog .button:hover:not(.disabled) {
+	transform: translateY(-2px);
+	box-shadow: 0 2px 8px rgba(139, 107, 72, 0.4);
+	filter: brightness(1.1);
+}
+
+/* 按钮点击效果 */
+.dialog .button:active:not(.disabled) {
+	transform: scale(0.95);
+	filter: brightness(0.9);
+	transition: all 0.1s;
+}
+
+/* 按钮点击波纹效果 */
+.dialog .button::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 5px;
+	height: 5px;
+	background: rgba(255, 255, 255, 0.5);
+	opacity: 0;
+	border-radius: 100%;
+	transform: scale(1, 1) translate(-50%);
+	transform-origin: 50% 50%;
+}
+
+/* 切换按钮基础样式 */
+.dialog .toggle-button {
+	position: relative;
+	min-width: 90px;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 15px;
+	margin: 5px;
+	font-family: 'xinwei';
+	font-size: 16px;
+	color: #FFE5B4;
+	text-align: center;
+	background: linear-gradient(to bottom, #8B6B48, #614730);
+	border: 1px solid #8B6B48;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+/* 切换按钮激活状态 */
+.dialog .toggle-button.active {
+	background: linear-gradient(to bottom, #B38B5D, #8B6B48);
+	border-color: #B38B5D;
+	box-shadow: 0 0 10px rgba(179, 139, 93, 0.4);
+	transform: translateY(-1px);
+}
+
+/* 切换按钮悬停效果 */
+.dialog .toggle-button:hover:not(.disabled) {
+	filter: brightness(1.1);
+	transform: translateY(-2px);
+	box-shadow: 0 2px 8px rgba(139, 107, 72, 0.4);
+}
+
+/* 切换按钮点击效果 */
+.dialog .toggle-button:active:not(.disabled) {
+	transform: scale(0.95);
+	filter: brightness(0.9);
+}
+
+/* 切换按钮禁用状态 */
+.dialog .toggle-button.disabled {
+	cursor: not-allowed;
+	opacity: 0.6;
+	filter: grayscale(0.3);
+}
+
+/* 切换按钮组布局 */
+.dialog .toggle-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 8px;
+	margin: 10px 0;
+}
+
+/* 切换按钮图标 */
+.dialog .toggle-button .icon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+/* 切换按钮选中指示器 */
+.dialog .toggle-button::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 50%;
+	width: 0;
+	height: 2px;
+	background: #FFE5B4;
+	transition: all 0.2s ease;
+	transform: translateX(-50%);
+}
+
+/* 切换按钮激活状态指示器 */
+.dialog .toggle-button.active::after {
+	width: 80%;
+}
+
+/* 切换按钮文字阴影 */
+.dialog .toggle-button {
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 切换按钮内容布局 */
+.dialog .toggle-button .content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}

@@ -92,14 +92,14 @@ export default async function () {
 			};
 			window._WJMHSHANGHAISHUZITEXIAO = {
 			    shuzi:{
-			        name: "../../../十周年UI/assets/animation/globaltexiao/shanghaishuzi/shuzi",
+			        name: "../../../十周年UI/assets/animation/globaltexiao/shanghaishuzi/SZN_shuzi",
 			    }, // OL
 			    SZN_shuzi:{
 			        name: "../../../十周年UI/assets/animation/globaltexiao/shanghaishuzi/SZN_shuzi",
 			    }, // 十周年
 			};
 			lib.skill._wjmh_shanghaishuzi_ = {
-			    priority: 10,
+			    priority: 210,
 			    forced: true,
 			    trigger: {
 			        player: 'damageBegin4',
@@ -5096,7 +5096,7 @@ export default async function () {
 							return this.init(info.name, info.name2);
 						}
 					};
-
+					//隐藏本体伤害数字显示
 					lib.element.player.$damagepop = function (num, nature, font, nobroadcast) {
 						if (typeof num == 'number' || typeof num == 'string') {
 						    game.addVideo('damagepop', this, [num, nature, font]);
@@ -5821,7 +5821,7 @@ export default async function () {
 								if (foldCardMinWidth == "cardWidth") {
 									min *= cw;
 								} else {
-									min *= foldCardMinWidth && foldCardMinWidth.length ? parseInt(foldCardMinWidth) : 81;
+									min *= foldCardMinWidth && foldCardMinWidth.length ? parseInt(foldCardMinWidth) : 9;
 								}
 								if (xMargin < min) {
 									expand = true;
@@ -11565,8 +11565,13 @@ export default async function () {
 							game.me.$syncExpand();
 						}
 						if (!config && game.me == ui.equipSolts.me) {
-							ui.equipSolts.me.appendChild(ui.equipSolts.equips);
-							ui.equipSolts.me = undefined;
+							if (ui.equipSolts.me) {
+								ui.equipSolts.me.appendChild(ui.equipSolts.equips);
+							}
+							ui.equipSolts.me = game.me;
+							ui.equipSolts.equips = game.me.node.equips;
+							ui.equipSolts.appendChild(game.me.node.equips);
+							game.me.$syncExpand();
 						}
 					}
 				}
@@ -11659,9 +11664,9 @@ export default async function () {
 		},
 		package: {
 			intro: '二改萌修十周年UI,有问题不要打扰萌新（转型中）' +
-				'<br>仓库：https://github.com/diandian157/XUI'+
 				'<br>感谢陌提供的技能排列样式' +
-				'<br>体验完整十周年特效请下载扩展《特效补充》'+
+				'<br>使用旧样式装备每局需打开一次新样式装备再关闭'+
+				'<br>https://github.com/diandian157'+
 				'<br>'+
 				'<br>您仍可以再次创作并分享，但是禁止售卖盈利',
 			author: '萌新（转型中）<br>十周年UI原作者：短歌<br>手杀UI原名：界面美化<br>手杀UI原作者：橙续缘',

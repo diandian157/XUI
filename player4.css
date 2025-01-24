@@ -162,7 +162,7 @@
 .player > .camp-wrap > .camp-back {
 	background: linear-gradient(to top, rgb(155, 129, 108), rgb(73, 71, 58));
 	border-radius: 10px 0 0 10px;
-	height: 245px;
+	height: 247px;
 	width: 35px;
 	margin-top: -45.5px;
 	margin-left: 1px;
@@ -214,7 +214,7 @@
 	display: block;
 	left: -6px;
 	height: 265px;
-	top: -17px;
+	top: -23px;
 	width: 70px;
 	position: absolute;
 	background-image: url("image/decoration/new_border_camp.png");
@@ -296,7 +296,7 @@
 	width: 100%;
 	height: 33.5%;
 	margin-left: 8px;
-	bottom: 59%;
+	bottom: 65%;
 	display: flex;
 	text-align: center;
 	align-items: center;
@@ -986,8 +986,8 @@
 	position: absolute;
 	top: auto;
 	right: auto;
-	left: -6px;
-	bottom: -6px;
+	left: -5px;
+	bottom: 1px;
 	line-height: 28px;
 	height: 32px;
 	width: 32px;

@@ -512,18 +512,18 @@
 }
 
 .handcardNumber > .cardPicture {
-	left: -5px;
-	bottom: 2px;
-	--w: 45px;
-	--h: 25px;
+	left: 3px;
+	bottom: 13px;
+	--w: 65px;
+	--h: 20px;
 	background-image: url("./images/uibutton/new_count1.png");
 	position: relative;
 	 z-index: -1;
 }
 /*手牌数参数*/
 .handcardNumber > .cardNumber {
-	left: 4px;
-	bottom: 21px;
+	left: 15px;
+	bottom: 30px;
 	height: 8px;
 	line-height: 25px;
 	text-align: center;
