@@ -98,8 +98,8 @@
 
 #arena/*.dui-mobile>*/:not(.fewplayer)>.player:not(.minskin),
 #arena/*.dui-mobile>*/:not(.fewplayer):not(*[data-player_height=''])>.player:not(.minskin) {
-    width: 12%!important;
-    height: 27%!important;
+    width: 180px!important;
+    height: 235px!important;
 }
 /* #arena:not(.fewplayer)>.player:not(.minskin),
 #arena:not(.fewplayer):not(*[data-player_height=''])>.player:not(.minskin) {
