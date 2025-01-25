@@ -327,16 +327,6 @@ export default async function () {
 			game.menuZoom = 1;
 			//单独装备栏
 			_status.nopopequip = lib.config.extension_十周年UI_aloneEquip;
-			//布局
-			switch (lib.config.layout) {
-				case "long2":
-				case "nova":
-				case "mobile":
-					break;
-				default:
-					alert("十周年UI提醒您，请使用<默认>、<手杀>、<新版>布局以获得良好体验（在选项-外观-布局中调整）。");
-					break;
-			}
 
 			console.time(decadeUIName);
 
@@ -1115,21 +1105,10 @@ export default async function () {
 										image = new Image(),
 										identity = decadeUI.getPlayerIdentity(this);
 									const goon = decadeUI.config.newDecadeStyle === "on" || decadeUI.config.newDecadeStyle === "othersOff";
-									var url = decadeUIPath + "image/decoration" + (goon ? "/dead" : "s/dead") + "_" + identity + ".png";
+									var url = decadeUIPath + "image/decoration" + (goon ? "/dead" : "/dead") + "_" + identity + ".png";
 									image.onerror = function () {
 										that.node.dieidentity.innerHTML = decadeUI.getPlayerIdentity(that, that.identity, true) + "<br>阵亡";
 									};
-
-									// 随机离开效果
-									if ((that._trueMe || that) != game.me && that != game.me && Math.random() < 0.5) {
-										if (goon) {
-											that.node.dieidentity.innerHTML = '<div style="width:40.2px; height:20px; left:0px; top:-32px; position:absolute; background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/likai_1.png);background-size: 100% 100%;"></div>';
-										} else {
-											that.node.dieidentity.innerHTML = '<div style="width:21px; height:81px; left:18px; top:-12px; position:absolute; background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/likai_2.png);background-size: 100% 100%;"></div>';
-										}
-									} else {
-										that.node.dieidentity.innerHTML = "";
-									}
 
 									that.node.dieidentity.style.backgroundImage = 'url("' + url + '")';
 									image.src = url;
@@ -1522,73 +1501,70 @@ export default async function () {
 									animations.current = animation;
 									this.style.animation = animation;
 								},
+								//卡牌摸牌音效
 								$draw: function (num, init, config) {
 									if (game.chess) return base.lib.element.player.$draw.call(this, num, init, config);
-
-									if (init !== false && init !== "nobroadcast") {
-										game.broadcast(
-											function (player, num, init, config) {
-												player.$draw(num, init, config);
-											},
-											this,
-											num,
-											init,
-											config
-										);
+									// 添加摸牌音效
+									game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+									
+									if (init !== false && init !== 'nobroadcast') {
+									    game.broadcast(function (player, num, init, config) {
+									        player.$draw(num, init, config);
+									    }, this, num, init, config);
 									}
-
+									
 									var cards;
 									var isDrawCard;
-									if (get.itemtype(num) == "cards") {
-										cards = num.concat();
-										isDrawCard = true;
-									} else if (get.itemtype(num) == "card") {
-										cards = [num];
-										isDrawCard = true;
-									} else if (typeof num == "number") {
-										cards = new Array(num);
+									if (get.itemtype(num) == 'cards') {
+									    cards = num.concat();
+									    isDrawCard = true;
+									} else if (get.itemtype(num) == 'card') {
+									    cards = [num];
+									    isDrawCard = true;
+									} else if (typeof num == 'number') {
+									    cards = new Array(num);
 									} else {
-										cards = new Array(1);
+									    cards = new Array(1);
 									}
 
 									if (init !== false) {
 										if (isDrawCard) {
-											game.addVideo("drawCard", this, get.cardsInfo(cards));
-										} else {
-											game.addVideo("draw", this, num);
+										        game.addVideo('drawCard', this, get.cardsInfo(cards));
+										    } else {
+										        game.addVideo('draw', this, num);
+										    }
 										}
-									}
-
-									if (_status.event && _status.event.name) {
-										if (
-											(function (event) {
-												return event.name != "gain" && !event.name.includes("raw");
-											})(_status.event)
-										)
-											isDrawCard = true;
-									}
-
-									if (game.me == this && !isDrawCard) return;
-
-									var fragment = document.createDocumentFragment();
-									var card;
-									for (var i = 0; i < cards.length; i++) {
-										card = cards[i];
-										if (card == null) card = dui.element.create("card thrown drawingcard");
-										else card = card.copy("thrown", "drawingcard", false);
-
-										card.fixed = true;
-										cards[i] = card;
-										fragment.appendChild(card);
-									}
-
-									var player = this;
-									dui.layoutDrawCards(cards, player, true);
-									ui.arena.appendChild(fragment);
-									dui.queueNextFrameTick(function () {
-										dui.layoutDrawCards(cards, player);
-										dui.delayRemoveCards(cards, 460, 220);
-									});
+																			
+										if (_status.event && _status.event.name) {
+										    if ((function(event) {
+										        return event.name != 'gain' && !event.name.includes('raw');
+										    })(_status.event)) isDrawCard = true;
+										}
+																			
+										if (game.me == this && !isDrawCard) return;
+																			
+										var fragment = document.createDocumentFragment();
+										var card;
+										for (var i = 0; i < cards.length; i++) {
+										    card = cards[i];
+										    if (card == null) 
+										        card = dui.element.create('card thrown drawingcard');
+										    else 
+										        card = card.copy('thrown', 'drawingcard', false);
+										    
+										    card.fixed = true;
+										    cards[i] = card;
+										    fragment.appendChild(card);
+										}
+																			
+										var player = this;
+										dui.layoutDrawCards(cards, player, true);
+										ui.arena.appendChild(fragment);
+										dui.queueNextFrameTick(function() {
+										    dui.layoutDrawCards(cards, player);
+										    // 修改动画持续时间和延迟
+										    dui.delayRemoveCards(cards, 600, 300); // 增加了动画时间和延迟
+										});
 								},
 								$give: function (cards, target, log, record) {
 									var itemtype;
@@ -1788,27 +1764,34 @@ export default async function () {
 
 									this.queueCssAnimation("player-hurt 0.3s");
 								},
+								// 卡牌弃牌音效
 								$throw: function (cards, time, record, nosource) {
 									var itemtype;
 									var duiMod = cards.duiMod && game.me == this && !nosource;
-									if (typeof cards == "number") {
-										itemtype = "number";
-										cards = new Array(cards);
+									if (typeof cards == 'number') {
+									    itemtype = 'number';
+									    cards = new Array(cards);
 									} else {
-										itemtype = get.itemtype(cards);
-										if (itemtype == "cards") {
-											cards = cards.concat();
-										} else if (itemtype == "card") {
-											cards = [cards];
-										} else {
-											var evt = _status.event;
-											if (evt && evt.card && evt.cards === cards) {
-												var card = ui.create.card().init([evt.card.suit, evt.card.number, evt.card.name, evt.card.nature]);
-												if (evt.card.suit == "none") card.node.suitnum.style.display = "none";
-												card.dataset.virtual = 1;
-												cards = [card];
-											}
-										}
+									    itemtype = get.itemtype(cards);
+									    if (itemtype == 'cards') {
+									        cards = cards.concat();
+									        // 添加弃牌音效
+									        game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+									    } else if (itemtype == 'card') {
+									        cards = [cards];
+									        // 添加弃牌音效
+									        game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+									    } else {
+									        var evt = _status.event;
+									        if (evt && evt.card && evt.cards === cards) {
+									            var card = ui.create.card().init([evt.card.suit, evt.card.number, evt.card.name, evt.card.nature]);
+									            if (evt.card.suit == 'none') card.node.suitnum.style.display = 'none';
+									            card.dataset.virtual = 1;
+									            cards = [card];
+									            // 添加弃牌音效
+									            game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+									        }
+									    }
 									}
 
 									var card;
@@ -1816,61 +1799,72 @@ export default async function () {
 									var player = this;
 									var hand = dui.boundsCaches.hand;
 									hand.check();
-
+																		
 									for (var i = 0; i < cards.length; i++) {
-										card = cards[i];
-										if (card) {
-											clone = card.copy("thrown");
-											if (duiMod && (card.throwWith == "h" || card.throwWith == "s")) {
-												clone.tx = Math.round(hand.x + card.tx);
-												clone.ty = Math.round(hand.y + 30 + card.ty);
-												clone.scaled = true;
-												clone.throwordered = true;
-												clone.style.transform = "translate(" + clone.tx + "px," + clone.ty + "px) scale(" + hand.cardScale + ")";
-											}
-											card = clone;
-										} else {
-											card = dui.element.create("card infohidden infoflip");
-											card.moveTo = lib.element.card.moveTo;
-											card.moveDelete = lib.element.card.moveDelete;
-										}
-
-										cards[i] = card;
+									    card = cards[i];
+									    if (card) {
+									        clone = card.copy("thrown");
+									        if (duiMod && (card.throwWith == "h" || card.throwWith == "s")) {
+									            clone.tx = Math.round(hand.x + card.tx);
+									            clone.ty = Math.round(hand.y + 30 + card.ty);
+									            clone.scaled = true;
+									            clone.throwordered = true;
+									            clone.style.transform = "translate(" + clone.tx + "px," + clone.ty + "px) scale(" + hand.cardScale + ")";
+									        }
+									        card = clone;
+									    } else {
+									        card = dui.element.create("card infohidden infoflip");
+									        card.moveTo = lib.element.card.moveTo;
+									        card.moveDelete = lib.element.card.moveDelete;
+									    }
+																		
+									    cards[i] = card;
 									}
-
+																		
 									if (record !== false) {
-										if (record !== "nobroadcast") {
-											game.broadcast(
-												function (player, cards, time, record, nosource) {
-													player.$throw(cards, time, record, nosource);
-												},
-												this,
-												cards,
-												0,
-												record,
-												nosource
-											);
-										}
-
-										game.addVideo("throw", this, [get.cardsInfo(cards), 0, nosource]);
+									    if (record !== "nobroadcast") {
+									        game.broadcast(
+									            function (player, cards, time, record, nosource) {
+									                player.$throw(cards, time, record, nosource);
+									            },
+									            this,
+									            cards,
+									            0,
+									            record,
+									            nosource
+									        );
+									    }
+																		
+									    game.addVideo("throw", this, [get.cardsInfo(cards), 0, nosource]);
 									}
-
-									if (duiMod && cards.length > 2) {
-										cards.sort(function (a, b) {
-											if (a.tx == undefined && b.tx == undefined) return 0;
-
-											if (a.tx == undefined) return duicfg.rightLayout ? -1 : 1;
-
-											if (b.tx == undefined) return duicfg.rightLayout ? 1 : -1;
-
-											return b.tx - a.tx;
-										});
+																		
+									cards.sort(function (a, b) {
+									    if (a.tx == undefined && b.tx == undefined) return 0;
+									    if (a.tx == undefined) return duicfg.rightLayout ? -1 : 1;
+									    if (b.tx == undefined) return duicfg.rightLayout ? 1 : -1;
+									    return b.tx - a.tx;
+									});
+																		
+									// 修改卡牌进入弃牌堆的动画
+									for (var i = 0; i < cards.length; i++) {
+									    (function(card, i){
+									        setTimeout(function(){
+									            player.$throwordered2(card, nosource);
+									            // 添加卡牌进入弃牌堆时的缓动效果
+									            if (card.fixed) {
+									                card.style.transition = 'all 0.5s cubic-bezier(.4, 0, .2, 1)';
+									                setTimeout(function(){
+									                    if (card.parentNode) {
+									                        card.style.opacity = '0.7';
+									                        card.style.transform = card.style.transform + ' scale(0.9)';
+									                    }
+									                }, 100);
+									            }
+									        }, i * 50); // 每张牌之间添加50ms的延迟
+									    })(cards[i], i);
 									}
-
-									for (var i = 0; i < cards.length; i++) player.$throwordered2(cards[i], nosource);
-
+																		
 									if (game.chess) this.chessFocus();
-
 									return cards[cards.length - 1];
 								},
 								$throwordered2: function (card, nosource) {
@@ -1943,7 +1937,6 @@ export default async function () {
 										event.hujia = Math.min(-num, player.hujia);
 										event.getParent().hujia = event.hujia;
 										event.num += event.hujia;
-										//game.log(player, '的护甲抵挡了' + get.cnNumber(event.hujia) + '点伤害');
 										player.changeHujia(-event.hujia).type = "damage";
 									}
 									num = event.num;
@@ -2242,11 +2235,6 @@ export default async function () {
 												ui.arena.classList.add("thrownhighlight");
 												event.node.classList.add("thrownhighlight");
 											}
-											/*
-					event.dialog = ui.create.dialog(str);
-					event.dialog.classList.add('center');
-					event.dialog.videoId = id;
-					*/
 										},
 										player,
 										player.judging[0] /*, judgestr*/,
@@ -2834,7 +2822,7 @@ export default async function () {
 								card._customintro = function (uiintro) {
 									uiintro.add(`${get.translation(identity + 2)}的身份牌`);
 								};
-								const fileName = "extension/十周年UI/image/identityCard/mougong_" + identity + ".jpg";
+								const fileName = "extension/十周年UI/image/identityCard/mougong_" + identity + ".png";
 								new Promise((resolve, reject) => {
 									const image = new Image();
 									image.onload = () => resolve();
@@ -3468,15 +3456,6 @@ export default async function () {
 							dui.cardTempSuitNum(card, cardsuit, cardnumber);
 						}
 					};
-					//根据手杀ui选项开关调用不同结束出牌阶段的弹出样式
-					lib.hooks["checkEnd"].push(function decadeUI_UIconfirm() {
-						if (ui.confirm && ui.confirm.lastChild.link == "cancel") {
-							if (_status.event.type == "phase") {
-								const innerHTML = lib.config.extension_十周年UI_newDecadeStyle != "othersOff" || decadeUI.config.newDecadeStyle == "on" ? "回合结束" : "结束出牌";
-								ui.confirm.lastChild.innerHTML = _status.event.skill ? "取消" : innerHTML;
-							}
-						}
-					});
 
 					//game.uncheck修改
 					//对十周年UI和本体的视为卡牌样式的同时适配
@@ -7967,7 +7946,6 @@ export default async function () {
 						player: ['phaseZhunbeiBegin', 'phaseBegin', 'phaseJudgeBegin', 'phaseDrawBegin', 'useCardAfter', 'phaseDiscardBegin', 'useSkillBefore', 'loseAfter']
 					},
 					filter: function (event, player) {
-						if (document.querySelector("#jindutiaoAI") && lib.config.extension_十周年UI_jindutiaoaiUpdata == false) return false;
 						return player != game.me && _status.currentPhase == player;
 					},
 					forced: true,
@@ -8015,7 +7993,6 @@ export default async function () {
 					forced: true,
 					charlotte: true,
 					filter: function (event, player) {
-						if (document.querySelector("#jindutiaoAI") && lib.config.extension_十周年UI_jindutiaoaiUpdata == false) return false;
 						return _status.currentPhase != player && player != game.me;
 					},
 					content: function () {
@@ -8713,886 +8690,651 @@ export default async function () {
 					}
 				},
 			};
-			//狗托播报
-			if (config.GTBB) {
-				var txcsanm = {};
-				var gddf = function () {
-					var player = "玩家";
-					var my = lib.config.connect_nickname;
-					var suiji = [
-						"氪金抽66",
-						"卡宝真可爱",
-						"蒸蒸日上",
-						"√卡视我如父",
-						"麒麟弓免疫枸杞",
-						"坏可宣（老坏批）",
-						"六千大败而归",
-						"开局酒古锭",
-						"遇事不决刷个乐",
-						"见面两刀喜相逢",
-						"改名出66",
-						"时代的六万五",
-						"韩旭",
-						"司马长衫",
-						"ogx",
-						"狗卡不如无名杀",
-						"王八万",
-						"一拳兀突骨",
-						"开局送神将",
-						"丈八二桃",
-						"装甲车车",
-						"等我喝口酒",
-						"Samuri",
-						"马",
-						"kimo鸡～木木",
-						"Log-Frunki",
-						"aoe银钱豹",
-						"没有丈八就托管",
-						"无中yyds",
-						"给咸鱼鸽鸽打call",
-						"小零二哟～",
-						"长歌最帅了",
-						"大猫有侠者之风",
-						"布灵布灵❤️",
-						"我爱～摸鱼🐠～",
-						"小寻寻真棒",
-						"呲牙哥超爱笑",
-						"是俺杀哒",
-						"阿七阿七",
-						"祖安·灰晖是龙王",
-						"吃颗桃桃好遗计",
-						"好可宣✓良民",
-						"藏海表锅好",
-						"金乎？木乎？水乎！！",
-						"无法也无天",
-						"西风不识相",
-						"神秘喵酱",
-						"星城在干嘛？",
-						"子鱼今天摸鱼了吗？",
-						"阳光苞里有阳光",
-						"诗笺的小裙裙",
-						"轮回中的消逝",
-						"乱踢jb的云野",
-						"小一是不是...是不是...",
-						"美羊羊爱瑟瑟",
-						"化梦的星辰",
-						"杰哥带你登dua郎",
-						"世中君子人",
-						"叹年华未央",
-						"短咕咕",
-						"若石",
-						"很可爱的小白",
-						"沉迷踢jb的云野",
-						"厉不厉害你坤哥",
-						"东方太白",
-						"恶心的死宅",
-						"风回太初",
-						"隔壁的戴天",
-						"林柒柒",
-						"洛神",
-						"ikun",
-						"蒙娜丽喵",
-						"只因无中",
-						"女宝",
-						"远道",
-						"翘课吗？",
-						"失败的man",
-						"晚舟",
-						"叙利亚野🐒",
-						"幸运女神在微笑",
-						"知天意，逆天寒",
-						"明月栖木",
-						"路卡利欧",
-						"兔兔",
-						"香蕉",
-						"douyun",
-						"启明星阿枫",
-						"雨夜寒稠",
-						"洛天依？！",
-						"黄老板是好人～",
-						"来点瑟瑟文和",
-						"鲨鱼配辣椒",
-						"萝卜～好萝卜",
-						"废城君",
-						"E佬细节鬼才",
-						"感到棘手要怀念谁？",
-						"半价小薯片",
-						"JK欧拉欧拉欧拉",
-						"新年快乐",
-						"乔姐带你飞",
-						"12345678？",
-						"缘之空",
-						"小小恐龙",
-						"教主：杀我！",
-						"才思泉涌的司马",
-						"我是好人",
-						"喜怒无常的大宝",
-						"黄赌毒",
-						"阴间杀～秋",
-						"敢于劈瓜的关羽",
-						"暮暮子",
-						"潜龙在渊",
-					].randomGet();
-					var name = [suiji, my].randomGet();
-					var v = ["通过", "使用", "开启"].randomGet();
-					var story = ["周年", "五一", "踏青", "牛年", "开黑", "冬至", "春分", "鼠年", "盛典", "魏魂", "群魂", "蜀魂", "吴魂", "猪年", "圣诞", "国庆", "狗年", "金秋", "奇珍", "元旦", "小雪", "冬日", "招募", "梦之回廊", "虎年", "新春", "七夕", "大雪", "端午", "武将", "中秋", "庆典"].randomGet();
-					var box = ["盒子", "宝盒", "礼包", "福袋", "礼盒", "庆典", "盛典"].randomGet();
-					var a = "获得了";
-					//皮肤
-					var pifu = ["界钟会×1", "王朗×1", "马钧×1", "司马昭×1", "司马师×1", "王平×1", "诸葛瞻×1", "张星彩×1", "董允×1", "关索×1", "骆统×1", "周处*1", "界步练师*1", "界朱然*1", "贺齐*1", "苏飞*1", "公孙康×1", "杨彪×1", "刘璋×1", "张仲景×1", "司马徽×1", "曹婴×1", "徐荣×1", "史诗宝珠*66", "史诗宝珠*33", "麒麟生角·魏延*1", "史诗宝珠*10", "刘焉×1", "孙寒华×1", "戏志才×1", "界曹真×1", "曹婴×1", "王粲×1", "界于禁×1", "郝昭×1", "界黄忠×1", "鲍三娘×1", "周群×1", "赵襄×1", "马云禄×1", "孙皓×1", "留赞×1", "吴景×1", "界徐盛×1", "许攸×1", "杜预×1", "界李儒×1", "张让×1", "麹义×1", "司马徽×1", "界左慈×1", "鲍三娘×1", "界徐盛×1", "南华老仙×1", "韩旭の大饼*100", "神郭嘉×1", "吴景×1", "周处×1", "杜预×1", "司马师×1", "羊微瑜×1", "神曹操×1"].randomGet();
-					//武将
-					var wujiang = [
-						"谋定天下·陆逊*1（动+静）",
-						"龙困于渊·刘协（动+静）*1",
-						"星花柔矛·张星彩*1（动+静）",
-						"呼啸生风·许褚*1（动+静）",
-						"牛年立冬·司马懿*1（动+静）",
-						"鹰视狼顾·司马懿*1（动+静）",
-						"洛水神韵·甄姬*1（动+静）",
-						"登锋陷阵·张辽*1（动+静）",
-						"十胜十败·郭嘉*1（动+静）",
-						"猪年端午·曹丕*1（动+静）",
-						"背水一战·张郃*1（动+静）",
-						"神兵天降·邓艾*1（动+静）",
-						"独来固志·王基*1（动+静）",
-						"猪年圣诞·刘备*1（动+静）",
-						"哮风从龙·关羽*1（动+静）",
-						"西凉雄狮·马超*1（动+静）",
-						"鏖战赤壁·黄盖*1（动+静）",
-						"星流霆击·孙尚香*1（动+静）",
-						"猪年圣诞·陆逊*1（动+静）",
-						"鼠年七夕·貂蝉*1（动+静）",
-						"迅雷风烈·张角*1（动+静）",
-						"一往无前·袁绍*1（动+静）",
-						"盛气凌人·许攸*1（动+静）",
-						"玄冥天通·神曹操*1（动+静）",
-						"魂牵梦绕·灵雎*1（动+静）",
-						"肝胆相照·⭐甘宁*1（动+静）",
-						"超脱于世·庞德公*1（动+静）",
-						"雄踞益州·刘焉*1（动+静）",
-						"鼠年春节·兀突骨*1（动+静）",
-						"牛年端午·孙鲁班*1（动+静）",
-						"灵魂歌王·留赞*1（动+静）",
-						"花容月貌·孙茹*1（动+静）",
-						"猪年春节·孙鲁育*1（动+静）",
-						"长沙桓王·孙笨*1（动+静）",
-						"如花似朵·小乔*1（动+静）",
-						"嫣然一笑·鲍三娘*1",
-						"锐不可当·张翼*1（动+静）",
-						"鼠年中秋·关索*1（动+静）",
-						"花海舞枪·马云禄*1（动+静）",
-						"木牛流马·黄月英*1（动+静）",
-						"锋芒毕露·曹婴*1（动+静）",
-						"长坂败备·曹纯*1（动+静）",
-						"龙袭星落·王朗*1（动+静）",
-						"举棋若定·戏志才*1（动+静）",
-						"泰山捧日·程昱*1（动+静）",
-						"冬日·王元姬（动态+静态）*1",
-						"牛年七夕·步练师动态包*1（动+静）",
-						"神甘宁×1",
-						"巾帼花舞·马云禄*1（动+静）",
-						"银币*66666",
-						"将魂*66666",
-						"琪花瑶草·徐氏*1（动+静）",
-						"肝胆相照·星甘宁*1（动+静）",
-						"星流霆击·孙尚香（动+静）*1",
-						"锋芒毕露·曹婴*1（动+静）",
-						"长衫の天牢令*100",
-					].randomGet();
-					//更改对应播报颜色
-					var gold = ['<font color="#56e4fa">' + pifu + "</font>", '<font color="#f3c20f">' + wujiang + "</font>"].randomGet();
-					var d = [",大家快恭喜TA吧！", ",大家快恭喜TA吧。无名杀是一款非盈利游戏(づ ●─● )づ", ",祝你新的一年天天开心，万事如意"].randomGet();
-					/*定义部分属性--默认手杀*/
-					var fontset = "FZLBJW"; /*字体*/
-					var colorA = "#efe8dc"; /*颜色a*/
-					var colorB = "#22c622"; /*颜色b*/
-					if (lib.config.extension_十周年UI_GTBBFont == "off") {
-						fontset = "yuanli";
-						colorA = "#86CC5B";
-						colorB = "#B3E1EC";
-					}
-					txcsanm.div.show();
-					setTimeout(function () {
-						txcsanm.div.hide();
-					}, 15500);
-					txcsanm.div2.innerHTML = '<marquee direction="left" behavior="scroll" scrollamount=9.8" loop="1" width="100%" height="50" align="absmiddle" >' + "<font  face=" + fontset + ">" + player + "<font color=" + colorA + ">" + "<b>" + name + "</b>" + "</font>" + v + "<font color=" + colorB + ">" + "<b>" + story + box + "</b>" + "</font>" + a + "<b>" + gold + "</b>" + d + "</font>" + "</marquee>";
-				};
-
-				txcsanm.div = ui.create.div("");
-				txcsanm.div2 = ui.create.div("", txcsanm.div);
-				/*----------手杀样式-------*/
-				if (config.GTBBYangshi == "on") {
-					txcsanm.div.style.cssText = "pointer-events:none;width:100%;height:25px;font-size:23px;z-index:6;";
-					txcsanm.div2.style.cssText = "pointer-events:none;background:rgba(0,0,0,0.5);width:100%;height:27px;";
-					/*------------------------*/
-				} else {
-					/*-------十周年样式-------*/
-					txcsanm.div.style.cssText = "pointer-events:none;width:56%;height:35px;font-size:18px;z-index:20;background-size:100% 100%;background-repeat:no-repeat;left:50%;top:15%;transform:translateX(-50%);";
-					txcsanm.div.style["background-image"] = "url(" + lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/goutuo.png";
-					txcsanm.div2.style.cssText = "pointer-events:none;width:85.5%;height:35px;left:8%;line-height:35px;";
-					/*------------------------*/
-				}
-
-				var id = setInterval(function () {
-					if (!txcsanm.div.parentNode && ui.window) {
-						ui.window.appendChild(txcsanm.div);
-						clearInterval(id);
-						gddf();
-						setInterval(gddf, parseFloat(lib.config["extension_十周年UI_GTBBTime"]));
-					}
-				}, 5000);
-			}
 			//阶段提示
-			if (lib.config.extension_十周年UI_JDTS) {
-				//游戏结束消失
-				lib.onover.push(function (bool) {
-					game.as_removeImage();
-				});
-				//等待响应
-				lib.skill._jd_ddxyA = {
-					trigger: {
-						player: ["chooseToRespondBegin"],
-					},
-					silent: true,
-					direct: true,
-					filter: function (event, player) {
-						return player == game.me && _status.auto == false;
-					},
-					content: function () {
-						trigger._jd_ddxy = true;
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.jpg", [10, 58, 7, 6], 10);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.jpg", [3, 58, 7, 6], 10);
-							}
+			//游戏结束消失
+			lib.onover.push(function (bool) {
+				game.as_removeImage();
+			});
+			//等待响应
+			lib.skill._jd_ddxyA = {
+				trigger: {
+					player: ["chooseToRespondBegin"],
+				},
+				silent: true,
+				direct: true,
+				filter: function (event, player) {
+					return player == game.me && _status.auto == false;
+				},
+				content: function () {
+					trigger._jd_ddxy = true;
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [10, 58, 7, 6], 10);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [18, 65, 8, 4.4], 10);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [3, 58, 7, 6], 10);
 						}
-					},
-				};
-				//成为杀的目标开始
-				lib.skill._jd_ddxyB = {
-					trigger: {
-						target: "shaBegin",
-					},
-					silent: true,
-					filter: function (event, player) {
-						return game.me == event.target;
-					},
-					charlotte: true,
-					forced: true,
-					content: function () {
-						trigger._jd_ddxy = true;
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [18, 65, 8, 4.4], true);
-						}
-					},
-				};
-				lib.skill._jd_ddxyC = {
-					trigger: {
-						player: ["useCardToBegin", "phaseJudge"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						if (event.card.storage && event.card.storage.nowuxie) return false;
-						var card = event.card;
-						var info = get.info(card);
-						if (info.wuxieable === false) return false;
-						if (event.name != "phaseJudge") {
-							if (event.getParent().nowuxie) return false;
-							if (!event.target) {
-								if (info.wuxieable) return true;
-								return false;
-							}
-							if (event.player.hasSkillTag("playernowuxie", false, event.card)) return false;
-							if (get.type(event.card) != "trick" && !info.wuxieable) return false;
-						}
-						return player == game.me && _status.auto == false;
-					},
-					charlotte: true,
-					forced: true,
-					content: function () {
-						trigger._jd_ddxy = true;
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [18, 65, 8, 4.4], true);
-						}
-					},
-				};
-				//使用或打出闪后
-				lib.skill._jd_shiyongshanD = {
-					forced: true,
-					charlotte: true,
-					trigger: {
-						player: ["useCard", "respondAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && event.card.name == "shan";
-					},
-					content: function () {
-						trigger._jd_ddxy = true;
-						game.as_removeImage();
-						if (_status.as_showImage_phase) {
-							if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-								if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-									game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".jpg", [10, 58, 7, 6], true);
-								} else {
-									game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".jpg", [3, 58, 7, 6], true);
-								}
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [18, 65, 8, 4.4], true);
-							}
-						}
-					},
-				};
-				//等待响应及游戏结束
-				lib.skill._jd_ddxyE = {
-					trigger: {
-						player: ["chooseToRespondEnd", "useCardToEnd", "phaseJudgeEnd", "respondSha", "shanBegin"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						if (!event._jd_ddxy) return false;
-						return player == game.me && _status.auto == false;
-					},
-					direct: true,
-					content: function () {
-						game.as_removeImage();
-						if (_status.as_showImage_phase) {
-							if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-								if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-									game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".jpg", [10, 58, 7, 6], true);
-								} else {
-									game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".jpg", [3, 58, 7, 6], true);
-								}
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [18, 65, 8, 4.4], true);
-							}
-						}
-					},
-				};
-				//对方正在思考
-				lib.skill._jd_dfsk = {
-					trigger: {
-						global: ["phaseBegin", "phaseEnd", "phaseJudgeBegin", "phaseDrawBegin", "phaseUseBegin", "phaseDiscardBegin"],
-					},
-					silent: true,
-					charlotte: true,
-					forced: true,
-					filter: function (event, player) {
-						//剩余人数两人时
-						if (game.players.length == 2 && _status.currentPhase != game.me) return true;
-					},
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [18, 65, 8, 4.4], true);
-						}
-					},
-				};
-				//死亡或回合结束消失
-				lib.skill._jd_wjsw = {
-					trigger: {
-						global: ["phaseEnd", "useCardAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return _status.currentPhase != game.me && player != game.me;
-					},
-					forced: true,
-					charlotte: true,
-					content: function () {
-						game.as_removeImage();
-					},
-				};
-				lib.skill._jd_swxs = {
-					trigger: {
-						global: ["dieAfter"],
-					},
-					silent: true,
-					forced: true,
-					charlotte: true,
-					filter: function (event, player) {
-						return player == game.me && _status.auto == false;
-					},
-					content: function () {
-						game.as_removeImage();
-					},
-				};
-				//回合开始
-				lib.skill._jd_hhks = {
-					trigger: {
-						player: ["phaseBegin"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: Infinity,
-					firstDo: true,
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [18, 65, 8, 4.4], true);
-						}
-						_status.as_showImage_phase = "hhks";
-					},
-				};
-				//准备阶段
-				lib.skill._jd_zbjdb = {
-					trigger: {
-						player: ["phaseZhunbeiBefore"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: Infinity,
-					firstDo: true,
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/zbjd.png", [18, 65, 8, 4.4], true);
-						}
-						_status.as_showImage_phase = "zbjd";
-					},
-				};
-				lib.skill._jd_zbjde = {
-					trigger: {
-						player: ["phaseZhunbeiAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: -Infinity,
-					lastDo: true,
-					content: function () {
-						if (_status.as_showImage_phase && _status.as_showImage_phase == "zbjd") {
-							game.as_removeImage();
-							delete _status.as_showImage_phase;
-						}
-					},
-				};
-				//判定阶段
-				lib.skill._jd_pdjdb = {
-					trigger: {
-						player: ["phaseJudgeBefore"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: Infinity,
-					firstDo: true,
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [18, 65, 8, 4.4], true);
-						}
-						_status.as_showImage_phase = "pdjd";
-					},
-				};
-				lib.skill._jd_pdjde = {
-					trigger: {
-						player: ["phaseJudgeAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: -Infinity,
-					lastDo: true,
-					content: function () {
-						if (_status.as_showImage_phase && _status.as_showImage_phase == "pdjd") {
-							game.as_removeImage();
-							delete _status.as_showImage_phase;
-						}
-					},
-				};
-				//摸牌阶段
-				lib.skill._jd_mpjdb = {
-					trigger: {
-						player: ["phaseDrawBefore"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: Infinity,
-					firstDo: true,
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [18, 65, 8, 4.4], true);
-						}
-						_status.as_showImage_phase = "mpjd";
-					},
-				};
-				lib.skill._jd_mpjde = {
-					trigger: {
-						player: ["phaseDrawAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: -Infinity,
-					lastDo: true,
-					content: function () {
-						if (_status.as_showImage_phase && _status.as_showImage_phase == "mpjd") {
-							game.as_removeImage();
-							delete _status.as_showImage_phase;
-						}
-					},
-				};
-				//出牌阶段
-				lib.skill._jd_cpjdb = {
-					trigger: {
-						player: ["phaseUseBefore"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: Infinity,
-					firstDo: true,
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [18, 65, 8, 4.4], true);
-						}
-						_status.as_showImage_phase = "cpjd";
-					},
-				};
-				lib.skill._jd_cpjde = {
-					trigger: {
-						player: ["phaseUseAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: -Infinity,
-					lastDo: true,
-					content: function () {
-						if (_status.as_showImage_phase && _status.as_showImage_phase == "cpjd") {
-							game.as_removeImage();
-							delete _status.as_showImage_phase;
-						}
-					},
-				};
-				//弃牌阶段
-				lib.skill._jd_qpjdb = {
-					trigger: {
-						player: ["phaseDiscardBefore"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: Infinity,
-					firstDo: true,
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [18, 65, 8, 4.4], true);
-						}
-						_status.as_showImage_phase = "qpjd";
-					},
-				};
-				lib.skill._jd_qpjde = {
-					trigger: {
-						player: ["phaseDiscardAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: -Infinity,
-					lastDo: true,
-					content: function () {
-						if (_status.as_showImage_phase && _status.as_showImage_phase == "qpjd") {
-							game.as_removeImage();
-							delete _status.as_showImage_phase;
-						}
-					},
-				};
-				//结束阶段
-				lib.skill._jd_jsjdb = {
-					trigger: {
-						player: ["phaseJieshuBefore"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: Infinity,
-					firstDo: true,
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/jsjd.png", [18, 65, 8, 4.4], true);
-						}
-						_status.as_showImage_phase = "jsjd";
-					},
-				};
-				lib.skill._jd_jsjde = {
-					trigger: {
-						player: ["phaseJieshuAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: -Infinity,
-					lastDo: true,
-					content: function () {
-						if (_status.as_showImage_phase && _status.as_showImage_phase == "jsjd") {
-							game.as_removeImage();
-							delete _status.as_showImage_phase;
-						}
-					},
-				};
-				//回合结束
-				lib.skill._jd_hhjsb = {
-					trigger: {
-						player: ["phaseEnd"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: Infinity,
-					firstDo: true,
-					content: function () {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.jpg", [10, 58, 7, 6], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.jpg", [3, 58, 7, 6], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [18, 65, 8, 4.4], true);
-						}
-						_status.as_showImage_phase = "hhjs";
-					},
-				};
-				lib.skill._jd_hhjse = {
-					trigger: {
-						player: ["phaseAfter"],
-					},
-					silent: true,
-					filter: function (event, player) {
-						return player == game.me && _status.currentPhase == player;
-					},
-					charlotte: true,
-					ruleSkill: true,
-					direct: true,
-					priority: -Infinity,
-					lastDo: true,
-					content: function () {
-						if (_status.as_showImage_phase && _status.as_showImage_phase == "hhjs") {
-							game.as_removeImage();
-							delete _status.as_showImage_phase;
-						}
-					},
-				};
-			}
-			//玩家进度条
-			if (get.mode() != "connect" && config.jindutiao == true) {
-				lib.onover.push(function (bool) {
-					if (document.getElementById("jindutiaopl")) {
-						document.getElementById("jindutiaopl").remove()
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], 10);
 					}
-				});
-				//玩家回合内进度条
-				lib.skill._jindutiao = {
-					trigger: {
-						player: ['phaseZhunbeiBegin', 'phaseBegin', 'phaseJudgeBegin', 'phaseDrawBegin', 'useCardAfter', 'phaseDiscardBegin', 'useSkillBefore', 'loseAfter']
-					},
-					silent: true,
-					filter: function (event, player) {
-						if (document.querySelector("#jindutiaopl") && lib.config.extension_十周年UI_jindutiaoUpdata == false) return false;
-						return player == game.me && _status.currentPhase == player;
-					},
-					forced: true,
-					content: function () {
-						game.Jindutiaoplayer();
-					},
-					group: ['_jindutiao_jieshu'],
-					subSkill: {
-						jieshu: {
-							trigger: {
-								player: ['phaseEnd', 'phaseJieshuBegin'],
-							},
-							forced: true,
-							filter: function (event, player) {
-								return player == game.me;
-							},
-							content: function () {
-								if (window.timer) {
-
-									clearInterval(window.timer);
-									delete window.timer;
-								}
-
-								if (window.timer2) {
-									clearInterval(window.timer2);
-									delete window.timer2;
-								}
-
-								if (document.getElementById("jindutiaopl")) {
-
-									document.getElementById("jindutiaopl").remove()
-								}
-							},
-						},
-					},
-				}
-				/*------回合外进度条玩家----*/
-				lib.skill._jindutiaopl = {
-					trigger: {
-						global: ['gameStart'],
-						player: ['useCardToBegin', 'respondBegin', 'chooseToRespondBegin', 'damageEnd', 'damageAfter', 'judgeEnd'],
-						target: "useCardToTargeted",
-					},
-					silent: true,
-					forced: true,
-					charlotte: true,
-					filter: function (event, player) {
-						if (document.querySelector("#jindutiaopl") && lib.config.extension_十周年UI_jindutiaoUpdata == false) return false;
-						if (event.name == 'gameStart' && lib.config['extension_无名补丁_enable'])
+				},
+			};
+			//成为杀的目标开始
+			lib.skill._jd_ddxyB = {
+				trigger: {
+					target: "shaBegin",
+				},
+				silent: true,
+				filter: function (event, player) {
+					return game.me == event.target;
+				},
+				charlotte: true,
+				forced: true,
+				content: function () {
+					trigger._jd_ddxy = true;
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], true);
+					}
+				},
+			};
+			lib.skill._jd_ddxyC = {
+				trigger: {
+					player: ["useCardToBegin", "phaseJudge"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					if (event.card.storage && event.card.storage.nowuxie) return false;
+					var card = event.card;
+					var info = get.info(card);
+					if (info.wuxieable === false) return false;
+					if (event.name != "phaseJudge") {
+						if (event.getParent().nowuxie) return false;
+						if (!event.target) {
+							if (info.wuxieable) return true;
 							return false;
-						return _status.currentPhase != player && player == game.me;
-					},
-					content: function () {
-						game.Jindutiaoplayer();
-					},
-					group: ['_jindutiaopl_jieshu'],
-					subSkill: {
-						jieshu: {
-							trigger: {
-								global: ["useCardAfter", "useCardBefore", "phaseBefore", "loseEnd", "phaseBegin", "phaseDradBegin", "phaseUseBegin", "phaseUseEnd", "phaseEnd", "phaseDiscardAfter", "phaseDiscardBegin", "useSkillBefore", "judgeAfter"],
-							},
-							forced: true,
-							charlotte: true,
-							filter: function (event, player) {
-								if (document.querySelector("#jindutiaopl"))
-									return _status.currentPhase != game.me;
-								return false;
-							},
-							content: function () {
-								if (window.timer) {
-									clearInterval(window.timer);
-									delete window.timer;
-								}
-								if (window.timer2) {
-									clearInterval(window.timer2);
-									delete window.timer2;
-								}
-								if (document.getElementById("jindutiaopl")) {
-									document.getElementById("jindutiaopl").remove()
-								}
-							},
+						}
+						if (event.player.hasSkillTag("playernowuxie", false, event.card)) return false;
+						if (get.type(event.card) != "trick" && !info.wuxieable) return false;
+					}
+					return player == game.me && _status.auto == false;
+				},
+				charlotte: true,
+				forced: true,
+				content: function () {
+					trigger._jd_ddxy = true;
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], true);
+					}
+				},
+			};
+			//使用或打出闪后
+			lib.skill._jd_shiyongshanD = {
+				forced: true,
+				charlotte: true,
+				trigger: {
+					player: ["useCard", "respondAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && event.card.name == "shan";
+				},
+				content: function () {
+					trigger._jd_ddxy = true;
+					game.as_removeImage();
+					if (_status.as_showImage_phase) {
+						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [10, 58, 7, 6], true);
+							} else {
+								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [3, 58, 7, 6], true);
+							}
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
+						}
+					}
+				},
+			};
+			//等待响应及游戏结束
+			lib.skill._jd_ddxyE = {
+				trigger: {
+					player: ["chooseToRespondEnd", "useCardToEnd", "phaseJudgeEnd", "respondSha", "shanBegin"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					if (!event._jd_ddxy) return false;
+					return player == game.me && _status.auto == false;
+				},
+				direct: true,
+				content: function () {
+					game.as_removeImage();
+					if (_status.as_showImage_phase) {
+						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [10, 58, 7, 6], true);
+							} else {
+								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [3, 58, 7, 6], true);
+							}
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
+						}
+					}
+				},
+			};
+			//对方正在思考
+			lib.skill._jd_dfsk = {
+				trigger: {
+					global: ["phaseBegin", "phaseEnd", "phaseJudgeBegin", "phaseDrawBegin", "phaseUseBegin", "phaseDiscardBegin"],
+				},
+				silent: true,
+				charlotte: true,
+				forced: true,
+				filter: function (event, player) {
+					//剩余人数两人时
+					if (game.players.length == 2 && _status.currentPhase != game.me) return true;
+				},
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [19, 71.5, 0, 3], true);
+					}
+				},
+			};
+			//死亡或回合结束消失
+			lib.skill._jd_wjsw = {
+				trigger: {
+					global: ["phaseEnd", "useCardAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return _status.currentPhase != game.me && player != game.me;
+				},
+				forced: true,
+				charlotte: true,
+				content: function () {
+					game.as_removeImage();
+				},
+			};
+			lib.skill._jd_swxs = {
+				trigger: {
+					global: ["dieAfter"],
+				},
+				silent: true,
+				forced: true,
+				charlotte: true,
+				filter: function (event, player) {
+					return player == game.me && _status.auto == false;
+				},
+				content: function () {
+					game.as_removeImage();
+				},
+			};
+			//回合开始
+			lib.skill._jd_hhks = {
+				trigger: {
+					player: ["phaseBegin"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: Infinity,
+				firstDo: true,
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [19, 71.5, 0, 3], true);
+					}
+					_status.as_showImage_phase = "hhks";
+				},
+			};
+			//准备阶段
+			lib.skill._jd_zbjdb = {
+				trigger: {
+					player: ["phaseZhunbeiBefore"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: Infinity,
+				firstDo: true,
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/zbjd.png", [19, 71.5, 0, 3], true);
+					}
+					_status.as_showImage_phase = "zbjd";
+				},
+			};
+			lib.skill._jd_zbjde = {
+				trigger: {
+					player: ["phaseZhunbeiAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: -Infinity,
+				lastDo: true,
+				content: function () {
+					if (_status.as_showImage_phase && _status.as_showImage_phase == "zbjd") {
+						game.as_removeImage();
+						delete _status.as_showImage_phase;
+					}
+				},
+			};
+			//判定阶段
+			lib.skill._jd_pdjdb = {
+				trigger: {
+					player: ["phaseJudgeBefore"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: Infinity,
+				firstDo: true,
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5, 0, 3], true);
+					}
+					_status.as_showImage_phase = "pdjd";
+				},
+			};
+			lib.skill._jd_pdjde = {
+				trigger: {
+					player: ["phaseJudgeAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: -Infinity,
+				lastDo: true,
+				content: function () {
+					if (_status.as_showImage_phase && _status.as_showImage_phase == "pdjd") {
+						game.as_removeImage();
+						delete _status.as_showImage_phase;
+					}
+				},
+			};
+			//摸牌阶段
+			lib.skill._jd_mpjdb = {
+				trigger: {
+					player: ["phaseDrawBefore"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: Infinity,
+				firstDo: true,
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [19, 71.5, 0, 3], true);
+					}
+					_status.as_showImage_phase = "mpjd";
+				},
+			};
+			lib.skill._jd_mpjde = {
+				trigger: {
+					player: ["phaseDrawAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: -Infinity,
+				lastDo: true,
+				content: function () {
+					if (_status.as_showImage_phase && _status.as_showImage_phase == "mpjd") {
+						game.as_removeImage();
+						delete _status.as_showImage_phase;
+					}
+				},
+			};
+			//出牌阶段
+			lib.skill._jd_cpjdb = {
+				trigger: {
+					player: ["phaseUseBefore"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: Infinity,
+				firstDo: true,
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [19, 71.5, 0, 3], true);
+					}
+					_status.as_showImage_phase = "cpjd";
+				},
+			};
+			lib.skill._jd_cpjde = {
+				trigger: {
+					player: ["phaseUseAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: -Infinity,
+				lastDo: true,
+				content: function () {
+					if (_status.as_showImage_phase && _status.as_showImage_phase == "cpjd") {
+						game.as_removeImage();
+						delete _status.as_showImage_phase;
+					}
+				},
+			};
+			//弃牌阶段
+			lib.skill._jd_qpjdb = {
+				trigger: {
+					player: ["phaseDiscardBefore"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: Infinity,
+				firstDo: true,
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [19, 71.5, 0, 3], true);
+					}
+					_status.as_showImage_phase = "qpjd";
+				},
+			};
+			lib.skill._jd_qpjde = {
+				trigger: {
+					player: ["phaseDiscardAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: -Infinity,
+				lastDo: true,
+				content: function () {
+					if (_status.as_showImage_phase && _status.as_showImage_phase == "qpjd") {
+						game.as_removeImage();
+						delete _status.as_showImage_phase;
+					}
+				},
+			};
+			//结束阶段
+			lib.skill._jd_jsjdb = {
+				trigger: {
+					player: ["phaseJieshuBefore"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: Infinity,
+				firstDo: true,
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/jsjd.png", [19, 71.5, 0, 3], true);
+					}
+					_status.as_showImage_phase = "jsjd";
+				},
+			};
+			lib.skill._jd_jsjde = {
+				trigger: {
+					player: ["phaseJieshuAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: -Infinity,
+				lastDo: true,
+				content: function () {
+					if (_status.as_showImage_phase && _status.as_showImage_phase == "jsjd") {
+						game.as_removeImage();
+						delete _status.as_showImage_phase;
+					}
+				},
+			};
+			//回合结束
+			lib.skill._jd_hhjsb = {
+				trigger: {
+					player: ["phaseEnd"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: Infinity,
+				firstDo: true,
+				content: function () {
+					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
+						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [10, 58, 7, 6], true);
+						} else {
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [3, 58, 7, 6], true);
+						}
+					} else {
+						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [19, 71.5, 0, 3], true);
+					}
+					_status.as_showImage_phase = "hhjs";
+				},
+			};
+			lib.skill._jd_hhjse = {
+				trigger: {
+					player: ["phaseAfter"],
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				charlotte: true,
+				ruleSkill: true,
+				direct: true,
+				priority: -Infinity,
+				lastDo: true,
+				content: function () {
+					if (_status.as_showImage_phase && _status.as_showImage_phase == "hhjs") {
+						game.as_removeImage();
+						delete _status.as_showImage_phase;
+					}
+				},
+			};
+			//玩家进度条
+			lib.onover.push(function (bool) {
+				if (document.getElementById("jindutiaopl")) {
+					document.getElementById("jindutiaopl").remove()
+				}
+			});
+			//玩家回合内进度条
+			lib.skill._jindutiao = {
+				trigger: {
+					player: ['phaseZhunbeiBegin', 'phaseBegin', 'phaseJudgeBegin', 'phaseDrawBegin', 'useCardAfter', 'phaseDiscardBegin', 'useSkillBefore', 'loseAfter']
+				},
+				silent: true,
+				filter: function (event, player) {
+					return player == game.me && _status.currentPhase == player;
+				},
+				forced: true,
+				content: function () {
+					game.Jindutiaoplayer();
+				},
+				group: ['_jindutiao_jieshu'],
+				subSkill: {
+					jieshu: {
+						trigger: {
+							player: ['phaseEnd', 'phaseJieshuBegin'],
+						},
+						forced: true,
+						filter: function (event, player) {
+							return player == game.me;
+						},
+						content: function () {
+							if (window.timer) {
+			
+								clearInterval(window.timer);
+								delete window.timer;
+							}
+			
+							if (window.timer2) {
+								clearInterval(window.timer2);
+								delete window.timer2;
+							}
+			
+							if (document.getElementById("jindutiaopl")) {
+			
+								document.getElementById("jindutiaopl").remove()
+							}
 						},
 					},
-				}
+				},
+			}
+			/*------回合外进度条玩家----*/
+			lib.skill._jindutiaopl = {
+				trigger: {
+					global: ['gameStart'],
+					player: ['useCardToBegin', 'respondBegin', 'chooseToRespondBegin', 'damageEnd', 'damageAfter', 'judgeEnd'],
+					target: "useCardToTargeted",
+				},
+				silent: true,
+				forced: true,
+				charlotte: true,
+				filter: function (event, player) {
+					if (event.name == 'gameStart' && lib.config['extension_无名补丁_enable'])
+						return false;
+					return _status.currentPhase != player && player == game.me;
+				},
+				content: function () {
+					game.Jindutiaoplayer();
+				},
+				group: ['_jindutiaopl_jieshu'],
+				subSkill: {
+					jieshu: {
+						trigger: {
+							global: ["useCardAfter", "useCardBefore", "phaseBefore", "loseEnd", "phaseBegin", "phaseDradBegin", "phaseUseBegin", "phaseUseEnd", "phaseEnd", "phaseDiscardAfter", "phaseDiscardBegin", "useSkillBefore", "judgeAfter"],
+						},
+						forced: true,
+						charlotte: true,
+						filter: function (event, player) {
+							if (document.querySelector("#jindutiaopl"))
+								return _status.currentPhase != game.me;
+							return false;
+						},
+						content: function () {
+							if (window.timer) {
+								clearInterval(window.timer);
+								delete window.timer;
+							}
+							if (window.timer2) {
+								clearInterval(window.timer2);
+								delete window.timer2;
+							}
+							if (document.getElementById("jindutiaopl")) {
+								document.getElementById("jindutiaopl").remove()
+							}
+						},
+					},
+				},
 			}
 			//手杀UI
 		},
@@ -10193,7 +9935,7 @@ export default async function () {
 
 							break;
 						default:
-							lib.init.css(layoutPath + pack + "/main" + listmap + (get.is.phoneLayout() ? "" : "_window") + ".css");
+							lib.init.css(layoutPath + pack + "/main" + listmap + ".css");
 							break;
 					}
 				}
@@ -10215,98 +9957,43 @@ export default async function () {
 				}
 				var boxContent = document.createElement('div');
 				boxContent.setAttribute('id', 'jindutiaopl');
-				//-------样式1-------//
-				if (lib.config.extension_十周年UI_jindutiaoYangshi == "1") {
-
-					//十周年PC端进度条样式
-					if (window.jindutiaoTeshu) {
-						delete window.jindutiaoTeshu;
-					}
-					boxContent.style.width = "400px";
-					boxContent.style.height = "24px";
-					boxContent.style.display = "block";
-					boxContent.style.left = "calc(50% - 197px)";
-					boxContent.style.position = "fixed";
-					boxContent.style.bottom = parseFloat(lib.config['extension_十周年UI_jindutiaoSet']) + '%';
-
-					var boxTime = document.createElement('div')
-					boxTime.data = 300
-					boxTime.style.cssText =
-						"width:280px;height:4.3px;margin:14px 0 0 85px;background-color: #E2E20A;border-right:5px solid #FFF;position: absolute;top: -3.5px;"
-					boxContent.appendChild(boxTime)
-
-					var imgBg = document.createElement('img')
-					imgBg.src = lib.assetURL + 'extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindutiao.png'
-					imgBg.style.cssText =
-						"--w:400px;--h:calc(var(--w)*44/759);width: var(--w);height:var(--h);position: absolute;top: 0;"
-					boxContent.appendChild(imgBg)
+				//十周年客户端进度条样式
+				if (!window.jindutiaoTeshu) {
+					window.jindutiaoTeshu = true;
 				}
-				//-------样式2-----//
-				if (lib.config.extension_十周年UI_jindutiaoYangshi == "2") {
-
-					//十周年PC端进度条样式
-					if (window.jindutiaoTeshu) {
-						delete window.jindutiaoTeshu;
-					}
-					boxContent.style.width = "400px";
-					boxContent.style.height = "24px";
-					boxContent.style.display = "block";
-					boxContent.style.left = "calc(50% - 197px)";
-					boxContent.style.position = "fixed";
-					boxContent.style.bottom = parseFloat(lib.config['extension_十周年UI_jindutiaoSet']) + '%';
-
-					var boxTime = document.createElement('div')
-					boxTime.data = 300
-					boxTime.style.cssText =
-						"width:280px;height:4.3px;margin:14px 0 0 85px;background-color: #E2E20A;border-right:5px solid #FFF;position: absolute;top: -3.5px;"
-					boxContent.appendChild(boxTime)
-
-					var imgBg = document.createElement('img')
-					imgBg.src = lib.assetURL + 'extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindutiao.png'
-					imgBg.style.cssText =
-						"--w:400px;--h:calc(var(--w)*44/759);width: var(--w);height:var(--h);position: absolute;top: 0;"
-					boxContent.appendChild(imgBg)
-				}
-				//-------样式3-----//
-				if (lib.config.extension_十周年UI_jindutiaoYangshi == "3") {
-					//十周年客户端进度条样式
-					if (!window.jindutiaoTeshu) {
-						window.jindutiaoTeshu = true;
-					}
-					boxContent.style.width = "615px";
-					boxContent.style.height = "13px";
-					boxContent.style.display = "block";
-					boxContent.style["boxShadow"] = "0 0 4px #000000";
-					boxContent.style.margin = "0 0 !important";
-					boxContent.style.position = "fixed";
-					boxContent.style.left = "calc(50% - 350px)";
-					boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
-
-					var boxTime = document.createElement("div");
-					boxTime.data = 614; /*黄色条长度*/
-					boxTime.style.cssText = "z-index:1;width:614px;height:8px;margin:0 0 0 1px;background-color: #F4C336;border-top:3px solid #EBE1A7;border-bottom:2px solid #73640D;border-left:1px solid #73640D;position: absolute;top: 0px;border-radius:3px;";
-					boxContent.appendChild(boxTime);
-
-					var boxTime2 = document.createElement("div");
-					boxTime2.data = 599; /*白色条长度*/
-					boxTime2.style.cssText = "";
-					boxContent.appendChild(boxTime2);
-					//白条底图
-					var imgBg3 = document.createElement("img");
-					imgBg3.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindustiao2.1.png";
-					imgBg3.style.cssText = "width: 400px;height:4px;position: absolute;top: 16px;z-index: -1;";
-					boxContent.appendChild(imgBg3);
-
-					var imgBg = document.createElement("img");
-					imgBg.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindsutiao2.png";
-					imgBg.style.cssText = "width: 400px;height:13px;position: absolute;top: 0;opacity:0;";
-					boxContent.appendChild(imgBg);
-					/*底图*/
-					var imgBg2 = document.createElement("img");
-					imgBg2.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindutiao2.1.png";
-					imgBg2.style.cssText = "width: 616px;height:14px;position: absolute;top: 0;z-index: -1;";
-					boxContent.appendChild(imgBg2);
-				}
+				boxContent.style.width = "615px";
+				boxContent.style.height = "13px";
+				boxContent.style.display = "block";
+				boxContent.style["boxShadow"] = "0 0 4px #000000";
+				boxContent.style.margin = "0 0 !important";
+				boxContent.style.position = "fixed";
+				boxContent.style.left = "calc(50% - 350px)";
+				boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
+								
+				var boxTime = document.createElement("div");
+				boxTime.data = 614; /*黄色条长度*/
+				boxTime.style.cssText = "z-index:1;width:614px;height:8px;margin:0 0 0 1px;background-color: #F4C336;border-top:3px solid #EBE1A7;border-bottom:2px solid #73640D;border-left:1px solid #73640D;position: absolute;top: 0px;border-radius:3px;";
+				boxContent.appendChild(boxTime);
+								
+				var boxTime2 = document.createElement("div");
+				boxTime2.data = 599; /*白色条长度*/
+				boxTime2.style.cssText = "";
+				boxContent.appendChild(boxTime2);
+				//白条底图
+				var imgBg3 = document.createElement("img");
+				imgBg3.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindustiao2.1.png";
+				imgBg3.style.cssText = "width: 400px;height:4px;position: absolute;top: 16px;z-index: -1;";
+				boxContent.appendChild(imgBg3);
+								
+				var imgBg = document.createElement("img");
+				imgBg.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindsutiao2.png";
+				imgBg.style.cssText = "width: 400px;height:13px;position: absolute;top: 0;opacity:0;";
+				boxContent.appendChild(imgBg);
+				/*底图*/
+				var imgBg2 = document.createElement("img");
+				imgBg2.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindutiao2.1.png";
+				imgBg2.style.cssText = "width: 616px;height:14px;position: absolute;top: 0;z-index: -1;";
+				boxContent.appendChild(imgBg2);
 				document.body.appendChild(boxContent)
 				window.timer = setInterval(function () {
 					boxTime.style.width = boxTime.data + 'px';
@@ -10319,7 +10006,7 @@ export default async function () {
 							ui.click.auto();
 						}
 					}
-				}, parseFloat(lib.config['extension_十周年UI_jindutiaoST'])); //进度条间隔时间100 
+				}, 100); //进度条间隔时间100 
 				//-------------//
 				if (window.jindutiaoTeshu == true) {
 					window.timer2 = setInterval(() => {
@@ -10334,7 +10021,7 @@ export default async function () {
 							//ui.click.cancel();//结束回合
 							//点击托管ui.click.auto();
 						}
-					}, parseFloat(lib.config['extension_十周年UI_jindutiaoST']) / 2); //进度条时间
+					}, 100 / 2); //进度条时间
 				}
 			};
 			//-----AI进度条框架----//
@@ -10408,755 +10095,6 @@ export default async function () {
 					}
 				}
 				if (window.chatBackground2 != undefined) game.updateChatWord(str);
-			};
-			//这里
-			game.showChatWordBackgroundX = function () {
-				if (window.chatBg != undefined && window.chatBg.show) {
-					//控制面板打开，首次调用此函数时打开面板，再次调用时关闭
-					window.chatBg.hide();
-					//关闭砸表情
-					if (window.jidan.thrownn) window.jidan.thrownn = false;
-					if (window.tuoxie.thrownn) window.tuoxie.thrownn = false;
-					if (window.xianhua.thrownn) window.xianhua.thrownn = false;
-					if (window.meijiu.thrownn) window.meijiu.thrownn = false;
-					if (window.cailan.thrownn) window.cailan.thrownn = false;
-					if (window.qicai.thrownn) window.qicai.thrownn = false;
-					window.chatBg.show = false;
-					if (window.dialog_lifesay) {
-						if (window.dialog_lifesay.show) window.dialog_lifesay.style.left = "-" + window.dialog_lifesay.style.width;
-						setTimeout(function () {
-							window.dialog_lifesay.hide();
-							window.dialog_lifesay.show = false;
-						}, 100);
-					}
-					if (window.dialog_emoji) {
-						if (window.dialog_emoji.show) window.dialog_emoji.style.top = "100%";
-						setTimeout(function () {
-							window.dialog_emoji.hide();
-							window.dialog_emoji.show = false;
-						}, 1000);
-					}
-					if (window.chatBackground) {
-						if (window.chatBackground.show) window.chatBackground.style.left = "100%";
-						setTimeout(function () {
-							window.chatBackground.hide();
-							window.chatBackground.show = false;
-						}, 1000);
-					}
-					return;
-				}
-				var dialogChat = {};
-				//聊天框整体
-				window.chatBg = ui.create.div("hidden");
-				window.chatBg.classList.add("popped");
-				window.chatBg.classList.add("static");
-				window.chatBg.show = true;
-				window.chatBg.style.cssText = "display: block;--w: 420px;--h: calc(var(--w) * 430/911);width: var(--w);height: var(--h);position: fixed;left:30%;bottom:5%;opacity: 1;background-size: 100% 100%;background-color: transparent;z-index:99;";
-				window.chatBg.style.transition = "all 1.5s";
-				/*window.chatBg.style.height='170px';//调整对话框背景大小，位置
-		window.chatBg.style.width='550px';
-		  window.chatBg.style.left='calc(50%-130px)';
-		window.chatBg.style.top='calc(100% - 470px)';
-		window.chatBg.style.opacity=1;*/
-				window.chatBg.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/chat.png");
-				/*window.chatBg.style.backgroundSize="100% 100%";
-		window.chatBg.style.transition='all 0.5s';
-		window.chatBg.style['box-shadow']='none';*/
-				ui.window.appendChild(window.chatBg);
-
-				var clickFK = function (div) {
-					div.style.transition = "opacity 0.5s";
-					div.addEventListener(lib.config.touchscreen ? "touchstart" : "mousedown", function () {
-						this.style.transform = "scale(0.95)";
-					});
-					div.addEventListener(lib.config.touchscreen ? "touchend" : "mouseup", function () {
-						this.style.transform = "";
-					});
-					div.onmouseout = function () {
-						this.style.transform = "";
-					};
-				};
-				//--------------------------------//
-				game.open_lifesay = function () {
-					//打开常用语函数
-					if (window.dialog_emoji) {
-						if (window.dialog_emoji.show) window.dialog_emoji.style.top = "100%";
-						setTimeout(function () {
-							window.dialog_emoji.hide();
-							window.dialog_emoji.show = false;
-						}, 1000);
-					}
-					if (window.chatBackground) {
-						if (window.chatBackground.show) window.chatBackground.style.left = "100%";
-						setTimeout(function () {
-							window.chatBackground.hide();
-							window.chatBackground.show = false;
-						}, 1000);
-					}
-					if (window.dialog_lifesay != undefined && window.dialog_lifesay.show) {
-						//控制面板打开，首次调用此函数时打开面板，再次调用时关闭
-						window.dialog_lifesay.hide();
-						window.dialog_lifesay.show = false;
-						return;
-					}
-					var dialogLife = {};
-					window.dialog_lifesay = ui.create.div("hidden");
-					window.dialog_lifesay.style["z-index"] = 999999999;
-					window.dialog_lifesay.classList.add("popped");
-					window.dialog_lifesay.classList.add("static");
-					window.dialog_lifesay.show = true;
-					window.dialog_lifesay.style.height = "300px"; //整个常用语对话框的宽高
-					window.dialog_lifesay.style.width = "600px"; //对话框的宽度，由每一条的内容字数决定，可自行调整，使用固定大小避免手机和电脑像素不同导致冲突
-					window.dialog_lifesay.style.left = "-" + window.dialog_lifesay.style.width; //这里弄一个右移的动画
-					setTimeout(function () {
-						window.dialog_lifesay.style.left = "calc( 50% - 300px)"; //整个对话框的位置
-					}, 100);
-					window.dialog_lifesay.style.top = "calc( 20% - 100px)"; //整个对话框的位置
-					window.dialog_lifesay.style.transition = "all 1s";
-					window.dialog_lifesay.style.opacity = 1;
-					window.dialog_lifesay.style.borderRadius = "8px";
-					window.dialog_lifesay.style.backgroundSize = "100% 100%";
-					window.dialog_lifesay.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/nobg.png"); //把背景dialog设置为透明
-					window.dialog_lifesay.style["box-shadow"] = "none";
-					ui.window.appendChild(window.dialog_lifesay);
-					dialogLife.background = window.dialog_lifesay;
-					window.dialog_lifesayBgPict = ui.create.div("hidden"); //这是现在的背景颜色的div，外层div
-					window.dialog_lifesayBgPict.style.height = "100%";
-					window.dialog_lifesayBgPict.style.width = "100%";
-					window.dialog_lifesayBgPict.style.left = "0%";
-					window.dialog_lifesayBgPict.style.top = "0%";
-					window.dialog_lifesayBgPict.style.borderRadius = "8px";
-					window.dialog_lifesayBgPict.style.backgroundSize = "100% 100%";
-					window.dialog_lifesayBgPict.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/saydiv.png");
-					window.dialog_lifesayBgPict.style["box-shadow"] = "none";
-					window.dialog_lifesay.appendChild(window.dialog_lifesayBgPict);
-					window.dialog_lifesayBgColor = ui.create.div("hidden"); //这是原来的背景颜色的div，内层div
-					window.dialog_lifesayBgColor.style.height = "70%";
-					window.dialog_lifesayBgColor.style.width = "80%";
-					window.dialog_lifesayBgColor.style.left = "10%";
-					window.dialog_lifesayBgColor.style.top = "10%";
-					window.dialog_lifesayBgColor.style.borderRadius = "8px";
-					window.dialog_lifesayBgColor.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/nobg.png"); //把背景设置为透明
-					//window.dialog_lifesayBgColor.style.backgroundColor='black';
-					window.dialog_lifesayBgColor.style["overflow-y"] = "scroll";
-					lib.setScroll(window.dialog_lifesayBgColor);
-					window.dialog_lifesay.appendChild(window.dialog_lifesayBgColor);
-					window.lifesayWord = ["能不能快点呀，兵贵神速啊", "主公，别开枪，自己人", "小内再不跳，后面还怎么玩啊", "你们怎么忍心就这么让我酱油了", "我，我惹你们了吗", "姑娘，你真是条汉子", "三十六计，走为上，容我去去便回", "人心散了，队伍不好带啊", "昏君，昏君啊", "风吹鸡蛋壳，牌去人安乐", "小内啊，您老悠着点儿", "不好意思，刚才卡了", "你可以打得再烂一点吗", "哥们儿，给力点行吗", "哥，交个朋友吧", "妹子，交个朋友吧"];
-					for (var i = 0; i < window.lifesayWord.length; i++) {
-						window["dialog_lifesayContent_" + i] = ui.create.div("hidden", "", function () {
-							game.me.say(this.content);
-							window.dialog_lifesay.delete();
-							delete window.dialog_lifesay;
-							window.dialog_lifesay = undefined;
-							game.playAudio("..", "extension", "十周年UI/shoushaUI/sayplay/audio", this.pos + "_" + game.me.sex);
-						});
-						window["dialog_lifesayContent_" + i].style.height = "10%"; //每一条内容的高度，可以用px也可以用百分比，由你喜欢
-						window["dialog_lifesayContent_" + i].style.width = "100%"; //每一条内容的宽度，默认与整个对话框宽度挂钩以美观，具体百分比可自己调整
-						window["dialog_lifesayContent_" + i].style.left = "0%";
-						window["dialog_lifesayContent_" + i].style.top = "0%";
-						window["dialog_lifesayContent_" + i].style.position = "relative";
-						window["dialog_lifesayContent_" + i].pos = i;
-						window["dialog_lifesayContent_" + i].content = window.lifesayWord[i];
-						window["dialog_lifesayContent_" + i].innerHTML = "<font color=white>" + window.lifesayWord[i] + "</font>"; //显示的字体可以自己改
-						window.dialog_lifesayBgColor.appendChild(window["dialog_lifesayContent_" + i]);
-						clickFK(window["dialog_lifesayContent_" + i]);
-					}
-				};
-				//常用语按钮
-				window.chatButton1 = ui.create.div("hidden", "", game.open_lifesay);
-				window.chatButton1.style.cssText = "display: block;--w: 80px;--h: calc(var(--w) * 82/98);width: var(--w);height: var(--h);left:40px;bottom:25px;transition:none;background-size:100% 100%";
-				/*window.chatButton1.style.height='70px';
-				window.chatButton1.style.width='80px';
-				window.chatButton1.style.left='40px';
-				window.chatButton1.style.bottom='10px';
-				window.chatButton1.style.transition='none';
-				window.chatButton1.style.backgroundSize="100% 100%";*/
-				window.chatButton1.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/lifesay.png");
-
-				lib.setScroll(window.chatButton1);
-				window.chatBg.appendChild(window.chatButton1);
-				clickFK(window.chatButton1);
-				//-----------------------------------//
-				//-----------互动框---------//
-				game.open_hudong = function () {
-					//打开互动框函数
-					if (window.dialog_hudong != undefined && dialog_hudong.show) {
-						//控制面板打开，首次调用此函数时打开面板，再次调用时关闭
-						window.dialog_hudong.hide();
-						window.dialog_hudong.show = false;
-						return;
-					}
-				};
-				//------菜篮子框------//
-				window.hudongkuang = ui.create.div("hidden", "", game.open_hudong);
-				window.hudongkuang.style.cssText = "display: block;--w: 315px;--h: calc(var(--w) * 135/142);width: var(--w);height: var(--h);left:-280px;bottom:-30px;transition:none;background-size:100% 100%;pointer-events:none;";
-				window.hudongkuang.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/hudong.png");
-				window.chatBg.appendChild(window.hudongkuang);
-				//------1--美酒-------//
-				game.open_meijiu = function () {
-					//打开美酒函数
-					//这里
-					var list = game.players;
-					for (let i = 0; i < game.players.length; i++) {
-						list[i].onclick = function () {
-							var target = this;
-							if (window.meijiu.thrownn == true) {
-								for (let i = 0; i < 10; i++) {
-									setTimeout(() => {
-										if (i <= 8) game.me.throwEmotion(this, "flower");
-										else game.me.throwEmotion(this, "wine");
-										window.shuliang.innerText = window.shuliang.innerText - 1;
-									}, 100 * i);
-									setTimeout(() => {
-										if (i <= 8) target.throwEmotion(game.me, "flower");
-										else target.throwEmotion(game.me, "wine");
-									}, 100 * i + 500);
-								}
-							}
-						};
-					}
-				};
-				window.meijiu = ui.create.div("hidden", "", game.open_meijiu);
-				window.meijiu.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-155px;bottom:173px;transition:none;background-size:100% 100%";
-
-				window.meijiu.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/meijiu.png");
-				//这里
-				window.meijiu.onclick = function () {
-					window.meijiu.thrownn = true;
-				};
-				window.chatBg.appendChild(window.meijiu);
-				lib.setScroll(window.meijiu);
-				clickFK(window.meijiu);
-				//---2-----鲜花-------//
-				game.open_xianhua = function () {
-					//打开鲜花函数
-					//这里
-					var list = game.players;
-					for (let i = 0; i < game.players.length; i++) {
-						list[i].onclick = function () {
-							if (window.xianhua.thrownn == true) game.me.throwEmotion(this, "flower");
-							window.shuliang.innerText = window.shuliang.innerText - 1;
-						};
-					}
-				};
-				window.xianhua = ui.create.div("hidden", "", game.open_xianhua);
-				window.xianhua.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-230px;bottom:173px;transition:none;background-size:100% 100%";
-
-				window.xianhua.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/xianhua.png");
-				//这里
-				window.xianhua.onclick = function () {
-					window.xianhua.thrownn = true;
-				};
-				window.chatBg.appendChild(window.xianhua);
-				lib.setScroll(window.xianhua);
-				clickFK(window.xianhua);
-				//-----3---拖鞋-------//
-				game.open_tuoxie = function () {
-					//打开拖鞋函数
-					//这里
-					var list = game.players;
-					var num = 10;
-					for (let i = 0; i < game.players.length; i++) {
-						list[i].onclick = function () {
-							var target = this;
-							if (window.tuoxie.thrownn == true) {
-								for (let i = 0; i < num; i++) {
-									setTimeout(() => {
-										if (i <= 8) {
-											game.me.throwEmotion(this, "egg");
-											window.shuliang.innerText = window.shuliang.innerText - 1;
-										} else {
-											game.me.throwEmotion(this, "shoe");
-											window.shuliang.innerText = window.shuliang.innerText - 1;
-										}
-									}, 100 * i);
-									setTimeout(() => {
-										if (i <= 8) target.throwEmotion(game.me, "egg");
-										else target.throwEmotion(game.me, "shoe");
-									}, 100 * i + 1000);
-								}
-							}
-						};
-					}
-				};
-				window.tuoxie = ui.create.div("hidden", "", game.open_tuoxie);
-				window.tuoxie.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-155px;bottom:105px;transition:none;background-size:100% 100%";
-
-				window.tuoxie.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/tuoxie.png");
-				//这里
-				window.tuoxie.onclick = function () {
-					window.tuoxie.thrownn = true;
-				};
-
-				window.chatBg.appendChild(window.tuoxie);
-				lib.setScroll(window.tuoxie);
-				clickFK(window.tuoxie);
-
-				game.open_jidan = function () {
-					//打开鸡蛋函数
-					//这里
-					var list = game.players;
-					for (let i = 0; i < game.players.length; i++) {
-						list[i].onclick = function () {
-							if (window.jidan.thrownn == true) {
-								game.me.throwEmotion(this, "egg");
-								window.shuliang.innerText = window.shuliang.innerText - 1;
-							}
-						};
-					}
-				};
-
-				window.jidan = ui.create.div("hidden", "", game.open_jidan);
-				window.jidan.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-230px;bottom:105px;transition:none;background-size:100% 100%";
-				window.jidan.onclick = function () {
-					window.jidan.thrownn = true;
-				};
-
-				//这里
-				window.jidan.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/jidan.png");
-				window.chatBg.appendChild(window.jidan);
-				lib.setScroll(window.jidan);
-				clickFK(window.jidan);
-
-				//-----5--菜篮-------//
-				game.open_cailan = function () {
-					//打开菜篮函数
-					var list = game.players;
-					for (let i = 0; i < game.players.length; i++) {
-						list[i].onclick = function () {
-							var target = this;
-							if (window.cailan.thrownn == true) {
-								for (let i = 0; i < 101; i++) {
-									setTimeout(() => {
-										if (i <= 99) game.me.throwEmotion(this, "flower");
-										else game.me.throwEmotion(this, "wine");
-										window.shuliang.innerText = window.shuliang.innerText - 1;
-									}, 100 * i);
-									setTimeout(() => {
-										if (i <= 99) target.throwEmotion(game.me, "flower");
-										else target.throwEmotion(game.me, "wine");
-									}, 100 * i + 1000);
-								}
-							}
-						};
-					}
-				};
-
-				window.cailan = ui.create.div("hidden", "", game.open_cailan);
-				window.cailan.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-80px;bottom:173px;transition:none;background-size:100% 100%";
-
-				window.cailan.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/cailan.png");
-				window.cailan.onclick = function () {
-					window.cailan.thrownn = true;
-				};
-				window.chatBg.appendChild(window.cailan);
-				lib.setScroll(window.cailan);
-				clickFK(window.cailan);
-				//------6--七彩-------//
-				game.open_qicai = function () {
-					//打开七彩函数
-					var list = game.players;
-					for (let i = 0; i < game.players.length; i++) {
-						list[i].onclick = function () {
-							var target = this;
-							if (window.qicai.thrownn == true) {
-								for (let i = 0; i < 101; i++) {
-									setTimeout(() => {
-										if (i <= 99) game.me.throwEmotion(this, "egg");
-										else game.me.throwEmotion(this, "shoe");
-										window.shuliang.innerText = window.shuliang.innerText - 1;
-									}, 100 * i);
-									setTimeout(() => {
-										if (i <= 99) target.throwEmotion(game.me, "egg");
-										else target.throwEmotion(game.me, "shoe");
-									}, 100 * i + 1000);
-								}
-							}
-						};
-					}
-				};
-
-				window.qicai = ui.create.div("hidden", "", game.open_qicai);
-				window.qicai.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-80px;bottom:105px;transition:none;background-size:100% 100%";
-
-				window.qicai.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/qicai.png");
-
-				window.qicai.onclick = function () {
-					window.qicai.thrownn = true;
-				};
-				window.chatBg.appendChild(window.qicai);
-				lib.setScroll(window.qicai);
-				clickFK(window.qicai);
-				//-----7---小酒-------//
-				game.open_xiaojiu = function () {};
-				window.xiaojiu = ui.create.div("hidden", "", game.open_xiaojiu);
-				window.xiaojiu.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-230px;bottom:36px;transition:none;background-size:100% 100%";
-
-				window.xiaojiu.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/xiaojiu.png");
-				window.chatBg.appendChild(window.xiaojiu);
-				lib.setScroll(window.xiaojiu);
-				clickFK(window.xiaojiu);
-				//-----8---雪球------//
-
-				game.open_xueqiu = function () {
-					//打开雪球函数
-				};
-				window.xueqiu = ui.create.div("hidden", "", game.open_xueqiu);
-				window.xueqiu.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-155px;bottom:36px;transition:none;background-size:100% 100%";
-
-				window.xueqiu.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/xueqiu.png");
-
-				window.chatBg.appendChild(window.xueqiu);
-				lib.setScroll(window.xueqiu);
-				clickFK(window.xueqiu);
-
-				//-------------------//
-
-				//------9-虚无-------//
-
-				game.open_xuwu = function () {
-					//打开虚无函数
-				};
-
-				window.xuwu = ui.create.div("hidden", "", game.open_xuwu);
-				window.xuwu.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-80px;bottom:36px;transition:none;background-size:100% 100%";
-
-				window.xuwu.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/xuwu.png");
-
-				window.chatBg.appendChild(window.xuwu);
-				lib.setScroll(window.xuwu);
-				clickFK(window.xuwu);
-
-				//-------------------//
-
-				//--------菜篮子-------//
-
-				window.cailanzi = ui.create.div("hidden", "");
-				window.cailanzi.style.cssText = "display: block;--w: 100px;--h: calc(var(--w) * 59/150);width: var(--w);height: var(--h);left:-230px;bottom:250px;transition:none;background-size:100% 100%";
-
-				window.cailanzi.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/cailanzi.png");
-
-				window.chatBg.appendChild(window.cailanzi);
-
-				window.shuliang = ui.create.node("div");
-				window.shuliang.innerText = Math.floor(Math.random() * (999 - 100 + 1) + 100);
-				window.shuliang.style.cssText = "display: block;left:-180px;bottom:260px;font-family:'shousha';color:#97856a;font-weight: 900; text-shadow:none;transition:none;background-size:100% 100%";
-
-				window.chatBg.appendChild(window.shuliang);
-
-				game.open_emoji = function () {
-					//打开emoji函数
-					if (window.dialog_lifesay) {
-						if (window.dialog_lifesay.show) window.dialog_lifesay.style.left = "-" + window.dialog_lifesay.style.width;
-						setTimeout(function () {
-							window.dialog_lifesay.hide();
-							window.dialog_lifesay.show = false;
-						}, 1000);
-					}
-					if (window.chatBackground) {
-						if (window.chatBackground.show) window.chatBackground.style.left = "100%";
-						setTimeout(function () {
-							window.chatBackground.hide();
-							window.chatBackground.show = false;
-						}, 1000);
-					}
-					if (window.dialog_emoji != undefined && window.dialog_emoji.show) {
-						//控制面板打开，首次调用此函数时打开面板，再次调用时关闭
-						window.dialog_emoji.hide();
-						window.dialog_emoji.show = false;
-						return;
-					}
-					var dialogEmoji = {};
-					window.dialog_emoji = ui.create.div("hidden");
-					window.dialog_emoji.style["z-index"] = 999999999;
-					window.dialog_emoji.classList.add("popped");
-					window.dialog_emoji.classList.add("static");
-					window.dialog_emoji.show = true;
-					window.dialog_emoji.style.height = "280px"; //整个选择emoji对话框的宽高
-					window.dialog_emoji.style.width = "360px";
-					window.dialog_emoji.style.left = "calc( 50% - 180px)";
-					window.dialog_emoji.style.top = "100%"; //这里弄一个上移的动画
-					window.dialog_emoji.style.transition = "all 1s";
-					setTimeout(function () {
-						window.dialog_emoji.style.top = "calc( 25% - 50px )"; //上移后的位置
-					}, 100);
-					window.dialog_emoji.style.opacity = 1;
-					window.dialog_emoji.style.borderRadius = "8px";
-					window.dialog_emoji.style.backgroundSize = "100% 100%";
-					window.dialog_emoji.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/nobg.png"); //把背景dialog设置为透明
-					window.dialog_emoji.style["box-shadow"] = "none";
-					ui.window.appendChild(window.dialog_emoji);
-					dialogEmoji.background = window.dialog_emoji;
-					window.dialog_emojiBgPict = ui.create.div("hidden"); //这是现在外层div
-					window.dialog_emojiBgPict.style.height = "100%";
-					window.dialog_emojiBgPict.style.width = "100%";
-					window.dialog_emojiBgPict.style.left = "0%";
-					window.dialog_emojiBgPict.style.top = "0%";
-					window.dialog_emojiBgPict.style.borderRadius = "8px";
-					window.dialog_emojiBgPict.style.backgroundSize = "100% 100%";
-					window.dialog_emojiBgPict.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/saydiv.png");
-					window.dialog_emojiBgPict.style["box-shadow"] = "none";
-					window.dialog_emoji.appendChild(window.dialog_emojiBgPict);
-					window.dialog_emojiBgColor = ui.create.div("hidden"); //这是内层div
-					window.dialog_emojiBgColor.style.height = "70%";
-					window.dialog_emojiBgColor.style.width = "80%";
-					window.dialog_emojiBgColor.style.left = "10%";
-					window.dialog_emojiBgColor.style.top = "10%";
-					window.dialog_emojiBgColor.style.borderRadius = "8px";
-					window.dialog_emojiBgColor.style.backgroundSize = "100% 100%";
-					window.dialog_emojiBgColor.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/nobg.png"); //把背景设置为透明
-					window.dialog_emojiBgColor.style["overflow-y"] = "scroll";
-					lib.setScroll(window.dialog_emojiBgColor);
-					window.dialog_emoji.appendChild(window.dialog_emojiBgColor);
-					for (var i = 0; i < 50; i++) {
-						window["dialog_emojiContent_" + i] = ui.create.div("hidden", "", function () {
-							game.me.say('<img style=width:34px height:34px src="' + lib.assetURL + "extension/十周年UI/shoushaUI/sayplay/emoji/" + this.pos + '.png">');
-							window.dialog_emoji.delete();
-							delete window.dialog_emoji;
-							window.dialog_emoji = undefined;
-						});
-						window["dialog_emojiContent_" + i].style.height = "34px"; //单个表情的宽高
-						window["dialog_emojiContent_" + i].style.width = "34px";
-						window["dialog_emojiContent_" + i].style.left = "0px";
-						window["dialog_emojiContent_" + i].style.top = "0px";
-						window["dialog_emojiContent_" + i].style.position = "relative";
-						window["dialog_emojiContent_" + i].pos = i;
-						window["dialog_emojiContent_" + i].setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/emoji/" + i + ".png");
-						window["dialog_emojiContent_" + i].style.backgroundSize = "100% 100%";
-						window.dialog_emojiBgColor.appendChild(window["dialog_emojiContent_" + i]);
-						clickFK(window["dialog_emojiContent_" + i]);
-					}
-				};
-				window.chatButton2 = ui.create.div("hidden", "", game.open_emoji);
-				window.chatButton2.style.cssText = "display: block;--w: 80px;--h: calc(var(--w) * 82/98);width: var(--w);height: var(--h);left:150px;bottom:25px;transition:none;background-size:100% 100%";
-				/*window.chatButton2.style.height='70px';
-				window.chatButton2.style.width='80px';
-				window.chatButton2.style.left='150px';
-				window.chatButton2.style.bottom='10px';
-				window.chatButton2.style.transition='none';
-				window.chatButton2.style.backgroundSize="100% 100%";*/
-				window.chatButton2.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/emoji.png");
-
-				lib.setScroll(window.chatButton2);
-				window.chatBg.appendChild(window.chatButton2);
-				clickFK(window.chatButton2);
-
-				game.open_jilu = function () {
-					//打开记录函数
-					game.showChatWord();
-				};
-				window.chatButton3 = ui.create.div("hidden", "", game.open_jilu);
-				window.chatButton3.style.cssText = "display: block;--w: 80px;--h: calc(var(--w) * 82/98);width: var(--w);height: var(--h);left:260px;bottom:25px;transition:none;background-size:100% 100%";
-				/*window.chatButton3.style.height='70px';
-				window.chatButton3.style.width='80px';
-				window.chatButton3.style.left='260px';
-				window.chatButton3.style.bottom='10px';
-				window.chatButton3.style.transition='none';
-				window.chatButton3.style.backgroundSize="100% 100%";*/
-				window.chatButton3.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/jilu.png");
-
-				lib.setScroll(window.chatButton3);
-				window.chatBg.appendChild(window.chatButton3);
-				clickFK(window.chatButton3);
-
-				window.chatSendBottom = ui.create.div("", "", function () {
-					//发送按钮
-					if (!window.input) return;
-					if (window.input.value == undefined) return;
-					window.sendInfo(window.input.value);
-				});
-				window.chatSendBottom.style.cssText = "display: block;--w: 91px;--h: calc(var(--w) * 62/160);width: var(--w);height: var(--h);left:70%;top:33px;transition:none;background-size:100% 100%;text-align:center;border-randius:8px;";
-				/*window.chatSendBottom.style.height='50px';
-				window.chatSendBottom.style.width='25%';
-				window.chatSendBottom.style.left='calc( 60% + 62px )';
-				window.chatSendBottom.style.top='23px';
-				window.chatSendBottom.style.transition='none';
-				window.chatSendBottom.style['text-align']='center';
-				window.chatSendBottom.style.borderRadius='8px';
-				window.chatSendBottom.style.backgroundSize="100% 100%";*/
-
-				window.chatSendBottom.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/buttonsend.png");
-				window.chatSendBottom.innerHTML = '<span style="color:white;font-size:22px;line-height:32px;font-weight:400;font-family:shousha">发送</span>';
-				window.chatBg.appendChild(window.chatSendBottom);
-				clickFK(window.chatSendBottom);
-				game.updateChatWord = function (str) {
-					window.chatBackground2.innerHTML = str;
-				};
-				game.addChatWord();
-
-				window.sendInfo = function (content) {
-					game.me.say(content);
-					window.input.value = "";
-				};
-				//房间
-				window.chatInputOut = ui.create.div("hidden");
-				window.chatInputOut.style.cssText = "display: block;--w: 265px;--h: calc(var(--w) * 50/280);width: var(--w);height: var(--h);left:30px;top:30px;transition:none;background-size:100% 100%;pointer-events:none;z-index:6;";
-				/*window.chatInputOut.style.height='22px';
-				window.chatInputOut.style.width='60%';
-				window.chatInputOut.style.left='40px';
-				window.chatInputOut.style.top='40px';
-				window.chatInputOut.style.transition='none';
-				window.chatInputOut.style.backgroundSize="100% 100%";*/
-				window.chatInputOut.style.backgroundImage = "url('" + lib.assetURL + "extension/十周年UI/shoushaUI/sayplay/sayX.png')";
-
-				window.chatBg.appendChild(window.chatInputOut);
-				//输入框
-				window.chatInput = ui.create.dialog("hidden");
-				window.chatInput.style.height = "22px";
-				window.chatInput.style.width = "42%"; //设置输入框宽度
-				window.chatInput.style.left = "27%";
-				window.chatInput.style.top = "42px";
-				window.chatInput.style.transition = "none";
-				window.chatBg.appendChild(window.chatInput);
-				window.ipt = ui.create.div();
-				window.ipt.style.height = "22px";
-				window.ipt.style.width = "100%";
-				window.ipt.style.top = "0px";
-				window.ipt.style.left = "0px";
-				window.ipt.style.margin = "0px";
-				window.ipt.style.borderRadius = "0px";
-				window.ipt.style["background-image"] = "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4))";
-				//window.ipt.style['box-shadow']='rgba(0, 0, 0, 0.4) 0 0 0 1px, rgba(0, 0, 0, 0.2) 0 3px 10px';
-				if (window.input && window.input.value) window.input_value = window.input.value;
-				window.ipt.innerHTML = '<input type="text" value=' + (window.input_value || "请输入文字") + ' style="color:white;font-family:shousha;width:calc(100% - 10px);text-align:left;"></input>';
-				window.input = window.ipt.querySelector("input");
-				window.input.style.backgroundImage = "url('" + lib.assetURL + "extension/十周年UI/shoushaUI/sayplay/say.png')";
-				window.input.style.backgroundSize = "120% 120%";
-				window.input.style["box-shadow"] = "none";
-				window.input.onclick = function (e) {
-					e.stopPropagation();
-				};
-				window.input.onfocus = function () {
-					if (this.value == "请输入文字") this.value = "";
-				};
-				window.input.onkeydown = function (e) {
-					e.stopPropagation();
-					if (e.keyCode == 13) {
-						var value = this.value;
-						if (!value) return;
-						if (typeof value != "string") value = "" + value;
-						window.sendInfo(value);
-					}
-				};
-				window.chatInput.add(window.ipt);
-			};
-
-			//聊天记录栏
-			game.showChatWord = function () {
-				if (window.dialog_lifesay) {
-					if (window.dialog_lifesay.show) window.dialog_lifesay.style.left = "-" + window.dialog_lifesay.style.width;
-					setTimeout(function () {
-						window.dialog_lifesay.hide();
-						window.dialog_lifesay.show = false;
-					}, 1000);
-				}
-				if (window.dialog_emoji) {
-					if (window.dialog_emoji.show) window.dialog_emoji.style.top = "100%";
-					setTimeout(function () {
-						window.dialog_emoji.hide();
-						window.dialog_emoji.show = false;
-					}, 1000);
-				}
-				if (window.chatBackground != undefined && window.chatBackground.show) {
-					//控制面板打开，首次调用此函数时打开面板，再次调用时关闭
-					window.chatBackground.hide();
-					window.chatBackground.show = false;
-					return;
-				}
-				window.chatBackground = ui.create.div("hidden");
-				window.chatBackground.style["z-index"] = 999999999;
-				//window.chatBackground.classList.add('popped');
-				window.chatBackground.classList.add("static");
-				window.chatBackground.show = true;
-				window.chatBackground.style.transition = "all 1s";
-				window.chatBackground.style.height = "330px"; //调整对话框背景大小，位置
-				window.chatBackground.style.width = "600px";
-				window.chatBackground.style.top = "calc( 20% - 100px )"; //这里弄一个左移的动画
-				window.chatBackground.style.left = "100%"; //这里弄一个左移的动画
-				setTimeout(function () {
-					window.chatBackground.style.left = "calc( 50% - 300px)"; //左移后的位置
-				}, 100);
-				window.chatBackground.style.bottom = "calc( " + window.chatBg.style.height + " + " + "5px )";
-				window.chatBackground.style.opacity = 1;
-				window.chatBackground.style.borderRadius = "10px";
-				game.mouseChatDiv = function (div) {
-					//查看时显示，不查看时，对话框虚化
-					if (lib.device == undefined) {
-						div.onmouseover = function () {
-							this.style.opacity = 1.0;
-						};
-						div.onmouseout = function () {
-							this.style.opacity = 0.25;
-						};
-					} else {
-						div.onclick = function () {
-							if (div.style.opacity == 0.25) this.style.opacity = 0.75;
-							else this.style.opacity = 0.25;
-						};
-					}
-				};
-				game.mouseChatDiv(window.chatBackground);
-				window.chatBackground.style.backgroundSize = "100% 100%";
-				window.chatBackground.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/nobg.png"); //把背景dialog设置为透明
-				window.chatBackground.style["box-shadow"] = "none";
-				ui.window.appendChild(window.chatBackground);
-
-				window.chatBackgroundPict = ui.create.div("hidden"); //外层div
-				window.chatBackgroundPict.style.height = "100%";
-				window.chatBackgroundPict.style.width = "100%";
-				window.chatBackgroundPict.style.left = "0%";
-				window.chatBackgroundPict.style.bottom = "0%";
-				window.chatBackgroundPict.style.transition = "none";
-				window.chatBackgroundPict.style.backgroundColor = "none";
-				window.chatBackgroundPict.style.borderRadius = "8px";
-				window.chatBackgroundPict.style.backgroundSize = "100% 100%";
-				window.chatBackgroundPict.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/saydiv.png");
-				window.chatBackgroundPict.style["box-shadow"] = "none";
-				window.chatBackground.appendChild(window.chatBackgroundPict);
-
-				window.chatBackgroundColor = ui.create.div("hidden"); //内层div
-				window.chatBackgroundColor.style.height = "70%";
-				window.chatBackgroundColor.style.width = "80%";
-				window.chatBackgroundColor.style.left = "10%";
-				window.chatBackgroundColor.style.top = "10%";
-				window.chatBackgroundColor.style.transition = "none";
-				window.chatBackgroundColor.style.borderRadius = "8px";
-				window.chatBackgroundColor.style.backgroundSize = "100% 100%";
-				window.chatBackgroundColor.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/nobg.png"); //把背景设置为透明
-				window.chatBackground.appendChild(window.chatBackgroundColor);
-
-				window.chatBackground2 = ui.create.div("hidden");
-				window.chatBackground2.style.height = "100%";
-				window.chatBackground2.style.width = "100%";
-				window.chatBackground2.style.left = "0%";
-				window.chatBackground2.style.bottom = "0%";
-				window.chatBackground2.style.transition = "none";
-				window.chatBackground2.style["text-align"] = "left";
-				window.chatBackground2.innerHTML = "";
-				window.chatBackground2.style["overflow-y"] = "scroll";
-				lib.setScroll(window.chatBackground2);
-				window.chatBackgroundColor.appendChild(window.chatBackground2);
-				game.addChatWord();
-			};
-
-			lib.skill._wmkzSayChange = {
-				trigger: {
-					global: ["gameStart", "phaseBegin", "phaseAfter", "useCardAfter"],
-				},
-				forced: true,
-				silent: true,
-				filter: function (event, player) {
-					return player.change_sayFunction != true;
-				},
-				content: function () {
-					player.change_sayFunction = true;
-					player.sayTextWord = player.say;
-					player.say = function (str) {
-						//对应上面函数，把其他player的发言记录到框里
-						game.addChatWord("<font color=yellow>" + get.translation("" + player.name) + "</font><font color=white>：" + str + "</font>");
-						player.sayTextWord(str);
-					};
-				},
 			};
 			//阶段提示框架（俺杀）
 			//自定义播放图片
@@ -11296,11 +10234,6 @@ export default async function () {
 						}
 					}
 				}
-			},
-			dynamicSkin_dieAfter: {
-				name: '阵亡保留动皮',
-				intro: '阵亡后依旧显示动态皮肤',
-				init: true,
 			},
 			cardAlternateNameVisible: {
 				name: '牌名辅助显示',
@@ -11549,7 +10482,7 @@ export default async function () {
 			aloneEquip: {
 				name: '新样式装备栏',
 				intro: '切换玩家装备栏位置，打开在右，仅限新十和一将有效',
-				init: false,
+				init: true,
 				update: function () {
 					const config = lib.config['extension_十周年UI_aloneEquip'];
 					if (window.decadeUI) ui.arena.dataset.aloneEquip = config ? 'on' : 'off';
@@ -11578,50 +10511,12 @@ export default async function () {
 			},
 			XPJ: {
 				name: "新样式小配件",
-				init: "on",
+				init: "off",
 				intro: "选择切换左下角小配件，仅限新十和一将有效",
 				item: {
 					on: "原版",
 					off: "新版",
 				},
-			},
-			jindutiao: {
-				init: true,
-				intro: "自己回合内显示进度条带素材",
-				name: "进度条"
-			},
-			jindutiaoYangshi: {
-				name: "进度条样式",
-				init: "3",
-				intro: "切换进度条样式，可根据个人喜好切换手杀进度条或十周年进度条，切换后重启生效",
-				item: {
-					"3": "十周年客户端进度条",
-				},
-			},
-			jindutiaoST: {
-				name: "进度条时间间隔",
-				init: "100",
-				intro: "<li>设置玩家进度条的时间间隔。",
-				item: {
-					"10": "10毫秒/次",
-					"50": "50毫秒/次",
-					"100": "100毫秒/次",
-					"200": "200毫秒/次",
-					"500": "500毫秒/次",
-					"800": "800毫秒/次",
-					"1000": "1秒/次",
-					"2000": "2秒/次",
-				},
-			},
-			jindutiaoUpdata: {
-				name: "玩家进度条刷新",
-				init: true,
-				intro: "开启进度条的情况下，开启此选项后，玩家进度条将会进行刷新",
-			},
-			jindutiaoaiUpdata: {
-				name: "人机进度条刷新",
-				init: true,
-				intro: "开启进度条的情况下，开启此选项后，ai的进度条将会进行刷新",
 			},
 			jindutiaoSet: {
 				name: "进度条高度",
