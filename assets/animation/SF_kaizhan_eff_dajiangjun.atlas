@@ -1,0 +1,160 @@
+
+SF_kaizhan_eff_dajiangjun.png
+size: 1941,1941
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+SF_animation_daojuhuode_lizi_001
+  rotate: false
+  xy: 1933, 1853
+  size: 6, 86
+  orig: 51, 102
+  offset: 23, 8
+  index: -1
+dajiangjun/kaizhan_1
+  rotate: false
+  xy: 1483, 72
+  size: 288, 286
+  orig: 288, 286
+  offset: 0, 0
+  index: -1
+dajiangjun/kaizhan_10
+  rotate: false
+  xy: 464, 103
+  size: 359, 278
+  orig: 636, 625
+  offset: 139, 174
+  index: -1
+dajiangjun/kaizhan_11
+  rotate: false
+  xy: 2, 1297
+  size: 1280, 642
+  orig: 1280, 642
+  offset: 0, 0
+  index: -1
+dajiangjun/kaizhan_13
+  rotate: false
+  xy: 2, 716
+  size: 222, 223
+  orig: 222, 223
+  offset: 0, 0
+  index: -1
+dajiangjun/kaizhan_5
+  rotate: false
+  xy: 2, 34
+  size: 460, 325
+  orig: 460, 325
+  offset: 0, 0
+  index: -1
+dajiangjun/kaizhan_7
+  rotate: false
+  xy: 2, 369
+  size: 426, 138
+  orig: 426, 138
+  offset: 0, 0
+  index: -1
+dajiangjun/kaizhan_9
+  rotate: false
+  xy: 825, 229
+  size: 358, 278
+  orig: 636, 624
+  offset: 139, 173
+  index: -1
+dajiangjun/tx_lizia_00000
+  rotate: false
+  xy: 1630, 1147
+  size: 301, 792
+  orig: 371, 837
+  offset: 27, 16
+  index: -1
+dajiangjun/tx_lizia_00004
+  rotate: false
+  xy: 1265, 361
+  size: 324, 787
+  orig: 371, 837
+  offset: 13, 19
+  index: -1
+dajiangjun/tx_lizia_00008
+  rotate: false
+  xy: 1591, 360
+  size: 323, 785
+  orig: 371, 837
+  offset: 19, 18
+  index: -1
+dajiangjun/tx_lizia_00012
+  rotate: false
+  xy: 757, 509
+  size: 338, 786
+  orig: 371, 837
+  offset: 11, 15
+  index: -1
+dajiangjun/tx_lizia_00016
+  rotate: false
+  xy: 1284, 1150
+  size: 344, 789
+  orig: 371, 837
+  offset: 3, 12
+  index: -1
+fanzei/fanzei_2
+  rotate: false
+  xy: 825, 5
+  size: 258, 222
+  orig: 258, 222
+  offset: 0, 0
+  index: -1
+fanzei/fanzei_3
+  rotate: false
+  xy: 430, 383
+  size: 220, 124
+  orig: 220, 124
+  offset: 0, 0
+  index: -1
+glow_tx1
+  rotate: false
+  xy: 1185, 52
+  size: 296, 307
+  orig: 296, 307
+  offset: 0, 0
+  index: -1
+glow_tx5
+  rotate: false
+  xy: 1097, 1136
+  size: 166, 159
+  orig: 192, 174
+  offset: 18, 10
+  index: -1
+glow_tx5_1
+  rotate: false
+  xy: 1097, 580
+  size: 112, 114
+  orig: 192, 174
+  offset: 42, 35
+  index: -1
+glow_tx5_2
+  rotate: false
+  xy: 1097, 696
+  size: 127, 128
+  orig: 192, 174
+  offset: 37, 28
+  index: -1
+glow_tx5_3
+  rotate: false
+  xy: 1097, 826
+  size: 148, 148
+  orig: 192, 174
+  offset: 28, 21
+  index: -1
+glow_tx5_4
+  rotate: false
+  xy: 1097, 976
+  size: 158, 158
+  orig: 192, 174
+  offset: 23, 16
+  index: -1
+shengli/shengli_12
+  rotate: false
+  xy: 2, 941
+  size: 753, 354
+  orig: 753, 354
+  offset: 0, 0
+  index: -1

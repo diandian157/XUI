@@ -1,0 +1,118 @@
+
+SF_kaizhan_eff_jiangjun.png
+size: 1342,1342
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+SF_animation_daojuhuode_lizi_001
+  rotate: false
+  xy: 1284, 1254
+  size: 6, 86
+  orig: 51, 102
+  offset: 23, 8
+  index: -1
+glow_tx1_2
+  rotate: false
+  xy: 757, 509
+  size: 296, 307
+  orig: 296, 307
+  offset: 0, 0
+  index: -1
+glow_tx5
+  rotate: false
+  xy: 1174, 379
+  size: 166, 159
+  orig: 192, 174
+  offset: 18, 10
+  index: -1
+glow_tx5_1
+  rotate: false
+  xy: 131, 24
+  size: 112, 114
+  orig: 192, 174
+  offset: 42, 35
+  index: -1
+glow_tx5_2
+  rotate: false
+  xy: 2, 10
+  size: 127, 128
+  orig: 192, 174
+  offset: 37, 28
+  index: -1
+glow_tx5_3
+  rotate: false
+  xy: 1174, 69
+  size: 148, 148
+  orig: 192, 174
+  offset: 28, 21
+  index: -1
+glow_tx5_4
+  rotate: false
+  xy: 1174, 219
+  size: 158, 158
+  orig: 192, 174
+  offset: 23, 16
+  index: -1
+putong/kaizhan_1
+  rotate: false
+  xy: 490, 174
+  size: 288, 286
+  orig: 288, 286
+  offset: 0, 0
+  index: -1
+putong/kaizhan_10
+  rotate: false
+  xy: 780, 231
+  size: 264, 276
+  orig: 528, 527
+  offset: 132, 126
+  index: -1
+putong/kaizhan_11
+  rotate: false
+  xy: 2, 818
+  size: 1280, 522
+  orig: 1280, 522
+  offset: 0, 0
+  index: -1
+putong/kaizhan_13
+  rotate: false
+  xy: 780, 6
+  size: 222, 223
+  orig: 222, 223
+  offset: 0, 0
+  index: -1
+putong/kaizhan_14
+  rotate: false
+  xy: 1046, 107
+  size: 126, 400
+  orig: 126, 400
+  offset: 0, 0
+  index: -1
+putong/kaizhan_5
+  rotate: false
+  xy: 2, 288
+  size: 486, 172
+  orig: 486, 172
+  offset: 0, 0
+  index: -1
+putong/kaizhan_7
+  rotate: false
+  xy: 2, 140
+  size: 416, 146
+  orig: 416, 146
+  offset: 0, 0
+  index: -1
+putong/kaizhan_9
+  rotate: false
+  xy: 1055, 540
+  size: 264, 276
+  orig: 658, 658
+  offset: 197, 191
+  index: -1
+shengli/shengli_12
+  rotate: false
+  xy: 2, 462
+  size: 753, 354
+  orig: 753, 354
+  offset: 0, 0
+  index: -1
