@@ -98,8 +98,8 @@
 
 #arena/*.dui-mobile>*/:not(.fewplayer)>.player:not(.minskin),
 #arena/*.dui-mobile>*/:not(.fewplayer):not(*[data-player_height=''])>.player:not(.minskin) {
-    width: 190px!important;
-    height: 245px!important;
+    width: 12.5%!important;
+    height: 28.5%!important;
 }
 /* #arena:not(.fewplayer)>.player:not(.minskin),
 #arena:not(.fewplayer):not(*[data-player_height=''])>.player:not(.minskin) {
@@ -555,13 +555,13 @@
 }
 
 #arena[data-outcrop-skin='on']>.player>.primary-avatar {
-	height: 270px;
+	height: 265px;
 	clip-path: url(#solo-clip); /*新增*/
 	-webkit-clip-path: url(#solo-clip);
 }
 
 #arena[data-outcrop-skin='on']>.player>.deputy-avatar {
-	height: 270px;
+	height: 265px;
 	clip-path: url(#duor-clip); /*新增*/
 	-webkit-clip-path: url(#duor-clip);
 }

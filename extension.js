@@ -5539,7 +5539,7 @@ export default async function () {
 									return;
 								}
 								var image = new Image();
-								var url = decadeUIPath + (decadeUI.config.newDecadeStyle == "off" ? "image/decoration/name2_" : "image/decoration/name_") + group + ".png";
+								var url = decadeUIPath + (decadeUI.config.newDecadeStyle == "off" ? "image/decoration/name_" : "image/decoration/name_") + group + ".png";
 								this._finalGroup = group;
 								image.onerror = () => {
 									if (!this._finalGroup) this.node.campWrap.node.campName.innerHTML = "";
