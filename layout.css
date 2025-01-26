@@ -245,11 +245,52 @@ body>.background {
 	z-index: 3;
 }
 
+/* 修改普通手牌位置 */
+#arena>.hand-wrap,
+#arena>.hand-back {
+	left: 50%;
+	bottom: 0%;
+	transform: translateX(-50%);
+	width: calc(100% - 400px); /* 调整手牌区域宽度 */
+	justify-content: center;
+	-webkit-mask-image: linear-gradient(90deg, 
+		transparent 0%, 
+		black 2%, 
+		black 98%, 
+		transparent 100%
+	);
+}
+/* 调整手牌区大小 */
+#handcards1 {
+    height: 150px !important;
+    width: calc(100% - 160px) !important;
+    bottom: 0px !important;
+    border-radius: 0 !important;
+}
+
+/* 调整手牌大小和间距 */
+#handcards1>.card {
+    height: 120px !important;
+    width: 90px !important;
+    margin: 0 -10px !important;
+    border-radius: 8px !important;
+}
+
+/* 调整手牌悬浮效果 */
+#handcards1>.card:hover {
+    transform: translateY(-15px) !important;
+}
+
+/* 调整手牌数量显示位置 */
+#handcards1>.number {
+    top: -15px !important;
+}
+/* 修改右手布局手牌位置 */
 #arena[data-right-layout='on']>.hand-wrap,
 #arena[data-right-layout='on']>.hand-back {
 	left: auto;
 	bottom: 0%;
-	right: 256px;
+	right: 256px; /* 调整右侧起始位置 */
 	transform: none;
 	width: calc(100% - 400px);
 	justify-content: flex-end;
@@ -258,25 +299,17 @@ body>.background {
 		black 2%, 
 		black 98%, 
 		transparent 100%
-	);  /* 右手布局的渐隐效果 */
-}
-/* 滚动条样式优化 */
-#arena>.handcards::-webkit-scrollbar,
-#arena[data-right-layout='on']>.handcards::-webkit-scrollbar {
-	height: 4px;
-	background: transparent;
+	);
 }
 
-#arena>.handcards::-webkit-scrollbar-thumb,
-#arena[data-right-layout='on']>.handcards::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, 0.2);
-	border-radius: 2px;
-	transition: background 0.3s;
-}
-
-#arena>.handcards::-webkit-scrollbar-thumb:hover,
-#arena[data-right-layout='on']>.handcards::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.3);  /* 滚动条hover效果 */
+/* 调整手牌区域的渐隐效果 */
+#arena>.hand-wrap {
+	-webkit-mask-image: linear-gradient(90deg,
+		transparent 0%,
+		black 2%,
+		black 98%,
+		transparent 100%
+	);
 }
 
 #arena[data-alone-equip='off'][data-right-layout='off']>.hand-wrap,

@@ -1179,22 +1179,6 @@
 	animation-delay: 0.5s;
 	-webkit-animation: fade-in 0.5s forwards;
 	-webkit-animation-delay: 0.5s;
-} /*玩家获得的技能显示*/
-.player > .gain-skill {
-	position: absolute;
-	left: 15px;
-	right: 15px;
-	max-height: calc(97% - 81px);
-	bottom: calc(3% + 81px);
-	color: rgb(255, 255, 200);
-	font-size: 13px;
-	text-align: center;
-	background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
-	z-index: 87;
-}
-#arena.decadeUI[data-gain-skills-visible="off"] > .player > .gain-skill,
-#arena.decadeUI[data-gain-skills-visible="othersOn"] > .player[data-position="0"] > .gain-skill {
-	display: none;
 } /*角色翻面背景*/
 .player > .turned-over {
 	position: absolute;

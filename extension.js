@@ -13,7 +13,6 @@ export default async function () {
 		name,
 		editable: false,
 		content(config, pack) {
-			
 			// 伤害恢复优化
 			window._WJMHHUIFUSHUZITEXIAO = {
 			    shuzi2:{
@@ -10706,6 +10705,29 @@ export default async function () {
 				name: '调试助手(开发用)',
 				init: false,
 			},
+			newDecadeStyle: {
+				name: '切换十周年样式',
+				intro: '初始为新十周年样式，根据个人喜好自行切换，选择不同的设置后游戏会自动重启以生效新的设置',
+				init: "on",
+				item: {
+					othersOn: "旧十周年",
+					on: "新十周年",
+					othersOff: "一将成名",
+				},
+				onclick(control) {
+					const origin = lib.config.extension_十周年UI_newDecadeStyle;
+					game.saveConfig("extension_十周年UI_newDecadeStyle", control);
+					if (origin != control) {
+						setTimeout(() => game.reload(), 100);
+					}
+				},
+				update() {
+					if (window.decadeUI) {
+						ui.arena.dataset.newDecadeStyle = lib.config.extension_十周年UI_newDecadeStyle;
+						ui.arena.dataset.decadeLayout = lib.config.extension_十周年UI_newDecadeStyle == "on" || lib.config.extension_十周年UI_newDecadeStyle == "othersOff" ? "on" : "off";
+					}
+				},
+			},
 			FL110: {
 				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
 				"intro": "",
@@ -10841,18 +10863,6 @@ export default async function () {
 					}
 				},
 			},
-			gainSkillsVisible: {
-				name: "获得技能显示",
-				init: "off",
-				item: {
-					on: "显示",
-					off: "不显示",
-					othersOn: "显示他人",
-				},
-				update() {
-					if (window.decadeUI) ui.arena.dataset.gainSkillsVisible = lib.config["extension_十周年UI_gainSkillsVisible"];
-				},
-			},
 			FL45: {
 				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
 				"intro": "",
@@ -10932,29 +10942,6 @@ export default async function () {
 				update: function () {
 					if (window.decadeUI) ui.arena.dataset.playerMarkStyle = lib.config['extension_十周年UI_playerMarkStyle'];
 				}
-			},
-			newDecadeStyle: {
-				name: '切换十周年样式',
-				intro: '初始为新十周年样式，根据个人喜好自行切换，选择不同的设置后游戏会自动重启以生效新的设置',
-				init: "on",
-				item: {
-					othersOn: "旧十周年",
-					on: "新十周年",
-					othersOff: "一将成名",
-				},
-				onclick(control) {
-					const origin = lib.config.extension_十周年UI_newDecadeStyle;
-					game.saveConfig("extension_十周年UI_newDecadeStyle", control);
-					if (origin != control) {
-						setTimeout(() => game.reload(), 100);
-					}
-				},
-				update() {
-					if (window.decadeUI) {
-						ui.arena.dataset.newDecadeStyle = lib.config.extension_十周年UI_newDecadeStyle;
-						ui.arena.dataset.decadeLayout = lib.config.extension_十周年UI_newDecadeStyle == "on" || lib.config.extension_十周年UI_newDecadeStyle == "othersOff" ? "on" : "off";
-					}
-				},
 			},
 			loadingStyle: {
 				name: '更换光标+loading框',
