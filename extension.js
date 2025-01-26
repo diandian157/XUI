@@ -10413,11 +10413,10 @@ export default async function () {
 			if (lib.config.extension_十周年UI_KGMH == "1") lib.init.css(layoutPath, "KGMH/kaiguan");
 			if (lib.config.extension_十周年UI_KGMH == "2") lib.init.css(layoutPath, "KGMH/kaiguan_new");
 			if (!(get.mode() == "chess" || get.mode() == "tafang" || get.mode == "hs_hearthstone")) {
-				for (var pack of [/*'card',*/ "character", "lbtn", "skill"]) {
+				for (var pack of [ "character", "lbtn", "skill"]) {
 					var listmap =
 						{
 							on: 2,
-							off: 1,
 							othersOn: 1,
 							othersOff: 3,
 						}[lib.config.extension_十周年UI_newDecadeStyle] || 2;
