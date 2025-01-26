@@ -362,70 +362,56 @@ export default async function () {
 				
 				if (lib.config.extension_十周年UI_newDecadeStyle == 'on') {
 					var SSEquip = {
-    				 "如意金箍棒":"金箍棒",
-    				"木牛流马": "木牛",
-                    "爪黄飞电": "爪黄+1",
-                    "的卢": "的卢+1",
-                    "骅骝": "骅骝+1",
-                    "绝影": "绝影+1",
-                    "赤兔": "赤兔-1",
-                    "大宛": "大宛-1",
-                    "紫骍": "紫骍-1",
-                    "霹雳投石车": "霹雳车",
-                    "圣麒麟": "圣麒麟±1",
-                    "玄剑": "三 玄剑",
-                    "思召剑": "二 思召剑",
-                    "吴六剑": "二 吴六剑",
-                    "机关弩": "一 机关弩",
-                    "刺匕": "一 刺比",
-                    "雌雄双股剑": "二 雌雄劍",
-                    "方天画戟": "四 方天戟",
-                    "贯石斧": "三 贯石斧",
-                    "寒冰剑": "二 寒冰剑",
-                    "麒麟弓": "五 麒麟弓",
-                    "青釭剑": "二 青釭剑",
-                    "青龙偃月刀": "三 青龙刀",
-                    "丈八蛇矛": "三 丈八矛",
-                    "古锭刀": "二 古锭刀",
-                    "朱雀羽扇": "四 朱雀扇",
-                    "七宝刀": "二 七宝刀",
-                    "银月枪": "三 银月枪",
-                    "衠钢槊": "三 衠钢槊",
-                    "飞龙夺凤": "二 飞龙刀",
-                    "三尖两刃刀": "三 三尖刀",
-                    "诸葛连弩": "一 諸葛弩",
-                    "倚天剑": "二 倚天剑",
-                    "七星宝刀": "二 七星刀",
-                    "折戟": "零 折戟",
-                    "无锋剑": "一 无锋剑",
-                    "涯角枪": "三 涯角枪",
-                    "五行鹤翎扇": "四 五行扇",
-                    "断剑": "零 断剑",
-                    "霹雳车": "九 霹雳车",
-                    "水波剑": "二 水波剑",
-                    "烈淬刀": "二 烈淬刀",
-                    "红缎枪": "三 红缎枪",
-                    "天雷刃": "四 天雷刃",
-                    "混毒弯匕": "一 混毒匕",
-                    "元戎精械弩": "三 精械弩",
-                    "乌铁锁链": "三 铁锁链",
-                    "太极拂尘": "五 太极拂",
-                    "灵宝仙壶": "三 灵宝壶",
-                    "冲应神符": "冲应符",
-                    "先天八卦阵": "先天八卦",
-                    "照月狮子盔": "狮子盔",
-                    "白银狮子": "白银狮",
-                    "仁王金刚盾": "金剛盾",
-                    "桐油百韧甲": "百韧甲",
-                    "定澜夜明珠": "夜明珠",
+					"木牛流马": "木牛",
+					"吴六剑": "吴六剑2",
+					"机关弩": "机关弩1",
+					"雌雄双股剑": "雌雄剑2",
+					"方天画戟": "方天戟4",
+					"贯石斧": "贯石斧3",
+					"寒冰剑": "寒冰剑2",
+					"麒麟弓": "麒麟弓5",
+					"青釭剑": "青釭剑2",
+					"青龙偃月刀": "青龙刀3",
+					"丈八蛇矛": "丈八矛3",
+					"古锭刀": "古锭刀2",
+					"朱雀羽扇": "朱雀扇4",
+					"七宝刀": "七宝刀2",
+					"银月枪": "银月枪3",
+					"衠钢槊": "衠钢槊3",
+					"飞龙夺凤": "飞龙刀2",
+					"三尖两刃刀": "三尖刀3",
+					"诸葛连弩": "诸葛弩1",
+					"倚天剑": "倚天剑2",
+					"七星宝刀": "七星刀2",
+					"折戟": "折戟0",
+					"无锋剑": "无锋剑1",
+					"涯角枪": "涯角枪3",
+					"五行鹤翎扇": "五行扇4",
+					"断剑": "断剑0",
+					"霹雳车": "霹雳车9",
+					"水波剑": "水波剑2",
+					"红缎枪": "红缎枪3",
+					"天雷刃": "天雷刃4",
+					"混毒弯匕": "混毒匕1",
+					"元戎精械弩": "精械弩3",
+					"乌铁锁链": "铁锁链3",
+					"太极拂尘": "太极拂5",
+					"灵宝仙壶": "灵宝壶3",
+					"冲应神符": "冲应符",
+					"先天八卦阵": "先天八卦",
+					"照月狮子盔": "狮子盔",
+					"白银狮子": "白银狮",
+					"仁王金刚盾": "金刚盾",
+					"桐油百韧甲": "百韧甲",
+					"定澜夜明珠": "夜明珠",
 					"镔铁双戟": "镔铁戟3",
 					"玲珑狮蛮带": "狮蛮带",
 					"束发紫金冠": "束发金冠",
 					"红棉百花袍": "百花袍",
 					"虚妄之冕": "虚妄冕",
-					"无双方天戟": "四 无双戟",
-					"鬼龙斩月刀": "三 斩月刀",
-					"赤焰镇魂琴": "四 镇魂琴",
+					"无双方天戟": "无双戟4",
+					"鬼龙斩月刀": "斩月刀3",
+					"赤焰镇魂琴": "镇魂琴4",
 				}
 				}
 				
@@ -8557,7 +8543,7 @@ export default async function () {
 						if (lib.config.extension_十周年UI_newDecadeStyle != 'on') {
 							//--------手杀样式-------------//  
 							boxContent.style.cssText =
-								"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:1.5px;bottom:-8.2px;"
+								"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:4.5px;bottom:-15px;"
 							boxTime.data = 120
 							boxTime.style.cssText =
 								"z-index:91;width: 170px;height: 3.3px;margin:1px;background-color: #f2c84b;position: absolute;top: 0px;border-radius: 3px;"
@@ -8569,7 +8555,7 @@ export default async function () {
 						else {
 							//----------十周年样式--------//		
 							boxContent.style.cssText =
-								"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:1.5px;bottom:-8.2px;"
+								"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:4.5px;bottom:-15px;"
 							boxTime.data = 120
 							boxTime.style.cssText =
 								"z-index:91;width: 155px;height: 3.3px;margin:1px;background-color: #f2c84b;position: absolute;top: 0px;border-radius: 3px;"
@@ -8641,7 +8627,7 @@ export default async function () {
 						if (lib.config.extension_十周年UI_newDecadeStyle != 'on') {
 							//--------手杀样式-------------//  
 							boxContent.style.cssText =
-								"display:block;position:absolute;z-index:90;--w: 130px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:1.5px;bottom:-8.2px;"
+								"display:block;position:absolute;z-index:90;--w: 130px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:4.5px;bottom:-15px;"
 							boxTime.data = 120
 							boxTime.style.cssText =
 								"z-index:91;width: 170px;height: 3.3px;margin:1px;background-color: #f2c84b;position: absolute;top: 0px;border-radius: 3px;"
@@ -8653,7 +8639,7 @@ export default async function () {
 						else {
 							//----------十周年样式--------//		
 							boxContent.style.cssText =
-								"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:1.5px;bottom:-8.2px;"
+								"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:4.5px;bottom:-15px;"
 							boxTime.data = 120
 							boxTime.style.cssText =
 								"z-index:91;width: 160px;height: 3.3px;margin:1px;background-color: #f2c84b;position: absolute;top: 0px;border-radius: 3px;"
@@ -9222,9 +9208,9 @@ export default async function () {
 					trigger._jd_ddxy = true;
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [10, 58, 7, 6], 10);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], 10);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [3, 58, 7, 6], 10);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], 10);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], 10);
@@ -9246,9 +9232,9 @@ export default async function () {
 					trigger._jd_ddxy = true;
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], true);
@@ -9282,9 +9268,9 @@ export default async function () {
 					trigger._jd_ddxy = true;
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5, 0, 3], true);
@@ -9308,9 +9294,9 @@ export default async function () {
 					if (_status.as_showImage_phase) {
 						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [10, 58, 7, 6], true);
+								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
 							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [3, 58, 7, 6], true);
+								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
 							}
 						} else {
 							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
@@ -9334,9 +9320,9 @@ export default async function () {
 					if (_status.as_showImage_phase) {
 						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [10, 58, 7, 6], true);
+								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
 							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [3, 58, 7, 6], true);
+								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
 							}
 						} else {
 							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
@@ -9359,9 +9345,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [19, 71.5, 0, 3], true);
@@ -9414,9 +9400,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [19, 71.5, 0, 3], true);
@@ -9441,9 +9427,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/zbjd.png", [19, 71.5, 0, 3], true);
@@ -9488,9 +9474,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5, 0, 3], true);
@@ -9535,9 +9521,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [19, 71.5, 0, 3], true);
@@ -9582,9 +9568,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [19, 71.5, 0, 3], true);
@@ -9629,9 +9615,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [19, 71.5, 0, 3], true);
@@ -9676,9 +9662,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/jsjd.png", [19, 71.5, 0, 3], true);
@@ -9723,9 +9709,9 @@ export default async function () {
 				content: function () {
 					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
 						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [10, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [19, 71.5, 0, 3], true);
 						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [3, 58, 7, 6], true);
+							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [19, 71.5, 0, 3], true);
 						}
 					} else {
 						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [19, 71.5, 0, 3], true);
@@ -10552,7 +10538,7 @@ export default async function () {
 				if (lib.config.extension_十周年UI_newDecadeStyle != 'on') {
 					//--------手杀样式-------------//  
 					window.boxContentAI.style.cssText =
-						"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:1.5px;bottom:-8.2px;"
+						"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:4.5px;bottom:-15px;"
 					window.boxTimeAI.data = 120
 					window.boxTimeAI.style.cssText =
 						"z-index:91;width: 170px;height: 3.3px;margin:1px;background-color: #f2c84b;position: absolute;top: 0px;border-radius: 3px;"
@@ -10569,7 +10555,7 @@ export default async function () {
 				else {
 					//----------十周年样式--------//		
 					window.boxContentAI.style.cssText =
-						"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:1.5px;bottom:-8.2px;"
+						"display:block;position:absolute;z-index:90;--w: 122px;--h: calc(var(--w) *8/162);width: var(--w);height: var(--h);left:4.5px;bottom:-15px;"
 					window.boxTimeAI.data = 120
 					window.boxTimeAI.style.cssText =
 						"z-index:91;width: 170px;height: 3.3px;margin:1px;background-color: #f2c84b;position: absolute;top: 0px;border-radius: 3px;"

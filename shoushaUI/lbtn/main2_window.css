@@ -215,15 +215,15 @@
     /*选将按钮，提示之类*/
 	/*height: var(--h) !important;
 	width: calc(var(--h)*90/32) !important;*/
-	background-image: url("./images/uibutton/btnn2.png");
+	background-image: url("./images/uibutton/btnnnor.png");
 	background-size: 100% 100%;
 	line-height: var(--h);
-	padding: 2.6px 15px !important; /*按钮高度+宽度*/
+	padding: 6.4px 25px !important; /*按钮高度+宽度*/
 	min-width: 100px !important; /*限制最小宽度100*/
 	max-height: 50px !important; /*限制最大高度35*/
 	text-align: center;
 	margin-top:0px !important;
-	margin-bottom: 18px !important;
+	margin-bottom: -15px !important;
 	color: #2F4F4F;
 	-webkit-text-stroke: 0.4px #803B02;
 	font-family: 'yuanli';
@@ -237,9 +237,16 @@
 
 /*无懈按钮位置*/
 #arena>#dui-controls>.control.stayleft {
-	left: calc(50% - 420px) !important;
-	margin-bottom: -1px !important;
-	order: 3;
+	left: calc(50% - -330px) !important;
+	margin-bottom: 70px !important;
+	width: 5px !important;
+	height: 30px !important;
+	border-radius: 30% !important;
+	box-shadow: none !important;
+	border: none !important;
+	transform: scale(0.8) !important;
+	opacity: 0.8 !important;
+	transition: all 0.2s ease-in-out !important;
 }
 
 .control > div.primary2 {/*(取消/结束)按钮*/
