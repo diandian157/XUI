@@ -312,438 +312,6 @@ export default async function () {
 			});
 			//-----------目标选中---------//
 			/*装备牌dom操作*/
-			lib.element.player.$addVirtualEquip=function(card, cards) {
-				const player = this;
-				const isViewAsCard = cards.length !== 1 || cards[0].name !== card.name,
-					info = get.info(card, false);
-				let cardShownName = get.translation(card.name);
-				/*if (info.subtype === "equip3") {
-					cardShownName += "+";
-				} else if (info.subtype === "equip4") {
-					cardShownName += "-";
-				}*/
-				const cardx = isViewAsCard ? game.createCard(card.name, cards.length == 1 ? get.suit(cards[0]) : "none", cards.length ==
-					1 ? get.number(cards[0]) : 0) : cards[0];
-				cardx.fix();
-				const cardSymbol = Symbol("card");
-				cardx.cardSymbol = cardSymbol;
-				cardx[cardSymbol] = card;
-				if (card.subtypes) cardx.subtypes = card.subtypes;
-				cardx.style.transform = "";
-				cardx.classList.remove("drawinghidden");
-				delete cardx._transform;
-				const suit = get.translation(cardx.suit),
-					number = get.strNumber(cardx.number);
-				if (isViewAsCard) {
-					cardx.cards = cards || [];
-					cardx.viewAs = card.name;
-					cardx.node.name2.innerHTML = `${suit}${number} [${cardShownName}]`;
-					cardx.classList.add("fakeequip");
-				} else {
-					delete cardx.viewAs;
-					cardx.node.name2.innerHTML = `${suit}${number} ${cardShownName}`;
-					cardx.classList.remove("fakeequip");
-				}
-				let equipped = false,
-					equipNum = get.equipNum(cardx);
-				
-				/* 十周年装备 */
-				cardx.node.name2.innerHTML = '';
-				
-				
-				if (!nameH) var nameH = document.createElement("span");
-				if (!suitH) var suitH = document.createElement("span");
-				nameH.textContent = cardShownName;
-				suitH.textContent = `${suit}${number}`;;
-				cardx.node.name2.appendChild(suitH);
-				cardx.node.name2.appendChild(nameH);
-				//装备花色	//手杀装备栏       //十周年装备栏
-				
-				if (lib.config.extension_十周年UI_newDecadeStyle == 'on') {
-					var SSEquip = {
-					"木牛流马": "木牛",
-					"吴六剑": "吴六剑2",
-					"机关弩": "机关弩1",
-					"雌雄双股剑": "雌雄剑2",
-					"方天画戟": "方天戟4",
-					"贯石斧": "贯石斧3",
-					"寒冰剑": "寒冰剑2",
-					"麒麟弓": "麒麟弓5",
-					"青釭剑": "青釭剑2",
-					"青龙偃月刀": "青龙刀3",
-					"丈八蛇矛": "丈八矛3",
-					"古锭刀": "古锭刀2",
-					"朱雀羽扇": "朱雀扇4",
-					"七宝刀": "七宝刀2",
-					"银月枪": "银月枪3",
-					"衠钢槊": "衠钢槊3",
-					"飞龙夺凤": "飞龙刀2",
-					"三尖两刃刀": "三尖刀3",
-					"诸葛连弩": "诸葛弩1",
-					"倚天剑": "倚天剑2",
-					"七星宝刀": "七星刀2",
-					"折戟": "折戟0",
-					"无锋剑": "无锋剑1",
-					"涯角枪": "涯角枪3",
-					"五行鹤翎扇": "五行扇4",
-					"断剑": "断剑0",
-					"霹雳车": "霹雳车9",
-					"水波剑": "水波剑2",
-					"红缎枪": "红缎枪3",
-					"天雷刃": "天雷刃4",
-					"混毒弯匕": "混毒匕1",
-					"元戎精械弩": "精械弩3",
-					"乌铁锁链": "铁锁链3",
-					"太极拂尘": "太极拂5",
-					"灵宝仙壶": "灵宝壶3",
-					"冲应神符": "冲应符",
-					"先天八卦阵": "先天八卦",
-					"照月狮子盔": "狮子盔",
-					"白银狮子": "白银狮",
-					"仁王金刚盾": "金刚盾",
-					"桐油百韧甲": "百韧甲",
-					"定澜夜明珠": "夜明珠",
-					"镔铁双戟": "镔铁戟3",
-					"玲珑狮蛮带": "狮蛮带",
-					"束发紫金冠": "束发金冠",
-					"红棉百花袍": "百花袍",
-					"虚妄之冕": "虚妄冕",
-					"无双方天戟": "无双戟4",
-					"鬼龙斩月刀": "斩月刀3",
-					"赤焰镇魂琴": "镇魂琴4",
-				}
-				}
-				
-				if (lib.config.extension_十周年UI_newDecadeStyle == 'off') {
-					var SSEquip = {
-					"木牛流马": "木牛",
-					"吴六剑": "吴六剑2",
-					"机关弩": "机关弩1",
-					"雌雄双股剑": "雌雄剑2",
-					"方天画戟": "方天戟4",
-					"贯石斧": "贯石斧3",
-					"寒冰剑": "寒冰剑2",
-					"麒麟弓": "麒麟弓5",
-					"青釭剑": "青釭剑2",
-					"青龙偃月刀": "青龙刀3",
-					"丈八蛇矛": "丈八矛3",
-					"古锭刀": "古锭刀2",
-					"朱雀羽扇": "朱雀扇4",
-					"七宝刀": "七宝刀2",
-					"银月枪": "银月枪3",
-					"衠钢槊": "衠钢槊3",
-					"飞龙夺凤": "飞龙刀2",
-					"三尖两刃刀": "三尖刀3",
-					"诸葛连弩": "诸葛弩1",
-					"倚天剑": "倚天剑2",
-					"七星宝刀": "七星刀2",
-					"折戟": "折戟0",
-					"无锋剑": "无锋剑1",
-					"涯角枪": "涯角枪3",
-					"五行鹤翎扇": "五行扇4",
-					"断剑": "断剑0",
-					"霹雳车": "霹雳车9",
-					"水波剑": "水波剑2",
-					"红缎枪": "红缎枪3",
-					"天雷刃": "天雷刃4",
-					"混毒弯匕": "混毒匕1",
-					"元戎精械弩": "精械弩3",
-					"乌铁锁链": "铁锁链3",
-					"太极拂尘": "太极拂5",
-					"灵宝仙壶": "灵宝壶3",
-					"冲应神符": "冲应符",
-					"先天八卦阵": "先天八卦",
-					"照月狮子盔": "狮子盔",
-					"白银狮子": "白银狮",
-					"仁王金刚盾": "金刚盾",
-					"桐油百韧甲": "百韧甲",
-					"定澜夜明珠": "夜明珠",
-					"镔铁双戟": "镔铁戟3",
-					"玲珑狮蛮带": "狮蛮带",
-					"束发紫金冠": "束发金冠",
-					"红棉百花袍": "百花袍",
-					"虚妄之冕": "虚妄冕",
-					"无双方天戟": "无双戟4",
-					"鬼龙斩月刀": "斩月刀3",
-					"赤焰镇魂琴": "镇魂琴4",
-				}
-				}
-				
-				if (lib.config.extension_十周年UI_newDecadeStyle == 'off') {
-				
-				
-				
-					if (!ele)
-						if (!ele) var ele = cardx.node.name2;
-				
-					if (!(ele.length > 1)) {
-						var e = ele.children;
-						var subtype = cardx.getAttribute("data-card-subtype");
-						var cardName = cardx.getAttribute("data-card-name");
-						if (!(e[0].nodeName == "IMG")) {
-							var colour = cardx.getAttribute("data-suit");
-							if (subtype) {
-								for (var i = 0; i < e.length; i++) {
-									//  this.style.top = "";
-									if (i == 0) {
-										if (colour == 'heart' || colour == 'diamond') e[i].style.color = "#ef1806";
-										else e[i].style.color = "#8dbede";
-										e[i].style.fontSize = "13px";
-										e[i].style.position = "absolute";
-										e[i].style.left = "11%";
-										e[i].style.top = "1px";
-									} else {
-										if (subtype == "equip3" || subtype == "equip4") {
-											var b = subtype == "equip3" ? "+" : "-";
-											var newele = document.createElement("img");
-											newele.setAttribute("src", decadeUIPath + "/image/ass/" + b + "1.png");
-											newele.style.height = "90%";
-											newele.onerror = function() {
-												this.src = decadeUIPath + "/image/ass/weizhi.png";
-												this.onerror = null;
-											};
-											e[0].style.left = "18%";
-											e[0].parentNode.insertBefore(newele, e[0]);
-											e[i].parentNode.removeChild(e[i + 1]);
-											continue;
-										} else {
-											e[i].style.color = "#e9e8e3";
-											e[i].style.left = "30%";
-											e[i].style.position = "absolute";
-										}
-										e[i].style.fontSize = "16px";
-									}
-									e[i].style.textShadow = "1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black";
-				
-								}
-								if (!(subtype == "equip3" || subtype == "equip4")) {
-									var newele = document.createElement("img");
-									newele.setAttribute("src", decadeUIPath + "/image/ass/" + cardName + ".png");
-									newele.style.height = "80%";
-									newele.onerror = function() {
-										this.src = decadeUIPath + "/image/ass/weizhi.png";
-										this.onerror = null;
-									};
-									if (SSEquip) {
-										var t = e[1].textContent
-										if (SSEquip[t]) {
-											e[1].textContent = SSEquip[t]
-										}
-									}
-									e[0].parentNode.insertBefore(newele, e[0]);
-								}
-							}
-						} else {
-							if (subtype) {
-								if (SSEquip) {
-									var t = e[2].textContent
-									if (SSEquip[t]) {
-										e[2].textContent = SSEquip[t]
-				
-										if (!(subtype == "equip3" || subtype == "equip4")) {
-											e[0].setAttribute("src", decadeUIPath + "/image/ass/" + cardName + ".png");
-										}
-									}
-								}
-							}
-						}
-					}
-				
-				} else {
-					/*十周年装备*/
-					if (!ele) var ele = cardx.node.name2;
-				
-					if (!lib.config['extension_Epix_SSEquip']) {
-						if (!(ele.length > 1)) {
-							var e = ele.children;
-				
-							var subtype = cardx.getAttribute("data-card-subtype");
-							var cardName = cardx.getAttribute("data-card-name");
-							if (!(e[0].nodeName == "IMG")) {
-								var colour = cardx.getAttribute("data-suit");
-								var nature = cardx.getAttribute("data-nature");
-								if (subtype) {
-									for (var i = 0; i < e.length; i++) { //2个武器，覆盖 判断拓展装备
-										//  this.style.top = "";
-										if (i == 0) {
-											if (colour == 'heart' || colour == 'diamond') {
-												e[i].style.color = "#ef1806";
-												//    e[i].style.fontFamily = "suits";
-												e[i].style.position = "absolute";
-												// e[i].style.transform = "scale(0.7,1.1)";
-												e[i].style.direction = "rtl";
-												e[i].style.marginLeft = "68px"; //装备花色字体整体右移
-												e[i].style.marginTop = "2px"; //花色字体上下
-												e[i].style.fontSize = "11px"; //花色大小
-												e[i].style.letterSpacing = "-1px"
-				
-											} else {
-												e[i].style.color = "#181818";
-												e[i].style.fontSize = "12px"; //花色大小
-												//    e[i].style.fontFamily = "suits";
-												e[i].style.position = "absolute";
-												// e[i].style.transform = "scale(0.7,1.1)";
-												e[i].style.direction = "rtl";
-												e[i].style.letterSpacing = "-1px";
-												e[i].style.marginLeft = "68px"; //装备花色字体整体右移
-												e[i].style.marginTop = "2px"; //花色字体上下
-												if (colour == 'none')
-													e[i].style.color = "#482a0a";
-											}
-										} else {
-											if (cardName.indexOf("feichu_") == -1) {
-												e[i].style.direction = "rtl";
-												e[i].style.color = "#482a0a";
-												e[i].style.marginLeft = "-8.5px";
-												e[i].style.letterSpacing = "1px";
-				
-												e[i].style.fontSize = "15px"; //装备字体大小
-												e[i].style.fontFamily = "yuanli";
-												e[i].style.position = "absolute";
-												e[i].style.marginTop = "2px"; //装备字体上下
-											} else {
-												e[i].style.display = "none";
-											}
-										}
-										//	e[i].style.textShadow = "-1.3px 0px 2.2px #fff3d6, 0px -1.3px 2.2px #fff3d6, 1.3px 0px 2.2px #fff3d6 ,0px 1.3px 2.2px #fff3d6"; // 装备字体描边显示
-				
-									}
-									var newele = document.createElement("img");
-				
-									if (cardName != "liulongcanjia" && cardName != "mengchong") {
-										newele.setAttribute("src", decadeUIPath + "/image/ass/decade/" + subtype + ".png")
-									} else {
-										newele.setAttribute("src", decadeUIPath + "/image/ass/decade/liulongcanjia.png")
-									};
-									if (cardName.indexOf("feichu_") != -1)
-										newele.setAttribute("src", decadeUIPath + "/image/ass/decade/" + cardName + ".png");
-				
-									newele.style.opacity = '0.83'; //图标透明度
-									newele.style.width = "120%";
-									newele.style.borderRadius = '5px';
-									newele.style.height = "112%";
-									/*装备栏宽度*/
-									if (lib.config.mode != 'guozhan') {
-				
-										newele.style.marginLeft = " -2px"; /*-7.5*/
-										//newele.style.marginRight = "-10px";
-									} else {
-										newele.style.width = "120%";
-										newele.style.marginLeft = "-2px"; /*-5.5*/
-										// newele.style.marginRight = "-1px";
-									}
-				
-									if (SSEquip) {
-										var t = e[1].textContent
-										if (SSEquip[t]) {
-											e[1].textContent = SSEquip[t]
-										}
-									}
-									if (lib.config.extension_十周年UI_aloneEquip) {
-										if (get.player() != game.me) {
-											e[0].parentNode.insertBefore(newele, e[0]);
-										}
-									} else {
-										e[0].parentNode.insertBefore(newele, e[0]);
-									}
-								}
-							} else {
-								if (subtype) {
-									if (SSEquip) {
-										var t = e[2].textContent
-										if (SSEquip[t]) {
-											e[2].textContent = SSEquip[t]
-										}
-									}
-				
-								}
-							}
-						}
-					}
-				}
-				//分割
-				
-				
-				
-				if (player.node.equips.childNodes.length) {
-					for (let i = 0; i < player.node.equips.childNodes.length; i++) {
-						if (get.equipNum(player.node.equips.childNodes[i]) >= equipNum) {
-							equipped = true;
-							player.node.equips.insertBefore(cardx, player.node.equips.childNodes[i]);
-							break;
-						}
-					}
-				}
-				if (equipped === false) {
-					player.node.equips.appendChild(cardx);
-					if (cards?.length && _status.discarded) _status.discarded.removeArray(cards);
-				}
-			};
-			lib.element.player.$syncDisable=function(map){
-				const suits = { equip3: "+1马栏", equip4: "-1马栏", equip6: "特殊栏" };
-				if (get.is.mountCombined()) suits.equip3 = "坐骑栏";
-				if (!map) {
-					map = this.disabledSlots || {};
-				}
-				game.addVideo("$syncDisable", this, get.copy(map));
-				game.broadcast(
-					function (player, map) {
-						player.disabledSlots = map;
-						player.$syncDisable(map);
-					},
-					this,
-					map
-				);
-				const map2 = get.copy(map);
-				/** @type { Card[] } */
-				// @ts-ignore
-				const cards = Array.from(this.node.equips.childNodes);
-				for (const card of cards) {
-					if (card.name.startsWith("feichu_")) {
-						const index = card.name.slice(7);
-						if (!map2[index]) map2[index] = 0;
-						map2[index]--;
-					}
-				}
-				for (const index in map2) {
-					if (!index.startsWith("equip") || !(parseInt(index.slice(5)) > 0)) continue;
-					const num = map2[index];
-					if (num > 0) {
-						for (let i = 0; i < num; i++) {
-							const card = game.createCard("feichu_" + index, suits[index] || get.translation(index) + "栏", "");
-							card.fix();
-							card.style.transform = "";
-							card.classList.remove("drawinghidden");
-							card.classList.add("feichu");
-							                                                        
-							delete card._transform;
-							const equipNum = get.equipNum(card);
-							let equipped = false;
-							for (let j = 0; j < this.node.equips.childNodes.length; j++) {
-								if (get.equipNum(this.node.equips.childNodes[j]) >= equipNum) {
-									this.node.equips.insertBefore(card, this.node.equips.childNodes[j]);
-									equipped = true;
-									break;
-								}
-							}
-							if (!equipped) {
-								this.node.equips.appendChild(card);
-								if (_status.discarded) {
-									_status.discarded.remove(card);
-								}
-							}
-						}
-					} else if (num < 0) {
-						for (let i = 0; i > num; i--) {
-							const card = cards.find(card => card.name == "feichu_" + index);
-							if (card) {
-								this.node.equips.removeChild(card);
-								cards.remove(card);
-							}
-						}
-					}
-				}
-			};
 			// 卡牌边框美化
 			if (true) {
 			  if (lib.config.extension_十周年UI_cardkmh && lib.config.extension_十周年UI_cardkmh != "off") {
@@ -760,6 +328,17 @@ export default async function () {
 			game.menuZoom = 1;
 			//单独装备栏
 			_status.nopopequip = lib.config.extension_十周年UI_aloneEquip;
+			
+			//布局
+			switch (lib.config.layout) {
+				case "long2":
+				case "nova":
+				case "mobile":
+					break;
+				default:
+					alert("十周年UI提醒您，请打开<触屏模式>并使用<新版>布局以获得良好体验（在选项-外观-布局中调整）。");
+					break;
+			}
 
 			console.time(decadeUIName);
 
@@ -932,205 +511,140 @@ export default async function () {
 							card: {
 								$init: function (card) {
 									base.lib.element.card.$init.apply(this, arguments);
-									
-																		this.node.range.innerHTML = '';
-																		var tags = [];
-																		if (Array.isArray(card[4])) {
-																			tags.addArray(card[4]);
-																		}
-																		if (this.cardid) {
-																			if (!_status.cardtag) {
-																				_status.cardtag = {};
-																			}
-																			for (var i in _status.cardtag) {
-																				if (_status.cardtag[i].includes(this.cardid)) {
-																					tags.add(i);
-																				}
-																			}
-																			if (tags.length) {
-																				var tagstr = ' <span class="cardtag">';
-																				for (var i = 0; i < tags.length; i++) {
-																					var tag = tags[i];
-																					if (!_status.cardtag[tag]) {
-																						_status.cardtag[tag] = [];
-																					}
-																					_status.cardtag[tag].add(this.cardid);
-																					tagstr += lib.translate[tag + '_tag'];
-																				}
-																				tagstr += '</span>';
-																				this.node.range.innerHTML += tagstr;
-																			}
-																		}
-									
-																		const verticalName = this.$vertname;
-																		this.$name.innerHTML = verticalName.innerHTML;
-																		let cardNumber = this.number || '';
-																		const parsedCardNumber = parseInt(cardNumber);
-									
-																		if (parsedCardNumber == cardNumber) cardNumber = parsedCardNumber;
-									
-																		switch (cardNumber) {
-																			case 1:
-																				this.$suitnum.$num.innerHTML = 'A';
-																				break;
-																			case 11:
-																				this.$suitnum.$num.innerHTML = 'J';
-																				break;
-																			case 12:
-																				this.$suitnum.$num.innerHTML = 'Q';
-																				break;
-																			case 13:
-																				this.$suitnum.$num.innerHTML = 'K';
-																				break;
-																			default: this.$suitnum.$num.innerHTML = (cardNumber !== 0 ? get.strNumber(cardNumber) : false) || cardNumber || "";
-																		}
-									
-																		this.$suitnum.$suit.innerHTML = get.translation(this.dataset.suit = this.suit);
-																		const equip = this.$equip;
-																		const innerHTML = equip.innerHTML;
-																		equip.$suitnum.innerHTML = innerHTML.slice(0, innerHTML.indexOf(' '));
-																		equip.$name.innerHTML = innerHTML.slice(innerHTML.indexOf(' '));
-																		const node = this.node;
-																		const background = node.background;
-																		node.judgeMark.node.judge.innerHTML = background.innerHTML;
-																		const classList = background.classList;
-									
-																		if (classList.contains('tight')) classList.remove('tight');
-									
-																		const cardStyle = this.style;
-									
-																		if (cardStyle.color) cardStyle.removeProperty('color');
-									
-																		if (cardStyle.textShadow) cardStyle.removeProperty('text-shadow');
-									
-																		const info = node.info;
-																		const infoStyle = info.style;
-									
-																		if (infoStyle.opacity) infoStyle.removeProperty('opacity');
-									
-																		const verticalNameStyle = verticalName.style;
-									
-																		if (verticalNameStyle.opacity) verticalNameStyle.removeProperty('opacity');
-									
-																		if (info.childElementCount) while (info.firstChild) {
-																			info.removeChild(info.lastChild);
-																		}
-									
-																		if (equip.childElementCount) while (equip.firstChild) {
-																			equip.removeChild(equip.lastChild);
-																		}
-									
-																		var imgFormat = decadeUI.config.cardPrettify;
-																		if (imgFormat != 'off') {
-																			let filename = card[2];
-																			this.classList.add('decade-card');
-																			if (!this.classList.contains('infohidden')) {
-																				//不同属性的【杀】的图片素材
-																				//仅针对单一属性【杀】
-																				if (Array.isArray(card) && card[2] == 'sha' && card[3] && !Array.isArray(card[3])) {
-																					filename += '_';
-																					filename += get.natureList(card[3]).sort(lib.sort.nature).join('_');
-																				}
-																				var res = dui.statics.cards;
-																				var asset = res[filename];
-																				if (res.READ_OK) {
-																					if (asset == undefined) {
-																						this.classList.remove('decade-card');
-																					}
-																					else {
-																						this.style.background = 'url("' + asset.url + '")';
-																					}
-																				}
-																				else {
-																					var url = lib.assetURL + 'extension/' + decadeUIName + '/image/card/' + filename + '.' + imgFormat;
-																					if (!asset) {
-																						res[filename] = asset = {
-																							name: filename,
-																							url: undefined,
-																							loaded: undefined,
-																							rawUrl: undefined,
-																						};
-																					}
-									
-																					if (asset.loaded !== false) {
-																						if (asset.loaded == undefined) {
-																							var image = new Image();
-																							image.onload = function () {
-																								asset.loaded = true;
-																								image.onload = undefined;
-																							};
-									
-																							var card = this;
-																							image.onerror = function () {
-																								asset.loaded = false;
-																								image.onerror = undefined;
-																								card.style.background = asset.rawUrl;
-																								card.classList.remove('decade-card');
-																							}
-									
-																							asset.url = url;
-																							asset.rawUrl = this.style.background || this.style.backgroundImage;
-																							asset.image = image;
-																							image.src = url;
-																						}
-									
-																						this.style.background = 'url("' + url + '")';
-																					}
-																					else {
-																						this.classList.remove('decade-card');
-																					}
-																				}
-																			}
-																		}
-																		else {
-																			this.classList.remove('decade-card');
-																		}
-													this.$equip.innerHTML='';
-									                              
-									    var cardName = this.getAttribute("data-card-name");
-									   /*十周年装备*/   if(!ele)  var ele = this.getElementsByClassName("name2");
-									
-									   if (!(ele.length > 1)) {
-									                                        var e = ele[0].children;
-									      var subype = this.getAttribute("data-card-subype");
-									                                      var cardName = this.getAttribute("data-card-name");
-									                                      	if(cardName.indexOf("feichu_")!=-1){		
-									                       	if (lib.config.extension_十周年UI_newDecadeStyle == 'on') {
-									                       	                     if (!(e[0])) {
-									  	var newele = document.createElement("img");						
-									newele.setAttribute("src",decadeUIPath + "/image/ass/decade/"+cardName+".png"); 
-									                                                newele.style.opacity = '0.83';//图标透明度
-									                                         newele.style.width = "120%";
-									               newele.style.borderRadius='5px';                                         newele.style.height = "112%";
-									       }
-									                           ele[0].appendChild(newele);       
-									}else{
-									if (!(e[0])) {
-									var newele = document.createElement("img");
-									                            newele.setAttribute("src", decadeUIPath + "/image/ass/feichuma.png");
-									                            if(subype!='equip3'&&subype!='equip4'){
-									                newele.style.cssText=`
-									                zoom:1.7;
-									                width:30px;
-									                height:10px;
-									                position:relative;
-									                left:10px;
-									                ` ;           
-									                            }else{
-									             newele.style.cssText=`
-									                zoom:1.7;
-									                width:30px;
-									                height:10px;
-									                position:relative;
-									                left:-4px;
-									                ` ;    }
-									           }
-									                   ele[0].appendChild(newele);    
-									      }
-									
-									   }
+
+									this.node.range.innerHTML = "";
+									var tags = [];
+									if (Array.isArray(card[4])) {
+										tags.addArray(card[4]);
 									}
-									                  return this;
+									if (this.cardid) {
+										if (!_status.cardtag) {
+											_status.cardtag = {};
+										}
+										for (var i in _status.cardtag) {
+											if (_status.cardtag[i].includes(this.cardid)) {
+												tags.add(i);
+											}
+										}
+										if (tags.length) {
+											var tagstr = ' <span class="cardtag">';
+											for (var i = 0; i < tags.length; i++) {
+												var tag = tags[i];
+												if (!_status.cardtag[tag]) {
+													_status.cardtag[tag] = [];
+												}
+												_status.cardtag[tag].add(this.cardid);
+												tagstr += lib.translate[tag + "_tag"];
+											}
+											tagstr += "</span>";
+											this.node.range.innerHTML += tagstr;
+										}
+									}
+
+									const verticalName = this.$vertname;
+									this.$name.innerHTML = verticalName.innerHTML;
+									let cardNumber = this.number;
+									this.$suitnum.$num.innerHTML = (cardNumber !== 0 ? get.strNumber(cardNumber) : false) || cardNumber || "";
+									this.$suitnum.$suit.innerHTML = get.translation((this.dataset.suit = this.suit));
+
+									const equip = this.$equip;
+									const innerHTML = equip.innerHTML;
+									equip.$suitnum.innerHTML = innerHTML.slice(0, innerHTML.indexOf(" "));
+									equip.$name.innerHTML = innerHTML.slice(innerHTML.indexOf(" "));
+									const node = this.node;
+									const background = node.background;
+									node.judgeMark.node.judge.innerHTML = background.innerHTML;
+									const classList = background.classList;
+
+									if (classList.contains("tight")) classList.remove("tight");
+
+									const cardStyle = this.style;
+
+									if (cardStyle.color) cardStyle.removeProperty("color");
+
+									if (cardStyle.textShadow) cardStyle.removeProperty("text-shadow");
+
+									const info = node.info;
+									const infoStyle = info.style;
+
+									if (infoStyle.opacity) infoStyle.removeProperty("opacity");
+
+									const verticalNameStyle = verticalName.style;
+
+									if (verticalNameStyle.opacity) verticalNameStyle.removeProperty("opacity");
+
+									if (info.childElementCount)
+										while (info.firstChild) {
+											info.removeChild(info.lastChild);
+										}
+
+									if (equip.childElementCount)
+										while (equip.firstChild) {
+											equip.removeChild(equip.lastChild);
+										}
+
+									var imgFormat = decadeUI.config.cardPrettify;
+									if (imgFormat != "off") {
+										let filename = card[2];
+										this.classList.add("decade-card");
+										if (!this.classList.contains("infohidden")) {
+											//不同属性的【杀】的图片素材
+											//仅针对单一属性【杀】
+											if (Array.isArray(card) && card[2] == "sha" && card[3] && !Array.isArray(card[3])) {
+												filename += "_";
+												filename += get.natureList(card[3]).sort(lib.sort.nature).join("_");
+											}
+											var res = dui.statics.cards;
+											var asset = res[filename];
+											if (res.READ_OK) {
+												if (asset == undefined) {
+													this.classList.remove("decade-card");
+												} else {
+													this.style.background = 'url("' + asset.url + '")';
+												}
+											} else {
+												var url = lib.assetURL + "extension/" + decadeUIName + "/image/card/" + filename + "." + imgFormat;
+												if (!asset) {
+													res[filename] = asset = {
+														name: filename,
+														url: undefined,
+														loaded: undefined,
+														rawUrl: undefined,
+													};
+												}
+
+												if (asset.loaded !== false) {
+													if (asset.loaded == undefined) {
+														var image = new Image();
+														image.onload = function () {
+															asset.loaded = true;
+															image.onload = undefined;
+														};
+
+														var card = this;
+														image.onerror = function () {
+															asset.loaded = false;
+															image.onerror = undefined;
+															card.style.background = asset.rawUrl;
+															card.classList.remove("decade-card");
+														};
+
+														asset.url = url;
+														asset.rawUrl = this.style.background || this.style.backgroundImage;
+														asset.image = image;
+														image.src = url;
+													}
+
+													this.style.background = 'url("' + url + '")';
+												} else {
+													this.classList.remove("decade-card");
+												}
+											}
+										}
+									} else {
+										this.classList.remove("decade-card");
+									}
+									return this;
 								},
 								updateTransform: function (bool, delay) {
 									if (delay) {
@@ -11044,6 +10558,7 @@ export default async function () {
 		},
 		package: {
 			intro: '二改萌修十周年UI,有问题不要打扰萌新（转型中）' +
+				'<br>其他十周年特效请下载扩展《特效补充》'+
 				'<br>使用旧样式装备每局需打开一次新样式装备再关闭'+
 				'<br>https://github.com/diandian157'+
 				'<br>'+

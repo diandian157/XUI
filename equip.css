@@ -14,9 +14,8 @@
 }
 
 #arena[data-alone-equip='off']>.equips-wrap {
-	right: auto;
-	bottom: 0%;
-	left: 0px;
+	opacity: 0;
+	left: auto;
 }
 
 .equips-wrap>.equips-back {
@@ -230,11 +229,11 @@
 /*其他玩家装备栏*/
 .player>.equips,
 #arena>.player:not(.minskin)>.equips {
-    left: 10%;
-    right: 16%;
-    width: auto;
-    height: 80px;
-    bottom: 3%;
+	left: 10%;
+	right: 16%;
+	width: auto;
+	height: 80px;
+	bottom: 3%;
 	box-shadow: none;
 	background: none;
 	background-image: none;
@@ -242,7 +241,10 @@
 	pointer-events: none;
 	z-index: 88;
 	transform: none;
-    transform-origin: center;
+	transform-origin: center;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
 }
 
 /*
