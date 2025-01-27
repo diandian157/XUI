@@ -175,7 +175,7 @@
 	height: 237px;
 	width: 35px;
 	margin-top: -45.5px;
-	margin-left: 1px;
+	margin-left: -1px;
 }
 .player > .camp-wrap[data-camp="wei"] > .camp-back {
 	background: linear-gradient(to top, rgb(35, 83, 123), rgb(15, 35, 68));
@@ -223,7 +223,7 @@
 .player > .camp-wrap > .camp-border {
 	display: block;
 	left: -6px;
-	height: 252px;
+	height: 255px;
 	top: -23px;
 	width: 70px;
 	position: absolute;
@@ -1308,7 +1308,7 @@
 }
 /* 主玩家判定区位置调整 */
 #arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges {
-    top: 30px;  /* 调整到装备栏上方 */
+    top: 20px;  /* 调整到装备栏上方 */
     left: auto;
     right: 115%;
     width: 100%;
