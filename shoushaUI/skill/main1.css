@@ -1,25 +1,25 @@
 .skill-control {/*技能按钮*/
-	bottom: 6px;/*整体上移，建议别调*/
-	right: 47px;/*技能显示右移，越小越靠右，建议别调*/
+	bottom: 10px;/*整体上移，建议别调*/
+	right: 43px;/*技能显示右移，越小越靠右，建议别调*/
 	z-index: 3;
 }
 .skill-control > div {
     display: flex;
     flex-wrap: wrap;
-    width: 180px; /* 增加容器宽度 */
+    width: 175px;
     justify-content: flex-end;
-    gap: 2px; /* 增加间距 */
+    gap: 6px 4px; /* 调整间距：垂直4px，水平2px */
 }
 
 /* 普通技能按钮 */
 .skill-control > .enable > .skillitem {
-    flex: 0 0 70px; /* 增加宽度 */
+    flex: 0 0 65px; /* 增加宽度 */
     width: 55px;
     height: 26px; /* 增加高度 */
     line-height: 26px;
     margin: 0;
     text-align: center;
-    font-family: 'xinwei';
+    font-family: 'kaiti';
     font-size: 20px; /* 增加字体大小 */
     color: #ffffff;
     background: linear-gradient(to bottom, #5b855b, #5e915e); /* 浅绿色渐变背景 */
@@ -42,13 +42,13 @@
 
 /* 限定技按钮 */
 .skill-control > .enable > .xiandingji {
-    flex: 0 0 70px; /* 增加宽度 */
+    flex: 0 0 65px; /* 增加宽度 */
     width: 55px;
     height: 26px; /* 增加高度 */
     line-height: 26px;
     margin: 0;
     text-align: center;
-    font-family: 'xinwei';
+    font-family: 'kaiti';
     font-size: 20px; /* 增加字体大小 */
     color: #ffffff;
     background: linear-gradient(to bottom, #d34646, #db6666);
@@ -75,31 +75,10 @@
 }
 /* 调整单个技能的显示 */
 .skill-control > .enable > .skillitem:last-child:nth-child(odd) {
-    flex: 0 0 140px !important; /* 加宽单个技能 */
+    flex: 0 0 133px !important; /* 加宽单个技能 */
     width: 80px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
     position: relative !important;
-    left: -20px !important; /* 微调居中位置 */
-}
-
-/* 限定技单个显示时的样式 */
-.skill-control > .enable > .xiandingji:last-child:nth-child(odd) {
-    flex: 0 0 140px !important;
-    width: 80px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    position: relative !important;
-    left: -20px !important;
-}
-
-/* 触发技单个显示时的样式 */
-.skill-control > .trigger > .skillitem:last-child:nth-child(odd) {
-    width: 80px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    position: relative !important;
-    left: -20px !important;
+	left: -3px !important; /* 微调居中位置 */
 }
 
 .skillMarks {
