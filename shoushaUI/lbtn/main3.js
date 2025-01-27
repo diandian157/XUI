@@ -85,7 +85,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
     //手牌排序
     var head = ui.create.node('img');
     head.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/new_zhengli.png"
-    head.style.cssText = "display: block;--w: 80px;--h: calc(var(--w) * 81/247);width: var(--w);height: var(--h)+4px;position: absolute;top: calc(100% - 50px);left: calc(100% - 370px);background-color: transparent;z-index:4"
+    head.style.cssText = "display: block;--w: 80px;--h: calc(var(--w) * 81/247);width: var(--w);height: var(--h)+4px;position: absolute;top: calc(100% - 50px);left: calc(100% - 360px);background-color: transparent;z-index:4"
     head.onclick = function () {
       //head.onclick=ui.click.sortCard;
       if (!game.me || game.me.hasSkillTag('noSortCard')) return;

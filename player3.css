@@ -164,6 +164,17 @@
 	z-index: 88;
 }
 
+/* 添加悬停和点击效果 */
+.player>.camp-wrap:active {
+    transform: scale(0.98);
+    filter: brightness(0.95);
+}
+
+/* 保持文字清晰 */
+.player>.camp-wrap>.camp-name {
+    transition: text-shadow 0.2s;
+}
+
 .player.connect>div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).camp-wrap {
 	display: block !important;
 }

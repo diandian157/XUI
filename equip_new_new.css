@@ -10,7 +10,7 @@
 #arena[data-right-layout='on']>.equips-wrap {/*右手布局*/
 	left: auto;
 	bottom: 6%;
-	right: 215px;
+	right: 205px;
 }
 
 #arena[data-alone-equip='off']>.equips-wrap {

@@ -25,7 +25,7 @@
 	left: -14px;
 	top: -13px;
 	width: 123%;
-	height: 270px;
+	height: 260px;
 	background-size: 93% 100%;
 	opacity: 0;
 	background-image: url('assets/image/select_green.png');
@@ -59,7 +59,7 @@
 	left: -14px;
 	top: -13px;
 	width: 123%;
-	height: 270px;
+	height: 260px;
 	background-size: 93% 100%;
 	opacity: 0;
 	background-image: url('assets/image/select_orange.png');
@@ -98,8 +98,8 @@
 
 #arena/*.dui-mobile>*/:not(.fewplayer)>.player:not(.minskin),
 #arena/*.dui-mobile>*/:not(.fewplayer):not(*[data-player_height=''])>.player:not(.minskin) {
-    width: 190px!important;
-    height: 245px!important;
+    width: 180px!important;
+    height: 235px!important;
 }
 /* #arena:not(.fewplayer)>.player:not(.minskin),
 #arena:not(.fewplayer):not(*[data-player_height=''])>.player:not(.minskin) {
@@ -143,12 +143,22 @@
 } /*玩家姓名阵营*/
 .player > .camp-wrap {
 	display: block;
-	left: -19px;
+	left: -12px;
 	top: 0px;
 	width: 37px;
 	height: 128px;
 	transition: none;
 	z-index: 88;
+}
+/* 添加悬停和点击效果 */
+.player>.camp-wrap:active {
+    transform: scale(0.98);
+    filter: brightness(0.95);
+}
+
+/* 保持文字清晰 */
+.player>.camp-wrap>.camp-name {
+    transition: text-shadow 0.2s;
 }
 .player.connect > div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).camp-wrap {
 	display: block !important;
@@ -162,7 +172,7 @@
 .player > .camp-wrap > .camp-back {
 	background: linear-gradient(to top, rgb(155, 129, 108), rgb(73, 71, 58));
 	border-radius: 10px 0 0 10px;
-	height: 247px;
+	height: 237px;
 	width: 35px;
 	margin-top: -45.5px;
 	margin-left: 1px;
@@ -213,7 +223,7 @@
 .player > .camp-wrap > .camp-border {
 	display: block;
 	left: -6px;
-	height: 265px;
+	height: 252px;
 	top: -23px;
 	width: 70px;
 	position: absolute;
@@ -555,13 +565,13 @@
 }
 
 #arena[data-outcrop-skin='on']>.player>.primary-avatar {
-	height: 265px;
+	height: 250px;
 	clip-path: url(#solo-clip); /*新增*/
 	-webkit-clip-path: url(#solo-clip);
 }
 
 #arena[data-outcrop-skin='on']>.player>.deputy-avatar {
-	height: 265px;
+	height: 250px;
 	clip-path: url(#duor-clip); /*新增*/
 	-webkit-clip-path: url(#duor-clip);
 }
@@ -605,7 +615,7 @@
 #arena[data-dynamic-skin-outcrop='on']>.player>.dynamic-wrap>.animation-player {
 	clip-path: url(#dskin-clip); /*新增*/
 	-webkit-clip-path: url(#dskin-clip);
-	height: 275px;
+	height: 265px;
 }
 .player > .dynamic-wrap > .primary-bg,
 .player > .dynamic-wrap > .deputy-bg {
