@@ -1,14 +1,14 @@
 .skill-control {/*技能按钮*/
-	bottom: 10px;/*整体上移，建议别调*/
+	bottom: 5px;/*整体上移，建议别调*/
 	right: 43px;/*技能显示右移，越小越靠右，建议别调*/
 	z-index: 3;
 }
 .skill-control > div {
     display: flex;
     flex-wrap: wrap;
-    width: 175px;
+    width: 160px;
     justify-content: flex-end;
-    gap: 6px 4px; /* 调整间距：垂直4px，水平2px */
+    gap: 6px 5px; /* 调整间距：垂直4px，水平2px */
 }
 
 /* 普通技能按钮 */
@@ -73,12 +73,40 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.2),
         0 0 4px #FF4444;
 }
-/* 调整单个技能的显示 */
-.skill-control > .enable > .skillitem:last-child:nth-child(odd) {
-    flex: 0 0 133px !important; /* 加宽单个技能 */
-    width: 80px !important;
-    position: relative !important;
-	left: -3px !important; /* 微调居中位置 */
+/* 强制每行最多两个技能 */
+.skill-control > .enable::after {
+    content: '';
+    flex: 0 0 76px;
+    margin: 0;
+    visibility: hidden;
+}
+/* 调整双数技能的对齐（第二行两个技能的情况） */
+.skill-control > .enable > .skillitem:nth-last-child(2),
+.skill-control > .enable > .skillitem:last-child,
+.skill-control > .enable > .xiandingji:nth-last-child(2),
+.skill-control > .enable > .xiandingji:last-child {
+    flex: 0 0 66px !important;
+    width: 66px !important;
+    margin: 0 !important;
+}
+
+/* 调整单个技能的显示（最后一行为单个技能时） */
+.skill-control > .enable > .skillitem:last-child:nth-child(odd),
+.skill-control > .enable > .xiandingji:last-child:nth-child(odd),
+.skill-control > .trigger > .skillitem:last-child:nth-child(odd) {
+    flex: 0 0 135px !important;
+    width: 156px !important;
+    margin: 0 !important;
+}
+
+/* 确保技能按钮文字居中 */
+.skill-control > .enable > .skillitem,
+.skill-control > .enable > .xiandingji,
+.skill-control > .trigger > .skillitem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .skillMarks {

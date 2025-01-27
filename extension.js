@@ -11044,7 +11044,6 @@ export default async function () {
 		},
 		package: {
 			intro: '二改萌修十周年UI,有问题不要打扰萌新（转型中）' +
-				'<br>感谢陌提供的技能排列样式' +
 				'<br>使用旧样式装备每局需打开一次新样式装备再关闭'+
 				'<br>https://github.com/diandian157'+
 				'<br>'+
