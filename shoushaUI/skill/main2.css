@@ -1,6 +1,6 @@
 .skill-control {/*技能按钮*/
 	bottom: 5px;/*整体上移，建议别调*/
-	right: 45px;/*技能显示右移，越小越靠右，建议别调*/
+	right: 40px;/*技能显示右移，越小越靠右，建议别调*/
 	z-index: 3;
 }
 .skill-control > div {
