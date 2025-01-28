@@ -1,6 +1,45 @@
 'use strict';
 decadeModule.import(function(lib, game, ui, get, ai, _status){
 	decadeUI.dynamicSkin = {
+		shen_pangtong:{
+			臻华福天: {
+                name: "神庞统/臻华福天/daiji2",
+                x: [0,0.56],
+                y: [0,0.38],
+                scale: 1.2,
+                shizhounian: true,
+                beijing: {
+                    name: "神庞统/臻华福天/beijing",
+                    x: [0,1.51],
+                    y: [0,0.43],
+                    scale: 0.37,
+                },
+                chuchang: {
+                    name: "神庞统/臻华福天/chuchang",
+                    scale: 0.7,
+                },
+                gongji: {
+                    name: "神庞统/臻华福天/chuchang2",
+                    scale: 0.7,
+                },
+                teshu: {
+                    name: "神庞统/臻华福天/chuchang2",
+                    scale: 0.7,
+                },
+                zhishixian: {
+                    name: "神庞统/臻华福天/shouji2",
+                    scale: 0.7,
+                    delay: 0.3,
+                    speed: 0.8,
+                    effect: {
+                        name: "神庞统/臻华福天/shouji",
+                        scale: 0.7,
+                        delay: 0.3,
+                        speed: 0.8,
+                    },
+                },
+            }
+		},
 		dc_huangwudie:{
 			云螭献瑞:{
                 name: "黄舞蝶/云螭献瑞/daiji2",
@@ -2192,6 +2231,43 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						delay: 0.3,
 					},
 				},
+			},
+			灵婀娉婷:{
+			    name: "曹华/灵婀娉婷/daiji2",
+			    x: [0,0.56],
+			    y: [0,0.38],
+			    scale: 1.2,
+			    shizhounian: true,
+			    beijing: {
+			        name: "曹华/灵婀娉婷/beijing",
+			        x: [0,1.51],
+			        y: [0,0.43],
+			        scale: 0.37,
+			    },
+			    chuchang: {
+			        name: "曹华/灵婀娉婷/chuchang",
+			        scale: 0.7,
+			    },
+			    gongji: {
+			        name: "曹华/灵婀娉婷/chuchang2",
+			        scale: 0.7,
+			    },
+			    teshu: {
+			        name: "曹华/灵婀娉婷/chuchang2",
+			        scale: 0.7,
+			    },
+			    zhishixian: {
+			        name: "曹华/灵婀娉婷/shouji2",
+			        scale: 0.7,
+			        delay: 0.3,
+			        speed: 0.8,
+			        effect: {
+			            name: "曹华/灵婀娉婷/shouji",
+			            scale: 0.7,
+			            delay: 0.3,
+			            speed: 0.8,
+			        },
+			    },
 			},
         },
         caoxian: {//曹宪
@@ -16029,6 +16105,49 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 			    	y: [0, 0.5]
 				},
 			},
+			战场荣耀: {
+				name: '孙茹/战场荣耀/daiji2',
+				shan: 'play3',
+				x: [0,0.46],
+				y: [0,0.47],
+				angle: 14,
+				scale: 0.86,
+			    //speed: 1,
+			    shizhounian: true,
+			    chuchang: {
+					name: '孙茹/战场荣耀/chuchang',
+					action: 'play',
+					scale: 0.7,
+				},
+				gongji: {
+					name: '孙茹/战场荣耀/chuchang2',
+					action: 'gongji',
+					scale: 0.8,
+				},
+				teshu: {
+					name: '孙茹/战场荣耀/chuchang2',
+					action: 'jineng',
+					scale: 0.8,
+				},
+				beijing: {
+					name: '孙茹/战场荣耀/beijing',
+					x: [0, 0.5],
+					y: [0, 0.5],
+					scale: 0.4,
+				},
+				zhishixian: {
+					name: '孙茹/战场荣耀/shouji2',
+					scale: 0.5,
+					speed: 1.3,
+					delay: 0.3,
+					effect: {
+						name: '孙茹/战场荣耀/shouji',
+						scale: 0.5,
+						speed: 0.8,
+						delay: 0.35,
+					},
+				},
+			},
             庆甚端阳: {
                 name: '孙茹/庆甚端阳/SunRu_LiHui_XingXiang',
                 version: '4.0',
@@ -23112,6 +23231,43 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						delay: 0.2,
 					},
 				},
+			},
+			金蛟巧刻: {
+			    name: "张瑾云/金蛟巧刻/daiji2",
+			    x: [0,0.56],
+			    y: [0,0.38],
+			    scale: 1.2,
+			    shizhounian: true,
+			    beijing: {
+			        name: "张瑾云/金蛟巧刻/beijing",
+			        x: [0,1.51],
+			        y: [0,0.43],
+			        scale: 0.37,
+			    },
+			    chuchang: {
+			        name: "张瑾云/金蛟巧刻/chuchang",
+			        scale: 0.7,
+			    },
+			    gongji: {
+			        name: "张瑾云/金蛟巧刻/chuchang2",
+			        scale: 0.7,
+			    },
+			    teshu: {
+			        name: "张瑾云/金蛟巧刻/chuchang2",
+			        scale: 0.7,
+			    },
+			    zhishixian: {
+			        name: "张瑾云/金蛟巧刻/shouji2",
+			        scale: 0.7,
+			        delay: 0.3,
+			        speed: 0.8,
+			        effect: {
+			            name: "张瑾云/金蛟巧刻/shouji",
+			            scale: 0.7,
+			            delay: 0.3,
+			            speed: 0.8,
+			        },
+			    },
 			},
         },
         zhangliao: {//张辽
