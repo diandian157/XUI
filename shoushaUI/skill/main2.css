@@ -53,6 +53,14 @@
     outline: none; /* 去除点击时的默认边框 */    
 }
 
+.skill-control > .enable > .skillitem.select {
+    background: linear-gradient(45deg, rgb(10, 100, 0), rgb(10, 100, 0), rgb(20, 200, 0));
+    border: 1.5px solid rgb(20, 220, 0); /* 描边 */
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 0 4px #FF4444;
+}
+
 /* 技能按钮不可用状态 - 保持原样 */
 .skill-control > .enable > .skillitem:not(.usable):not(.select) {
     background: linear-gradient(to bottom, #5f5f5d, #767977);
