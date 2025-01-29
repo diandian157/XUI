@@ -387,18 +387,8 @@
 /* 手牌hover效果 */
 .handcards > .card:not(.selected):not(.removing):not(.thrown):hover {
 	transform: translateY(-20px) translateZ(20px);
-	margin-left: 3px;  /* hover时展开间距 */
-	margin-right: 3px;
+	cursor: pointer; /* 鼠标悬停时显示为手型 */
 	z-index: 2;
-}
-
-/* 选中状态 */
-.handcards > .card.selected {
-	transform: translateY(-30px) translateZ(30px) scale(1.05);
-	margin-left: 5px;  /* 选中时展开间距 */
-	margin-right: 5px;
-	z-index: 3;
-	box-shadow: 0 0 15px rgba(255, 230, 0, 0.4);
 }
 
 /* 手牌数量提示 */

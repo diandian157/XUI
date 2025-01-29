@@ -29181,6 +29181,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
         //孔融
         sp_kongrong: decadeUI.dynamicSkin.kongrong,
 		ol_sb_kongrong: decadeUI.dynamicSkin.kongrong,
+		dc_kongrong: decadeUI.dynamicSkin.kongrong,
 
         //凌统
         re_lingtong: decadeUI.dynamicSkin.lingtong,
