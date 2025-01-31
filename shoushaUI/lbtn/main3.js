@@ -10,10 +10,10 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 		if (lib.config.mode == "identity" || lib.config.mode == "doudizhu" || lib.config.mode ==
 			"guozhan" || lib.config.mode == "versus" || lib.config.mode == "single" || lib.config
 			.mode == "martial") {
-			var wenhao = ui.create.node("imsg");
-			wenhao.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/CD/wenhaso.png";
+			var wenhao = ui.create.node("ismg");
+			wenhao.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/CD/wenhao.png";
 			wenhao.style.cssText =
-				"cursor: pointer;display: block;width: 40px;height: 29px;position: absolute;bottom: calc(100% - 30px);left: calc(100% - 590px);background-color: transparent;z-index:5";
+				"cursor: pointer;display: block;width: 40px;height: 29px;position: absolute;bottom: calc(100% - 30px);left:61.5%;background-color: transparent;z-index:5";
 
 			//--------------//
 			if (lib.config.mode == "identity" || lib.config.mode == "doudizhu" || lib.config.mode ==
