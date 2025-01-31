@@ -10857,6 +10857,36 @@ export default async function() {
 					"39": "39%",
 				},
 			},
+			aloneEquip: {
+				name: '<b><font color="#99FF75">单独装备栏',
+				intro: '<b><font color="#99FF75">切换玩家装备栏为单独装备栏或非单独装备栏，初始为单独装备栏，根据个人喜好调整',
+				init: true,
+				update() {
+					const config = lib.config["extension_十周年UI_aloneEquip"];
+					if (window.decadeUI) ui.arena.dataset.aloneEquip = config ? "on" : "off";
+					_status.nopopequip = config;
+					if (_status.gameStarted && ui && ui.equipSolts) {
+						if (config && game.me != ui.equipSolts.me) {
+							if (ui.equipSolts.me) {
+								ui.equipSolts.me.appendChild(ui.equipSolts.equips);
+							}
+							ui.equipSolts.me = game.me;
+							ui.equipSolts.equips = game.me.node.equips;
+							ui.equipSolts.appendChild(game.me.node.equips);
+							game.me.$syncExpand();
+						}
+						if (!config && game.me == ui.equipSolts.me) {
+							if (ui.equipSolts.me) {
+								ui.equipSolts.me.appendChild(ui.equipSolts.equips);
+							}
+							ui.equipSolts.me = game.me;
+							ui.equipSolts.equips = game.me.node.equips;
+							ui.equipSolts.appendChild(game.me.node.equips);
+							game.me.$syncExpand();
+						}
+					}
+				},
+			},
 			loadingStyle: {
 				name: '更换光标+loading框',
 				intro: '可以更换局内选项框以及光标',
@@ -10887,7 +10917,6 @@ export default async function() {
 		package: {
 			intro: '二改萌修十周年UI,有问题不要打扰萌新（转型中）' +
 				'<br>其他十周年特效请下载扩展《特效补充》' +
-				'<br>使用旧样式装备每局需打开一次新样式装备再关闭' +
 				'<br>https://github.com/diandian157' +
 				'<br>' +
 				'<br>您仍可以再次创作并分享，但是禁止售卖盈利',
