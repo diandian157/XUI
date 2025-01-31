@@ -3718,25 +3718,6 @@ export default async function() {
 							if (player2.node.seat) player2.node.seat.innerHTML = get.cnNumber(
 								player2.seat, true);
 						},
-						addOverDialog: function(dialog, result) {
-							var sprite = decadeUI.backgroundAnimation.current;
-							if (!(sprite && sprite.name == "skin_xiaosha_default")) return;
-
-							decadeUI.backgroundAnimation.canvas.style.zIndex = 7;
-							switch (result) {
-								case "战斗胜利":
-									sprite.scaleTo(1.8, 600);
-									sprite.setAction("shengli");
-									break;
-								case "平局":
-								case "战斗失败":
-									if (!duicfg.rightLayout) sprite.flipX = true;
-									sprite.moveTo([0, 0.5], [0, 0.25], 600);
-									sprite.scaleTo(2.5, 600);
-									sprite.setAction("gongji");
-									break;
-							}
-						},
 					};
 
 					ride.get = {
