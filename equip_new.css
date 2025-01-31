@@ -7,7 +7,8 @@
 	top: auto;
 }
 
-#arena[data-right-layout='on']>.equips-wrap {/*右手布局*/
+#arena[data-right-layout='on']>.equips-wrap {
+	/*右手布局*/
 	left: 0px;
 	right: auto;
 }
@@ -54,23 +55,23 @@
 	width: 100%;
 }
 
-.equips-wrap>.equips-back>div[data-type='0']{
+.equips-wrap>.equips-back>div[data-type='0'] {
 	background-image: url("image/decoration/equip1.png");
 }
 
-.equips-wrap>.equips-back>div[data-type='1']{
+.equips-wrap>.equips-back>div[data-type='1'] {
 	background-image: url("image/decoration/equip2.png");
 }
 
-.equips-wrap>.equips-back>div[data-type='2']{
+.equips-wrap>.equips-back>div[data-type='2'] {
 	background-image: url("image/decoration/equip3.png");
 }
 
-.equips-wrap>.equips-back>div[data-type='3']{
+.equips-wrap>.equips-back>div[data-type='3'] {
 	background-image: url("image/decoration/equip4.png");
 }
 
-.equips-wrap>.equips-back>div[data-type='4']{
+.equips-wrap>.equips-back>div[data-type='4'] {
 	background-image: url("image/decoration/equip5.png");
 }
 

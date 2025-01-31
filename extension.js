@@ -433,12 +433,12 @@ export default async function() {
 					var dskinPath = dskin.appendChild(document.createElementNS(SVG_NS, "path"));
 					soloPath.setAttribute("d",
 						"M0 0 H1 Q1 0.05 0.9 0.06 Q1 0.06 1 0.11 V1 H0 V0.11 Q0 0.06 0.1 0.06 Q0 0.05 0 0 Z"
-						);
+					);
 					duoLPath.setAttribute("d", "M1 0 H0 Q0 0.06 0.15 0.06 Q0 0.06 0 0.11 V1 H1 Z");
 					duoRPath.setAttribute("d", "M0 0 H1 Q1 0.06 0.85 0.06 Q1 0.06 1 0.11 V1 H0 Z");
 					dskinPath.setAttribute("d",
 						"M0 0 H1 Q1 0.1 0.94 0.1 Q0.985 0.1 1 0.13 V1 H0 V0.14 Q0 0.11 0.06 0.1 Q0 0.1 0 0 Z"
-						);
+					);
 
 					document.addEventListener(
 						"click",
@@ -659,7 +659,7 @@ export default async function() {
 											//不同属性的【杀】的图片素材
 											//仅针对单一属性【杀】
 											if (Array.isArray(card) && card[2] == "sha" && card[
-												3] && !Array.isArray(card[3])) {
+													3] && !Array.isArray(card[3])) {
 												filename += "_";
 												filename += get.natureList(card[3]).sort(lib.sort
 													.nature).join("_");
@@ -699,9 +699,9 @@ export default async function() {
 															asset.loaded = false;
 															image.onerror = undefined;
 															card.style.background = asset
-															.rawUrl;
+																.rawUrl;
 															card.classList.remove(
-															"decade-card");
+																"decade-card");
 														};
 
 														asset.url = url;
@@ -1012,11 +1012,11 @@ export default async function() {
 												});
 											} else {
 												player.marks[id] = player.markCharacter(
-												target, {
-													name: name,
-													content: content,
-													id: id,
-												});
+													target, {
+														name: name,
+														content: content,
+														id: id,
+													});
 												game.addVideo("markCharacter", player, {
 													name: name,
 													content: content,
@@ -1159,7 +1159,7 @@ export default async function() {
 										}
 									}
 									if (lib.config.background_speak && lib.quickVoice.indexOf(
-										str) != -1) {
+											str) != -1) {
 										game.playAudio("voice", this.sex == "female" ? "female" :
 											"male", lib.quickVoice.indexOf(str));
 									}
@@ -1170,7 +1170,7 @@ export default async function() {
 									if (!this.marks[name]) {
 										if (lib.skill[name] && lib.skill[name].intro && (this
 												.storage[name] || lib.skill[name].intro.markcount
-												)) {
+											)) {
 											this.markSkill(name);
 											if (!this.marks[name]) return this;
 										} else {
@@ -1369,7 +1369,7 @@ export default async function() {
 											if (skin.speed == undefined) skin.speed = 1;
 											this.playDynamic({
 													name: skin
-													.name, //	string 骨骼文件名，一般是assets/dynamic 下的动皮文件，也可以使用.. 来寻找其他文件目录
+														.name, //	string 骨骼文件名，一般是assets/dynamic 下的动皮文件，也可以使用.. 来寻找其他文件目录
 													action: skin.action, // string 播放动作 不填为默认
 													loop: true, // boolean 是否循环播放
 													loopCount: -1, // number 循环次数，只有loop为true时生效
@@ -1386,9 +1386,9 @@ export default async function() {
 													scale: skin.scale, // 缩放
 													angle: skin.angle, // 角度
 													hideSlots: skin
-													.hideSlots, // 隐藏不需要的部件，想知道具体部件名称请使用SpineAltasSplit工具查看
+														.hideSlots, // 隐藏不需要的部件，想知道具体部件名称请使用SpineAltasSplit工具查看
 													clipSlots: skin
-													.clipSlots, // 剪掉超出头的部件，仅针对露头动皮，其他勿用
+														.clipSlots, // 剪掉超出头的部件，仅针对露头动皮，其他勿用
 												},
 												i == 1
 											);
@@ -1438,7 +1438,7 @@ export default async function() {
 											this.node.hpWrap.appendChild(hujiat);
 										}
 										hujiat.innerText = this.hujia == Infinity ? "∞" : this
-										.hujia;
+											.hujia;
 									} else if (hujiat) hujiat.remove();
 									//体力条显示修改
 									const hidden = this.classList.contains("unseen_show") || this
@@ -1683,7 +1683,7 @@ export default async function() {
 										num, init, config);
 									// 添加摸牌音效
 									game.playAudio('..', 'extension', '十周年UI',
-									'audio/GameShowCard');
+										'audio/GameShowCard');
 
 									if (init !== false && init !== 'nobroadcast') {
 										game.broadcast(function(player, num, init, config) {
@@ -1916,7 +1916,7 @@ export default async function() {
 									const sum = Array.from(player.node.equips.childNodes).filter(
 										card => {
 											return ![1, 2, 3, 4, 5].includes(get.equipNum(
-											card));
+												card));
 										}).length;
 									const current = Array.from(ui.equipSolts.back.children).filter(
 										elements => {
@@ -2032,9 +2032,9 @@ export default async function() {
 										if (record !== "nobroadcast") {
 											game.broadcast(
 												function(player, cards, time, record,
-												nosource) {
+													nosource) {
 													player.$throw(cards, time, record,
-													nosource);
+														nosource);
 												},
 												this,
 												cards,
@@ -2051,7 +2051,7 @@ export default async function() {
 
 									cards.sort(function(a, b) {
 										if (a.tx == undefined && b.tx == undefined)
-									return 0;
+											return 0;
 										if (a.tx == undefined) return duicfg.rightLayout ? -
 											1 : 1;
 										if (b.tx == undefined) return duicfg.rightLayout ?
@@ -2223,12 +2223,12 @@ export default async function() {
 									}
 									if (event.skill) {
 										if (player.stat[player.stat.length - 1].skill[event
-											.skill] == undefined) {
+												.skill] == undefined) {
 											player.stat[player.stat.length - 1].skill[event.skill] =
 												1;
 										} else {
 											player.stat[player.stat.length - 1].skill[event
-											.skill]++;
+												.skill]++;
 										}
 										var sourceSkill = get.info(event.skill).sourceSkill;
 										if (sourceSkill) {
@@ -2290,7 +2290,7 @@ export default async function() {
 										for (var i of cards) {
 											var owner = get.owner(i, "judge");
 											if (owner && (owner != player || get.position(i) !=
-												"h")) {
+													"h")) {
 												var id = owner.playerid;
 												if (!map[id]) map[id] = [
 													[],
@@ -2488,8 +2488,7 @@ export default async function() {
 									}
 									player.judging.unshift(cardj);
 									game.addVideo("judge1", player, [get.cardInfo(player.judging[
-										0]), judgestr, event.videoId
-									]);
+										0]), judgestr, event.videoId]);
 									game.broadcastAll(
 										function(player, card /*, str*/ , id, cardid) {
 											var event = game.online ? {} : _status.event;
@@ -2698,7 +2697,7 @@ export default async function() {
 														.position.firstChild);
 												} else {
 													if (event.position == ui.cardPile) cardx[j]
-													.fix();
+														.fix();
 													event.position.appendChild(cardx[j]);
 												}
 											} else {
@@ -3112,7 +3111,7 @@ export default async function() {
 									.update;
 								if (!notouchscroll) {
 									dialog.contentContainer.ontouchstart = ui.click
-									.dialogtouchStart;
+										.dialogtouchStart;
 									dialog.contentContainer.ontouchmove = ui.click.touchScroll;
 									dialog.contentContainer.style.WebkitOverflowScrolling = "touch";
 									dialog.ontouchstart = ui.click.dragtouchdialog;
@@ -3274,7 +3273,7 @@ export default async function() {
 													(_status.connectMode || (_status
 														.connectMode ? lib.configOL
 														.double_hp : get.config("double_hp")
-														) == "pingjun"));
+													) == "pingjun"));
 											var str = get.numStr(hp / (check ? 2 : 1));
 											if (hp != maxHp) {
 												str += "/";
@@ -3395,8 +3394,8 @@ export default async function() {
 								if (ui.intro) return;
 								_status.clicked = true;
 								if (this.parentNode && (this.parentNode.classList.contains(
-										"judges") || this.parentNode.classList.contains("dui-marks")
-										)) {
+										"judges") || this.parentNode.classList.contains(
+										"dui-marks"))) {
 									if (!(e && e instanceof MouseEvent)) {
 										var rect = this.getBoundingClientRect();
 										e = {
@@ -3585,7 +3584,7 @@ export default async function() {
 									node.source = targets;
 									player = targets;
 									if (!player.isUnseen(0)) avatar = player.node.avatar
-								.cloneNode();
+										.cloneNode();
 									else if (!player.isUnseen(1)) avatar = player.node.avatar2
 										.cloneNode();
 									else if (get.mode() == "guozhan" && player.node && player.node
@@ -3843,7 +3842,7 @@ export default async function() {
 							cardnature = get.nature(cardskb);
 						}
 						if (card.name !== cardname || !get.is.sameNature(card.nature, cardnature,
-							true)) {
+								true)) {
 							if (lib.config.extension_十周年UI_showTemp) {
 								if (!card._tempName) card._tempName = ui.create.div(".temp-name", card);
 								let tempname = "",
@@ -4442,7 +4441,7 @@ export default async function() {
 												filename = "qianfeng";
 											} else if (get.mode() == "versus" && get
 												.translation(player.side + "Color") == "wei"
-												) {
+											) {
 												filename += "_blue";
 												this.player.classList.add("opposite-camp");
 												checked = true;
@@ -4529,7 +4528,7 @@ export default async function() {
 										if (lib.config.extension_十周年UI_newDecadeStyle ==
 											"on" || lib.config
 											.extension_十周年UI_newDecadeStyle == "othersOff"
-											) {
+										) {
 											image.src = decadeUIPath +
 												"image/decoration/identity_" + filename +
 												".png";
@@ -4614,7 +4613,7 @@ export default async function() {
 									var sender = this;
 									if (!sender.skills) sender.skills = [];
 									if (!sender.skills.includes(skill) && lib.translate[
-										skill]) {
+											skill]) {
 										//var info = lib.skill[skill];
 										//if (!info || info.charlotte || info.sub || (info.mark && !info.limited) || (info.nopop || info.popup === false)) return;
 										//if (info.onremove && game.me != this.player.storage[skill]) return;
@@ -4626,7 +4625,7 @@ export default async function() {
 											if (lib.config.extension_十周年UI_newDecadeStyle ==
 												"on" || lib.config
 												.extension_十周年UI_newDecadeStyle == "othersOff"
-												) {
+											) {
 												html += "[" + lib.translate[sender.skills[i]] +
 													"]";
 											} else {
@@ -4648,7 +4647,7 @@ export default async function() {
 											if (lib.config.extension_十周年UI_newDecadeStyle ==
 												"on" || lib.config
 												.extension_十周年UI_newDecadeStyle == "othersOff"
-												) {
+											) {
 												html += "[" + lib.translate[sender.skills[i]] +
 													"]";
 											} else {
@@ -5377,7 +5376,7 @@ export default async function() {
 												if (ifo.viewAs && typeof ifo.viewAs != "function" && ifo
 													.viewAs.name == "wuxie") {
 													if (!ifo.viewAsFilter || ifo.viewAsFilter(
-														current)) {
+															current)) {
 														num++;
 														break;
 													}
@@ -5524,7 +5523,7 @@ export default async function() {
 						if (!Array.isArray(skill)) {
 							const skills = ["name", "name1", "name2"].reduce((list, name) => {
 								if (this[name] && (name != "name1" || this.name != this
-									.name1)) {
+										.name1)) {
 									list.addArray(get.character(this[name], 3) || []);
 								}
 								return list;
@@ -5542,7 +5541,7 @@ export default async function() {
 						var skill = playerRemoveSkillFunction.apply(this, arguments);
 						if (!Array.isArray(skill)) {
 							if (this.node.gainSkill.skills && this.node.gainSkill.skills.includes(
-								skill)) {
+									skill)) {
 								this.node.gainSkill.lose(skill);
 							}
 						}
@@ -6072,7 +6071,7 @@ export default async function() {
 							},
 							drawRect: function(x, y, width, height, color, lineWidth) {
 								if (x == null || y == null || width == null || height == null)
-								throw "arguments";
+									throw "arguments";
 
 								var ctx = this.context;
 								ctx.beginPath();
@@ -6083,7 +6082,7 @@ export default async function() {
 								ctx.stroke();
 							},
 							drawText: function(text, font, color, x, y, textAlign, textBaseline,
-							stroke) {
+								stroke) {
 								if (!text) return;
 								if (x == null || y == null) throw "x or y";
 								var context = this.context;
@@ -7015,10 +7014,10 @@ export default async function() {
 										break;
 									case "juedou":
 										decadeUI.animation.cap.playSpineTo(card,
-										"SF_eff_jiangling_juedou", {
-											x: [10, 0.4],
-											scale: 1
-										});
+											"SF_eff_jiangling_juedou", {
+												x: [10, 0.4],
+												scale: 1
+											});
 										break;
 									case "nanman":
 										decadeUI.animation.cap.playSpineTo(card, "effect_nanmanruqin", {
@@ -7256,7 +7255,7 @@ export default async function() {
 				},
 				getMapElementPos: function(elementFrom, elementTo) {
 					if (!(elementFrom instanceof HTMLElement) || !(elementTo instanceof HTMLElement))
-					return console.error("arguments");
+						return console.error("arguments");
 					var rectFrom = elementFrom.getBoundingClientRect();
 					var rectTo = elementTo.getBoundingClientRect();
 					var pos = {
@@ -7269,7 +7268,7 @@ export default async function() {
 				},
 				getPlayerIdentity: function(player, identity, chinese, isMark) {
 					if (!(player instanceof HTMLElement && get.itemtype(player) == "player"))
-				throw "player";
+						throw "player";
 					if (!identity) identity = player.identity;
 
 					var mode = get.mode();
@@ -8694,7 +8693,8 @@ export default async function() {
 				lib.skill._jindutiaoA = {
 					trigger: {
 						player: ['useCardBegin', 'respondBegin', 'chooseToRespondBegin', 'damageEnd',
-							'judgeEnd'],
+							'judgeEnd'
+						],
 					},
 					silent: true,
 					forced: true,
@@ -10713,7 +10713,7 @@ export default async function() {
 									cardnature = get.nature(cardskb);
 								}
 								if (card.name != cardname || !get.is.sameNature(card.nature, cardnature,
-									true)) {
+										true)) {
 									if (bool) {
 										if (!card._tempName) card._tempName = ui.create.div('.temp-name', card);
 										let tempname = '',

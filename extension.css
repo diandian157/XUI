@@ -3,15 +3,18 @@
 	font-family: "HYZLSJ";
 	src: url("./shoushaUI/fonts/HYZLSJ.woff2");
 }
+
 /* 用于武将字体 */
 @font-face {
 	font-family: "WDZLFT";
 	src: url("./shoushaUI/fonts/WDZLFT.woff2");
 }
+
 @font-face {
 	font-family: "FZLBJW";
 	src: url("./shoushaUI/fonts/FZLBJW.woff2");
 }
+
 /* 用于角色弹框标题的字体 */
 @font-face {
 	font-family: "ATLL";
@@ -22,7 +25,8 @@
 	font-family: "FZLSFT";
 	src: url("./shoushaUI/fonts/FZLSFT.woff2");
 }
-.menu-container > .menu.main.cxy-import-dialog {
+
+.menu-container>.menu.main.cxy-import-dialog {
 	top: 50% !important;
 	left: 50% !important;
 	width: 420px;
@@ -30,7 +34,8 @@
 	padding: 15px;
 	transform: translate(-50%, -50%);
 }
-.menu.main.cxy-import-dialog > .caption {
+
+.menu.main.cxy-import-dialog>.caption {
 	padding-top: 0;
 	padding-bottom: 8px;
 }
@@ -44,43 +49,53 @@
 	width: calc(90% - 480px);
 	pointer-events: none;
 }
-#control > * {
+
+#control>* {
 	pointer-events: auto;
 }
+
 #window:not(.nopointer) #control {
 	cursor: pointer;
 }
-#control.nozoom > div {
+
+#control.nozoom>div {
 	transition-property: opacity;
 }
-#control > div.stayleft {
+
+#control>div.stayleft {
 	transition-property: opacity !important;
 }
+
 .control {
 	padding-top: 2px;
 	padding-bottom: 2px;
 	padding-left: 4px;
 	padding-right: 4px;
 }
+
 .control {
 	font-size: 18px;
 	white-space: nowrap;
 	overflow: hidden;
 	opacity: 0;
 }
+
 .control.removing.removing2 {
 	transform: scale(0.2);
 }
-.control > div {
+
+.control>div {
 	position: relative;
 	padding: 3px;
 	margin: 0;
 }
+
 .control.disabled {
 	opacity: 1 !important;
 	cursor: default !important;
 }
-#control > div {
+
+#control>div {
 	position: absolute;
 	left: 50%;
 }
@@ -158,7 +173,7 @@
 .JDTSSM,
 .GTBBSM,
 .JMYSSM,
-.QTMHSM > .shousha_text {
+.QTMHSM>.shousha_text {
 	text-align: left;
 	font-size: 14px;
 	width: 250px;
@@ -170,7 +185,7 @@
 	background-size: cover;
 }
 
-.shousha_update > .shousha_update_close {
+.shousha_update>.shousha_update_close {
 	z-index: 999;
 	position: fixed;
 	overflow: hidden;
@@ -198,6 +213,7 @@
 	background-size: contain;
 	z-index: 1;
 }
+
 .nmscore2 {
 	/*手牌分个位*/
 	display: block;
@@ -210,6 +226,7 @@
 	background-size: contain;
 	z-index: 1;
 }
+
 .nmcardscore {
 	/*手牌分背景*/
 	display: block;

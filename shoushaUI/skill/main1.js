@@ -1,30 +1,29 @@
-app.import(function (lib, game, ui, get, ai, _status, app) {
+app.import(function(lib, game, ui, get, ai, _status, app) {
 	var plugin = {
 		name: 'skill',
-		filter: function () {
+		filter: function() {
 			return !['chess', 'tafang'].includes(get.mode());
 		},
-		content: function (next) {
-		},
-		precontent: function () {
+		content: function(next) {},
+		precontent: function() {
 
 			Object.assign(ui.create, {
-				skills: function (skills) {
+				skills: function(skills) {
 					ui.skills = plugin.createSkills(skills, ui.skills);
 					ui.skillControl.update();
 					return ui.skills;
 				},
-				skills2: function (skills) {
+				skills2: function(skills) {
 					ui.skills2 = plugin.createSkills(skills, ui.skills2);
 					ui.skillControl.update();
 					return ui.skills2;
 				},
-				skills3: function (skills) {
+				skills3: function(skills) {
 					ui.skills3 = plugin.createSkills(skills, ui.skills3);
 					ui.skillControl.update();
 					return ui.skills3;
 				},
-				skillControl: function (clear) {
+				skillControl: function(clear) {
 					if (!ui.skillControl) {
 						var node = ui.create.div('.skill-control', ui.arena);
 						node.node = {
@@ -45,9 +44,9 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 			});
 
 			Object.assign(ui, {
-				updateSkillControl: function (player, clear) {
+				updateSkillControl: function(player, clear) {
 					var eSkills = player.getSkills('e', true, false).slice(0);
-					var skills = app.get.playerSkills(player, true);/*国战隐匿技能*/
+					var skills = app.get.playerSkills(player, true); /*国战隐匿技能*/
 					if (ui.skills2 && ui.skills2.skills.length) {
 						var gSkills = ui.skills2.skills
 					}
@@ -59,7 +58,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 
 					var iSkills = player.invisibleSkills.slice(0);
 					game.expandSkills(iSkills);
-					skills.addArray(iSkills.filter(function (skill) {
+					skills.addArray(iSkills.filter(function(skill) {
 						var info = get.info(skill);
 						return info && info.enable;
 					}));
@@ -74,40 +73,43 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 
 					var juexingji = {};
 					var xiandingji = {};
-					app.get.playerSkills(player).forEach(function (skill) {
+					app.get.playerSkills(player).forEach(function(skill) {
 						var info = get.info(skill);
 						if (!info) return;
-						if (get.is.zhuanhuanji(skill, player) || info.limited || (info.intro && info.intro.content === 'limited')) {
-							xiandingji[skill] = player.awakenedSkills.includes(skill);
+						if (get.is.zhuanhuanji(skill, player) || info.limited || (
+								info.intro && info.intro.content === 'limited')) {
+							xiandingji[skill] = player.awakenedSkills.includes(
+								skill);
 						}
-						if (info.juexingji || info.dutySkill) juexingji[skill] = player.awakenedSkills.includes(skill);
+						if (info.juexingji || info.dutySkill) juexingji[skill] =
+							player.awakenedSkills.includes(skill);
 					});
 					plugin.updateSkillMarks(player, xiandingji, juexingji);
 				},
 			});
 
 			app.reWriteFunction(lib.element.player, {
-				addSkill: [null, function () {
+				addSkill: [null, function() {
 					ui.updateSkillControl(this);
 				}],
-				removeSkill: [null, function () {
+				removeSkill: [null, function() {
 					ui.updateSkillControl(this, true);
 				}],
-				addSkillTrigger: [null, function () {
+				addSkillTrigger: [null, function() {
 					ui.updateSkillControl(this);
 				}],
-				removeSkillTrigger: [null, function () {
+				removeSkillTrigger: [null, function() {
 					ui.updateSkillControl(this, true);
 				}],
-				awakenSkill: [null, function () {
+				awakenSkill: [null, function() {
 					ui.updateSkillControl(this);
 				}],
-				restoreSkill: [null, function () {
+				restoreSkill: [null, function() {
 					ui.updateSkillControl(this);
 				}],
 			});
 			app.reWriteFunction(lib.element.control, {
-				close: [null, function () {
+				close: [null, function() {
 					if (this.classList.contains('skillControl')) {
 						ui.skillControl.update();
 					}
@@ -115,7 +117,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 			});
 
 			app.reWriteFunction(game, {
-				loop: [function () {
+				loop: [function() {
 					if (game.boss && !ui.skillControl) {
 						ui.updateSkillControl(game.me);
 					}
@@ -123,37 +125,37 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 						ui.skillControl.update();
 					}
 				}, null],
-				swapControl: [null, function () {
+				swapControl: [null, function() {
 					ui.updateSkillControl(game.me, true);
 				}],
-				swapPlayer: [null, function () {
+				swapPlayer: [null, function() {
 					ui.updateSkillControl(game.me, true);
 				}],
 			});
 
 			Object.assign(game.videoContent, {
-				updateSkillControl: function (player, clear) {
+				updateSkillControl: function(player, clear) {
 					ui.updateSkillControl(player, clear);
 				},
 			});
 			ui.skillControlArea = ui.create.div();
 		},
 		controlElement: {
-			add: function (skill, eSkills) {
+			add: function(skill, eSkills) {
 				if (Array.isArray(skill)) {
 					var node = this;
-					skill.forEach(function (item) {
+					skill.forEach(function(item) {
 						node.add(item, eSkills);
 					});
 					return this;
 				}
 
 				var self = this;
-				var skills = game.expandSkills([skill]).map(function (item) {
+				var skills = game.expandSkills([skill]).map(function(item) {
 					return app.get.skillInfo(item);
 				});
 				var hasSame = false;
-				var enableSkills = skills.filter(function (item) {
+				var enableSkills = skills.filter(function(item) {
 					if (item.type !== 'enable') return false;
 					if (item.name === skills[0].name) hasSame = true;
 					return true;
@@ -161,11 +163,13 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 
 				if (!hasSame) enableSkills.unshift(skills[0]);
 				var showSkills = enableSkills.length ? enableSkills : skills;
-				showSkills.forEach(function (item) {
+				showSkills.forEach(function(item) {
 					var node = self.querySelector('[data-id="' + item.id + '"]');
 					if (node) return;
 					if (item.type === 'enable') {
-						node = ui.create.div(lib.skill[item.id].limited ? '.xiandingji' : '.skillitem', self.node.enable, get.translation(item.name)/*.slice(0, 2)*/); //咸鱼大佬提供代码
+						node = ui.create.div(lib.skill[item.id].limited ? '.xiandingji' :
+							'.skillitem', self.node.enable, get.translation(item
+							.name) /*.slice(0, 2)*/ ); //咸鱼大佬提供代码
 						node.dataset.id = item.id;
 						app.listen(node, plugin.clickSkill);
 						return;
@@ -178,13 +182,13 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 				});
 				return this;
 			},
-			update: function () {
+			update: function() {
 				var skills = [];
 				if (ui.skills) skills.addArray(ui.skills.skills);
 				if (ui.skills2) skills.addArray(ui.skills2.skills);
 				if (ui.skills3) skills.addArray(ui.skills3.skills);
 
-				Array.from(this.node.enable.childNodes).forEach(function (item) {
+				Array.from(this.node.enable.childNodes).forEach(function(item) {
 
 					if (skills.includes(item.dataset.id)) {
 						item.classList.add('usable');
@@ -201,28 +205,28 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 				});
 
 				var level1 = Math.min(4, this.node.trigger.childNodes.length);
-				var level2 = this.node.enable.childNodes.length > 2
-					? 4 : this.node.enable.childNodes.length > 0
-						? 2 : 0;
+				var level2 = this.node.enable.childNodes.length > 2 ?
+					4 : this.node.enable.childNodes.length > 0 ?
+					2 : 0;
 				var level = Math.max(level1, level2);
 				ui.arena.dataset.sclevel = level;
 			},
 		},
-		checkSkill: function (skill) {
+		checkSkill: function(skill) {
 
 			var info = lib.skill[skill];
 			if (!info) return -1;
 			if (info.enable) return 1;
 			return 0;
 		},
-		clickSkill: function (e) {
+		clickSkill: function(e) {
 			if (this.classList.contains('usable')) {
 				var skill = this.dataset.id;
 				var item = ui.skillControlArea.querySelector('[data-id="' + skill + '"]');
 				item && app.mockTouch(item);
 			}
 		},
-		createSkills: function (skills, node) {
+		createSkills: function(skills, node) {
 			var same = true;
 			if (node) {
 				if (skills && skills.length) {
@@ -241,23 +245,24 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 
 			node = ui.create.div('.control.skillControl', ui.skillControlArea);
 			Object.assign(node, lib.element.control);
-			skills.forEach(function (skill) {
+			skills.forEach(function(skill) {
 				var item = ui.create.div(node);
 				item.link = skill;
 				item.dataset.id = skill;
-				item.addEventListener(lib.config.touchscreen ? 'touchend' : 'click', ui.click.control);
+				item.addEventListener(lib.config.touchscreen ? 'touchend' : 'click', ui.click
+					.control);
 			});
 			node.skills = skills;
 			node.custom = ui.click.skill;
 			return node;
 		},
-		updateSkillMarks: function (player, skills1, skills2) {
+		updateSkillMarks: function(player, skills1, skills2) {
 			var node = player.node.xSkillMarks;
 			if (!node) {
 				node = player.node.xSkillMarks = ui.create.div('.skillMarks', player);
 			}
 
-			Array.from(node.childNodes).forEach(function (item) {
+			Array.from(node.childNodes).forEach(function(item) {
 				if (skills1.hasOwnProperty(item.dataset.id)) return;
 				if (skills2[item.dataset.id]) return;
 				item.remove();
@@ -276,7 +281,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 				item.dataset.id = k;
 			}
 			//这里结束3}
-			Array.from(node.querySelectorAll('.juexingji')).forEach(function (item) {
+			Array.from(node.querySelectorAll('.juexingji')).forEach(function(item) {
 				if (!skills2[item.dataset.id]) {
 					item.remove();
 				}
@@ -294,12 +299,12 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 			}
 
 		},
-		recontent: function () {
+		recontent: function() {
 			app.reWriteFunction(ui.create, {
-				dialog: [null, function (dialog) {
+				dialog: [null, function(dialog) {
 					dialog.classList.add('xdialog');
 					app.reWriteFunction(dialog, {
-						hide: [null, function () {
+						hide: [null, function() {
 							app.emit('dialog:change', dialog);
 						}],
 					});
@@ -307,10 +312,10 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 			});
 
 			app.reWriteFunction(lib.element.dialog, {
-				open: [null, function () {
+				open: [null, function() {
 					app.emit('dialog:change', this);
 				}],
-				close: [null, function () {
+				close: [null, function() {
 					app.emit('dialog:change', this);
 				}],
 			});
@@ -319,7 +324,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 
 
 
-				markSkill: [function (args, name) {
+				markSkill: [function(args, name) {
 					var info = lib.skill[name];
 					if (!info) return;
 					if (info.limited) return this;
@@ -330,21 +335,21 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 
 
 			app.reWriteFunction(lib.configMenu.appearence.config, {
-				update: [null, function (res, config, map) {
+				update: [null, function(res, config, map) {
 					map.button_press.hide();
 				}],
 			});
 
-			app.on('playerUpdateE', function (player) {
+			app.on('playerUpdateE', function(player) {
 				plugin.updateMark(player);
 			});
 		},
 		element: {
 			mark: {
-				delete: function () {
+				delete: function() {
 					this.remove();
 				},
-				setName: function (name) {
+				setName: function(name) {
 					name = get.translation(name) || name;
 					if (!name || !name.trim()) {
 						this.classList.add('unshow');
@@ -355,7 +360,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 					}
 					return this;
 				},
-				setCount: function (count) {
+				setCount: function(count) {
 					if (typeof count === 'number') {
 						this.node.count.innerHTML = count;
 						this.node.count.classList.remove('unshow');
@@ -365,11 +370,11 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 					}
 					return this;
 				},
-				setExtra: function (extra) {
+				setExtra: function(extra) {
 					var str = '';
 
 					if (!Array.isArray(extra)) extra = [extra]
-					extra.forEach(function (item) {
+					extra.forEach(function(item) {
 						if (!item || typeof item !== 'string') return this;
 						if (item.indexOf('#') === 0) {
 							item = item.substr(1);
@@ -387,7 +392,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 					}
 					return this;
 				},
-				setBackground: function (name, type) {
+				setBackground: function(name, type) {
 					var skill = lib.skill[this.name];
 					if (skill && skill.intro && skill.intro.markExtra) return this;
 					if (type === 'character') {
@@ -397,7 +402,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 					}
 					return this;
 				},
-				_customintro: function (uiintro) {
+				_customintro: function(uiintro) {
 					var node = this;
 					var info = node.info;
 					var player = node.parentNode.parentNode;
@@ -417,7 +422,8 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 					if (typeof info.mark == 'function') {
 						var stint = info.mark(uiintro, player.storage[node.skill], player);
 						if (stint) {
-							var placetext = uiintro.add('<div class="text" style="display:inline">' + stint + '</div>');
+							var placetext = uiintro.add('<div class="text" style="display:inline">' +
+								stint + '</div>');
 							if (stint.indexOf('<div class="skill"') != 0) {
 								uiintro._place_text = placetext;
 							}
@@ -429,7 +435,8 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 							if (stint[0] == '@') {
 								uiintro.add('<div class="caption">' + stint.slice(1) + '</div>');
 							} else {
-								var placetext = uiintro.add('<div class="text" style="display:inline">' + stint + '</div>');
+								var placetext = uiintro.add(
+									'<div class="text" style="display:inline">' + stint + '</div>');
 								if (stint.indexOf('<div class="skill"') != 0) {
 									uiintro._place_text = placetext;
 								}
@@ -441,7 +448,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 			},
 		},
 		click: {
-			mark: function (e) {
+			mark: function(e) {
 				e.stopPropagation();
 				delete this._waitingfordrag;
 				if (_status.dragged) return;
@@ -456,7 +463,7 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 				_status.clicked = false;
 			},
 		},
-		updateMark: function (player) {
+		updateMark: function(player) {
 			var eh = player.node.equips.childNodes.length * 22;
 			var bv = Math.max(88, eh) * 0.8 + 1.6;
 			player.node.marks.style.bottom = bv + 'px';

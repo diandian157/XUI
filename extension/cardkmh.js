@@ -1,4 +1,11 @@
-import { lib, game, ui, get, ai, _status } from "../../../noname.js";
+import {
+	lib,
+	game,
+	ui,
+	get,
+	ai,
+	_status
+} from "../../../noname.js";
 
 export function cardkmh() {
 	var name = lib.config.extension_十周年UI_cardkmh;

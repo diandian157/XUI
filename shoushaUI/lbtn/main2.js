@@ -14,14 +14,14 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 			wenhao.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/CD/wenhaso.png";
 			wenhao.style.cssText =
 				"cursor: pointer;display: block;width: 40px;height: 29px;position: absolute;bottom: calc(100% - 30px);left: calc(100% - 590px);background-color: transparent;z-index:5";
-		
+
 			//--------------//
 			if (lib.config.mode == "identity" || lib.config.mode == "doudizhu" || lib.config.mode ==
 				"versus" || lib.config.mode == "guozhan") {
 				wenhao.onclick = function() {
 					var popuperContainer = ui.create.div(".popup-container", ui.window);
 					game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-		
+
 					if (lib.config.mode == "identity") {
 						if (game.me.identity == "zhu") {
 							ui.create.div(".Tipzhugong", popuperContainer);
@@ -40,11 +40,11 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 							ui.create.div(".Tipnongmin", popuperContainer);
 						}
 					}
-		
+
 					if (lib.config.mode == "versus") {
 						ui.create.div(".Tiphu", popuperContainer);
 					}
-		
+
 					if (lib.config.mode == "guozhan") {
 						if (game.me.group == "unknown" || game.me.group == "undefined") {
 							//未选择身份势力
@@ -269,7 +269,7 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 						item.link = skills[i];
 						item.innerHTML = get.translation(skills[i]);
 						item.addEventListener(lib.config.touchscreen ? 'touchend' : 'click', function(
-						e) {
+							e) {
 							e.stopPropagation();
 							ui.click.skill(this.link);
 						});
@@ -323,197 +323,199 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 					var node63 = ui.create.div('.bujianbjButton_new', ui.arena);
 					var node623 = ui.create.div('.bujianSbjButton_new', ui.arena);
 					var node633 = ui.create.div('.fanhuibjButton_new', ui.arena);
-					var node6 = ui.create.div('.huanfuButton_new', ui.arena, function(){
-					    game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
-					    ui.click.auto();
+					var node6 = ui.create.div('.huanfuButton_new', ui.arena, function() {
+						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
+						ui.click.auto();
 					});
-					var node61 = ui.create.div('.huanfuButton1_new', ui.arena, function(){
-					    game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
-					    ui.click.auto();
+					var node61 = ui.create.div('.huanfuButton1_new', ui.arena, function() {
+						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
+						ui.click.auto();
 					});
-					var node7 = ui.create.div('.jiluButton_new', ui.arena, function(){
-					    game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
-					    ui.click.pause();
+					var node7 = ui.create.div('.jiluButton_new', ui.arena, function() {
+						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
+						ui.click.pause();
 					});
 					var node8 = ui.create.div('.meiguiButton_new', ui.arena);
 					// 背景图片列表
 					var backgroundList = [
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/新十周年.jpg',
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/上兵伐谋.jpg',
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/一将成名.jpg',
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/旧十周年.jpg',
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/周年华灯.jpg',
-					    // 可以继续添加更多背景
+						'extension/十周年UI/shoushaUI/lbtn/images/background/新十周年.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/上兵伐谋.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/一将成名.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/旧十周年.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/周年华灯.jpg',
+						// 可以继续添加更多背景
 					];
-					
+
 					// 当前背景索引
 					var currentBgIndex = 0;
-					
+
 					// 添加更换背景功能
 					node8.listen(function(e) {
-					    e.stopPropagation();
-					    
+						e.stopPropagation();
+
 						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-						
-					    // 切换到下一个背景
-					    currentBgIndex = (currentBgIndex + 1) % backgroundList.length;
-					    
-					    // 更新背景
-					    ui.background.style.backgroundImage = `url('${backgroundList[currentBgIndex]}')`;
-					    
-					    // 保存当前背景设置
-					    game.saveConfig('background', currentBgIndex);
+
+						// 切换到下一个背景
+						currentBgIndex = (currentBgIndex + 1) % backgroundList.length;
+
+						// 更新背景
+						ui.background.style.backgroundImage =
+							`url('${backgroundList[currentBgIndex]}')`;
+
+						// 保存当前背景设置
+						game.saveConfig('background', currentBgIndex);
 					});
 					var node81 = ui.create.div('.meiguiButton1_new', ui.arena);
 					// 背景图片列表
 					var backgroundList = [
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/新十周年.jpg',
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/上兵伐谋.jpg',
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/一将成名.jpg',
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/旧十周年.jpg',
-					    'extension/十周年UI/shoushaUI/lbtn/images/background/周年华灯.jpg',
-					    // 可以继续添加更多背景
+						'extension/十周年UI/shoushaUI/lbtn/images/background/新十周年.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/上兵伐谋.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/一将成名.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/旧十周年.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/周年华灯.jpg',
+						// 可以继续添加更多背景
 					];
-					
+
 					// 当前背景索引
 					var currentBgIndex = 0;
-					
+
 					// 添加更换背景功能
 					node81.listen(function(e) {
-					    e.stopPropagation();
-					    
-					    // 播放音效
-					    game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-					    
-					    // 切换到下一个背景
-					    currentBgIndex = (currentBgIndex + 1) % backgroundList.length;
-					    
-					    // 更新背景
-					    ui.background.style.backgroundImage = `url('${backgroundList[currentBgIndex]}')`;
-					    
-					    // 保存当前背景设置
-					    game.saveConfig('background', currentBgIndex);
+						e.stopPropagation();
+
+						// 播放音效
+						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
+
+						// 切换到下一个背景
+						currentBgIndex = (currentBgIndex + 1) % backgroundList.length;
+
+						// 更新背景
+						ui.background.style.backgroundImage =
+							`url('${backgroundList[currentBgIndex]}')`;
+
+						// 保存当前背景设置
+						game.saveConfig('background', currentBgIndex);
 					});
 					var node9 = ui.create.div('.xiaolianButton_new', ui.arena);
 					// 添加打开武将资料卡功能
 					node9.listen(function(e) {
-					    e.stopPropagation();
-					    
+						e.stopPropagation();
+
 						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-						
-					    // 打开武将资料卡
-					    if (game.me && game.me.name && game.me.name2) {
-					        // 双将模式
-					        var name1 = game.me.name;
-					        var name2 = game.me.name2;
-					        ui.click.charactercard(name1, null, null, true);
-					        setTimeout(() => {
-					            ui.click.charactercard(name2, null, null, true);
-					        }, 100);
-					    } else if (game.me && game.me.name) {
-					        // 单将模式
-					        var name = game.me.name;
-					        ui.click.charactercard(name, null, null, true);
-					    }
+
+						// 打开武将资料卡
+						if (game.me && game.me.name && game.me.name2) {
+							// 双将模式
+							var name1 = game.me.name;
+							var name2 = game.me.name2;
+							ui.click.charactercard(name1, null, null, true);
+							setTimeout(() => {
+								ui.click.charactercard(name2, null, null, true);
+							}, 100);
+						} else if (game.me && game.me.name) {
+							// 单将模式
+							var name = game.me.name;
+							ui.click.charactercard(name, null, null, true);
+						}
 					});
 					var node91 = ui.create.div('.xiaolianButton1_new', ui.arena);
 					// 添加打开武将资料卡功能
 					node91.listen(function(e) {
-					    e.stopPropagation();
-					    
+						e.stopPropagation();
+
 						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-						
-					    // 打开武将资料卡
-					    if (game.me && game.me.name && game.me.name2) {
-					        // 双将模式
-					        var name1 = game.me.name;
-					        var name2 = game.me.name2;
-					        ui.click.charactercard(name1, null, null, true);
-					        setTimeout(() => {
-					            ui.click.charactercard(name2, null, null, true);
-					        }, 100);
-					    } else if (game.me && game.me.name) {
-					        // 单将模式
-					        var name = game.me.name;
-					        ui.click.charactercard(name, null, null, true);
-					    }
+
+						// 打开武将资料卡
+						if (game.me && game.me.name && game.me.name2) {
+							// 双将模式
+							var name1 = game.me.name;
+							var name2 = game.me.name2;
+							ui.click.charactercard(name1, null, null, true);
+							setTimeout(() => {
+								ui.click.charactercard(name2, null, null, true);
+							}, 100);
+						} else if (game.me && game.me.name) {
+							// 单将模式
+							var name = game.me.name;
+							ui.click.charactercard(name, null, null, true);
+						}
 					});
 					var node61 = ui.create.div('.juliButton_new', ui.arena);
 					var node72 = ui.create.div('.luxiangButton_new', ui.arena);
 					// 添加打开选项功能
 					node72.listen(function(e) {
-					    e.stopPropagation();
-					    
+						e.stopPropagation();
+
 						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-						
-					    // 直接打开游戏选项
-					    ui.click.configMenu();
-					    // 或者使用
-					    // game.pause2();
+
+						// 直接打开游戏选项
+						ui.click.configMenu();
+						// 或者使用
+						// game.pause2();
 					});
 					var node712 = ui.create.div('.luxiangButton1_new', ui.arena);
 					// 添加打开选项功能
 					node712.listen(function(e) {
-					    e.stopPropagation();
-					    
+						e.stopPropagation();
+
 						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-						
-					    // 直接打开游戏选项
-					    ui.click.configMenu();
-					    // 或者使用
-					    // game.pause2();
+
+						// 直接打开游戏选项
+						ui.click.configMenu();
+						// 或者使用
+						// game.pause2();
 					});
 					var node83 = ui.create.div('.touxiangButton_new', ui.arena);
 					// 添加投降功能
 					node83.listen(function(e) {
-					    e.stopPropagation();
-					    
-					    // 播放音效
-					    game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-					    
-					    // 直接投降
-					    game.over(false);
+						e.stopPropagation();
+
+						// 播放音效
+						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
+
+						// 直接投降
+						game.over(false);
 					});
-					
+
 					// 添加按钮状态检查
 					game.checkSurrenderButton = function() {
-					    // 只在游戏进行中且为自己回合时可用
-					    if (game.me && game.me.isAlive() && !game.over) {
-					        node83.classList.remove('disabled');
-					        node83.style.opacity = '1';
-					    } else {
-					        node83.classList.add('disabled');
-					        node83.style.opacity = '0.5';
-					    }
+						// 只在游戏进行中且为自己回合时可用
+						if (game.me && game.me.isAlive() && !game.over) {
+							node83.classList.remove('disabled');
+							node83.style.opacity = '1';
+						} else {
+							node83.classList.add('disabled');
+							node83.style.opacity = '0.5';
+						}
 					};
 					var node813 = ui.create.div('.touxiang1Button_new', ui.arena);
 					// 添加重开功能
 					node813.listen(function(e) {
-					    e.stopPropagation();
-					    
-					    // 播放音效
-					    game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
-					    
-					    // 直接重新开始游戏
-					    game.reload();
+						e.stopPropagation();
+
+						// 播放音效
+						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
+
+						// 直接重新开始游戏
+						game.reload();
 					});
-					
+
 					// 添加按钮状态检查
 					game.checkRestartButton = function() {
-					    if (game.me && !game.over) {
-					        node813.classList.remove('disabled');
-					        node813.style.opacity = '1';
-					    } else {
-					        node813.classList.add('disabled');
-					        node813.style.opacity = '0.5';
-					    }
+						if (game.me && !game.over) {
+							node813.classList.remove('disabled');
+							node813.style.opacity = '1';
+						} else {
+							node813.classList.add('disabled');
+							node813.style.opacity = '0.5';
+						}
 					};
 					var node94 = ui.create.div('.huatongButton_new', ui.arena);
 					//---------------------//
 				}
 				var node4 = ui.create.div('.tuoguanButton', ui.arena, ui.click.auto);
 				var node = ui.create.div('.handcardNumber', ui.arena).hide();
-				
+
 				node.node = {
 					cardPicture: ui.create.div('.cardPicture', node),
 					cardNumber: ui.create.div('.cardNumber', node),
@@ -547,10 +549,10 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 			},
 			cardRoundTime: function() {
 				var node = ui.create.div('.cardRoundNumber', ui.arena);
-				node.listen(function(e){
-				    e.stopPropagation();
-				    game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
-				    ui.click.pause();
+				node.listen(function(e) {
+					e.stopPropagation();
+					game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
+					ui.click.pause();
 				});
 				node.hide();
 				node.node = {

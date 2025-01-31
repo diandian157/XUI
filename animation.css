@@ -2,6 +2,7 @@
 	from {
 		opacity: 0;
 	}
+
 	to {
 		opacity: 1;
 	}
@@ -11,6 +12,7 @@
 	from {
 		opacity: 1;
 	}
+
 	to {
 		opacity: 0;
 		transform: translateX(100%);
@@ -21,6 +23,7 @@
 	from {
 		transform: scale(0);
 	}
+
 	to {
 		transform: scale(1);
 	}
@@ -31,6 +34,7 @@
 		opacity: 0.1;
 		transform: scale(0.8);
 	}
+
 	to {
 		opacity: 1;
 		transform: scale(1);
@@ -42,6 +46,7 @@
 		opacity: 1;
 		transform: scale(1);
 	}
+
 	to {
 		opacity: 0;
 		transform: scale(0.8);
@@ -52,12 +57,14 @@
 	from {
 		left: 100%;
 	}
+
 	to {
 		left: -100%;
 	}
 }
 
 @keyframes player-died {
+
 	5%,
 	15%,
 	25%,
@@ -169,9 +176,11 @@
 	0% {
 		opacity: 0;
 	}
+
 	50% {
 		opacity: 0.2;
 	}
+
 	100% {
 		opacity: 0;
 	}
@@ -182,6 +191,7 @@
 		transform: rotate(-5deg);
 		transform-origin: top center;
 	}
+
 	100% {
 		transform: rotate(5deg);
 		transform-origin: top center;

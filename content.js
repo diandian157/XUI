@@ -1,7 +1,7 @@
 "use strict";
-decadeModule.import(function (lib, game, ui, get, ai, _status) {
+decadeModule.import(function(lib, game, ui, get, ai, _status) {
 	decadeUI.content = {
-		chooseGuanXing: function (player, cards1, movable1, cards2, movable2, infohide) {
+		chooseGuanXing: function(player, cards1, movable1, cards2, movable2, infohide) {
 			if (get.itemtype(player) != "player") throw player;
 			if (!cards1 && !cards2) throw arguments;
 
@@ -12,22 +12,28 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 				tip: undefined,
 				header1: undefined,
 				header2: undefined,
-				cards: [[], []],
+				cards: [
+					[],
+					[]
+				],
 				movables: [movable1 ? movable1 : 0, movable2 ? movable2 : 0],
 				selected: undefined,
 				callback: undefined,
 				infohide: undefined,
 				confirmed: undefined,
 				doubleSwitch: undefined,
-				orderCardsList: [[], []],
+				orderCardsList: [
+					[],
+					[]
+				],
 				finishing: undefined,
 				finished: undefined,
-				finishTime: function (time) {
+				finishTime: function(time) {
 					if (this.finishing || this.finished) return;
 					if (typeof time != "number") throw time;
 					this.finishing = true;
 					setTimeout(
-						function (dialog) {
+						function(dialog) {
 							dialog.finishing = false;
 							dialog.finish();
 						},
@@ -35,7 +41,7 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 						this
 					);
 				},
-				finish: function () {
+				finish: function() {
 					if (this.finishing || this.finished) return;
 					this.finishing = true;
 					if (this.callback) this.confirmed = this.callback.call(this);
@@ -49,7 +55,8 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 							cards[i].style.cssText = cards[i].rawCssText;
 							delete cards[i].rawCssText;
 
-							if (!this.callback) ui.cardPile.insertBefore(cards[i], ui.cardPile.firstChild);
+							if (!this.callback) ui.cardPile.insertBefore(cards[i], ui.cardPile
+								.firstChild);
 						}
 					}
 
@@ -68,10 +75,13 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 					_status.event.cards2 = this.cards[1];
 					_status.event.num1 = this.cards[0].length;
 					_status.event.num2 = this.cards[1].length;
-					if (_status.event.result) _status.event.result.bool = this.confirmed === true;
-					else _status.event.result = { bool: this.confirmed === true };
+					if (_status.event.result) _status.event.result.bool = this.confirmed ===
+						true;
+					else _status.event.result = {
+						bool: this.confirmed === true
+					};
 
-					game.broadcastAll(function () {
+					game.broadcastAll(function() {
 						if (!window.decadeUI && decadeUI.eventDialog) return;
 						decadeUI.eventDialog.close();
 						decadeUI.eventDialog.finished = true;
@@ -80,17 +90,19 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 					});
 					decadeUI.game.resume();
 				},
-				update: function () {
+				update: function() {
 					var x, y;
 					for (var i = 0; i < this.cards.length; i++) {
 						cards = this.cards[i];
 						if (this.orderCardsList[i].length) {
-							cards.sort(function (a, b) {
+							cards.sort(function(a, b) {
 								var aIndex = guanXing.orderCardsList[i].indexOf(a);
 								var bIndex = guanXing.orderCardsList[i].indexOf(b);
 
-								aIndex = aIndex >= 0 ? aIndex : guanXing.orderCardsList[i].length;
-								bIndex = bIndex >= 0 ? bIndex : guanXing.orderCardsList[i].length;
+								aIndex = aIndex >= 0 ? aIndex : guanXing.orderCardsList[
+									i].length;
+								bIndex = bIndex >= 0 ? bIndex : guanXing.orderCardsList[
+									i].length;
 								return aIndex - bIndex;
 							});
 						}
@@ -100,13 +112,14 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 							x = "calc(" + j * 100 + "% + " + j * 10 + "px)";
 							// cards[j].style.transform = 'translate(' + x + ', ' + y + ')';
 							// cards[j].style.zIndex = (i * 10 + j + 1);
-							cards[j].style.cssText += ";transform:translate(" + x + ", " + y + "); z-index:" + (i * 10 + j + 1) + ";";
+							cards[j].style.cssText += ";transform:translate(" + x + ", " + y +
+								"); z-index:" + (i * 10 + j + 1) + ";";
 						}
 					}
 				},
-				swap: function (source, target) {
+				swap: function(source, target) {
 					game.broadcast(
-						function (source, target) {
+						function(source, target) {
 							if (!window.decadeUI && decadeUI.eventDialog) return;
 
 							decadeUI.eventDialog.swap(source, target);
@@ -146,7 +159,8 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 					} else {
 						sourceIndex = this.cardToIndex(source, 0);
 
-						if (targetIndex < 0 || sourceIndex < 0) return console.error("card not found");
+						if (targetIndex < 0 || sourceIndex < 0) return console.error(
+							"card not found");
 						this.cards[0][sourceIndex] = target;
 						this.cards[0][targetIndex] = source;
 					}
@@ -154,8 +168,8 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 					this.update();
 					this.onMoved();
 				},
-				switch: function (card) {
-					game.broadcast(function (card) {
+				switch: function(card) {
+					game.broadcast(function(card) {
 						if (!window.decadeUI && decadeUI.eventDialog) return;
 
 						decadeUI.eventDialog.switch(card);
@@ -181,7 +195,7 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 					this.update();
 					this.onMoved();
 				},
-				move: function (card, indexTo, moveDown) {
+				move: function(card, indexTo, moveDown) {
 					var dim = moveDown ? 1 : 0;
 					var dim2 = dim;
 					var index = this.cardToIndex(card, dim);
@@ -200,7 +214,7 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 					this.onMoved();
 					this.update();
 				},
-				cardToIndex: function (card, cardArrayIndex) {
+				cardToIndex: function(card, cardArrayIndex) {
 					if (!(card && card.cardid)) return -1;
 					var id = card.cardid;
 					var cards = this.cards[cardArrayIndex == null ? 0 : cardArrayIndex];
@@ -210,7 +224,7 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 
 					return -1;
 				},
-				lockCardsOrder: function (isBottom) {
+				lockCardsOrder: function(isBottom) {
 					var orders;
 					var cards;
 
@@ -230,14 +244,14 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 						}
 					}
 				},
-				unlockCardsOrder: function (isBottom) {
+				unlockCardsOrder: function(isBottom) {
 					if (isBottom) {
 						this.orderCardsList[1] = [];
 					} else {
 						this.orderCardsList[0] = [];
 					}
 				},
-				getCardArrayIndex: function (card) {
+				getCardArrayIndex: function(card) {
 					var cards = this.cards;
 
 					if (cards[0].indexOf(card) >= 0) {
@@ -248,7 +262,7 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 						return -1;
 					}
 				},
-				onMoved: function () {
+				onMoved: function() {
 					if (typeof this.callback == "function") {
 						var ok = this.callback.call(this);
 						if (!ok) {
@@ -259,12 +273,14 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 
 					this.classList.remove("ok-disable");
 				},
-				_click: function (e) {
+				_click: function(e) {
 					if (this.finishing || this.finished) return;
 					switch (this.objectType) {
 						case "content":
 							if (guanXing.selected) {
-								var y = (this.offsetHeight * decadeUI.zooms.body * decadeUI.zooms.card) / 2 - (guanXing.cards[0].contains(guanXing.selected) ? 12 : -12);
+								var y = (this.offsetHeight * decadeUI.zooms.body * decadeUI
+									.zooms.card) / 2 - (guanXing.cards[0].contains(guanXing
+									.selected) ? 12 : -12);
 								var index = e.layerY < y ? 0 : 1;
 								if (!guanXing.cards[index].contains(guanXing.selected)) {
 									guanXing.switch(guanXing.selected);
@@ -319,10 +335,10 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 			Object.defineProperties(guanXing, {
 				selected: {
 					configurable: true,
-					get: function () {
+					get: function() {
 						return this._selected;
 					},
-					set: function (value) {
+					set: function(value) {
 						var current = this._selected;
 						if (current == value) return;
 						if (current != undefined) current.classList.remove("selected");
@@ -338,52 +354,52 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 				},
 				caption: {
 					configurable: true,
-					get: function () {
+					get: function() {
 						return this._caption.innerHTML;
 					},
-					set: function (value) {
+					set: function(value) {
 						if (this._caption.innerHTML == value) return;
 						this._caption.innerHTML = value;
 					},
 				},
 				tip: {
 					configurable: true,
-					get: function () {
+					get: function() {
 						return this._tip.innerHTML;
 					},
-					set: function (value) {
+					set: function(value) {
 						if (this._tip.innerHTML == value) return;
 						this._tip.innerHTML = value;
 					},
 				},
 				header1: {
 					configurable: true,
-					get: function () {
+					get: function() {
 						if (this._header1) return this._header1.innerHTML;
 						return "";
 					},
-					set: function (value) {
+					set: function(value) {
 						if (!this._header1 || this._header1.innerHTML == value) return;
 						this._header1.innerHTML = value;
 					},
 				},
 				header2: {
 					configurable: true,
-					get: function () {
+					get: function() {
 						if (this._header2) return this._header2.innerHTML;
 						return "";
 					},
-					set: function (value) {
+					set: function(value) {
 						if (!this._header2 || this._header2.innerHTML == value) return;
 						this._header2.innerHTML = value;
 					},
 				},
 				infohide: {
 					configurable: true,
-					get: function () {
+					get: function() {
 						return this._infohide;
 					},
-					set: function (value) {
+					set: function(value) {
 						if (this._infohide == value) return;
 						this._infohide = value;
 
@@ -405,10 +421,10 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 				},
 				callback: {
 					configurable: true,
-					get: function () {
+					get: function() {
 						return this._callback;
 					},
-					set: function (value) {
+					set: function(value) {
 						if (this._callback == value) return;
 						this._callback = value;
 						this.onMoved();

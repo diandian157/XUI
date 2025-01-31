@@ -26,16 +26,16 @@
 	opacity: 1;
 }
 
-#arena > .card.thrown {
+#arena>.card.thrown {
 	z-index: 5;
 }
 
-#arena > .card.thrown.gainingcard,
-#arena > .card.thrown.drawingcard {
+#arena>.card.thrown.gainingcard,
+#arena>.card.thrown.drawingcard {
 	z-index: 6;
 }
 
-.card > .animation {
+.card>.animation {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -50,11 +50,11 @@
 	pointer-events: none;
 }
 
-.card > .animation[data-nature="fire"] {
+.card>.animation[data-nature="fire"] {
 	text-shadow: 0 0 4px #fff, 0 -5px 4px #ff3, 2px -10px 6px #fd3, -2px -15px 10px #f80, 2px -25px 20px #f20;
 }
 
-.card > .animation[data-nature="thunder"]::before {
+.card>.animation[data-nature="thunder"]::before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -71,7 +71,7 @@
 	pointer-events: none;
 }
 
-.card > .animation-player {
+.card>.animation-player {
 	display: block;
 	position: absolute;
 	left: -120%;
@@ -84,7 +84,7 @@
 }
 
 /*出牌来源提示*/
-.card > .used-info {
+.card>.used-info {
 	opacity: 0;
 	margin: 0px;
 	padding: 0px;
@@ -106,13 +106,13 @@
 	z-index: 4;
 }
 
-.card.thrown:not(.drawingcard):not(.movingcard) > .used-info:not(:empty) {
+.card.thrown:not(.drawingcard):not(.movingcard)>.used-info:not(:empty) {
 	opacity: 1;
 }
 
 /*卡牌转换提示*/
-.card > .gaintag.info,
-.card.button > .gaintag.info {
+.card>.gaintag.info,
+.card.button>.gaintag.info {
 	left: 4px;
 	top: calc(50% - 16px);
 	bottom: auto;
@@ -133,20 +133,20 @@
 	z-index: 2;
 }
 
-.card > .gaintag.info:empty,
-.card.button > .gaintag.info:empty {
+.card>.gaintag.info:empty,
+.card.button>.gaintag.info:empty {
 	display: none;
 }
 
-.card[data-low="1"] > .gaintag.info {
+.card[data-low="1"]>.gaintag.info {
 	top: calc(70% - 16px);
 }
 
 /*卡名辅助显示及控制*/
-.card > .name,
-.card.fullskin > .name,
-.card.fullskin > .name.long,
-.dialog .buttons > .card > .name.long {
+.card>.name,
+.card.fullskin>.name,
+.card.fullskin>.name.long,
+.dialog .buttons>.card>.name.long {
 	top: auto;
 	bottom: 5px;
 	line-height: 16px;
@@ -160,16 +160,16 @@
 	z-index: 1;
 }
 
-.card.decade-card:not(*[data-card-type="basic"]) > .name {
+.card.decade-card:not(*[data-card-type="basic"])>.name {
 	bottom: 20px;
 }
 
-#window[data-card-alternate-name-visible="off"] .card > .name {
+#window[data-card-alternate-name-visible="off"] .card>.name {
 	display: none;
 }
 
 /****** 转换牌显示 ******/
-.card > .temp-name {
+.card>.temp-name {
 	position: absolute;
 	left: 4px;
 	top: calc(50% - 12px);
@@ -193,12 +193,12 @@
 	background-position: center;
 }
 
-.card > .temp-name[data-nature="fire"] {
+.card>.temp-name[data-nature="fire"] {
 	color: red;
 	text-shadow: 0 0 4px #fff, 0 -5px 4px #ff3, 2px -10px 6px #fd3, -2px -15px 10px #f80, 2px -25px 20px #f20;
 }
 
-.card > .temp-name[data-nature="thunder"] {
+.card>.temp-name[data-nature="thunder"] {
 	color: blue;
 	text-shadow: 0 0 5px lightblue, 0 0 10px lightblue;
 }
@@ -218,19 +218,19 @@
 /* transform: scale(0.8); */
 /* } */
 
-.card > .temp-name:empty {
+.card>.temp-name:empty {
 	display: none;
 }
 
-.handcards.nsanruo > .card.decade-card[data-card-type="trick"]:not(*[data-card-multitarget="1"]),
-.handcards.nsanruo > .card.decade-card[data-card-name="sha"] {
+.handcards.nsanruo>.card.decade-card[data-card-type="trick"]:not(*[data-card-multitarget="1"]),
+.handcards.nsanruo>.card.decade-card[data-card-name="sha"] {
 	background-image: url("../../image/character/ns_liuzhang.jpg") !important;
 	background-position: center;
 	background-size: cover !important;
 }
 
 /*转化花色点数显示*/
-.card > .tempsuitnum {
+.card>.tempsuitnum {
 	font-size: 25px;
 	color: #351d01;
 	text-align: center;
@@ -249,36 +249,36 @@
 	-webkit-text-size-adjust: none;
 }
 
-.card[data-virtual="1"] > .tempsuitnum {
+.card[data-virtual="1"]>.tempsuitnum {
 	display: none;
 }
 
-.card > .tempsuitnum > .num {
+.card>.tempsuitnum>.num {
 	left: -11px;
 	position: relative;
 }
 
-.card > .tempsuitnum > .suit {
+.card>.tempsuitnum>.suit {
 	left: -10px;
 	top: -22px;
 	position: relative;
 }
 
-.card[data-suit="heart"] > .suit-num,
-.card[data-suit="diamond"] > .suit-num,
-.card[data-tempsn="heart"] > .tempsuitnum,
-.card[data-tempsn="diamond"] > .tempsuitnum {
+.card[data-suit="heart"]>.suit-num,
+.card[data-suit="diamond"]>.suit-num,
+.card[data-tempsn="heart"]>.tempsuitnum,
+.card[data-tempsn="diamond"]>.tempsuitnum {
 	color: #df0101;
 }
 
-.card[data-suit="club"] > .suit-num,
-.card[data-suit="spade"] > .suit-num,
-.card[data-tempsn="club"] > .tempsuitnum,
-.card[data-tempsn="spade"] > .tempsuitnum {
+.card[data-suit="club"]>.suit-num,
+.card[data-suit="spade"]>.suit-num,
+.card[data-tempsn="club"]>.tempsuitnum,
+.card[data-tempsn="spade"]>.tempsuitnum {
 	color: #010101;
 }
 
-.dui-mobile .card > .tempsuitnum > .suit {
+.dui-mobile .card>.tempsuitnum>.suit {
 	font-size: 16px;
 }
 
@@ -299,17 +299,18 @@
 }
 
 /* 手牌基础样式 */
-.handcards > .card {
+.handcards>.card {
 	margin-top: -10px;
 	margin-bottom: 0;
-	margin-left: -27px;  /* 调整卡牌重叠程度 */
+	margin-left: -27px;
+	/* 调整卡牌重叠程度 */
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	transform-origin: center bottom;
 	will-change: transform;
 }
 
 /* 摸牌动画 */
-.handcards > .card.drawing {
+.handcards>.card.drawing {
 	animation: draw-card 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 	transform-origin: center center;
 }
@@ -319,16 +320,16 @@
 		opacity: 0;
 		transform: translate(0, -150px) scale(1.3) rotate(-5deg);
 	}
-	
+
 	50% {
 		opacity: 1;
 		transform: translate(0, 20px) scale(1.1) rotate(2deg);
 	}
-	
+
 	75% {
 		transform: translate(0, -10px) scale(1.05) rotate(-1deg);
 	}
-	
+
 	100% {
 		opacity: 1;
 		transform: translate(0, 0) scale(1) rotate(0);
@@ -336,14 +337,14 @@
 }
 
 /* 摸牌闪光效果 */
-.handcards > .card.drawing::after {
+.handcards>.card.drawing::after {
 	content: '';
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: linear-gradient(135deg, transparent, rgba(255,255,255,0.4), transparent);
+	background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.4), transparent);
 	animation: card-shine 0.6s ease-in-out;
 }
 
@@ -352,11 +353,11 @@
 		opacity: 0;
 		transform: translateX(-100%) rotate(35deg);
 	}
-	
+
 	50% {
 		opacity: 1;
 	}
-	
+
 	100% {
 		opacity: 0;
 		transform: translateX(100%) rotate(35deg);
@@ -364,12 +365,12 @@
 }
 
 /* 摸牌音效触发 */
-.handcards > .card.drawing {
+.handcards>.card.drawing {
 	animation-play-state: running;
 }
 
 /* 弃牌动画 */
-.handcards > .card.discarding {
+.handcards>.card.discarding {
 	animation: discard-card 0.3s ease-in;
 }
 
@@ -378,6 +379,7 @@
 		transform: translate(0, 0) scale(1);
 		opacity: 1;
 	}
+
 	100% {
 		transform: translate(0, 100px) scale(0.8);
 		opacity: 0;
@@ -385,14 +387,15 @@
 }
 
 /* 手牌hover效果 */
-.handcards > .card:not(.selected):not(.removing):not(.thrown):hover {
+.handcards>.card:not(.selected):not(.removing):not(.thrown):hover {
 	transform: translateY(-20px) translateZ(20px);
-	cursor: pointer; /* 鼠标悬停时显示为手型 */
+	cursor: pointer;
+	/* 鼠标悬停时显示为手型 */
 	z-index: 2;
 }
 
 /* 手牌数量提示 */
-.handcards > .card-count {
+.handcards>.card-count {
 	bottom: auto;
 	top: -5px;
 	right: -15px;
@@ -420,12 +423,13 @@
 }
 
 /* 手牌区域hover时展开 */
-.handcards:hover > .card {
-	margin-left: -15px;  /* hover时减少重叠 */
+.handcards:hover>.card {
+	margin-left: -15px;
+	/* hover时减少重叠 */
 }
 
 /* 装备区hover效果 */
-.equips > .card:not(.selected):not(.removing):not(.thrown):hover {
+.equips>.card:not(.selected):not(.removing):not(.thrown):hover {
 	transform: translateY(-10px) translateZ(10px);
 	box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
 	z-index: 2;
@@ -433,7 +437,7 @@
 }
 
 /* 判定区hover效果 */
-.judges > .card:not(.selected):not(.removing):not(.thrown):hover {
+.judges>.card:not(.selected):not(.removing):not(.thrown):hover {
 	transform: translateY(-10px) translateZ(10px);
 	box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
 	z-index: 2;
@@ -476,7 +480,9 @@
 }
 
 /* 添加3D视角 */
-.handcards, .equips, .judges {
+.handcards,
+.equips,
+.judges {
 	perspective: 1000px;
 	transform-style: preserve-3d;
 }

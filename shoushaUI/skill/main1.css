@@ -1,167 +1,201 @@
-.skill-control {/*技能按钮*/
-	bottom: 5px;/*整体上移，建议别调*/
-	right: 40px;/*技能显示右移，越小越靠右，建议别调*/
+.skill-control {
+	/*技能按钮*/
+	bottom: 5px;
+	/*整体上移，建议别调*/
+	right: 40px;
+	/*技能显示右移，越小越靠右，建议别调*/
 	z-index: 3;
 }
-.skill-control > div {
-    display: flex;
-    flex-wrap: wrap;
-    width: 160px;
-    justify-content: flex-end;
-    gap: 6px 5px; /* 调整间距：垂直4px，水平2px */
+
+.skill-control>div {
+	display: flex;
+	flex-wrap: wrap;
+	width: 160px;
+	justify-content: flex-end;
+	gap: 6px 5px;
+	/* 调整间距：垂直4px，水平2px */
 }
 
 /* 普通技能按钮 */
-.skill-control > .enable > .skillitem {
-    flex: 0 0 65px; /* 增加宽度 */
-    width: 55px;
-    height: 26px; /* 增加高度 */
-    line-height: 26px;
-    margin: 0;
-    text-align: center;
-    font-family: 'kaiti';
-    font-size: 20px; /* 增加字体大小 */
-    color: #ffffff;
-    background: linear-gradient(45deg, rgb(10, 100, 0), rgb(10, 100, 0), rgb(20, 200, 0));
-    border: 1.5px solid rgb(20, 220, 0); /* 描边 */
-	cursor: pointer; /* 鼠标悬停时显示为手型 */
-	border: none; /* 移除边框 */
-    border-radius: 3px;
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 2px rgba(0, 0, 0, 0.5);
-    text-shadow: 0 0 2px #000;
+.skill-control>.enable>.skillitem {
+	flex: 0 0 65px;
+	/* 增加宽度 */
+	width: 55px;
+	height: 26px;
+	/* 增加高度 */
+	line-height: 26px;
+	margin: 0;
+	text-align: center;
+	font-family: 'kaiti';
+	font-size: 20px;
+	/* 增加字体大小 */
+	color: #ffffff;
+	background: linear-gradient(45deg, rgb(10, 100, 0), rgb(10, 100, 0), rgb(20, 200, 0));
+	border: 1.5px solid rgb(20, 220, 0);
+	/* 描边 */
+	cursor: pointer;
+	/* 鼠标悬停时显示为手型 */
+	border: none;
+	/* 移除边框 */
+	border-radius: 3px;
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.1),
+		0 0 2px rgba(0, 0, 0, 0.5);
+	text-shadow: 0 0 2px #000;
 }
 
 /* 悬停效果 */
-.skill-control > .enable > .skillitem:hover {
-    background-image: none;
-    background: linear-gradient(45deg, rgb(10, 100, 0), rgb(10, 100, 0), rgb(20, 200, 0));    
-    border: 1.5px solid rgb(20, 220, 0); /* 描边 */
-    border-radius: 5px;
-    color: #ffffff; /* 文本颜色 */
-    font-family: 'kaiti';    
-    font-size: 18px;
-    opacity: 1; /* 透明度 */
-    text-shadow: none;
-    display: flex;
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中*/
-    cursor: pointer; /* 鼠标悬停时显示为手型 */
-    text-align: center;
-    text-decoration: none;
-    outline: none; /* 去除点击时的默认边框 */    
+.skill-control>.enable>.skillitem:hover {
+	background-image: none;
+	background: linear-gradient(45deg, rgb(10, 100, 0), rgb(10, 100, 0), rgb(20, 200, 0));
+	border: 1.5px solid rgb(20, 220, 0);
+	/* 描边 */
+	border-radius: 5px;
+	color: #ffffff;
+	/* 文本颜色 */
+	font-family: 'kaiti';
+	font-size: 18px;
+	opacity: 1;
+	/* 透明度 */
+	text-shadow: none;
+	display: flex;
+	align-items: center;
+	/* 垂直居中 */
+	justify-content: center;
+	/* 水平居中*/
+	cursor: pointer;
+	/* 鼠标悬停时显示为手型 */
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	/* 去除点击时的默认边框 */
 }
 
-.skill-control > .enable > .skillitem.select {
-    background: linear-gradient(45deg, rgb(10, 100, 0), rgb(10, 100, 0), rgb(20, 200, 0));
-    border: 1.5px solid rgb(20, 220, 0); /* 描边 */
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        0 0 4px #FF4444;
+.skill-control>.enable>.skillitem.select {
+	background: linear-gradient(45deg, rgb(10, 100, 0), rgb(10, 100, 0), rgb(20, 200, 0));
+	border: 1.5px solid rgb(20, 220, 0);
+	/* 描边 */
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.2),
+		0 0 4px #FF4444;
 }
 
 /* 技能按钮不可用状态 - 保持原样 */
-.skill-control > .enable > .skillitem:not(.usable):not(.select) {
-    background: linear-gradient(to bottom, #5f5f5d, #767977);
-    border: none;
-    color: #ffffff;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-    box-shadow: none;
+.skill-control>.enable>.skillitem:not(.usable):not(.select) {
+	background: linear-gradient(to bottom, #5f5f5d, #767977);
+	border: none;
+	color: #ffffff;
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	box-shadow: none;
 }
 
 /* 限定技按钮 */
-.skill-control > .enable > .xiandingji {
-    flex: 0 0 65px; /* 增加宽度 */
-    width: 55px;
-    height: 26px; /* 增加高度 */
-    line-height: 26px;
-    margin: 0;
-    text-align: center;
-    font-family: 'kaiti';
-    font-size: 20px; /* 增加字体大小 */
-    color: #ffffff;
-    background: linear-gradient(0deg, rgb(150, 50, 57), rgb(150, 50, 57), rgb(215, 50, 57));
-    border: 1.5px solid rgb(225, 55, 60); /* 描边 */
-	border: none; /* 移除边框 */
-    border-radius: 3px;
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 2px rgba(0, 0, 0, 0.5);
-    text-shadow: 0 0 2px #000;
-	cursor: pointer; /* 鼠标悬停时显示为手型 */
+.skill-control>.enable>.xiandingji {
+	flex: 0 0 65px;
+	/* 增加宽度 */
+	width: 55px;
+	height: 26px;
+	/* 增加高度 */
+	line-height: 26px;
+	margin: 0;
+	text-align: center;
+	font-family: 'kaiti';
+	font-size: 20px;
+	/* 增加字体大小 */
+	color: #ffffff;
+	background: linear-gradient(0deg, rgb(150, 50, 57), rgb(150, 50, 57), rgb(215, 50, 57));
+	border: 1.5px solid rgb(225, 55, 60);
+	/* 描边 */
+	border: none;
+	/* 移除边框 */
+	border-radius: 3px;
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.1),
+		0 0 2px rgba(0, 0, 0, 0.5);
+	text-shadow: 0 0 2px #000;
+	cursor: pointer;
+	/* 鼠标悬停时显示为手型 */
 }
 
 /*限定技按钮不可用时变灰*/
-.skill-control > .enable > .xiandingji:not(.usable):not(.select) {
-    background: linear-gradient(to bottom, #5f5f5d, #767977);
-    border: none;
-    color: #ffffff;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-    box-shadow: none;
+.skill-control>.enable>.xiandingji:not(.usable):not(.select) {
+	background: linear-gradient(to bottom, #5f5f5d, #767977);
+	border: none;
+	color: #ffffff;
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	box-shadow: none;
 }
 
 /* 限定技悬浮和选中效果 */
-.skill-control > .enable > .xiandingji:hover {
-    background-image: none;
-    background: linear-gradient(0deg, rgb(150, 50, 57), rgb(150, 50, 57), rgb(215, 50, 57));
-    border: 1.5px solid rgb(225, 55, 60); /* 描边 */
-    border-radius: 5px;
-    color: #ffffff; /* 文本颜色 */
-    font-family: 'kaiti';    
-    font-size: 18px;
-    opacity: 1; /* 透明度 */
-    text-shadow: none;
-    display: flex;
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中*/
-    cursor: pointer; /* 鼠标悬停时显示为手型 */
-    text-align: center;
-    text-decoration: none;
-    outline: none; /* 去除点击时的默认边框 */    
+.skill-control>.enable>.xiandingji:hover {
+	background-image: none;
+	background: linear-gradient(0deg, rgb(150, 50, 57), rgb(150, 50, 57), rgb(215, 50, 57));
+	border: 1.5px solid rgb(225, 55, 60);
+	/* 描边 */
+	border-radius: 5px;
+	color: #ffffff;
+	/* 文本颜色 */
+	font-family: 'kaiti';
+	font-size: 18px;
+	opacity: 1;
+	/* 透明度 */
+	text-shadow: none;
+	display: flex;
+	align-items: center;
+	/* 垂直居中 */
+	justify-content: center;
+	/* 水平居中*/
+	cursor: pointer;
+	/* 鼠标悬停时显示为手型 */
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	/* 去除点击时的默认边框 */
 }
 
-.skill-control > .enable > .xiandingji.select {
-    background: linear-gradient(to bottom, #C62222, #A61C1C);
-    border-color: #FF2F2F;
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        0 0 4px #FF4444;
+.skill-control>.enable>.xiandingji.select {
+	background: linear-gradient(to bottom, #C62222, #A61C1C);
+	border-color: #FF2F2F;
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.2),
+		0 0 4px #FF4444;
 }
+
 /* 强制每行最多两个技能 */
-.skill-control > .enable::after {
-    content: '';
-    flex: 0 0 76px;
-    margin: 0;
-    visibility: hidden;
+.skill-control>.enable::after {
+	content: '';
+	flex: 0 0 76px;
+	margin: 0;
+	visibility: hidden;
 }
+
 /* 调整双数技能的对齐（第二行两个技能的情况） */
-.skill-control > .enable > .skillitem:nth-last-child(2),
-.skill-control > .enable > .skillitem:last-child,
-.skill-control > .enable > .xiandingji:nth-last-child(2),
-.skill-control > .enable > .xiandingji:last-child {
-    flex: 0 0 66px !important;
-    width: 66px !important;
-    margin: 0 !important;
+.skill-control>.enable>.skillitem:nth-last-child(2),
+.skill-control>.enable>.skillitem:last-child,
+.skill-control>.enable>.xiandingji:nth-last-child(2),
+.skill-control>.enable>.xiandingji:last-child {
+	flex: 0 0 66px !important;
+	width: 66px !important;
+	margin: 0 !important;
 }
 
 /* 调整单个技能的显示（最后一行为单个技能时） */
-.skill-control > .enable > .skillitem:last-child:nth-child(odd),
-.skill-control > .enable > .xiandingji:last-child:nth-child(odd),
-.skill-control > .trigger > .skillitem:last-child:nth-child(odd) {
-    flex: 0 0 135px !important;
-    width: 156px !important;
-    margin: 0 !important;
+.skill-control>.enable>.skillitem:last-child:nth-child(odd),
+.skill-control>.enable>.xiandingji:last-child:nth-child(odd),
+.skill-control>.trigger>.skillitem:last-child:nth-child(odd) {
+	flex: 0 0 135px !important;
+	width: 156px !important;
+	margin: 0 !important;
 }
 
 /* 确保技能按钮文字居中 */
-.skill-control > .enable > .skillitem,
-.skill-control > .enable > .xiandingji,
-.skill-control > .trigger > .skillitem {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.skill-control>.enable>.skillitem,
+.skill-control>.enable>.xiandingji,
+.skill-control>.trigger>.skillitem {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
 .skillMarks {
@@ -173,7 +207,8 @@
 	justify-content: center;
 	align-items: center;
 }
-.skillMarks > .skillMarkItem {
+
+.skillMarks>.skillMarkItem {
 	--h: 19px;
 	width: 30px !important;
 	height: 30px !important;
@@ -188,49 +223,64 @@
     white-space: nowrap;*/
 	border-radius: 50%;
 }
+
 .skillMarkItem.xiandingji {
 	background-image: url("./images/xiandingji.png");
 	background-size: 100% 100%;
 	text-shadow: none;
 	--w: 30px;
-	--h: calc(var(--w) * 1 / 1); /*高和长*/
-	width: var(--w); /*按比例调节*/
-	height: var(--h); /*同理*/
+	--h: calc(var(--w) * 1 / 1);
+	/*高和长*/
+	width: var(--w);
+	/*按比例调节*/
+	height: var(--h);
+	/*同理*/
 }
+
 .skillMarkItem.xiandingji.used {
 	-webkit-filter: grayscale(1);
 }
-.skillMarkItem + .skillMarkItem {
+
+.skillMarkItem+.skillMarkItem {
 	margin-top: -6.5px;
 }
+
 .skillMarkItem.juexingji {
 	background-image: url("./images/juexingji.png");
 	background-size: 100% 100%;
 	text-shadow: none;
 	--w: 30px;
-	--h: calc(var(--w) * 1 / 1); /*高和长*/
-	width: var(--w); /*按比例调节*/
-	height: var(--h); /*同理*/
+	--h: calc(var(--w) * 1 / 1);
+	/*高和长*/
+	width: var(--w);
+	/*按比例调节*/
+	height: var(--h);
+	/*同理*/
 }
 
 .skillMarkItem.zhuanhuanji {
 	/*background-size: contain;*/
 	--w: 30px;
-	--h: calc(var(--w) * 1 / 1); /*高和长*/
-	width: var(--w); /*按比例调节*/
-	height: var(--h); /*同理*/
+	--h: calc(var(--w) * 1 / 1);
+	/*高和长*/
+	width: var(--w);
+	/*按比例调节*/
+	height: var(--h);
+	/*同理*/
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	transform-style: preserve-3d;
 	transform: rotateY(360deg);
 	background-image: url("./images/mark_yang.png");
 }
+
 .skillMarkItem.zhuanhuanji.yang {
 	background-image: url("./images/mark_yang.png");
 	/*transform:rotate(1turn);*/
 	/*transform:  rotateY(360deg);*/
 	animation: fanzhuan 1.5s;
 }
+
 .skillMarkItem.zhuanhuanji.yin {
 	background-image: url("./images/mark_ying.png");
 	/*transform:rotate(1turn);*/
@@ -238,25 +288,28 @@
 	animation: fanzhuan 1.5s;
 }
 
-@keyframes fanzhuan{
-   0%{
-   transform: rotateY(0deg) scale(1.2); 
-   }
-   50%{
-   transform: rotateY(180deg) scale(1.2);
-   }
-   100%{
-   transform: rotateY(0deg) scale(1);
-   }
+@keyframes fanzhuan {
+	0% {
+		transform: rotateY(0deg) scale(1.2);
+	}
+
+	50% {
+		transform: rotateY(180deg) scale(1.2);
+	}
+
+	100% {
+		transform: rotateY(0deg) scale(1);
+	}
 }
 
 
 .skillMarkItem.duty {
 	background-image: url("./images/mark_duty.png");
-  background-size: contain;
-  background-repeat:no-repeat;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
+
 .skillMarkItem.duty.fail {
-filter: grayscale(100%);
--webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
 }

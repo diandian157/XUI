@@ -1,6 +1,6 @@
 "use strict";
 
-Array.prototype.remove = function (item) {
+Array.prototype.remove = function(item) {
 	var index = this.indexOf(item);
 	if (index >= 0) return this.splice(index, 1);
 	return item;
@@ -9,16 +9,16 @@ Array.prototype.remove = function (item) {
 var window = self;
 var devicePixelRatio = 1;
 var documentZoom = 1;
-var HTMLCanvasElement = function () {
+var HTMLCanvasElement = function() {
 	return "HTMLCanvasElement";
 };
-var HTMLElement = function () {
+var HTMLElement = function() {
 	return "HTMLElement";
 };
 
 importScripts("spine.js", "animation.js");
 var dynamics = [];
-dynamics.getById = function (id) {
+dynamics.getById = function(id) {
 	for (var i = 0; i < this.length; i++) {
 		if (this[i].id == id) return this[i];
 	}
@@ -26,7 +26,7 @@ dynamics.getById = function (id) {
 	return null;
 };
 
-onmessage = function (e) {
+onmessage = function(e) {
 	var data = e.data;
 	switch (data.message) {
 		case "CREATE":
@@ -41,10 +41,12 @@ onmessage = function (e) {
 			if (!dynamic) return;
 
 			update(dynamic, data);
-			var sprite = typeof data.sprite == "string" ? { name: data.sprite } : data.sprite;
+			var sprite = typeof data.sprite == "string" ? {
+				name: data.sprite
+			} : data.sprite;
 			sprite.loop = true;
 
-			var run = function () {
+			var run = function() {
 				var t = dynamic.playSpine(sprite);
 				t.opacity = 0;
 				t.fadeTo(1, 600);

@@ -12,7 +12,7 @@ html {
 
 
 /* #arena>.dialog { */
-	/* display: none; */
+/* display: none; */
 /* } */
 
 
@@ -22,8 +22,13 @@ body>.background {
 }
 
 @keyframes anime-opacity {
-	0% { opacity: 0; }
-	100% { opacity: 1; }
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
 }
 
 #decadeUI-canvas,
@@ -39,7 +44,8 @@ body>.background {
 }
 
 #decadeUI-canvas-background {
-	z-index: -1; /* 动态背景显示层级*/
+	z-index: -1;
+	/* 动态背景显示层级*/
 }
 
 #decadeUI-canvas-arena {
@@ -79,7 +85,7 @@ body>.background {
 }
 
 /* #arena.dragging { */
-	/* cursor: default; */
+/* cursor: default; */
 /* } */
 
 #window.leftbar #arena:not(.chess) {
@@ -105,7 +111,7 @@ body>.background {
 	bottom: -2% !important;
 	width: auto !important;
 	height: calc(2% + 180px);
-	background: linear-gradient(transparent, rgba(0,0,0,0.8));
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 }
 
 #autonode>div {
@@ -117,7 +123,7 @@ body>.background {
 	z-index: -1;
 }
 
-#window > #time {
+#window>#time {
 	left: 50px;
 	right: 50px;
 	color: rgb(250, 250, 200);
@@ -144,7 +150,8 @@ body>.background {
 /* 手牌样式 */
 #arena>.handcards>.card {
 	position: relative;
-	margin: 0 -27px 0 0;  /* 调整卡牌重叠程度 */
+	margin: 0 -27px 0 0;
+	/* 调整卡牌重叠程度 */
 	transform-origin: center bottom;
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	will-change: transform, margin;
@@ -152,20 +159,23 @@ body>.background {
 
 /* hover效果 */
 #arena>.handcards:hover>.card {
-	margin-right: -15px;  /* hover时减少重叠 */
+	margin-right: -15px;
+	/* hover时减少重叠 */
 }
 
 /* hover展开 */
 #arena>.handcards>.card:not(.selected):not(.removing):hover {
 	transform: translateY(-20px) translateZ(20px);
-	margin: 0 3px;  /* hover时完全展开 */
+	margin: 0 3px;
+	/* hover时完全展开 */
 	z-index: 2;
 }
 
 /* 选中状态 */
 #arena>.handcards>.card.selected {
 	transform: translateY(-30px) translateZ(30px) scale(1.05);
-	margin: 0 5px;  /* 选中时完全展开 */
+	margin: 0 5px;
+	/* 选中时完全展开 */
 	z-index: 3;
 	box-shadow: 0 0 15px rgba(255, 230, 0, 0.4);
 }
@@ -180,10 +190,12 @@ body>.background {
 		transform: translateY(-50px) scale(1.1);
 		opacity: 0;
 	}
+
 	50% {
 		transform: translateY(-25px) scale(1.05);
 		opacity: 0.8;
 	}
+
 	100% {
 		transform: translateY(0) scale(1);
 		opacity: 1;
@@ -200,6 +212,7 @@ body>.background {
 		transform: translateY(0) scale(1);
 		opacity: 1;
 	}
+
 	100% {
 		transform: translateY(50px) scale(0.9);
 		opacity: 0;
@@ -232,13 +245,15 @@ body>.background {
 
 #arena>.handcards::-webkit-scrollbar-thumb:hover,
 #arena[data-right-layout='on']>.handcards::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.3);  /* 滚动条hover效果 */
+	background: rgba(255, 255, 255, 0.3);
+	/* 滚动条hover效果 */
 }
 
 #arena>.card-number {
 	position: absolute;
 	right: 10px;
-	bottom: 206px;  /* 调整手牌数显示位置 */
+	bottom: 206px;
+	/* 调整手牌数显示位置 */
 	font-family: 'xinwei';
 	font-size: 22px;
 	text-shadow: 0 0 5px black, 0 0 10px black;
@@ -251,69 +266,71 @@ body>.background {
 	left: 50%;
 	bottom: 0%;
 	transform: translateX(-50%);
-	width: calc(100% - 400px); /* 调整手牌区域宽度 */
+	width: calc(100% - 400px);
+	/* 调整手牌区域宽度 */
 	justify-content: center;
-	-webkit-mask-image: linear-gradient(90deg, 
-		transparent 0%, 
-		black 2%, 
-		black 98%, 
-		transparent 100%
-	);
+	-webkit-mask-image: linear-gradient(90deg,
+			transparent 0%,
+			black 2%,
+			black 98%,
+			transparent 100%);
 }
+
 /* 调整手牌区大小 */
 #handcards1 {
-    height: 150px !important;
-    width: calc(100% - 160px) !important;
-    bottom: 0px !important;
-    border-radius: 0 !important;
+	height: 150px !important;
+	width: calc(100% - 160px) !important;
+	bottom: 0px !important;
+	border-radius: 0 !important;
 }
 
 /* 调整手牌大小和间距 */
 #handcards1>.card {
-    height: 120px !important;
-    width: 90px !important;
-    margin: 0 -10px !important;
-    border-radius: 8px !important;
+	height: 120px !important;
+	width: 90px !important;
+	margin: 0 -10px !important;
+	border-radius: 8px !important;
 }
 
 /* 调整手牌悬浮效果 */
 #handcards1>.card:hover {
-    transform: translateY(-15px) !important;
+	transform: translateY(-15px) !important;
 }
 
 /* 调整手牌数量显示位置 */
 #handcards1>.number {
-    top: -15px !important;
+	top: -15px !important;
 }
+
 /* 修改右手布局手牌位置 */
 #arena[data-right-layout='on']>.hand-wrap,
 #arena[data-right-layout='on']>.hand-back {
 	left: auto;
 	bottom: 0%;
-	right: 256px; /* 调整右侧起始位置 */
+	right: 256px;
+	/* 调整右侧起始位置 */
 	transform: none;
 	width: calc(100% - 400px);
 	justify-content: flex-end;
-	-webkit-mask-image: linear-gradient(90deg, 
-		transparent 0%, 
-		black 2%, 
-		black 98%, 
-		transparent 100%
-	);
+	-webkit-mask-image: linear-gradient(90deg,
+			transparent 0%,
+			black 2%,
+			black 98%,
+			transparent 100%);
 }
 
 /* 调整手牌区域的渐隐效果 */
 #arena>.hand-wrap {
 	-webkit-mask-image: linear-gradient(90deg,
-		transparent 0%,
-		black 2%,
-		black 98%,
-		transparent 100%
-	);
+			transparent 0%,
+			black 2%,
+			black 98%,
+			transparent 100%);
 }
 
 #arena[data-alone-equip='off'][data-right-layout='off']>.hand-wrap,
-#arena[data-alone-equip='off'][data-right-layout='off']>.hand-back {/*左手布局+非单独装备栏*/
+#arena[data-alone-equip='off'][data-right-layout='off']>.hand-back {
+	/*左手布局+非单独装备栏*/
 	left: 180px;
 	right: 30px;
 }
@@ -326,18 +343,19 @@ body>.background {
 	transform: none;
 	width: calc(100% - 400px);
 	justify-content: flex-end;
-	-webkit-mask-image: linear-gradient(90deg, 
-		transparent 0%, 
-		black 2%, 
-		black 98%, 
-		transparent 100%
-	);  /* 右手布局的渐隐效果 */
+	-webkit-mask-image: linear-gradient(90deg,
+			transparent 0%,
+			black 2%,
+			black 98%,
+			transparent 100%);
+	/* 右手布局的渐隐效果 */
 }
 
 .discard-zone {
 	width: 100%;
 	height: 10%;
 }
+
 /*挑战模式小头像*/
 .hand-wrap>.fakeme.avatar {
 	left: -150px;
@@ -423,18 +441,18 @@ body>.background {
 	transform: none !important;
 }
 
-.hand-special>.cards>.card::after { 
+.hand-special>.cards>.card::after {
 	border-radius: inherit !important;
 	box-shadow: 0px -1px 2px yellow, 0px -1px 5px yellow, 0px 0px 15px yellow;
 	transition: opacity 0.5s;
 }
 
 
-#arena>.card, 
+#arena>.card,
 #arena.oblongcard:not(.chess)>.card,
 #arena.oblongcard:not(.chess) .handcards>.card {
 	width: 108px;
-		height: 150px;
+	height: 150px;
 }
 
 .button.card {
@@ -457,7 +475,8 @@ body>.background {
 	background-repeat: no-repeat !important;
 	background-size: 100% 100% !important;
 	-moz-background-size: 100% 100% !important;
-	transition: all 0.46s; /*新增*/
+	transition: all 0.46s;
+	/*新增*/
 }
 
 .dui-mobile .card {
@@ -479,7 +498,7 @@ body>.background {
 	font-size: 80px;
 	line-height: 80px;
 	padding-top: 0;
-}	
+}
 
 .card.mark>.background {
 	line-height: 100%;
@@ -509,11 +528,11 @@ body>.background {
 #arena:not(.chess)>.card>.image,
 #arena:not(.chess) .handcards>.card>.image,
 #arena.oblongcard:not(.chess)>.card>.image,
-#arena.oblongcard:not(.chess) .handcards>.card>.image{
+#arena.oblongcard:not(.chess) .handcards>.card>.image {
 	position: absolute;
 	width: 108px;
 	height: 108px;
-	left:  0;
+	left: 0;
 	top: auto;
 	right: 0;
 	bottom: 8%;
@@ -610,7 +629,7 @@ body>.background {
 	top: 9%;
 	color: rgb(250, 250, 200);
 	font-family: xinwei;
-	text-shadow: rgb(51,51,51) 1px 0 0, rgb(51,51,51) 0 1px 0, rgb(51,51,51) -1px 0 0, rgb(51,51,51) 0 -1px 0;
+	text-shadow: rgb(51, 51, 51) 1px 0 0, rgb(51, 51, 51) 0 1px 0, rgb(51, 51, 51) -1px 0 0, rgb(51, 51, 51) 0 -1px 0;
 	/* background: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black; */
 	z-index: 4;
 }
@@ -637,13 +656,15 @@ body>.background {
 
 
 /*界面操作按钮*/
-#arena > #dui-controls {
+#arena>#dui-controls {
 	position: absolute;
 	display: flex;
 	align-items: center;
-	align-content: flex-start; /*多轴排列方式*/
+	align-content: flex-start;
+	/*多轴排列方式*/
 	justify-content: center;
-	flex-wrap: wrap-reverse; /*换行方式*/
+	flex-wrap: wrap-reverse;
+	/*换行方式*/
 	top: auto;
 	left: 50px;
 	right: 150px;
@@ -657,30 +678,35 @@ body>.background {
 	z-index: 8;
 }
 
-#arena > #dui-controls > * {
+#arena>#dui-controls>* {
 	height: 44px;
 	font-size: 24px;
 	overflow: inherit;
 	pointer-events: auto;
 }
 
-#arena > #dui-controls.bosslist,
-#arena.choose-character > #dui-controls {
+#arena>#dui-controls.bosslist,
+#arena.choose-character>#dui-controls {
 	bottom: 20px;
 	left: -5px;
 	right: -5px;
 }
 
-#arena.dui-mobile:not(.choose-character) > #dui-controls {
+#arena.dui-mobile:not(.choose-character)>#dui-controls {
 	bottom: calc(23% + 40px);
-	left: 10px; /*左边距*/
-	right: 10px; /*右边距*/
-	display: flex; /*不加这个，换行没用*/
-	flex-wrap: wrap !important; /*换行方式*/
+	left: 10px;
+	/*左边距*/
+	right: 10px;
+	/*右边距*/
+	display: flex;
+	/*不加这个，换行没用*/
+	flex-wrap: wrap !important;
+	/*换行方式*/
 }
 
-#arena > #dui-controls > .control {
-	overflow: visible; /*别动*/
+#arena>#dui-controls>.control {
+	overflow: visible;
+	/*别动*/
 	flex: 0 0 auto;
 	display: flex;
 	align-items: center;
@@ -696,18 +722,19 @@ body>.background {
 	cursor: pointer;
 }
 
-#arena.decadeUI.dui-mobile > #dui-controls > .control.stayleft {
+#arena.decadeUI.dui-mobile>#dui-controls>.control.stayleft {
 	position: absolute;
 	left: 120px !important;
 	order: 0;
 }
-#arena > #dui-controls > .control.stayleft {
+
+#arena>#dui-controls>.control.stayleft {
 	position: absolute;
 	left: -25px;
 	order: 0;
 }
 
-#arena > #dui-controls > .control > div {
+#arena>#dui-controls>.control>div {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -722,7 +749,7 @@ body>.background {
 	opacity: 1;
 }
 
-#arena > #dui-controls > .control > div:only-child {
+#arena>#dui-controls>.control>div:only-child {
 	position: static;
 	padding-left: 0px;
 	padding-right: 0px;
@@ -730,7 +757,7 @@ body>.background {
 	padding-bottom: 0;
 }
 
-#arena > #dui-controls > .control.combo-control {
+#arena>#dui-controls>.control.combo-control {
 	flex-direction: row;
 	padding-left: 0;
 	padding-right: 0;
@@ -738,12 +765,12 @@ body>.background {
 	background: none;
 }
 
-#arena > #dui-controls > .control:not(.disabled) > div:active,
-#arena > #dui-controls > .control:not(.disabled):not(.combo-control):active {
+#arena>#dui-controls>.control:not(.disabled)>div:active,
+#arena>#dui-controls>.control:not(.disabled):not(.combo-control):active {
 	transform: scale(0.96);
 }
 
-#arena > #dui-controls > .control.combo-control > div {
+#arena>#dui-controls>.control.combo-control>div {
 	font-size: inherit;
 }
 
@@ -829,7 +856,7 @@ body>.background {
 }
 
 /* 界面操作按钮基础样式 */
-#arena > #dui-controls {
+#arena>#dui-controls {
 	position: absolute;
 	display: flex;
 	align-items: center;
@@ -850,7 +877,7 @@ body>.background {
 }
 
 /* 按钮基础样式 */
-#arena > #dui-controls > div {
+#arena>#dui-controls>div {
 	position: relative;
 	pointer-events: auto;
 	margin: 0 5px;
@@ -866,17 +893,17 @@ body>.background {
 }
 
 /* 按钮hover效果 */
-#arena > #dui-controls > div:hover {
+#arena>#dui-controls>div:hover {
 	transform: translateY(-2px);
 }
 
 /* 按钮点击效果 */
-#arena > #dui-controls > div:active {
+#arena>#dui-controls>div:active {
 	transform: scale(0.95);
 }
 
 /* 按钮点击波纹效果 */
-#arena > #dui-controls > div::after {
+#arena>#dui-controls>div::after {
 	content: '';
 	position: absolute;
 	left: 0;
@@ -889,20 +916,20 @@ body>.background {
 	transition: opacity 0.3s;
 }
 
-#arena > #dui-controls > div:active::after {
+#arena>#dui-controls>div:active::after {
 	opacity: 1;
 	transition: none;
 }
 
 /* 按钮禁用状态 */
-#arena > #dui-controls > div.disabled {
+#arena>#dui-controls>div.disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
 	pointer-events: none;
 }
 
 /* 按钮选中状态 */
-#arena > #dui-controls > div.selected {
+#arena>#dui-controls>div.selected {
 	transform: scale(1.05);
 	background: rgba(255, 230, 0, 0.2);
 	box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
@@ -920,10 +947,12 @@ body>.background {
 		transform: translateY(0);
 		box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
 	}
+
 	50% {
 		transform: translateY(-10px);
 		box-shadow: 0 0 20px rgba(255, 230, 0, 0.6);
 	}
+
 	100% {
 		transform: translateY(0);
 		box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
@@ -957,9 +986,11 @@ body>.background {
 	0% {
 		box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
 	}
+
 	50% {
 		box-shadow: 0 0 20px rgba(255, 230, 0, 0.6);
 	}
+
 	100% {
 		box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
 	}
