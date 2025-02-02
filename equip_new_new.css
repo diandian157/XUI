@@ -10,14 +10,13 @@
 #arena[data-right-layout='on']>.equips-wrap {
 	/*右手布局*/
 	left: auto;
-	bottom: 6%;
+	bottom: 5.5%;
 	right: 205px;
 }
 
 #arena[data-alone-equip='off']>.equips-wrap {
-	right: auto;
-	bottom: 0%;
-	left: 0px;
+	opacity: 0;
+	left: auto;
 }
 
 .equips-wrap>.equips-back {
@@ -57,25 +56,27 @@
 	width: 100%;
 }
 
-.equips-wrap>.equips-back>div[data-type="0"] {
+.equips-wrap>.equips-back>div[data-type='0'] {
 	background-image: url("image/decoration/equip1.png");
 }
 
-.equips-wrap>.equips-back>div[data-type="1"] {
+.equips-wrap>.equips-back>div[data-type='1'] {
 	background-image: url("image/decoration/equip2.png");
 }
 
-.equips-wrap>.equips-back>div[data-type="2"] {
+.equips-wrap>.equips-back>div[data-type='2'] {
 	background-image: url("image/decoration/equip3.png");
 }
 
-.equips-wrap>.equips-back>div[data-type="3"] {
+.equips-wrap>.equips-back>div[data-type='3'] {
 	background-image: url("image/decoration/equip4.png");
 }
 
-.equips-wrap>.equips-back>div[data-type="4"] {
+.equips-wrap>.equips-back>div[data-type='4'] {
 	background-image: url("image/decoration/equip5.png");
 }
+
+
 
 .equips-wrap>.equips>div {
 	left: 3px;
@@ -103,7 +104,15 @@
 }
 
 .equips-wrap>.equips>div::after {
-	background: linear-gradient(to left, yellow, yellow) left top no-repeat, linear-gradient(to bottom, yellow, yellow) left top no-repeat, linear-gradient(to left, yellow, yellow) right top no-repeat, linear-gradient(to bottom, yellow, yellow) right top no-repeat, linear-gradient(to left, yellow, yellow) left bottom no-repeat, linear-gradient(to bottom, yellow, yellow) left bottom no-repeat, linear-gradient(to left, yellow, yellow) right bottom no-repeat, linear-gradient(to left, yellow, yellow) right bottom no-repeat !important;
+	background:
+		linear-gradient(to left, yellow, yellow) left top no-repeat,
+		linear-gradient(to bottom, yellow, yellow) left top no-repeat,
+		linear-gradient(to left, yellow, yellow) right top no-repeat,
+		linear-gradient(to bottom, yellow, yellow) right top no-repeat,
+		linear-gradient(to left, yellow, yellow) left bottom no-repeat,
+		linear-gradient(to bottom, yellow, yellow) left bottom no-repeat,
+		linear-gradient(to left, yellow, yellow) right bottom no-repeat,
+		linear-gradient(to left, yellow, yellow) right bottom no-repeat !important;
 	background-size: 2px 8px, 10px 2px, 2px 8px, 10px 2px !important;
 	border-radius: 0px;
 	box-shadow: none;
@@ -129,7 +138,7 @@
 	animation: fade-in-out-selectable 1s infinite;
 }
 
-#arena[data-right-layout="on"]>.equips-wrap>.equips>div.selectable {
+#arena[data-right-layout='on']>.equips-wrap>.equips>div.selectable {
 	transform: translateX(10px);
 }
 
@@ -137,7 +146,7 @@
 	box-shadow: 0 0 2px yellow, 0 0 4px yellow, 0 0 8px yellow;
 }
 
-.equips-wrap .equips>div[data-card-subype="equip5"] .equips-wrap>.equips-back>div.equip0 {
+.equips-wrap .equips>div[data-card-subype='equip5'] .equips-wrap>.equips-back>div.equip0 {
 	opacity: 1;
 }
 
@@ -173,26 +182,26 @@
 	border-radius: 0px;
 	box-sizing: border-box;
 	font-weight: bold;
-	font-family: "shousha" !important;
+	font-family: "kaiti" !important;
 	white-space: pre-wrap;
 	pointer-events: none;
 	z-index: 1;
 }
 
 /*红色装备牌颜色显示*/
-.equips-wrap>.equips>.card[data-suit="heart"]>.name2,
-.equips-wrap>.equips>.card[data-suit="diamond"]>.name2 {
-	color: #8b0000;
+.equips-wrap>.equips>.card[data-suit='heart']>.name2,
+.equips-wrap>.equips>.card[data-suit='diamond']>.name2 {
+	color: #8B0000;
 }
 
 /*黑色装备牌颜色显示*/
-.equips-wrap>.equips>.card[data-suit="spade"]>.name2,
-.equips-wrap>.equips>.card[data-suit="club"]>.name2 {
+.equips-wrap>.equips>.card[data-suit='spade']>.name2,
+.equips-wrap>.equips>.card[data-suit='club']>.name2 {
 	color: #181818;
 }
 
 /*无色装备牌颜色显示*/
-.equips-wrap>.equips>.card[data-suit="none"]>.name2 {
+.equips-wrap>.equips>.card[data-suit='none']>.name2 {
 	background-color: black;
 	color: white;
 }
@@ -221,8 +230,8 @@
 /*其他玩家装备栏*/
 .player>.equips,
 #arena>.player:not(.minskin)>.equips {
-	left: 20%;
-	right: 10%;
+	left: 10%;
+	right: 16%;
 	width: auto;
 	height: 80px;
 	bottom: 3%;
@@ -329,7 +338,7 @@
 	color: #181818;
 	font-size: 13px;
 	font-weight: bold;
-	font-family: shousha, xinwei, xinkai !important;
+	font-family: kaiti !important;
 	text-shadow: none;
 	text-align: center;
 	margin-left: 0px;
@@ -339,7 +348,7 @@
 	pointer-events: none;
 }
 
-.player>.equips>.card[data-suit="heart"]>.name2,
-.player>.equips>.card[data-suit="diamond"]>.name2 {
-	color: #8b0000;
+.player>.equips>.card[data-suit='heart']>.name2,
+.player>.equips>.card[data-suit='diamond']>.name2 {
+	color: #8B0000;
 }

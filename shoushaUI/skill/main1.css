@@ -2,7 +2,7 @@
 	/*技能按钮*/
 	bottom: 5px;
 	/*整体上移，建议别调*/
-	right: 40px;
+	right: 44px;
 	/*技能显示右移，越小越靠右，建议别调*/
 	z-index: 3;
 }
@@ -174,7 +174,7 @@
 .skill-control>.enable>.skillitem:last-child,
 .skill-control>.enable>.xiandingji:nth-last-child(2),
 .skill-control>.enable>.xiandingji:last-child {
-	flex: 0 0 66px !important;
+	flex: 0 0 65px !important;
 	width: 66px !important;
 	margin: 0 !important;
 }

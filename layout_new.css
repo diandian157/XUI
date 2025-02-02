@@ -307,7 +307,7 @@ body>.background {
 #arena[data-right-layout='on']>.hand-back {
 	left: auto;
 	bottom: 0%;
-	right: 256px;
+	right: 260px;
 	/* 调整右侧起始位置 */
 	transform: none;
 	width: calc(100% - 400px);

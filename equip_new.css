@@ -181,7 +181,7 @@
 	border-radius: 0px;
 	box-sizing: border-box;
 	font-weight: bold;
-	font-family: "shousha" !important;
+	font-family: "kaiti" !important;
 	white-space: pre-wrap;
 	pointer-events: none;
 	z-index: 1;
@@ -337,7 +337,7 @@
 	color: #181818;
 	font-size: 13px;
 	font-weight: bold;
-	font-family: shousha, xinwei, xinkai !important;
+	font-family: "kaiti" !important;
 	text-shadow: none;
 	text-align: center;
 	margin-left: 0px;

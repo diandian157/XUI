@@ -327,7 +327,7 @@
 }
 
 .player>.camp-wrap>.camp-name {
-	font-family: xinwei, xingkai;
+	font-family: kaiti;
 	font-display: swap;
 	font-size: 26px;
 	width: 100%;
@@ -399,7 +399,7 @@
 .player>.nameol {
 	top: 5px;
 	font-size: 16px;
-	font-family: 'shousha';
+	font-family: kaiti;
 	text-shadow: 0 0 2px black;
 	background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
 	z-index: 89;
@@ -725,7 +725,7 @@
 	width: 18px;
 	height: auto;
 	border-radius: 0;
-	font-family: xinwei, xingkai;
+	font-family: kaiti;
 	box-shadow: none;
 	background: none;
 	overflow: visible;
@@ -751,7 +751,7 @@
 	line-height: 16px;
 	text-align: center;
 	font-size: 20px;
-	font-family: xinwei, xingkai;
+	font-family: kaiti;
 	color: rgb(77, 60, 51);
 	border-radius: 5px;
 	background-image: radial-gradient(rgb(255, 255, 200) 0, rgb(255, 255, 120) 50%, rgb(255, 255, 10) 80%, yellow 100%);
@@ -826,7 +826,7 @@
 
 #arena[data-player-mark-style="decade"]>.player>.dui-marks>.mark {
 	display: flex;
-	width: 45px;
+	width: 50px;
 	/*宽度*/
 	height: 25px;
 	/*高度*/
@@ -835,6 +835,7 @@
 	animation: fade-in 0.5s;
 	margin-bottom: 1px;
 	/*标记纵向间隔*/
+	cursor: pointer;
 }
 
 /*文字文本显示*/
@@ -851,6 +852,7 @@
 	color: white;
 	/*字体颜色*/
 	background-image: none;
+	font-family: 'kaiti';
 	box-shadow: none;
 	animation: none;
 }
@@ -998,7 +1000,7 @@
 	top: 0;
 	width: 100%;
 	height: 100%;
-	font-family: xinwei, xingkai;
+	font-family: kaiti;
 	font-size: 16px;
 	color: white;
 	text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0, 0 0 8px #000;
@@ -1017,8 +1019,8 @@
 	bottom: -25px;
 	width: 100%;
 	line-height: 20px;
-	font-family: "xinwei", "Microsoft YaHei";
-	font-size: 18px;
+	font-family: "kaiti";
+	font-size: 16px;
 	text-align: center;
 	color: #FFE5B4;
 	text-shadow: 0 0 2px #000,
@@ -1092,7 +1094,7 @@
 	border: none;
 	box-shadow: none;
 	font-size: 25px;
-	font-family: xinwei, xingkai;
+	font-family: kaiti;
 	color: white;
 	text-align: center;
 	text-shadow: none;
@@ -1132,6 +1134,7 @@
 	z-index: 89;
 	transform: none;
 	transition: none;
+	cursor: pointer;
 }
 
 .player>.identity[data-color='rYe'] {
@@ -1248,7 +1251,7 @@
 	width: 100%;
 	height: 32px;
 	font-size: 32px;
-	font-family: 'xinwei';
+	font-family: kaiti;
 	text-align: center;
 	z-index: 89;
 }
@@ -1281,7 +1284,7 @@
 	line-height: 38px;
 	color: rgb(210, 50, 50);
 	font-size: 38px;
-	font-family: xingkai, huangcao, xinwei;
+	font-family: kaiti;
 	font-display: swap;
 	text-shadow: 0 0 5px black, 0 0 10px black, 0 0 15px black;
 	background-size: contain;
@@ -1358,7 +1361,7 @@
 	border-image-source: url('assets/image/item_bg.png');
 	cursor: pointer;
 	color: rgb(77, 60, 51);
-	font-family: shousha;
+	font-family: kaiti;
 	font-weight: bold;
 	font-size: 20px;
 	text-shadow: none;
