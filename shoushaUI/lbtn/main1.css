@@ -33,7 +33,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 25%;
+	bottom: 20%;
 	left: 270px;
 	background-image: url("./images/uibutton/gengduo1.png");
 	background-size: 100% 100%;
@@ -128,7 +128,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 25%;
+	bottom: 20%;
 	left: -10px;
 	background-image: url("./images/uibutton/liaotian1.png");
 	background-size: 100% 100%;
@@ -145,7 +145,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 25%;
+	bottom: 20%;
 	left: 165px;
 	background-image: url("./images/uibutton/tuoguan1.png");
 	background-size: 100% 100%;
@@ -162,7 +162,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 25%;
+	bottom: 20%;
 	left: 225px;
 	background-image: url("./images/uibutton/xianhua1.png");
 	background-size: 100% 100%;
@@ -177,7 +177,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 25%;
+	bottom: 20%;
 	left: 60px;
 	background-image: url("./images/uibutton/xiaolian1.png");
 	background-size: 100% 100%;
@@ -194,7 +194,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 25%;
+	bottom: 20%;
 	left: 105px;
 	background-image: url("./images/uibutton/yuyin1.png");
 	background-size: 100% 100%;
