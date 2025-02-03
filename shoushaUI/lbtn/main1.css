@@ -60,6 +60,23 @@
 
 }
 
+.huanfuButton12_new {
+	display: block;
+	--w: 45px;
+	--h: 45px;
+	width: var(--w);
+	height: var(--h);
+	position: absolute;
+	bottom: 98%;
+	left: 84%;
+	border-radius: 1px;
+	z-index: 5;
+	margin-left: 10px;
+	cursor: pointer;
+	/* 鼠标悬停时显示为手型 */
+
+}
+
 .meiguiButton1_new {
 	display: block;
 	--w: 45px;

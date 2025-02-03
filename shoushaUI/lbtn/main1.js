@@ -328,6 +328,51 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
 						ui.click.auto();
 					});
+					var node641 = ui.create.div('.huanfuButton12_new', ui.arena, function() {
+						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
+						
+						// 切换全屏状态
+						if (window.node && window.node.gui) {
+							// NW.js环境
+							try {
+								let win = window.node.gui.Window.get();
+								if (win.isFullscreen) {
+									win.leaveFullscreen();
+								} else {
+									win.enterFullscreen();
+								}
+							} catch (e) {
+								console.log('全屏切换失败');
+							}
+						} else if (window.require) {
+							// Electron环境
+							try {
+								let remote = require('@electron/remote');
+								if (remote) {
+									let win = remote.getCurrentWindow();
+									if (win.isFullScreen()) {
+										win.setFullScreen(false);
+									} else {
+										win.setFullScreen(true);
+									}
+								}
+							} catch (e) {
+								// 如果不是客户端环境，尝试使用浏览器的全屏API
+								if (document.fullscreenElement) {
+									document.exitFullscreen();
+								} else {
+									document.documentElement.requestFullscreen();
+								}
+							}
+						} else {
+							// 浏览器环境
+							if (document.fullscreenElement) {
+								document.exitFullscreen();
+							} else {
+								document.documentElement.requestFullscreen();
+							}
+						}
+					});
 					var node81 = ui.create.div('.meiguiButton1_new', ui.arena);
 					// 背景图片列表
 					var backgroundList = [

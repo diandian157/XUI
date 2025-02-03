@@ -1068,28 +1068,30 @@
 
 /*玩家手牌数显示*/
 .player>.card-count {
-	position: absolute;
-	top: auto;
-	right: auto;
-	left: -15px;
-	bottom: -13px;
-	line-height: 28px;
-	height: 45px;
-	width: 45px;
-	background: url("image/decoration/card_count3.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-position: 0 -1px;
-	border: none;
-	box-shadow: none;
-	font-size: 20px;
-	font-family: kaiti;
-	color: white;
-	text-align: center;
-	text-shadow: none;
-	border-radius: 0px;
-	z-index: 89;
-	transition: transform, opacity;
+    position: absolute;
+    top: auto;
+    right: auto;
+    left: -15px;
+    bottom: -13px;
+    line-height: 28px;
+    height: 45px;
+    width: 45px;
+    background: url("image/decoration/card_count3.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 0 -1px;
+    border: none;
+    box-shadow: none;
+    font-size: 23px;
+    font-family: kaiti;
+    color: white;
+    text-align: center;
+    text-shadow: none;
+    border-radius: 0px;
+    z-index: 89;
+    transition: transform, opacity;
+    padding-top: 4px;  /* 添加顶部内边距，使文本下移 */
+    box-sizing: border-box;  /* 确保padding不会影响整体大小 */
 }
 
 .player>.card-count::before {
@@ -1422,4 +1424,39 @@
 	background-size: 100% 100%;
 	pointer-events: none;
 	z-index: 87;
+}
+/* 主玩家判定区位置调整 */
+#arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges {
+	top: 145px;
+	/* 调整到装备栏上方 */
+	left: auto;
+	right: 115%;
+	width: 100%;
+	text-align: center;
+}
+
+/* 判定区卡牌样式 */
+#arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges>.card {
+	position: relative;
+	display: inline-block;
+	margin: 0 2px;
+	transform-origin: center bottom;
+	transition: transform 0.3s;
+}
+
+/* 判定区卡牌hover效果 */
+#arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges>.card:hover {
+	transform: translateY(-10px);
+	z-index: 2;
+}
+
+/* 确保判定区不会被其他元素遮挡 */
+#arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges {
+	z-index: 4;
+}
+
+/* 调整装备区位置以适应判定区 */
+#arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.equips {
+	top: -120px;
+	/* 稍微下移装备区 */
 }

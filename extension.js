@@ -31,6 +31,27 @@ export default async function() {
 		name,
 		editable: false,
 		content(config, pack) {
+			// 隐藏菜单栏
+			if (config.hideMenuBar) {
+				if (window.node && window.node.menuBar) {
+					try {
+						window.node.menuBar.hide();
+					} catch (e) {
+						console.log('隐藏菜单栏失败');
+					}
+				} else if (window.require) {
+					try {
+						let remote = require('@electron/remote');
+						if (remote) {
+							let win = remote.getCurrentWindow();
+							win.setMenuBarVisibility(false);
+							win.setAutoHideMenuBar(true);
+						}
+					} catch (e) {
+						console.log('隐藏菜单栏失败');
+					}
+				}
+			}
 			// 伤害恢复优化
 			window._WJMHHUIFUSHUZITEXIAO = {
 				shuzi2: {
@@ -220,6 +241,25 @@ export default async function() {
 				game.addGlobalSkill('_useCardAudio');
 			}
 			lib.translate.zhangba_skill = '丈八';
+			lib.hooks.checkBegin.add("cardqx", () => {
+				const event = get.event();
+				if (event.selectCard && event.selectCard[1] > 1 && !ui.cardqx) {
+					ui.cardqx = ui.create.control("全选", function() {
+						ai.basic.chooseCard((card) => get.position(card) == "h" ? 114514 : 0);
+						if (_status.event.custom?.add.card) _status.event.custom.add.card();
+						ui.selected.cards.forEach(card => card.updateTransform(true));
+					});
+				} else if (!event.selectCard || event.selectCard[1] <= 1) {
+					ui.cardqx?.remove();
+					delete ui.cardqx;
+				}
+			});
+			lib.hooks.uncheckBegin.add("cardqx", () => {
+				if (get.event().result?.bool) {
+					ui.cardqx?.remove();
+					delete ui.cardqx;
+				}
+			});
 			lib.skill._phaseStartAudio = {
 				trigger: {
 					player: 'phaseBegin'
@@ -10553,8 +10593,47 @@ export default async function() {
 				name: '调试助手(开发用)',
 				init: false,
 			},
+			hideMenuBar: {
+				name: '隐藏菜单(仅诗笺版)',
+				init: false,
+				intro: '开启后将隐藏诗笺版顶部菜单栏',
+				onclick: function(value) {
+					game.saveConfig('extension_十周年UI_hideMenuBar', value);
+					if (value) {
+						if (window.node && window.node.menuBar) {
+							try {
+								window.node.menuBar.hide();
+							} catch (e) {}
+						} else if (window.require) {
+							try {
+								let remote = require('@electron/remote');
+								if (remote) {
+									let win = remote.getCurrentWindow();
+									win.setMenuBarVisibility(false);
+									win.setAutoHideMenuBar(true);
+								}
+							} catch (e) {}
+						}
+					} else {
+						if (window.node && window.node.menuBar) {
+							try {
+								window.node.menuBar.show();
+							} catch (e) {}
+						} else if (window.require) {
+							try {
+								let remote = require('@electron/remote');
+								if (remote) {
+									let win = remote.getCurrentWindow();
+									win.setMenuBarVisibility(true);
+									win.setAutoHideMenuBar(false);
+								}
+							} catch (e) {}
+						}
+					}
+				}
+			},
 			newDecadeStyle: {
-				name: '切换十周年样式',
+				name: '切换样式',
 				intro: '初始为新十周年样式，根据个人喜好自行切换，选择不同的设置后游戏会自动重启以生效新的设置',
 				init: "on",
 				item: {

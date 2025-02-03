@@ -260,12 +260,36 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						.height / size.y);
 
 					var effect = decadeUI.element.create(
-					"skill-name"); // 限定/觉醒特效技能文本显示，如需取消，将 'skill-name' 改为 null
+						"skill-name"); // 限定/觉醒特效技能文本显示，如需取消，将 'skill-name' 改为 null
 					effect.innerHTML = skillName;
 					effect.style.top = "calc(50% + " + 165 * sprite.scale + "px)";
 
+					var effect = decadeUI.element.create('skill-name');
+					effect.innerHTML = skillName;
+					effect.style.top = "calc(50% + " + 165 * sprite.scale + "px)";
+
+					// 添加武将名称显示
+					var nameEffect = decadeUI.element.create('general-name');
+					nameEffect.innerHTML = playerName; // 直接使用武将名称，不需要分割
+					nameEffect.style.cssText = `
+					position: absolute;
+					right: calc(50% - ${200 * sprite.scale}px);
+					top: calc(50% - ${160 * sprite.scale}px);
+					writing-mode: vertical-lr;      /* 改为vertical-lr */
+					text-orientation: upright;      /* 添加此属性使文字竖直 */
+					font-family: kaiti;
+					color: rgb(215, 234, 67);
+					font-size: 30px;
+					text-shadow: 0 0 5px black, 0 0 10px black;
+					pointer-events: none;
+					letter-spacing: 5px;            /* 添加字间距 */
+					z-index: 17;
+					`;
+
 					ui.arena.appendChild(effect);
+					ui.arena.appendChild(nameEffect);
 					effect.removeSelf(2180);
+					nameEffect.removeSelf(2180);
 				};
 
 				bgImage.onerror = function() {
@@ -278,14 +302,31 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 
 			image.onerror = function() {
 				image.onerror = void 0;
-				image.src = lib.assetURL + "imagearacter/default_silhouette_" + (player.sex ==
-					"female" ? "female" : "male") + ".jpg";
+				// 修改默认头像路径
+				image.src = "image/characters/default_silhouette_" + (player.sex == "female" ?
+					"female" : "male") + ".jpg";
 			};
 
-			if (url.indexOf('url("') == 0) {
-				image.src = url.slice(5, url.indexOf('")'));
-			} else if (url.indexOf("url('") == 0) {
-				image.src = url.slice(5, url.indexOf("')"));
+			// 获取武将立绘路径的新逻辑
+			if (url.indexOf('url("') == 0 || url.indexOf("url('") == 0) {
+				let imgPath = url.slice(5, url.indexOf(url.indexOf('url("') == 0 ? '")' : "')"));
+
+				// 检查是否有皮肤
+				if (player.skin) {
+					// 如果有皮肤，使用皮肤立绘路径
+					let skinName = player.skin[vice === 'vice' ? player.name2 : player.name];
+					if (skinName) {
+						image.src = 'image/skin/' + skinName + '.jpg';
+					} else {
+						// 没有对应皮肤时使用默认立绘
+						image.src = imgPath.includes('extension/') ? imgPath : "image/characters/" +
+							imgPath.split('/').pop();
+					}
+				} else {
+					// 没有皮肤时使用默认立绘
+					image.src = imgPath.includes('extension/') ? imgPath : "image/characters/" + imgPath
+						.split('/').pop();
+				}
 			}
 		},
 	};
