@@ -10583,6 +10583,24 @@ export default async function() {
 		},
 		help: {},
 		config: {
+			'description': {
+				name: '<div class="popup pointerdiv">使用须知·查看</div>',
+				clear: true,
+				onclick: function() {
+					if (this.description == undefined) {
+						var more = ui.create.div('.description',
+							'<div class="popup pointerdiv">二改萌修十周年UI,有问题不要打扰萌新（转型中）<br>其他十周年特效请下载扩展《特效补充》<br>限定技立绘需要自行下载放到本体image里<br>全屏模式下界面缩放调至120最佳<br><br>您仍可以再次创作并分享，但是禁止售卖盈利</div>'
+							);
+						this.parentNode.insertBefore(more, this.nextSibling);
+						this.description = more;
+						this.innerHTML = '<div class="popup pointerdiv">使用须知·关闭</div>';
+					} else {
+						this.parentNode.removeChild(this.description);
+						delete this.description;
+						this.innerHTML = '<div class="popup pointerdiv">使用须知·查看</div>';
+					};
+				}
+			},
 			FL0: {
 				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
 				"intro": "",
@@ -10793,8 +10811,6 @@ export default async function() {
 									}
 								}
 							}
-							//game.uncheck();
-							//game.check();
 						}
 					}
 				},
@@ -10973,11 +10989,6 @@ export default async function() {
 			},
 		},
 		package: {
-			intro: '二改萌修十周年UI,有问题不要打扰萌新（转型中）' +
-				'<br>其他十周年特效请下载扩展《特效补充》' +
-				'<br>https://github.com/diandian157' +
-				'<br>' +
-				'<br>您仍可以再次创作并分享，但是禁止售卖盈利',
 			author: '萌新（转型中）<br>十周年UI原作者：短歌<br>手杀UI原名：界面美化<br>手杀UI原作者：橙续缘',
 			diskURL: '',
 			forumURL: '',
