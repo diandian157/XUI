@@ -148,6 +148,8 @@
 	height: 128px;
 	transition: none;
 	z-index: 88;
+	cursor: pointer !important;
+	/* 添加鼠标手型 */
 }
 
 /* 添加悬停和点击效果 */
@@ -621,6 +623,7 @@
 
 #arena[data-outcrop-skin='on']>.player>.primary-avatar {
 	height: 250px;
+	width: 185.5px !important;
 	clip-path: url(#solo-clip);
 	/*新增*/
 	-webkit-clip-path: url(#solo-clip);
@@ -628,6 +631,7 @@
 
 #arena[data-outcrop-skin='on']>.player>.deputy-avatar {
 	height: 250px;
+	width: 185.5px !important;
 	clip-path: url(#duor-clip);
 	/*新增*/
 	-webkit-clip-path: url(#duor-clip);

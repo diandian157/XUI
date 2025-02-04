@@ -306,7 +306,7 @@ body>.background {
 #arena[data-right-layout='on']>.hand-wrap,
 #arena[data-right-layout='on']>.hand-back {
 	left: auto;
-	bottom: 0%;
+	bottom: 1px;
 	right: 260px;
 	/* 调整右侧起始位置 */
 	transform: none;
@@ -652,30 +652,6 @@ body>.background {
 
 #arena>.dialog {
 	z-index: 7;
-}
-
-
-/*界面操作按钮*/
-#arena>#dui-controls {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	align-content: flex-start;
-	/*多轴排列方式*/
-	justify-content: center;
-	flex-wrap: wrap-reverse;
-	/*换行方式*/
-	top: auto;
-	left: 50px;
-	right: 150px;
-	bottom: calc(20% + 5px);
-	width: auto;
-	height: 42px;
-	font-size: 23px;
-	font-family: xinwei;
-	transition: opacity 0.3s;
-	pointer-events: none;
-	z-index: 8;
 }
 
 #arena>#dui-controls>* {

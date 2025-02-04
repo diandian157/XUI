@@ -592,6 +592,7 @@
 
 #arena[data-outcrop-skin='on']>.player>.primary-avatar {
 	height: 250px;
+	width: 185.5px !important;
 	clip-path: url(#solo-clip);
 	/*新增*/
 	-webkit-clip-path: url(#solo-clip);
@@ -599,6 +600,7 @@
 
 #arena[data-outcrop-skin='on']>.player>.deputy-avatar {
 	height: 250px;
+	width: 185.5px !important;
 	clip-path: url(#duor-clip);
 	/*新增*/
 	-webkit-clip-path: url(#duor-clip);

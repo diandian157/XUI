@@ -52,6 +52,59 @@ export default async function() {
 					}
 				}
 			}
+			// AI随机名称
+			lib.skill._AIname = {
+				charlotte: true,
+				ruleSkill: true,
+				trigger: {
+					global: 'phaseBefore'
+				},
+				filter(event, player) {
+					return !game.firstPlayer && game.phaseNumber == 0;
+				},
+				direct: true,
+				priority: 1145141919810,
+				content() {
+					game.firstPlayer = true;
+					game.players.forEach(i => {
+						if (i != game.me && i.getSeatNum() != 0) {
+							// 为每个非主玩家生成随机7位数字
+							const randomNum = get.rand(1000000, 9999999);
+							// 设置隐藏的昵称
+							i.node.nameol.style.display = 'none';
+							i.node.nameol.innerHTML =
+								'<span style="color:#9932CC;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
+								randomNum + '</span>';
+
+							// 添加鼠标悬浮事件
+							i.addEventListener('mouseenter', function() {
+								this.node.nameol.style.display = '';
+							});
+							i.addEventListener('mouseleave', function() {
+								this.node.nameol.style.display = 'none';
+							});
+						}
+					});
+
+					var originSwapSeat = game.swapSeat;
+					game.swapSeat = function(player1, player2, prompt, behind, noanimate) {
+						originSwapSeat.apply(this, arguments);
+						// 交换座位时重新生成随机名称，但跳过主玩家
+						if (player1 != game.me && player1.getSeatNum() != 0) {
+							const randomNum1 = get.rand(1000000, 9999999);
+							player1.node.nameol.innerHTML =
+								'<span style="color:#9932CC;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
+								randomNum1 + '</span>';
+						}
+						if (player2 != game.me && player2.getSeatNum() != 0) {
+							const randomNum2 = get.rand(1000000, 9999999);
+							player2.node.nameol.innerHTML =
+								'<span style="color:#9932CC;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
+								randomNum2 + '</span>';
+						}
+					};
+				},
+			};
 			// 伤害恢复优化
 			window._WJMHHUIFUSHUZITEXIAO = {
 				shuzi2: {
@@ -8965,636 +9018,6 @@ export default async function() {
 					}
 				},
 			};
-			//阶段提示
-			//游戏结束消失
-			lib.onover.push(function(bool) {
-				game.as_removeImage();
-			});
-			//等待响应
-			lib.skill._jd_ddxyA = {
-				trigger: {
-					player: ["chooseToRespondBegin"],
-				},
-				silent: true,
-				direct: true,
-				filter: function(event, player) {
-					return player == game.me && _status.auto == false;
-				},
-				content: function() {
-					trigger._jd_ddxy = true;
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19,
-								71.5, 0, 3
-							], 10);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19,
-								71.5, 0, 3
-							], 10);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5,
-							0, 3
-						], 10);
-					}
-				},
-			};
-			//成为杀的目标开始
-			lib.skill._jd_ddxyB = {
-				trigger: {
-					target: "shaBegin",
-				},
-				silent: true,
-				filter: function(event, player) {
-					return game.me == event.target;
-				},
-				charlotte: true,
-				forced: true,
-				content: function() {
-					trigger._jd_ddxy = true;
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-				},
-			};
-			lib.skill._jd_ddxyC = {
-				trigger: {
-					player: ["useCardToBegin", "phaseJudge"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					if (event.card.storage && event.card.storage.nowuxie) return false;
-					var card = event.card;
-					var info = get.info(card);
-					if (info.wuxieable === false) return false;
-					if (event.name != "phaseJudge") {
-						if (event.getParent().nowuxie) return false;
-						if (!event.target) {
-							if (info.wuxieable) return true;
-							return false;
-						}
-						if (event.player.hasSkillTag("playernowuxie", false, event.card)) return false;
-						if (get.type(event.card) != "trick" && !info.wuxieable) return false;
-					}
-					return player == game.me && _status.auto == false;
-				},
-				charlotte: true,
-				forced: true,
-				content: function() {
-					trigger._jd_ddxy = true;
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/ddxy.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-				},
-			};
-			//使用或打出闪后
-			lib.skill._jd_shiyongshanD = {
-				forced: true,
-				charlotte: true,
-				trigger: {
-					player: ["useCard", "respondAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && event.card.name == "shan";
-				},
-				content: function() {
-					trigger._jd_ddxy = true;
-					game.as_removeImage();
-					if (_status.as_showImage_phase) {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status
-									.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status
-									.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status
-								.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
-						}
-					}
-				},
-			};
-			//等待响应及游戏结束
-			lib.skill._jd_ddxyE = {
-				trigger: {
-					player: ["chooseToRespondEnd", "useCardToEnd", "phaseJudgeEnd", "respondSha", "shanBegin"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					if (!event._jd_ddxy) return false;
-					return player == game.me && _status.auto == false;
-				},
-				direct: true,
-				content: function() {
-					game.as_removeImage();
-					if (_status.as_showImage_phase) {
-						if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-							if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status
-									.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
-							} else {
-								game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status
-									.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
-							}
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/" + _status
-								.as_showImage_phase + ".png", [19, 71.5, 0, 3], true);
-						}
-					}
-				},
-			};
-			//对方正在思考
-			lib.skill._jd_dfsk = {
-				trigger: {
-					global: ["phaseBegin", "phaseEnd", "phaseJudgeBegin", "phaseDrawBegin", "phaseUseBegin",
-						"phaseDiscardBegin"
-					],
-				},
-				silent: true,
-				charlotte: true,
-				forced: true,
-				filter: function(event, player) {
-					//剩余人数两人时
-					if (game.players.length == 2 && _status.currentPhase != game.me) return true;
-				},
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/dfsk.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-				},
-			};
-			//死亡或回合结束消失
-			lib.skill._jd_wjsw = {
-				trigger: {
-					global: ["phaseEnd", "useCardAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return _status.currentPhase != game.me && player != game.me;
-				},
-				forced: true,
-				charlotte: true,
-				content: function() {
-					game.as_removeImage();
-				},
-			};
-			lib.skill._jd_swxs = {
-				trigger: {
-					global: ["dieAfter"],
-				},
-				silent: true,
-				forced: true,
-				charlotte: true,
-				filter: function(event, player) {
-					return player == game.me && _status.auto == false;
-				},
-				content: function() {
-					game.as_removeImage();
-				},
-			};
-			//回合开始
-			lib.skill._jd_hhks = {
-				trigger: {
-					player: ["phaseBegin"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: Infinity,
-				firstDo: true,
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhks.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-					_status.as_showImage_phase = "hhks";
-				},
-			};
-			//准备阶段
-			lib.skill._jd_zbjdb = {
-				trigger: {
-					player: ["phaseZhunbeiBefore"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: Infinity,
-				firstDo: true,
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/zbjd.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-					_status.as_showImage_phase = "zbjd";
-				},
-			};
-			lib.skill._jd_zbjde = {
-				trigger: {
-					player: ["phaseZhunbeiAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: -Infinity,
-				lastDo: true,
-				content: function() {
-					if (_status.as_showImage_phase && _status.as_showImage_phase == "zbjd") {
-						game.as_removeImage();
-						delete _status.as_showImage_phase;
-					}
-				},
-			};
-			//判定阶段
-			lib.skill._jd_pdjdb = {
-				trigger: {
-					player: ["phaseJudgeBefore"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: Infinity,
-				firstDo: true,
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-					_status.as_showImage_phase = "pdjd";
-				},
-			};
-			lib.skill._jd_pdjde = {
-				trigger: {
-					player: ["phaseJudgeAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: -Infinity,
-				lastDo: true,
-				content: function() {
-					if (_status.as_showImage_phase && _status.as_showImage_phase == "pdjd") {
-						game.as_removeImage();
-						delete _status.as_showImage_phase;
-					}
-				},
-			};
-			//摸牌阶段
-			lib.skill._jd_mpjdb = {
-				trigger: {
-					player: ["phaseDrawBefore"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: Infinity,
-				firstDo: true,
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/mpjd.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-					_status.as_showImage_phase = "mpjd";
-				},
-			};
-			lib.skill._jd_mpjde = {
-				trigger: {
-					player: ["phaseDrawAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: -Infinity,
-				lastDo: true,
-				content: function() {
-					if (_status.as_showImage_phase && _status.as_showImage_phase == "mpjd") {
-						game.as_removeImage();
-						delete _status.as_showImage_phase;
-					}
-				},
-			};
-			//出牌阶段
-			lib.skill._jd_cpjdb = {
-				trigger: {
-					player: ["phaseUseBefore"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: Infinity,
-				firstDo: true,
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/cpjd.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-					_status.as_showImage_phase = "cpjd";
-				},
-			};
-			lib.skill._jd_cpjde = {
-				trigger: {
-					player: ["phaseUseAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: -Infinity,
-				lastDo: true,
-				content: function() {
-					if (_status.as_showImage_phase && _status.as_showImage_phase == "cpjd") {
-						game.as_removeImage();
-						delete _status.as_showImage_phase;
-					}
-				},
-			};
-			//弃牌阶段
-			lib.skill._jd_qpjdb = {
-				trigger: {
-					player: ["phaseDiscardBefore"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: Infinity,
-				firstDo: true,
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/qpjd.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-					_status.as_showImage_phase = "qpjd";
-				},
-			};
-			lib.skill._jd_qpjde = {
-				trigger: {
-					player: ["phaseDiscardAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: -Infinity,
-				lastDo: true,
-				content: function() {
-					if (_status.as_showImage_phase && _status.as_showImage_phase == "qpjd") {
-						game.as_removeImage();
-						delete _status.as_showImage_phase;
-					}
-				},
-			};
-			//结束阶段
-			lib.skill._jd_jsjdb = {
-				trigger: {
-					player: ["phaseJieshuBefore"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: Infinity,
-				firstDo: true,
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/pdjd.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/jsjd.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-					_status.as_showImage_phase = "jsjd";
-				},
-			};
-			lib.skill._jd_jsjde = {
-				trigger: {
-					player: ["phaseJieshuAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: -Infinity,
-				lastDo: true,
-				content: function() {
-					if (_status.as_showImage_phase && _status.as_showImage_phase == "jsjd") {
-						game.as_removeImage();
-						delete _status.as_showImage_phase;
-					}
-				},
-			};
-			//回合结束
-			lib.skill._jd_hhjsb = {
-				trigger: {
-					player: ["phaseEnd"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: Infinity,
-				firstDo: true,
-				content: function() {
-					if (lib.config.extension_十周年UI_JDTSYangshi == "1") {
-						if (get.mode() == "taixuhuanjing" || lib.config["extension_EngEX_SSServant"]) {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [19,
-								71.5, 0, 3
-							], true);
-						} else {
-							game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [19,
-								71.5, 0, 3
-							], true);
-						}
-					} else {
-						game.as_showImage("extension/十周年UI/shoushaUI/lbtn/images/JDTS/hhjs.png", [19, 71.5,
-							0, 3
-						], true);
-					}
-					_status.as_showImage_phase = "hhjs";
-				},
-			};
-			lib.skill._jd_hhjse = {
-				trigger: {
-					player: ["phaseAfter"],
-				},
-				silent: true,
-				filter: function(event, player) {
-					return player == game.me && _status.currentPhase == player;
-				},
-				charlotte: true,
-				ruleSkill: true,
-				direct: true,
-				priority: -Infinity,
-				lastDo: true,
-				content: function() {
-					if (_status.as_showImage_phase && _status.as_showImage_phase == "hhjs") {
-						game.as_removeImage();
-						delete _status.as_showImage_phase;
-					}
-				},
-			};
 			//玩家进度条
 			lib.onover.push(function(bool) {
 				if (document.getElementById("jindutiaopl")) {
@@ -10590,7 +10013,7 @@ export default async function() {
 					if (this.description == undefined) {
 						var more = ui.create.div('.description',
 							'<div class="popup pointerdiv">二改萌修十周年UI,有问题不要打扰萌新（转型中）<br>其他十周年特效请下载扩展《特效补充》<br>限定技立绘需要自行下载放到本体image里<br>全屏模式下界面缩放调至120最佳<br><br>您仍可以再次创作并分享，但是禁止售卖盈利</div>'
-							);
+						);
 						this.parentNode.insertBefore(more, this.nextSibling);
 						this.description = more;
 						this.innerHTML = '<div class="popup pointerdiv">使用须知·关闭</div>';

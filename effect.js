@@ -319,12 +319,12 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						image.src = 'image/skin/' + skinName + '.jpg';
 					} else {
 						// 没有对应皮肤时使用默认立绘
-						image.src = imgPath.includes('extension/') ? imgPath : "image/characters/" +
+						image.src = imgPath.includes('extension/') ? imgPath : "image/lihui/" +
 							imgPath.split('/').pop();
 					}
 				} else {
 					// 没有皮肤时使用默认立绘
-					image.src = imgPath.includes('extension/') ? imgPath : "image/characters/" + imgPath
+					image.src = imgPath.includes('extension/') ? imgPath : "image/lihui/" + imgPath
 						.split('/').pop();
 				}
 			}
