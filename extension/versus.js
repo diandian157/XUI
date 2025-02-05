@@ -6,8 +6,6 @@ import {
 	ai,
 	_status
 } from "../../../noname.js";
-
-//来源/参考自 2v2美化(作者@西瓜)
 export function versus() {
 	if (lib.config.mode == 'versus' && get.config('versus_mode') == 'two') {
 		lib.game.chooseCharacterTwo = function() {

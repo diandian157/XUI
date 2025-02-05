@@ -1007,66 +1007,43 @@
 
 /*玩家号位显示*/
 .player>.seat {
-	display: block;
-	position: absolute;
-	bottom: -25px;
-	width: 100%;
-	line-height: 20px;
-	font-family: "kaiti";
-	font-size: 16px;
-	text-align: center;
-	color: #FFE5B4;
-	text-shadow: 0 0 2px #000,
-		0 0 5px #000,
-		0 0 10px #000;
-	z-index: 89;
-	pointer-events: none;
-	transform: scale(1.2);
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+    line-height: 20px;
+    font-family: "kaiti";
+    font-size: 16px;
+    text-align: center;
+    color: #FFE5B4;
+    text-shadow: 0 0 2px #000,
+        0 0 5px #000,
+        0 0 10px #000;
+    z-index: 89;
+    pointer-events: none;
+    transform: scale(1.2);
 }
 
+/* 主玩家座位号位置调整 */
 .player[data-position="0"]>.seat {
-	bottom: -12px;
+    bottom: -12px;
 }
 
-.player[data-position="0"]>.seat::after {
-	content: "号位";
-}
-
+/* 隐藏原有座位号 */
 .player>.name_seat {
-	display: none !important;
+    display: none !important;
 }
 
-/* 添加座位号文本 */
-.player[data-position="1"]>.seat::after {
-	content: "号位";
-}
-
-.player[data-position="2"]>.seat::after {
-	content: "号位";
-}
-
-.player[data-position="3"]>.seat::after {
-	content: "号位";
-}
-
-.player[data-position="4"]>.seat::after {
-	content: "号位";
-}
-
-.player[data-position="5"]>.seat::after {
-	content: "号位";
-}
-
-.player[data-position="6"]>.seat::after {
-	content: "号位";
-}
-
-.player[data-position="7"]>.seat::after {
-	content: "号位";
-}
-
+/* 所有位置添加"号位"文本 */
+.player[data-position="0"]>.seat::after,
+.player[data-position="1"]>.seat::after,
+.player[data-position="2"]>.seat::after,
+.player[data-position="3"]>.seat::after,
+.player[data-position="4"]>.seat::after,
+.player[data-position="5"]>.seat::after,
+.player[data-position="6"]>.seat::after,
+.player[data-position="7"]>.seat::after,
 .player[data-position="8"]>.seat::after {
-	content: "号位";
+    content: "号位";
 }
 
 
