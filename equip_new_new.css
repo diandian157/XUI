@@ -76,8 +76,6 @@
 	background-image: url("image/decoration/equip5.png");
 }
 
-
-
 .equips-wrap>.equips>div {
 	left: 3px;
 	right: 3px;
@@ -231,7 +229,7 @@
 .player>.equips,
 #arena>.player:not(.minskin)>.equips {
 	left: 20%;
-	right: 10%;
+	right: 13%;
 	width: auto;
 	height: 80px;
 	bottom: 3%;
@@ -351,4 +349,37 @@
 .player>.equips>.card[data-suit='heart']>.name2,
 .player>.equips>.card[data-suit='diamond']>.name2 {
 	color: #8B0000;
+}
+
+/* 修改装备区的顺序，宝物区放在最上方 */
+.equips-wrap>.equips>div[data-card-subtype='equip5'],
+.equips-wrap>.equips-back>div[data-type='4'] {
+	order: 1 !important; /* 宝物区 */
+}
+
+.equips-wrap>.equips>div[data-card-subtype='equip1'],
+.equips-wrap>.equips-back>div[data-type='0'] {
+	order: 2 !important; /* 武器区 */
+}
+
+.equips-wrap>.equips>div[data-card-subtype='equip2'],
+.equips-wrap>.equips-back>div[data-type='1'] {
+	order: 3 !important; /* 防具区 */
+}
+
+.equips-wrap>.equips>div[data-card-subtype='equip3'],
+.equips-wrap>.equips-back>div[data-type='2'] {
+	order: 4 !important; /* +1马区 */
+}
+
+.equips-wrap>.equips>div[data-card-subtype='equip4'],
+.equips-wrap>.equips-back>div[data-type='3'] {
+	order: 5 !important; /* -1马区 */
+}
+
+/* 确保flex布局方向正确 */
+.equips-wrap>.equips,
+.equips-wrap>.equips-back {
+	display: flex;
+	flex-direction: column;
 }

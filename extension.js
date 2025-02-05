@@ -31,6 +31,11 @@ export default async function() {
 		name,
 		editable: false,
 		content(config, pack) {
+			if (get.mode() === "chess" || get.mode() === "tafang" || get.mode === "hs_hearthstone") return;
+			//菜单栏错位bugfix
+			game.menuZoom = 1;
+			//单独装备栏
+			_status.nopopequip = lib.config.extension_十周年UI_aloneEquip;
 			// 隐藏菜单栏
 			if (config.hideMenuBar) {
 				if (window.node && window.node.menuBar) {
@@ -62,12 +67,6 @@ export default async function() {
 			if (lib.config.extension_十周年UI_duijuetwo) {
 				versus();
 			}
-			/*-----------------分割线-----------------*/
-			if (get.mode() === "chess" || get.mode() === "tafang" || get.mode === "hs_hearthstone") return;
-			//菜单栏错位bugfix
-			game.menuZoom = 1;
-			//单独装备栏
-			_status.nopopequip = lib.config.extension_十周年UI_aloneEquip;
 
 			//布局
 			switch (lib.config.layout) {
