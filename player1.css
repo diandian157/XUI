@@ -1416,7 +1416,7 @@
 
 /* 主玩家判定区位置调整 */
 #arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges {
-	top: 25px;
+	top: 30px;
 	/* 调整到装备栏上方 */
 	left: auto;
 	right: 120%;

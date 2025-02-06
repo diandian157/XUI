@@ -15,7 +15,7 @@
 #arena[data-right-layout='on']>.equips-wrap {
 	/*右手布局*/
 	left: auto;
-	bottom: 6.5%;
+	bottom: 5%;
 	right: 205px;
 }
 
@@ -233,8 +233,8 @@
 /*其他玩家装备栏*/
 .player>.equips,
 #arena>.player:not(.minskin)>.equips {
-	left: 20%;
-	right: 13%;
+	left: 10%;
+	right: 16%;
 	width: auto;
 	height: 80px;
 	bottom: 3%;

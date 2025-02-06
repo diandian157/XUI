@@ -4,59 +4,59 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 
 	// AI随机名称
 	lib.skill._AIname = {
-		charlotte: true,
-		ruleSkill: true,
-		trigger: {
-			global: 'gameStart'
-		},
-		forced: true,
-		priority: 1145141919810,
-		content() {
-			// 初始化时设置名称
-			const setPlayerName = (player) => {
-				if (!player || !player.node || !player.node.nameol) return;
-
-				player.node.nameol.style.display = 'none';
-
-				if (player == game.me) {
-					const nickname = get.connectNickname() || '无名玩家';
-					player.node.nameol.innerHTML =
-						'<span style="color:#9932CC;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">' +
-						nickname + '</span>';
-				} else {
-					const randomNum = get.rand(1000000, 9999999);
-					player.node.nameol.innerHTML =
-						'<span style="color:#9932CC;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
-						randomNum + '</span>';
-				}
-
-				player.addEventListener('mouseenter', function() {
-					this.node.nameol.style.display = '';
-				});
-				player.addEventListener('mouseleave', function() {
-					this.node.nameol.style.display = 'none';
-				});
-			};
-
-			// 为所有现有玩家设置名称
-			game.players.forEach(player => setPlayerName(player));
-
-			// 监听新玩家加入
-			lib.element.player.$init = (function(origin) {
-				return function() {
-					origin.apply(this, arguments);
-					setPlayerName(this);
-				}
-			})(lib.element.player.$init);
-
-			// 处理换座位
-			var originSwapSeat = game.swapSeat;
-			game.swapSeat = function(player1, player2, prompt, behind, noanimate) {
-				originSwapSeat.apply(this, arguments);
-				setPlayerName(player1);
-				setPlayerName(player2);
-			};
-		},
+	    charlotte: true,
+	    ruleSkill: true,
+	    trigger: {
+	        global: 'gameStart'
+	    },
+	    forced: true,
+	    priority: 1145141919810,
+	    content() {
+	        // 初始化时设置名称
+	        const setPlayerName = (player) => {
+	            if (!player || !player.node || !player.node.nameol) return;
+	
+	            player.node.nameol.style.display = 'none';
+	
+	            if (player == game.me) {
+	                const nickname = get.connectNickname() || '无名玩家';
+	                player.node.nameol.innerHTML =
+	                    '<span style="color:#00ffff;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">' +
+	                    nickname + '</span>';
+	            } else {
+	                const randomNum = get.rand(1000000, 9999999);
+	                player.node.nameol.innerHTML =
+	                    '<span style="color:#ba30cc;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
+	                    randomNum + '</span>';
+	            }
+	
+	            player.addEventListener('mouseenter', function() {
+	                this.node.nameol.style.display = '';
+	            });
+	            player.addEventListener('mouseleave', function() {
+	                this.node.nameol.style.display = 'none';
+	            });
+	        };
+	
+	        // 为所有现有玩家设置名称
+	        game.players.forEach(player => setPlayerName(player));
+	
+	        // 监听新玩家加入
+	        lib.element.player.$init = (function(origin) {
+	            return function() {
+	                origin.apply(this, arguments);
+	                setPlayerName(this);
+	            }
+	        })(lib.element.player.$init);
+	
+	        // 处理换座位
+	        var originSwapSeat = game.swapSeat;
+	        game.swapSeat = function(player1, player2, prompt, behind, noanimate) {
+	            originSwapSeat.apply(this, arguments);
+	            setPlayerName(player1);
+	            setPlayerName(player2);
+	        };
+	    },
 	};
 
 	//神势力选择
