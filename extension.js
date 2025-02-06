@@ -9362,7 +9362,7 @@ export default async function() {
 				boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
 
 				var boxTime = document.createElement("div");
-				boxTime.data = 614; /*黄色条长度*/
+				boxTime.data = 610; /*黄色条长度*/
 				boxTime.style.cssText =
 					"z-index:1;width:614px;height:8px;margin:0 0 0 1px;background-color: #F4C336;border-top:3px solid #EBE1A7;border-bottom:2px solid #73640D;border-left:1px solid #73640D;position: absolute;top: 0px;border-radius:3px;";
 				boxContent.appendChild(boxTime);
@@ -9384,7 +9384,7 @@ export default async function() {
 				/*底图*/
 				var imgBg2 = document.createElement("img");
 				imgBg2.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindutiao2.1.png";
-				imgBg2.style.cssText = "width: 616px;height:14px;position: absolute;top: 0;z-index: -1;";
+				imgBg2.style.cssText = "width: 615px;height:14px;position: absolute;top: 0;z-index: -1;";
 				boxContent.appendChild(imgBg2);
 				document.body.appendChild(boxContent)
 				window.timer = setInterval(function() {
