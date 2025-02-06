@@ -7,10 +7,15 @@
 	top: auto;
 }
 
+/* 调整手牌区域的层级 */
+#arena.decadeUI .hand-wrap {
+    z-index: 3 !important; /* 确保手牌在装备栏上方 */
+}
+
 #arena[data-right-layout='on']>.equips-wrap {
 	/*右手布局*/
 	left: auto;
-	bottom: 5.5%;
+	bottom: 6.5%;
 	right: 205px;
 }
 
@@ -75,8 +80,6 @@
 .equips-wrap>.equips-back>div[data-type='4'] {
 	background-image: url("image/decoration/equip5.png");
 }
-
-
 
 .equips-wrap>.equips>div {
 	left: 3px;
@@ -230,8 +233,8 @@
 /*其他玩家装备栏*/
 .player>.equips,
 #arena>.player:not(.minskin)>.equips {
-	left: 10%;
-	right: 16%;
+	left: 20%;
+	right: 13%;
 	width: auto;
 	height: 80px;
 	bottom: 3%;
