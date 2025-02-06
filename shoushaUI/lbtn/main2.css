@@ -28,8 +28,8 @@
 /*---------新版小配件--------*/
 .bujianbjButton_new {
 	display: block;
-	--w: 180px;
-	--h: 240px;
+	--w: 165px;
+	--h: 300px;
 	width: var(--w);
 	height: var(--h);
 	bottom: -5%;
@@ -46,7 +46,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 11%;
-	left: 125px;
+	left: 110px;
 	background-image: url("./images/uibutton/fanhuibj_new.png");
 	background-size: 100% 100%;
 	border-radius: 1px;
@@ -62,7 +62,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 0%;
-	left: -10px;
+	left: -20px;
 	background-image: url("./images/uibutton/jilu_new.png");
 	background-size: 100% 100%;
 	border-radius: 1px;
@@ -81,7 +81,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 13.8%;
-	left: -10px;
+	left: -20px;
 	background-image: url("./images/uibutton/tuoguan_new.png");
 	background-size: 100% 100%;
 	border-radius: 1px;
@@ -109,23 +109,6 @@
 
 }
 
-.huanfuButton12_new {
-	display: block;
-	--w: 45px;
-	--h: 45px;
-	width: var(--w);
-	height: var(--h);
-	position: absolute;
-	bottom: 98%;
-	left: 84%;
-	border-radius: 1px;
-	z-index: 5;
-	margin-left: 10px;
-	cursor: pointer;
-	/* 鼠标悬停时显示为手型 */
-
-}
-
 .meiguiButton_new {
 	display: block;
 	--w: 45px;
@@ -134,7 +117,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 20%;
-	left: -10px;
+	left: -20px;
 	background-image: url("./images/uibutton/meigui_new.png");
 	background-size: 100% 100%;
 	z-index: 3;
@@ -158,6 +141,23 @@
 	/* 鼠标悬停时显示为手型 */
 }
 
+.huanfuButton12_new {
+	display: block;
+	--w: 45px;
+	--h: 45px;
+	width: var(--w);
+	height: var(--h);
+	position: absolute;
+	bottom: 98%;
+	left: 84%;
+	border-radius: 1px;
+	z-index: 5;
+	margin-left: 10px;
+	cursor: pointer;
+	/* 鼠标悬停时显示为手型 */
+
+}
+
 .xiaolianButton_new {
 	display: block;
 	--w: 45px;
@@ -166,7 +166,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 7%;
-	left: -10px;
+	left: -20px;
 	background-image: url("./images/uibutton/xiaolian_new.png");
 	background-size: 100% 100%;
 	z-index: 3;
@@ -200,7 +200,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 0%;
-	left: 60px;
+	left: 55px;
 	background-image: url("./images/uibutton/huatongbj_new.png");
 	background-size: 100% 100%;
 	border-radius: 1px;
@@ -219,7 +219,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 13.8%;
-	left: 60px;
+	left: 55px;
 	background-image: url("./images/uibutton/juli_new.png");
 	background-size: 100% 100%;
 	border-radius: 1px;
@@ -253,7 +253,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 20%;
-	left: 60px;
+	left: 55px;
 	background-image: url("./images/uibutton/touxianbj_new.png");
 	background-size: 100% 100%;
 	z-index: 3;
@@ -285,7 +285,7 @@
 	height: var(--h);
 	position: absolute;
 	bottom: 7%;
-	left: 60px;
+	left: 55px;
 	background-image: url("./images/uibutton/luxiangbj_new.png");
 	background-size: 100% 100%;
 	z-index: 3;
