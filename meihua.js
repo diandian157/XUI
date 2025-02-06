@@ -104,34 +104,34 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			}
 		}
 	};
-	
+
 	// 全选按钮
 	lib.hooks.checkBegin.add("cardqx", () => {
-	    const event = get.event();
-	    // 只在需要选择多张牌且没有全选按钮时创建
-	    if (event.selectCard?.[1] > 1 && !ui.cardqx) {
-	        ui.cardqx = ui.create.control("全选", () => {
-	            // 选择所有手牌
-	            ai.basic.chooseCard(card => get.position(card) == "h" ? 114514 : 0);
-	            // 执行自定义添加卡牌函数
-	            _status.event.custom?.add.card?.();
-	            // 更新选中卡牌的显示
-	            ui.selected.cards.forEach(card => card.updateTransform(true));
-	        });
-	    } 
-	    // 当不需要选择多张牌时移除按钮
-	    else if (!event.selectCard?.[1] || event.selectCard[1] <= 1) {
-	        ui.cardqx?.remove();
-	        delete ui.cardqx;
-	    }
+		const event = get.event();
+		// 只在需要选择多张牌且没有全选按钮时创建
+		if (event.selectCard?.[1] > 1 && !ui.cardqx) {
+			ui.cardqx = ui.create.control("全选", () => {
+				// 选择所有手牌
+				ai.basic.chooseCard(card => get.position(card) == "h" ? 114514 : 0);
+				// 执行自定义添加卡牌函数
+				_status.event.custom?.add.card?.();
+				// 更新选中卡牌的显示
+				ui.selected.cards.forEach(card => card.updateTransform(true));
+			});
+		}
+		// 当不需要选择多张牌时移除按钮
+		else if (!event.selectCard?.[1] || event.selectCard[1] <= 1) {
+			ui.cardqx?.remove();
+			delete ui.cardqx;
+		}
 	});
-	
+
 	// 选择结束时移除按钮
 	lib.hooks.uncheckBegin.add("cardqx", () => {
-	    if (get.event().result?.bool) {
-	        ui.cardqx?.remove();
-	        delete ui.cardqx;
-	    }
+		if (get.event().result?.bool) {
+			ui.cardqx?.remove();
+			delete ui.cardqx;
+		}
 	});
 
 	// 伤害恢复优化
@@ -229,33 +229,60 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		popup: false,
 		priority: -10,
 		content: function() {
-			const card = trigger.card;
-			const cardType = get.type(card);
-			const cardName = get.name(card);
-			const cardNature = get.nature(card);
-
-			const playAudio = (audio) => game.playAudio('..', 'extension', '十周年UI', audio);
-
-			if (cardType === 'basic') {
-				if (cardName === 'sha' && (cardNature === 'fire' || cardNature === 'thunder')) {
-					playAudio('GameShowCard');
+			let card = trigger.card;
+			let cardType = get.type(card);
+			let cardName = get.name(card);
+			let cardNature = get.nature(card);
+			if (cardType == 'basic') {
+				switch (cardName) {
+					case 'sha':
+						if (cardNature == 'fire') {
+							game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						} else if (cardNature == 'thunder') {
+							game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						} else {
+							game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						}
+						break;
+					case 'shan':
+						game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						break;
+					case 'tao':
+						game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						break;
+					case 'jiu':
+						game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+						break;
+					default:
+						game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+				}
+			} else if (cardType == 'trick') {
+				if (get.tag(card, 'damage')) {
+					game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
+				} else if (get.tag(card, 'recover')) {
+					game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
 				} else {
-					playAudio('GameShowCard');
+					game.playAudio('..', 'extension', '十周年UI', 'audio/GameShowCard');
 				}
-			} else if (cardType === 'trick') {
-				if (get.tag(card, 'damage') || get.tag(card, 'recover')) {
-					playAudio('GameShowCard');
+			} else if (cardType == 'equip') {
+				let equipType = get.subtype(card);
+				switch (equipType) {
+					case 'equip1': // 武器
+						game.playAudio('..', 'extension', '十周年UI', 'audio/weapon_equip');
+						break;
+					case 'equip2': // 防具
+						game.playAudio('..', 'extension', '十周年UI', 'audio/horse_equip');
+						break;
+					case 'equip3': // -1马
+						game.playAudio('..', 'extension', '十周年UI', 'audio/armor_equip');
+						break;
+					case 'equip4': // +1马
+						game.playAudio('..', 'extension', '十周年UI', 'audio/armor_equip');
+						break;
+					case 'equip5': // 宝物
+						game.playAudio('..', 'extension', '十周年UI', 'audio/horse_equip');
+						break;
 				}
-			} else if (cardType === 'equip') {
-				const equipType = get.subtype(card);
-				const audioMap = {
-					'equip1': 'weapon_equip',
-					'equip2': 'horse_equip',
-					'equip3': 'armor_equip',
-					'equip4': 'armor_equip',
-					'equip5': 'horse_equip'
-				};
-				playAudio(audioMap[equipType] || 'GameShowCard');
 			}
 		}
 	};
