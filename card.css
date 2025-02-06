@@ -282,33 +282,6 @@
 	font-size: 16px;
 }
 
-/* 卡牌基础状态 */
-.card {
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	transform-origin: center bottom;
-	will-change: transform, box-shadow;
-}
-
-/* 手牌区域基础样式 */
-.handcards {
-	height: 150px;
-	padding: 10px;
-	transition: all 0.3s;
-	transform-style: preserve-3d;
-	perspective: 1000px;
-}
-
-/* 手牌基础样式 */
-.handcards>.card {
-	margin-top: -10px;
-	margin-bottom: 0;
-	margin-left: -27px;
-	/* 调整卡牌重叠程度 */
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	transform-origin: center bottom;
-	will-change: transform;
-}
-
 /* 摸牌动画 */
 .handcards>.card.drawing {
 	animation: draw-card 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -477,19 +450,4 @@
 /* 确保动画流畅 */
 .card:not(.selected):not(.removing):not(.thrown) {
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 添加3D视角 */
-.handcards,
-.equips,
-.judges {
-	perspective: 1000px;
-	transform-style: preserve-3d;
-}
-
-/* 优化移动端体验 */
-@media (hover: hover) {
-	.card:hover {
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	}
 }

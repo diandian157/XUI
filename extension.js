@@ -6895,7 +6895,7 @@ export default async function() {
 					if (!(size && size.height)) size = decadeUI.getHandCardSize();
 
 					var bodySize = decadeUI.get.bodySize();
-					return Math.min((bodySize.height * (decadeUI.isMobile() ? 0.23 : 0.18)) / size.height,
+					return Math.min((bodySize.height * (decadeUI.isMobile() ? 0.23 : 0.17)) / size.height,
 						1);
 				},
 				getHandCardSize: function(canUseDefault) {

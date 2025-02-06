@@ -105,25 +105,33 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		}
 	};
 	
-	//全选按钮
+	// 全选按钮
 	lib.hooks.checkBegin.add("cardqx", () => {
-		const event = get.event();
-		if (event.selectCard && event.selectCard[1] > 1 && !ui.cardqx) {
-			ui.cardqx = ui.create.control("全选", function() {
-				ai.basic.chooseCard((card) => get.position(card) == "h" ? 114514 : 0);
-				if (_status.event.custom?.add.card) _status.event.custom.add.card();
-				ui.selected.cards.forEach(card => card.updateTransform(true));
-			});
-		} else if (!event.selectCard || event.selectCard[1] <= 1) {
-			ui.cardqx?.remove();
-			delete ui.cardqx;
-		}
+	    const event = get.event();
+	    // 只在需要选择多张牌且没有全选按钮时创建
+	    if (event.selectCard?.[1] > 1 && !ui.cardqx) {
+	        ui.cardqx = ui.create.control("全选", () => {
+	            // 选择所有手牌
+	            ai.basic.chooseCard(card => get.position(card) == "h" ? 114514 : 0);
+	            // 执行自定义添加卡牌函数
+	            _status.event.custom?.add.card?.();
+	            // 更新选中卡牌的显示
+	            ui.selected.cards.forEach(card => card.updateTransform(true));
+	        });
+	    } 
+	    // 当不需要选择多张牌时移除按钮
+	    else if (!event.selectCard?.[1] || event.selectCard[1] <= 1) {
+	        ui.cardqx?.remove();
+	        delete ui.cardqx;
+	    }
 	});
+	
+	// 选择结束时移除按钮
 	lib.hooks.uncheckBegin.add("cardqx", () => {
-		if (get.event().result?.bool) {
-			ui.cardqx?.remove();
-			delete ui.cardqx;
-		}
+	    if (get.event().result?.bool) {
+	        ui.cardqx?.remove();
+	        delete ui.cardqx;
+	    }
 	});
 
 	// 伤害恢复优化
