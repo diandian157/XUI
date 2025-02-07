@@ -5,6 +5,7 @@
 	min-width: 130px;
 	right: -16px;
 	top: auto;
+	z-index: 2;
 }
 
 /* 调整手牌区域的层级 */
@@ -95,6 +96,7 @@
 	align-content: center;
 	justify-content: center;
 	-webkit-text-size-adjust: none;
+	transition: all 0.2s ease;
 	z-index: 1;
 }
 
@@ -354,4 +356,26 @@
 .player>.equips>.card[data-suit='heart']>.name2,
 .player>.equips>.card[data-suit='diamond']>.name2 {
 	color: #8B0000;
+}
+
+/* 鼠标悬浮时提升层级并展开 */
+.equips-wrap>.equips>div:hover {
+    transform: scale(1.2) translateX(-30px); /* 向左移动以避免遮挡 */
+    z-index: 99 !important; /* 确保在最上层 */
+}
+
+/* 右手布局时的悬浮效果 */
+#arena[data-right-layout='on'] .equips-wrap>.equips>div:hover {
+    transform: scale(1.2) translateX(30px); /* 向右移动以避免遮挡 */
+}
+
+/* 确保装备卡牌在悬浮时不被其他元素遮挡 */
+.equips-wrap>.equips>div:hover .name2 {
+    white-space: nowrap;
+    overflow: visible;
+}
+
+/* 悬浮时的过渡动画 */
+.equips-wrap>.equips>div {
+    transition: transform 0.2s ease, z-index 0s;
 }
