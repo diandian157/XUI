@@ -92,23 +92,35 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 					//主将立绘
 					var playerSkin;
 					if (name != 'unknown') {
-						playerSkin = player.style.backgroundImage;
-						if (!playerSkin) playerSkin = player.childNodes[0].style.backgroundImage;
-						skin1.style.backgroundImage = playerSkin;
+					    playerSkin = 'url("' + lib.assetURL + 'image/lihui/' + name + '.jpg")';
+					    skin1.style.backgroundImage = playerSkin;
+					    skin1.style.cssText += `
+					        background-size: auto 100% !important;
+					        background-position: center center !important;
+					        transform: scale(1.2);
+					        transform-origin: center center;
+					    `;
 					} else {
-						var url = extensionPath + 'character/images/unknown.png';
-						skin1.style.backgroundImage = 'url("' + url + '")';
+					    var url = extensionPath + 'character/images/unknown.png';
+					    skin1.style.backgroundImage = 'url("' + url + '")';
 					}
+					
 					//副将立绘
 					if (name2) {
-						var playerSkin2;
-						if (name2 != 'unknown') {
-							playerSkin2 = player.childNodes[1].style.backgroundImage;
-							skin2.style.backgroundImage = playerSkin2;
-						} else {
-							var url = extensionPath + 'character/images/unknown.png';
-							skin2.style.backgroundImage = 'url("' + url + '")';
-						}
+					    var playerSkin2;
+					    if (name2 != 'unknown') {
+					        playerSkin2 = 'url("' + lib.assetURL + 'image/lihui/' + name2 + '.jpg")';
+					        skin2.style.backgroundImage = playerSkin2;
+					        skin2.style.cssText += `
+					            background-size: auto 100% !important;
+					            background-position: center center !important;
+					            transform: scale(1.2);
+					            transform-origin: center center;
+					        `;
+					    } else {
+					        var url = extensionPath + 'character/images/unknown.png';
+					        skin2.style.backgroundImage = 'url("' + url + '")';
+					    }
 					}
 
 					//等阶。适配最新版千幻
