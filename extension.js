@@ -8244,7 +8244,6 @@ export default async function() {
 								if (list[i].childNodes[0].innerText.indexOf("背水") != -1 && lib.config
 									.extension_十周年UI_newDecadeStyle != "on" && lib.config
 									.extension_十周年UI_newDecadeStyle != "othersOff") {
-									/*list[i].childNodes[0].setBackgroundImage('extension/无名补丁/image/beishui.png');*/
 									list[i].childNodes[0].setBackgroundImage(
 										"extension/十周年UI/shoushaUI/lbtn/images/uibutton/beishui.png");
 									list[i].childNodes[0].innerText = "背水";
@@ -8670,7 +8669,7 @@ export default async function() {
 				forced: true,
 				charlotte: true,
 				filter: function(event, player) {
-					if (event.name == 'gameStart' && lib.config['extension_无名补丁_enable'])
+					if (event.name == 'gameStart')
 						return false;
 					return _status.currentPhase != player && player == game.me;
 				},

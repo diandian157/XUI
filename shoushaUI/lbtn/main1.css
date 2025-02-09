@@ -284,7 +284,8 @@
 
 /*无懈按钮位置*/
 #arena>#dui-controls>.control.stayleft {
-	left: calc(50% - -260px) !important;
+	left: calc(50% - -265px) !important;
+	right: auto !important;
 	margin-bottom: 70px !important;
 	width: 5px !important;
 	height: 25px !important;
