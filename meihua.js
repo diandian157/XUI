@@ -4,59 +4,59 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 
 	// AI随机名称
 	lib.skill._AIname = {
-	    charlotte: true,
-	    ruleSkill: true,
-	    trigger: {
-	        global: 'gameStart'
-	    },
-	    forced: true,
-	    priority: 1145141919810,
-	    content() {
-	        // 初始化时设置名称
-	        const setPlayerName = (player) => {
-	            if (!player || !player.node || !player.node.nameol) return;
-	
-	            player.node.nameol.style.display = 'none';
-	
-	            if (player == game.me) {
-	                const nickname = get.connectNickname() || '无名玩家';
-	                player.node.nameol.innerHTML =
-	                    '<span style="color:#00ffff;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">' +
-	                    nickname + '</span>';
-	            } else {
-	                const randomNum = get.rand(1000000, 9999999);
-	                player.node.nameol.innerHTML =
-	                    '<span style="color:#ba30cc;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
-	                    randomNum + '</span>';
-	            }
-	
-	            player.addEventListener('mouseenter', function() {
-	                this.node.nameol.style.display = '';
-	            });
-	            player.addEventListener('mouseleave', function() {
-	                this.node.nameol.style.display = 'none';
-	            });
-	        };
-	
-	        // 为所有现有玩家设置名称
-	        game.players.forEach(player => setPlayerName(player));
-	
-	        // 监听新玩家加入
-	        lib.element.player.$init = (function(origin) {
-	            return function() {
-	                origin.apply(this, arguments);
-	                setPlayerName(this);
-	            }
-	        })(lib.element.player.$init);
-	
-	        // 处理换座位
-	        var originSwapSeat = game.swapSeat;
-	        game.swapSeat = function(player1, player2, prompt, behind, noanimate) {
-	            originSwapSeat.apply(this, arguments);
-	            setPlayerName(player1);
-	            setPlayerName(player2);
-	        };
-	    },
+		charlotte: true,
+		ruleSkill: true,
+		trigger: {
+			global: 'gameStart'
+		},
+		forced: true,
+		priority: 1145141919810,
+		content() {
+			// 初始化时设置名称
+			const setPlayerName = (player) => {
+				if (!player || !player.node || !player.node.nameol) return;
+
+				player.node.nameol.style.display = 'none';
+
+				if (player == game.me) {
+					const nickname = get.connectNickname() || '无名玩家';
+					player.node.nameol.innerHTML =
+						'<span style="color:#00ffff;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">' +
+						nickname + '</span>';
+				} else {
+					const randomNum = get.rand(1000000, 9999999);
+					player.node.nameol.innerHTML =
+						'<span style="color:#ba30cc;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
+						randomNum + '</span>';
+				}
+
+				player.addEventListener('mouseenter', function() {
+					this.node.nameol.style.display = '';
+				});
+				player.addEventListener('mouseleave', function() {
+					this.node.nameol.style.display = 'none';
+				});
+			};
+
+			// 为所有现有玩家设置名称
+			game.players.forEach(player => setPlayerName(player));
+
+			// 监听新玩家加入
+			lib.element.player.$init = (function(origin) {
+				return function() {
+					origin.apply(this, arguments);
+					setPlayerName(this);
+				}
+			})(lib.element.player.$init);
+
+			// 处理换座位
+			var originSwapSeat = game.swapSeat;
+			game.swapSeat = function(player1, player2, prompt, behind, noanimate) {
+				originSwapSeat.apply(this, arguments);
+				setPlayerName(player1);
+				setPlayerName(player2);
+			};
+		},
 	};
 
 	//神势力选择
@@ -145,20 +145,30 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		trigger: {
 			player: 'recoverBegin',
 		},
-		filter: function(event) {
-			return event.num > 0 && event.num <= 9;
+		filter: function(event, player) {
+			return event.num && event.num > 0 && event.num <= 9;
 		},
 		content: function() {
-			const action = trigger.num.toString(); // 直接使用数字作为动作
+			var action;
+			if (trigger.num > 0 && trigger.num <= 1) action = '1';
+			else if (trigger.num > 1 && trigger.num <= 2) action = '2';
+			else if (trigger.num > 2 && trigger.num <= 3) action = '3';
+			else if (trigger.num > 3 && trigger.num <= 4) action = '4';
+			else if (trigger.num > 4 && trigger.num <= 5) action = '5';
+			else if (trigger.num > 5 && trigger.num <= 6) action = '6';
+			else if (trigger.num > 6 && trigger.num <= 7) action = '7';
+			else if (trigger.num > 7 && trigger.num <= 8) action = '8';
+			else if (trigger.num > 8 && trigger.num <= 9) action = '9';
 			if (action) {
 				dcdAnim.loadSpine(window._WJMHHUIFUSHUZITEXIAO.shuzi2.name, "skel", function() {
+					window._WJMHHUIFUSHUZITEXIAO.shuzi2.action = action;
 					dcdAnim.playSpine(window._WJMHHUIFUSHUZITEXIAO.shuzi2, {
 						speed: 0.6,
 						scale: 0.5,
 						parent: player,
 					});
 				});
-			}
+			};
 		},
 	};
 	window._WJMHXUNISHUZITEXIAO = {
@@ -172,27 +182,42 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		trigger: {
 			player: 'damage',
 		},
-		filter: function(event) {
-			return event.unreal && event.num > 0 && event.num <= 9;
+		filter: function(event, player) {
+			if ((event.num != 0 && !event.num) || (event.num < 0 && event.num > 9)) return false;
+			return event.unreal; // 判断是否是虚拟伤害
 		},
 		content: function() {
-			const action = trigger.num <= 9 ? `play${trigger.num}` : null; // 动作名称
+			var action;
+			if (trigger.num <= 0) action = "play0";
+			else if (trigger.num > 0 && trigger.num <= 1) action = 'play1';
+			else if (trigger.num > 1 && trigger.num <= 2) action = 'play2';
+			else if (trigger.num > 2 && trigger.num <= 3) action = 'play3';
+			else if (trigger.num > 3 && trigger.num <= 4) action = 'play4';
+			else if (trigger.num > 4 && trigger.num <= 5) action = 'play5';
+			else if (trigger.num > 5 && trigger.num <= 6) action = 'play6';
+			else if (trigger.num > 6 && trigger.num <= 7) action = 'play7';
+			else if (trigger.num > 7 && trigger.num <= 8) action = 'play8';
+			else if (trigger.num > 8 && trigger.num <= 9) action = 'play9';
 			if (action) {
 				dcdAnim.loadSpine(window._WJMHXUNISHUZITEXIAO.SS_PaiJu_xunishanghai.name, "skel",
 					function() {
+						window._WJMHXUNISHUZITEXIAO.SS_PaiJu_xunishanghai.action = action;
 						dcdAnim.playSpine(window._WJMHXUNISHUZITEXIAO.SS_PaiJu_xunishanghai, {
 							speed: 0.6,
 							scale: 0.5,
 							parent: player,
 						});
 					});
-			}
+			};
 		},
 	};
 	window._WJMHSHANGHAISHUZITEXIAO = {
 		shuzi: {
 			name: "../../../十周年UI/assets/animation/globaltexiao/shanghaishuzi/SZN_shuzi",
-		},
+		}, // OL
+		SZN_shuzi: {
+			name: "../../../十周年UI/assets/animation/globaltexiao/shanghaishuzi/SZN_shuzi",
+		}, // 十周年
 	};
 	lib.skill._wjmh_shanghaishuzi_ = {
 		priority: 210,
@@ -200,22 +225,31 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		trigger: {
 			player: 'damageBegin4',
 		},
-		filter: function(event) {
-			return event.num > 1 && event.num <= 9;
+		filter: function(event, player) {
+			return event.num && event.num > 1 && event.num <= 9;
 		},
 		content: function() {
-			const action = trigger.num.toString(); // 直接使用数字作为动作
-			const anim = lib.config.extension_十周年UI_shanghaishuzitexiao === "shizhounian" ?
-				"SZN_shuzi" : "shuzi";
+			var action;
+			if (trigger.num > 1 && trigger.num <= 2) action = '2';
+			else if (trigger.num > 2 && trigger.num <= 3) action = '3';
+			else if (trigger.num > 3 && trigger.num <= 4) action = '4';
+			else if (trigger.num > 4 && trigger.num <= 5) action = '5';
+			else if (trigger.num > 5 && trigger.num <= 6) action = '6';
+			else if (trigger.num > 6 && trigger.num <= 7) action = '7';
+			else if (trigger.num > 7 && trigger.num <= 8) action = '8';
+			else if (trigger.num > 8 && trigger.num <= 9) action = '9';
 			if (action) {
+				var anim = "shuzi";
+				if (lib.config.extension_十周年UI_shanghaishuzi == "shizhounian") anim = "SZN_shuzi";
 				dcdAnim.loadSpine(window._WJMHSHANGHAISHUZITEXIAO[anim].name, "skel", function() {
+					window._WJMHSHANGHAISHUZITEXIAO[anim].action = action;
 					dcdAnim.playSpine(window._WJMHSHANGHAISHUZITEXIAO[anim], {
 						speed: 0.6,
 						scale: 0.5,
 						parent: player,
 					});
 				});
-			}
+			};
 		},
 	};
 
