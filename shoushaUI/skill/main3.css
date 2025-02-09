@@ -2,7 +2,7 @@
 	/*技能按钮*/
 	bottom: 5px;
 	/*整体上移，建议别调*/
-	right: 27px;
+	right: 20px;
 	/*技能显示右移，越小越靠右，建议别调*/
 	z-index: 3;
 }
@@ -10,7 +10,7 @@
 .skill-control>div {
 	display: flex;
 	flex-wrap: wrap;
-	width: 160px;
+	width: 150px;
 	justify-content: flex-end;
 	gap: 6px 5px;
 	/* 调整间距：垂直4px，水平2px */
@@ -18,7 +18,7 @@
 
 /* 普通技能按钮 */
 .skill-control>.enable>.skillitem {
-	flex: 0 0 60px;
+	flex: 0 0 55px;
 	/* 增加宽度 */
 	width: 55px;
 	height: 26px;
@@ -91,7 +91,7 @@
 
 /* 限定技按钮 */
 .skill-control>.enable>.xiandingji {
-	flex: 0 0 60px;
+	flex: 0 0 55px;
 	/* 增加宽度 */
 	width: 55px;
 	height: 26px;
@@ -174,7 +174,7 @@
 .skill-control>.enable>.skillitem:last-child,
 .skill-control>.enable>.xiandingji:nth-last-child(2),
 .skill-control>.enable>.xiandingji:last-child {
-	flex: 0 0 60px !important;
+	flex: 0 0 55px !important;
 	width: 66px !important;
 	margin: 0 !important;
 }
@@ -183,7 +183,7 @@
 .skill-control>.enable>.skillitem:last-child:nth-child(odd),
 .skill-control>.enable>.xiandingji:last-child:nth-child(odd),
 .skill-control>.trigger>.skillitem:last-child:nth-child(odd) {
-	flex: 0 0 125px !important;
+	flex: 0 0 115px !important;
 	width: 156px !important;
 	margin: 0 !important;
 }
