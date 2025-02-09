@@ -33,7 +33,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 20%;
+	bottom: 25%;
 	left: 270px;
 	background-image: url("./images/uibutton/gengduo1.png");
 	background-size: 100% 100%;
@@ -145,7 +145,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 20%;
+	bottom: 25%;
 	left: -10px;
 	background-image: url("./images/uibutton/liaotian1.png");
 	background-size: 100% 100%;
@@ -162,7 +162,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 20%;
+	bottom: 25%;
 	left: 165px;
 	background-image: url("./images/uibutton/tuoguan1.png");
 	background-size: 100% 100%;
@@ -179,7 +179,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 20%;
+	bottom: 25%;
 	left: 225px;
 	background-image: url("./images/uibutton/xianhua1.png");
 	background-size: 100% 100%;
@@ -194,7 +194,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 20%;
+	bottom: 25%;
 	left: 60px;
 	background-image: url("./images/uibutton/xiaolian1.png");
 	background-size: 100% 100%;
@@ -211,7 +211,7 @@
 	width: var(--w);
 	height: var(--h);
 	position: absolute;
-	bottom: 20%;
+	bottom: 25%;
 	left: 105px;
 	background-image: url("./images/uibutton/yuyin1.png");
 	background-size: 100% 100%;
@@ -259,7 +259,7 @@
 	/*选将按钮，提示之类*/
 	/*height: var(--h) !important;
 	width: calc(var(--h)*90/32) !important;*/
-	background-image: url("./images/uibutton/btnn12.png");
+	background-image: url("./images/uibutton/button1.png");
 	background-size: 100% 100%;
 	line-height: var(--h);
 	padding: 6.4px 25px !important;
@@ -284,10 +284,10 @@
 
 /*无懈按钮位置*/
 #arena>#dui-controls>.control.stayleft {
-	left: calc(50% - -330px) !important;
+	left: calc(50% - -260px) !important;
 	margin-bottom: 70px !important;
 	width: 5px !important;
-	height: 30px !important;
+	height: 25px !important;
 	border-radius: 30% !important;
 	box-shadow: none !important;
 	border: none !important;

@@ -1,6 +1,177 @@
 'use strict';
 decadeModule.import(function(lib, game, ui, get, ai, _status) {
 	decadeUI.dynamicSkin = {
+		scs_zhaozhong: { //赵忠
+			清明至臻: {
+				name: '十常侍/赵忠/清明至臻/XingXiang',
+				x: [0, 0.25],
+				y: [0, 0.44],
+				scale: 0.43,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/赵忠/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
+					y: [0, 0.5]
+				},
+			},
+		},
+		scs_bilan: {
+			清明至臻: {
+				name: '十常侍/毕岚/清明至臻/XingXiang',
+				x: [0, 1.34],
+				y: [0, 0.32],
+				scale: 0.5,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/毕岚/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
+					y: [0, 0.5]
+				},
+			},
+		},
+		scs_gaowang: { //高望
+			清明至臻: {
+				name: "十常侍/高望/XingXiang",
+				x: [0, 0.55],
+				y: [0, 0.12],
+				scale: 1.24,
+				version: '4.0',
+				action: 'DaiJi',
+				gongji: {
+					name: "十常侍/高望/XingXiang",
+					version: '4.0',
+					x: [0, 0.75],
+					y: [0, 0.55],
+					scale: 0.79,
+					action: ['GongJi_1', 'GongJi_2'],
+				},
+				teshu: {
+					name: "十常侍/高望/XingXiang",
+					version: '4.0',
+					x: [0, 1],
+					y: [0, 0.55],
+					scale: 0.79,
+					action: 'GongJi_2',
+				},
+				beijing: {
+					name: "十常侍/高望/BeiJing",
+					x: [0, 0.05],
+					y: [0, 0.85],
+					version: '4.0',
+					scale: 0.38,
+					action: 'BeiJing',
+					//ss_jinchang:'ChuChang',
+				},
+			},
+		},
+		scs_duangui: { //段珪            
+			清明至臻: {
+				name: '十常侍/段珪/清明至臻/XingXiang',
+				x: [0, 0.18],
+				y: [0, 0.23],
+				scale: 0.56,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/段珪/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
+					y: [0, 0.5]
+				},
+			},
+		},
+		scs_sunzhang: { //孙璋            
+			清明至臻: {
+				name: '十常侍/孙璋/清明至臻/XingXiang',
+				x: [0, 0.1],
+				y: [0, 0.04],
+				scale: 0.61,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/孙璋/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
+					y: [0, 0.5]
+				},
+			},
+		},
+		scs_hankui: { //韩悝            
+			清明至臻: {
+				name: '十常侍/韩悝/清明至臻/XingXiang',
+				x: [0, 0.44],
+				y: [0, 0.14],
+				scale: 0.47,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/韩悝/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
+					y: [0, 0.5]
+				},
+			},
+		},
+		scs_xiayun: { //夏恽            
+			清明至臻: {
+				name: '十常侍/夏恽/清明至臻/XingXiang',
+				x: [0, 0.63],
+				y: [0, 0.15],
+				scale: 0.53,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/夏恽/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
+					y: [0, 0.5]
+				},
+			},
+		},
+		scs_lisong: {
+			清明至臻: {
+				name: '十常侍/栗嵩/清明至臻/XingXiang',
+				x: [0, 0.52],
+				y: [0, 0.13],
+				scale: 0.53,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/栗嵩/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
+					y: [0, 0.5]
+				},
+			},
+		},
+		scs_guosheng: {
+			清明至臻: {
+				name: '十常侍/郭胜/清明至臻/XingXiang',
+				x: [0, 0.51],
+				y: [0, 0.19],
+				scale: 0.56,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/郭胜/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
+					y: [0, 0.5]
+				},
+			},
+		},
 		shen_pangtong: {
 			臻华福天: {
 				name: "神庞统/臻华福天/daiji2",
@@ -86,8 +257,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				y: [0, -0.05],
 				angle: 10,
 				scale: 0.57,
-				//speed: 1,
-				//action: 'DaiJi',
 				beijing: {
 					name: '神华佗/五灵济世/BeiJing',
 					x: [0, 0.5],
@@ -928,6 +1097,24 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					x: [0, 0.5],
 					y: [0, 0.5],
 					scale: 0.3,
+				},
+			},
+			御魂惑心: {
+				name: '卑弥呼/御魂惑心/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '卑弥呼/御魂惑心/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
 				},
 			},
 			呼风唤雨: {
@@ -6198,6 +6385,24 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					y: [0, 0.5]
 				},
 			},
+			凤屏银月: {
+				name: '关银屏/凤屏银月/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '关银屏/凤屏银月/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
 			鸾刀惊鸿: {
 				name: '关银屏/鸾刀惊鸿/xingxiang',
 				x: [0, -0.17],
@@ -6616,6 +6821,44 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				//speed: 1,
 				beijing: {
 					name: '毌丘俭/威重忠义/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
+		},
+		guohuai: { //guohuai
+			御蜀屏障: {
+				name: '郭淮-御蜀屏障/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '郭淮-御蜀屏障/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
+			紫电霆击: {
+				name: '郭淮/紫电霆击/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 1.49],
+				y: [0, 0.01],
+				angle: 15,
+				scale: 1.39,
+				//speed: 1,
+				beijing: {
+					name: '郭淮/紫电霆击/beijing',
 					version: "4.0",
 					json: true,
 					scale: 0.6,
@@ -7355,6 +7598,31 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					y: [0, 0.5]
 				},
 			},
+			云梦涟漪: {
+				name: '胡金定/云梦涟漪/daiji2',
+				x: [0, 0.56],
+				y: [0, 0.4],
+				angle: -5,
+				scale: 1.05,
+				//speed: 1,
+				shizhounian: true,
+				chuchang: {
+					name: '胡金定/云梦涟漪/chuchang',
+					scale: 0.6,
+					action: 'play',
+				},
+				gongji: {
+					name: '胡金定/云梦涟漪/chuchang',
+					scale: 0.8,
+					action: 'play',
+				},
+				beijing: {
+					name: '胡金定/云梦涟漪/beijing',
+					x: [0, 0.5],
+					y: [0, 0.5],
+					scale: 0.3,
+				},
+			},
 			金粉福颜: {
 				name: '胡金定/金粉福颜/daiji2',
 				shan: 'play3',
@@ -7923,6 +8191,38 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					scale: 0.3,
 					x: [0, 0.4],
 					y: [0, 0.5]
+				},
+			},
+			炙索击艟: {
+				name: '黄盖/炙索击艟/daiji2',
+				shan: 'play3',
+				x: [0, 0.47],
+				y: [0, 0.43],
+				angle: -13,
+				scale: 0.9,
+				//speed: 1,
+				shizhounian: true,
+				chuchang: {
+					name: '黄盖/炙索击艟/chuchang',
+					action: 'play',
+					scale: 0.8,
+				},
+				gongji: {
+					name: '黄盖/炙索击艟/chuchang2',
+					action: 'gongji',
+					scale: 0.8,
+				},
+				teshu: {
+					name: '黄盖/炙索击艟/chuchang2',
+					action: 'jineng',
+					scale: 0.8,
+				},
+				beijing: {
+					name: '黄盖/炙索击艟/beijing',
+					x: [0, 0.5],
+					y: [0, 0.5],
+					scale: 0.3,
+					angle: 20,
 				},
 			},
 			鏖战赤壁: {
@@ -9529,6 +9829,24 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				//speed: 1,
 				beijing: {
 					name: '灵雎/金枝玉叶/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
+			艳艳无双: {
+				name: '灵雎/艳艳无双/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '灵雎/艳艳无双/beijing',
 					version: "4.0",
 					json: true,
 					scale: 0.6,
@@ -11605,6 +11923,24 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					version: '4.0',
 					json: true,
 					"scale": 0.82,
+				},
+			},
+			溯江激战: {
+				name: '吕蒙/溯江激战/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '吕蒙/溯江激战/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
 				},
 			},
 			剑起惊澜: {
@@ -15728,6 +16064,24 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					scale: 0.3,
 				},
 			},
+			玉颜双娇: {
+				name: '孙鲁班/玉颜双娇/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '孙鲁班/玉颜双娇/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
 			战场荣耀: {
 				name: '孙鲁班/战场荣耀/daiji2',
 				shan: 'play3',
@@ -15784,6 +16138,24 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				//speed: 1,
 				beijing: {
 					name: '孙鲁育/慈媛戏涧/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
+			玉颜双娇: {
+				name: '孙鲁育/玉颜双娇/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '孙鲁育/玉颜双娇/beijing',
 					version: "4.0",
 					json: true,
 					scale: 0.6,
@@ -19655,6 +20027,24 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					scale: 0.3,
 				},
 			},
+			锦绣黛眉: {
+				name: '辛宪英/锦绣黛眉/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '辛宪英/锦绣黛眉/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
 			鼠年春节: {
 				name: '辛宪英/鼠年春节/XingXiang',
 				x: [0, 0.43],
@@ -22360,6 +22750,56 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					},
 				},
 			},
+			玉鸾翩跹: {
+				name: "张春华/玉鸾翩跹/daiji",
+				ss_jinchang: 'ChuChang',
+				x: [0, 0.55],
+				y: [0, 0.12],
+				scale: 1.24,
+				version: '4.0',
+				action: 'DaiJi',
+				gongji: {
+					name: "张春华/玉鸾翩跹/xingxiang",
+					version: '4.0',
+					x: [0, 0.75],
+					y: [0, 0.55],
+					scale: 0.79,
+					action: 'GongJi',
+				},
+				teshu: {
+					name: "张春华/玉鸾翩跹/xingxiang",
+					version: '4.0',
+					x: [0, 0.75],
+					y: [0, 0.55],
+					scale: 0.79,
+					action: 'JiNeng',
+				},
+				qianjing: {
+					name: "张春华/玉鸾翩跹/qianjing",
+					version: '4.0',
+					x: [0, 0.75],
+					y: [0, 0.55],
+					scale: 0.79,
+					action: 'DaiJi',
+					ss_jinchang: 'ChuChang',
+				},
+				zhishixian: {
+					name: '张春华/玉鸾翩跹/jineng02',
+					version: "4.0",
+					scale: 0.5,
+					speed: 0.6,
+					delay: 0.3,
+				},
+				beijing: {
+					name: "张春华/玉鸾翩跹/beijing",
+					x: [0, 0.05],
+					y: [0, 0.85],
+					version: '4.0',
+					scale: 0.38,
+					action: 'DaiJi',
+					ss_jinchang: 'ChuChang',
+				},
+			},
 			绰约多姿: {
 				name: '张春华/绰约多姿/daiji2',
 				x: [0, 0.5],
@@ -23655,6 +24095,21 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					json: true,
 					scale: 0.6,
 					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
+			清明至臻: {
+				name: '十常侍/张让/清明至臻/XingXiang',
+				x: [0, 1.21],
+				y: [0, 0.05],
+				scale: 0.46,
+				angle: 0,
+				//speed: 1,
+				//action: 'DaiJi',
+				beijing: {
+					name: '十常侍/张让/清明至臻/BeiJing',
+					scale: 0.3,
+					x: [0, 0.4],
 					y: [0, 0.5]
 				},
 			},
@@ -25738,6 +26193,24 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				scale: 0.58,
 				background: '周妃/寻箜觅灵/beijing.png',
 			},
+			金枝玉叶: {
+				name: '周妃/金枝玉叶/xingxiang',
+				version: "4.0",
+				json: true,
+				x: [0, 0.48],
+				y: [0, 0.11],
+				scale: 1.0,
+				angle: 15,
+				//speed: 1,
+				beijing: {
+					name: '周妃/金枝玉叶/beijing',
+					version: "4.0",
+					json: true,
+					scale: 0.6,
+					x: [0, 0.5],
+					y: [0, 0.5]
+				},
+			},
 			箜篌箜声: {
 				name: '周妃/箜篌箜声/daiji2',
 				x: [0, 0.47],
@@ -27332,1569 +27805,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				},
 			},
 		},
-
-
-
-
-		//极略三国
-		jlsgsk_baosanniang: { //鲍三娘
-			女貌男才: {
-				name: 'JiLue/鲍三娘/女貌男才/baosanniang_001',
-				json: true,
-				x: [0, 0.22],
-				y: [0, 0.18],
-				scale: 0.6,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_bianfuren: { //卞夫人
-			奕世雍容: {
-				name: 'JiLue/卞夫人/奕世雍容/bianfuren_001',
-				json: true,
-				x: [0, 0.55],
-				y: [0, 0.32],
-				scale: 0.58,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsy_caifuren: { //蔡夫人
-			蛇蝎美人: {
-				name: 'JiLue/蔡夫人/蛇蝎美人/mo_caifuren_001',
-				json: true,
-				x: [0, 0.54],
-				y: [0, 0.46],
-				scale: 0.38,
-				angle: 0,
-				//speed: 1,
-			},
-			幽夜烛纱: {
-				name: 'JiLue/蔡夫人/幽夜烛纱/caifuren_001',
-				json: true,
-				x: [0, 0.52],
-				y: [0, 0.41],
-				scale: 0.46,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_caiwenji: { //蔡文姬
-			百喙春和: {
-				name: 'JiLue/蔡文姬/百喙春和/caiwenji_001',
-				json: true,
-				x: [0, 0.36],
-				y: [0, 0.35],
-				scale: 0.6,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_caocao: { //曹操
-			临渊观海: {
-				name: '曹操/临渊观海/XingXiang',
-				version: '4.0',
-				x: [0, 0.52],
-				y: [0, -0.28],
-				angle: 2,
-				scale: 1.01,
-				background: '曹操/临渊观海/beijing.png',
-			},
-			王权霸业: {
-				name: 'JiLue/曹操/王权霸业/shencaocao_001',
-				json: true,
-				x: [0, 0.58],
-				y: [0, 0.23],
-				scale: 0.62,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_caojie: { //曹节
-			元鸣孔皇: {
-				name: 'JiLue/曹节/元鸣孔皇/caojie_001',
-				json: true,
-				x: [0, 0.35],
-				y: [0, 0.3],
-				scale: 0.63,
-				angle: -5,
-				//speed: 1,
-			},
-		},
-		jlsgsk_caorui: { //曹叡
-			玺握天下: {
-				name: 'JiLue/曹叡/玺握天下/caorui_001',
-				json: true,
-				x: [0, 0.46],
-				y: [0, 0.14],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_caoxiu: { //曹休
-			挽弓如月: {
-				name: 'JiLue/曹休/挽弓如月/caoxiu_001',
-				json: true,
-				x: [0, 0.1],
-				y: [0, 0.12],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_daqiao: { //大乔
-			琪花瑶草: {
-				name: '极大乔/琪花瑶草/XingXiang',
-				version: '4.0',
-				//alpha: true,
-				x: [0, 0.46],
-				y: [0, 0.22],
-				scale: 0.37,
-				background: '极大乔/琪花瑶草/beijing.png',
-			},
-			暗香浮影: {
-				name: 'JiLue/大乔/暗香浮影/daqiao_001',
-				json: true,
-				x: [0, 0.56],
-				y: [0, 0.24],
-				scale: 0.62,
-				angle: 0,
-				//speed: 1,
-			},
-			韶光易逝: {
-				name: 'JiLue/大乔/韶光易逝/meirirenwu_huxi',
-				json: true,
-				x: [0, 0.46],
-				y: [0, -0.3],
-				scale: 0.35,
-				angle: 0,
-				//speed: 1,
-				background: "JiLue/大乔/韶光易逝/beijing.png"
-			},
-		},
-		jlsgsoul_dianwei: { //典韦
-			无双乱戟: {
-				name: 'JiLue/典韦/无双乱戟/dw_kami',
-				json: true,
-				x: [0, 0.5],
-				y: [0, 0.5],
-				scale: 0.55,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_diaochan: { //貂蝉
-			花语花愿: {
-				name: 'JiLue/貂蝉/花语花愿/diaochan_2021zhongqiu',
-				json: true,
-				x: [0, 0.21],
-				y: [0, 0.3],
-				scale: 0.6,
-				angle: 10,
-				//speed: 1,
-			},
-			歌舞升平: {
-				name: 'JiLue/貂蝉/歌舞升平/diaochan_001',
-				json: true,
-				x: [0, 0.88],
-				y: [0, 0.08],
-				scale: 0.7,
-				angle: 10,
-				//speed: 1,
-			},
-			妖狐之魅: {
-				name: 'JiLue/貂蝉/妖狐之魅/mo_diaochan_001',
-				json: true,
-				x: [0, 0.24],
-				y: [0, 0.35],
-				scale: 0.56,
-				angle: -15,
-				//speed: 1,
-			},
-			御世之傀儡师: {
-				name: 'JiLue/貂蝉/御世之傀儡师/sp_diaochan_001',
-				json: true,
-				x: [0, 0.5],
-				y: [0, 0.38],
-				scale: 0.5,
-				angle: -20,
-				//speed: 1,
-			},
-			正态分布: {
-				name: 'JiLue/貂蝉/正态分布/diaochan_sjfxs',
-				json: true,
-				x: [0, 0.35],
-				y: [0, 0.21],
-				scale: 0.53,
-				angle: 10,
-				//speed: 1,
-			},
-		},
-		jlsgsk_dongbai: { //董白
-			长乐未央: {
-				name: 'JiLue/董白/长乐未央/dongbai_001',
-				json: true,
-				x: [0, 0.06],
-				y: [0, 0.18],
-				scale: 0.65,
-				angle: 10,
-				//speed: 1,
-			},
-		},
-		jlsgsk_dongzhuo: { //董卓
-			狱魔王: {
-				name: 'JiLue/董卓/狱魔王/mo_dongzhuo_001',
-				json: true,
-				x: [0, 0.46],
-				y: [0, 0.54],
-				scale: 0.35,
-				angle: -5,
-				//speed: 1,
-			},
-		},
-		jlsgsr_ganning: { //甘宁
-			锦翎如龙: {
-				name: 'JiLue/甘宁/锦翎如龙/sp_shenganning_001',
-				json: true,
-				x: [0, 0.82],
-				y: [0, 0.02],
-				scale: 0.78,
-				angle: -5,
-				//speed: 1,
-			},
-			披星踏浪: {
-				name: 'JiLue/甘宁/披星踏浪/shenganning_001',
-				json: true,
-				x: [0, 0.26],
-				y: [0, 0.26],
-				scale: 0.72,
-				angle: -8,
-				//speed: 1,
-			},
-		},
-		jlsgsk_guansuo: { //关索
-			男才女貌: {
-				name: 'JiLue/关索/男才女貌/guansuo_001',
-				json: true,
-				x: [0, 0.65],
-				y: [0, 0.25],
-				scale: 0.62,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_guanxing: { //关兴
-			青龙血脉: {
-				name: 'JiLue/关兴/青龙血脉/guanxing_001',
-				json: true,
-				x: [0, 0.04],
-				y: [0, 0.14],
-				scale: 0.7,
-				angle: 10,
-				//speed: 1,
-			},
-		},
-		jlsgsk_guanyu: { //关羽
-			炼狱武神: {
-				name: 'JiLue/关羽/炼狱武神/shenguanyu_001',
-				json: true,
-				x: [0, 0.04],
-				y: [0, 0.12],
-				scale: 0.75,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_guojia: { //郭嘉
-			妙手生花: {
-				name: 'JiLue/郭嘉/妙手生花/guojia_001',
-				json: true,
-				x: [0, -0.08],
-				y: [0, 0.12],
-				scale: 0.75,
-				angle: 0,
-				//speed: 1,
-			},
-			驭魂画策: {
-				name: 'JiLue/郭嘉/驭魂画策/shenguojia_001',
-				json: true,
-				x: [0, 0.5],
-				y: [0, 0.3],
-				scale: 0.55,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_guonvwang: { //郭女王
-			殚心书诏: {
-				name: 'JiLue/郭女王/殚心书诏/guonvwang_001',
-				json: true,
-				x: [0, 0.3],
-				y: [0, 0.22],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_huatuo: { //华佗
-			百草归元: {
-				name: 'JiLue/华佗/百草归元/shenhuatuo_001',
-				json: true,
-				x: [0, 0.24],
-				y: [0, 0.11],
-				scale: 0.68,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_huangyueying: { //黄月英
-			星前月下: {
-				name: '黄月英/星前月下/HuangYueYing_XingXiang',
-				version: '4.0',
-				//alpha: true,
-				x: [0, 0.47],
-				y: [0, 0.64],
-				scale: 0.58,
-				background: '黄月英/星前月下/beijing.png',
-			},
-			华裳羽梦: {
-				name: 'JiLue/黄月英/华裳羽梦/huangyueying_001',
-				json: true,
-				x: [0, 0.58],
-				y: [0, 0.45],
-				scale: 0.43,
-				angle: 0,
-				//speed: 1,
-			},
-			黎月流光: {
-				name: 'JiLue/黄月英/黎月流光/huangyueying_sr001',
-				json: true,
-				x: [0, 0.39],
-				y: [0, 0.43],
-				scale: 0.53,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsoul_jiaxu: { //贾诩
-			谋定天下: {
-				name: 'JiLue/贾诩/谋定天下/shenjiaxu_001',
-				json: true,
-				x: [0, 0.4],
-				y: [0, 0.24],
-				scale: 0.68,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		kuailiangkuaiyue: {
-			御策千军: {
-				name: '蒯良蒯越/xingxiang',
-				version: "4.0",
-				json: true,
-				x: [0, 0.48],
-				y: [0, 0.42],
-				angle: -11,
-				scale: 0.58,
-				//speed: 1,
-				beijing: {
-					name: '蒯良蒯越/beijing',
-					version: "4.0",
-					json: true,
-					scale: 0.6,
-					x: [0, 0.5],
-					y: [0, 0.5]
-				},
-			},
-		},
-		jlsgsk_jushou: { //沮授
-			延绵之策: {
-				name: 'JiLue/沮授/延绵之策/jushou_001',
-				json: true,
-				x: [0, 0.3],
-				y: [0, 0.15],
-				scale: 0.73,
-				angle: -10,
-				//speed: 1,
-			},
-		},
-		jlsgsr_liubei: { //刘备
-			仁义君王: {
-				name: 'JiLue/刘备/仁义君王/liubei_001',
-				json: true,
-				x: [0, 0.22],
-				y: [0, 0.14],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-			神龙之怒: {
-				name: 'JiLue/刘备/神龙之怒/shenliubei_001',
-				json: true,
-				x: [0, 0.42],
-				y: [0, 0.13],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_liuchen: { //刘谌
-			血荐轩辕: {
-				name: 'JiLue/刘谌/血荐轩辕/liuchen_001',
-				json: true,
-				x: [0, 0.41],
-				y: [0, 0.22],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_luzhi: { //卢植
-			国之桢干: {
-				name: 'JiLue/卢植/国之桢干/luzhi_001',
-				json: true,
-				x: [0, 0.32],
-				y: [0, 0.11],
-				scale: 0.6,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_luxun: { //陆逊
-			焚天落奕: {
-				name: 'JiLue/陆逊/焚天落奕/luxun_001',
-				json: true,
-				x: [0, 0.2],
-				y: [0, 0.22],
-				scale: 0.6,
-				angle: 0,
-				//speed: 1,
-			},
-			燎原之火: {
-				name: 'JiLue/陆逊/燎原之火/shenluxun_001',
-				json: true,
-				x: [0, 0.25],
-				y: [0, 0.28],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_lvbu: { //吕布
-			罗刹天: {
-				name: 'JiLue/吕布/罗刹天/spshenlvbu_001',
-				json: true,
-				x: [0, 0.28],
-				y: [0, 0.1],
-				scale: 0.75,
-				angle: 0,
-				//speed: 1,
-			},
-			最强神话: {
-				name: 'JiLue/吕布/最强神话/mo_lvbu_001',
-				json: true,
-				x: [0, 0.52],
-				y: [0, 0.44],
-				scale: 0.45,
-				angle: 0,
-				//speed: 1,
-			},
-			气盈山河: {
-				name: 'JiLue/吕布/气盈山河/lvbu_2021zhongqiu',
-				json: true,
-				x: [0, 0.43],
-				y: [0, 0.26],
-				scale: 0.6,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_lvlingqi: { //吕玲绮
-			无双战姬: {
-				name: 'JiLue/吕玲绮/无双战姬/lvlingqi_001',
-				json: true,
-				x: [0, 0.22],
-				y: [0, 0.21],
-				scale: 0.68,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_lvmeng: { //吕蒙
-			圣域神使: {
-				name: 'JiLue/吕蒙/圣域神使/shenlvmeng_001',
-				json: true,
-				x: [0, 0.16],
-				y: [0, 0.15],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_machao: { //马超
-			武装机甲: {
-				name: 'JiLue/马超/武装机甲/machao_jijia',
-				json: true,
-				x: [0, 0.52],
-				y: [0, 0.4],
-				scale: 0.6,
-				angle: 0,
-				//speed: 1,
-			},
-			修罗幽影: {
-				name: 'JiLue/马超/修罗幽影/shenmachao_001',
-				json: true,
-				x: [0, 0.7],
-				y: [0, 0.18],
-				scale: 0.72,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_mifuren: { //糜夫人
-			青莲疏影: {
-				name: 'JiLue/糜夫人/青莲疏影/mifuren_001',
-				json: true,
-				x: [0, 0.06],
-				y: [0, 0.36],
-				scale: 0.5,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_panshu: { //潘淑
-			锦织引簇: {
-				name: 'JiLue/潘淑/锦织引簇/panshu_001',
-				json: true,
-				x: [0, 0.3],
-				y: [0, 0.23],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_panzhang: { //潘璋
-			视财如命: {
-				name: 'JiLue/潘璋/视财如命/panzhang_001',
-				json: true,
-				x: [0, 0.32],
-				y: [0, 0.31],
-				scale: 0.55,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsoul_simahui: { //司马徽
-			局中窥人: {
-				name: 'JiLue/司马徽/局中窥人/shensimahui_001',
-				json: true,
-				x: [0, 0.6],
-				y: [0, 0.16],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_simayi: { //司马懿
-			鉴往知来: {
-				name: 'JiLue/司马懿/鉴往知来/shensimayi_001',
-				json: true,
-				x: [0, -0.1],
-				y: [0, 0.04],
-				scale: 0.7,
-				angle: 10,
-				//speed: 1,
-			},
-			三分归晋: {
-				name: 'JiLue/司马懿/三分归晋/mo_simayi_001',
-				json: true,
-				x: [0, 0.24],
-				y: [0, 0.21],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_sunce: { //孙策
-			霸影狂狮: {
-				name: 'JiLue/孙策/霸影狂狮/sunce2',
-				json: true,
-				x: [0, 0.33],
-				y: [0, 0.3],
-				scale: 0.52,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_sundeng: { //孙登
-			瑞雪丰年: {
-				name: 'JiLue/孙登/瑞雪丰年/sundeng_001',
-				json: true,
-				x: [0, 0.55],
-				y: [0, 0.15],
-				scale: 0.7,
-				angle: -5,
-				//speed: 1,
-			},
-		},
-		jlsgsk_sunhao: { //孙皓
-			末世暴君: {
-				name: 'JiLue/孙皓/末世暴君/mo_sunhao',
-				json: true,
-				x: [0, 0.4],
-				y: [0, 0.3],
-				scale: 0.48,
-				angle: -5,
-				//speed: 1,
-			},
-		},
-		jlsgsk_sunluyu: { //孙鲁育
-			与虎谋皮: {
-				name: 'JiLue/孙鲁育/与虎谋皮/sunluyu_001',
-				json: true,
-				x: [0, 0],
-				y: [0, 0.27],
-				scale: 0.7,
-				angle: 10,
-				//speed: 1,
-			},
-		},
-		jlsgsr_sunquan: { //孙权
-			东吴大帝: {
-				name: 'JiLue/孙权/东吴大帝/shensunquan_001',
-				json: true,
-				x: [0, 0.38],
-				y: [0, 0.2],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-			剑舞游龙: {
-				name: 'JiLue/孙权/剑舞游龙/sunquan_001',
-				json: true,
-				x: [0, 0.25],
-				y: [0, 0.15],
-				scale: 0.68,
-				angle: 5,
-				//speed: 1,
-			},
-		},
-		jlsgsk_sunru: { //孙茹
-			月桂颉香: {
-				name: 'JiLue/孙茹/月桂颉香/sunru_001',
-				json: true,
-				x: [0, 0.25],
-				y: [0, 0.35],
-				scale: 0.5,
-				angle: 10,
-				//speed: 1,
-			},
-		},
-		jlsgsr_sunshangxiang: { //孙尚香
-			蝶梦轻影: {
-				name: 'JiLue/孙尚香/蝶梦轻影/sunshangxiang_001',
-				json: true,
-				x: [0, 0.8],
-				y: [0, 0.25],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-			绝代巾帼: {
-				name: 'JiLue/孙尚香/绝代巾帼/sunshangxiang_003',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.42],
-				y: [0, 0.24],
-				scale: 0.58,
-				angle: 0,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/孙尚香/绝代巾帼/role',
-					json: true,
-					action: 'in',
-					scale: 0.45,
-				},
-				gongji: {
-					name: 'JiLue/孙尚香/绝代巾帼/role',
-					json: true,
-					action: 'in',
-					scale: 0.6,
-				},
-				background: "JiLue/孙尚香/绝代巾帼/beijing.png"
-			},
-			夏日炎炎: {
-				name: 'JiLue/孙尚香/夏日炎炎/sunshangxiang_xiari',
-				json: true,
-				x: [0, 0.7],
-				y: [0, 0.4],
-				scale: 0.55,
-				angle: -5,
-				//speed: 1,
-			},
-			夜枭泷月: {
-				name: 'JiLue/孙尚香/夜枭泷月/shensunshangxiang_001',
-				json: true,
-				x: [0, 0.64],
-				y: [0, 0.24],
-				scale: 0.68,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_sunxiu: { //孙休
-			宴诛权臣: {
-				name: 'JiLue/孙休/宴诛权臣/sunxiu_001',
-				json: true,
-				x: [0, 0.7],
-				y: [0, 0.13],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		dc_tianfeng: { //田丰
-			神秩之辉: {
-				name: 'JiLue/田丰/神秩之辉/tianfeng_001',
-				json: true,
-				x: [0, 0.12],
-				y: [0, 0.34],
-				scale: 0.6,
-				angle: 0,
-				//speed: 1,
-			},
-			刚而谏上: {
-				name: '田丰/刚而谏上/xingxiang',
-				version: "4.0",
-				json: true,
-				x: [0, 0.49],
-				y: [0, 0.25],
-				angle: 27,
-				scale: 0.77,
-				//speed: 1,
-				beijing: {
-					name: '田丰/刚而谏上/beijing',
-					version: "4.0",
-					json: true,
-					scale: 0.6,
-					x: [0, 0.5],
-					y: [0, 0.5]
-				},
-			},
-		},
-		jlsgsk_wanglang: { //王朗
-			四世三公: {
-				name: 'JiLue/王朗/四世三公/wanglang_001',
-				json: true,
-				x: [0, 0.35],
-				y: [0, 0.22],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_wangyi: { //王异
-			孤剑琼英: {
-				name: 'JiLue/王异/孤剑琼英/wangyi_001',
-				json: true,
-				x: [0, 0.47],
-				y: [0, 0.35],
-				scale: 0.52,
-				angle: 5,
-				//speed: 1,
-			},
-		},
-		jlsgsy_weiyan: { //魏延
-			嗜血狂狼: {
-				name: 'JiLue/魏延/嗜血狂狼/mo_weiyan_001',
-				json: true,
-				x: [0, 0.35],
-				y: [0, 0.15],
-				scale: 0.62,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_wenyang: { //文鸯
-			飞云挚电: {
-				name: 'JiLue/文鸯/飞云挚电/wenyang_001',
-				json: true,
-				x: [0, 0.35],
-				y: [0, 0.38],
-				scale: 0.7,
-				angle: 10,
-				//speed: 1,
-			},
-		},
-		jlsgsk_wuxian: { //吴苋
-			雍容华贵: {
-				name: 'JiLue/吴苋/雍容华贵/wuxian_001',
-				json: true,
-				x: [0, 0.86],
-				y: [0, 0.32],
-				scale: 0.55,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_wuyi: { //吴懿
-			万军破敌: {
-				name: 'JiLue/吴懿/万军破敌/wuyi_001',
-				json: true,
-				x: [0, 0.2],
-				y: [0, 0.12],
-				scale: 0.72,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_xizhicai: { //戏志才
-			风流倜傥: {
-				name: 'JiLue/戏志才/风流倜傥/xizhicai_001',
-				json: true,
-				x: [0, 0.74],
-				y: [0, 0.11],
-				scale: 0.63,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_xiahoudun: { //夏侯惇
-			忠魂烈火: {
-				name: 'JiLue/夏侯惇/忠魂烈火/shenxiahoudun_001',
-				json: true,
-				x: [0, 0.54],
-				y: [0, 0.3],
-				scale: 0.68,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_xiahoushi: { //夏侯氏
-			童趣春生: {
-				name: 'JiLue/夏侯氏/童趣春生/xiahoushi_001',
-				json: true,
-				x: [0, 0.44],
-				y: [0, 0.32],
-				scale: 0.6,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_xinxianying: { //辛宪英
-			灵汐幻鲸: {
-				name: 'JiLue/辛宪英/灵汐幻鲸/xinxianying_001',
-				json: true,
-				x: [0, 0.37],
-				y: [0, 0.25],
-				scale: 0.63,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_xushi: { //徐氏
-			怅然思君: {
-				name: 'JiLue/徐氏/怅然思君/xushi_001',
-				json: true,
-				x: [0, 0.45],
-				y: [0, 0.28],
-				scale: 0.63,
-				angle: -10,
-				//speed: 1,
-			},
-		},
-		jlsgsk_xuyou: { //许攸
-			火烧乌巢: {
-				name: 'JiLue/许攸/火烧乌巢/xuyou_001_00',
-				json: true,
-				x: [0, 0.48],
-				y: [0, 0.32],
-				scale: 0.5,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_yuji: { //于吉
-			符水济世: {
-				name: 'JiLue/于吉/符水济世/yuji_001',
-				json: true,
-				x: [0, 0.48],
-				y: [0, 0.1],
-				scale: 0.62,
-				angle: -5,
-				//speed: 1,
-			},
-		},
-		jlsgsy_yuanshao: { //袁绍
-			魔君: {
-				name: 'JiLue/袁绍/魔君/mo_yuanshao_001',
-				json: true,
-				x: [0, 0.5],
-				y: [0, -0.02],
-				scale: 0.75,
-				angle: -5,
-				//speed: 1,
-			},
-		},
-		jlsgsr_zhangfei: { //张飞
-			龙舟竞渡: {
-				name: 'JiLue/张飞/龙舟竞渡/zhangfei_001',
-				json: true,
-				x: [0, 0.47],
-				y: [0, 0.21],
-				scale: 0.65,
-				angle: 5,
-				//speed: 1,
-			},
-		},
-		jlsgsoul_zhangjiao: { //张角
-			大道无常: {
-				name: 'JiLue/张角/大道无常/spshenzhangjiao_001',
-				json: true,
-				x: [0, 0.35],
-				y: [0, 0.06],
-				scale: 0.72,
-				angle: 0,
-				//speed: 1,
-			},
-			大贤良师: {
-				name: 'JiLue/张角/大贤良师/mo_zhangjiao_001',
-				json: true,
-				x: [0, 0.46],
-				y: [0, 0.41],
-				scale: 0.4,
-				angle: 0,
-				//speed: 1,
-			},
-			驱雷策电: {
-				name: 'JiLue/张角/驱雷策电/shenzhangjiao_001',
-				json: true,
-				x: [0, 0.17],
-				y: [0, 0.12],
-				scale: 0.65,
-				angle: 10,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zhangliang: { //张梁
-			聚义成雷: {
-				name: 'JiLue/张梁/聚义成雷/zhangliang_001',
-				json: true,
-				x: [0, 0.4],
-				y: [0, 0.17],
-				scale: 0.68,
-				angle: -5,
-				//speed: 1,
-			},
-		},
-		jlsgsr_zhangliao: { //张辽
-			风驰电掣: {
-				name: 'JiLue/张辽/风驰电掣/shenzhangliao_001',
-				json: true,
-				x: [0, 0.48],
-				y: [0, 0.1],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-			雁门刑天: {
-				name: 'JiLue/张辽/雁门刑天/sp_shenzhangliao_001',
-				json: true,
-				x: [0, 0.4],
-				y: [0, 0.48],
-				scale: 0.55,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zhangning: { //张宁
-			烽火连天: {
-				name: '张宁/烽火连天/daiji2',
-				shan: 'play3',
-				version: "3.6",
-				x: [0, 0.54],
-				y: [0, 0.53],
-				scale: 0.73,
-				angle: 0,
-				//speed: 1,
-				shizhounian: true,
-				chuchang: {
-					name: '张宁/烽火连天/chuchang',
-					version: "3.6",
-					action: 'play',
-					scale: 0.7,
-				},
-				gongji: {
-					name: '张宁/烽火连天/chuchang2',
-					version: "3.6",
-					action: 'gongji',
-					scale: 0.8,
-				},
-				teshu: {
-					name: '张宁/烽火连天/chuchang2',
-					version: "3.6",
-					action: 'jineng',
-					scale: 0.8,
-				},
-				beijing: {
-					name: '张宁/烽火连天/beijing',
-					version: "3.6",
-					x: [0, 0.29],
-					y: [0, 0.5],
-					scale: 0.4,
-				},
-				zhishixian: {
-					name: '张宁/烽火连天/shouji2',
-					version: "3.6",
-					scale: 0.5,
-					speed: 0.8,
-					delay: 0.4,
-					effect: {
-						name: '张宁/烽火连天/shouji',
-						version: "3.6",
-						scale: 0.5,
-						speed: 0.8,
-						delay: 0.25,
-					},
-				},
-			},
-			绝命幽兰: {
-				name: 'JiLue/张宁/绝命幽兰/zhangchunhua_yiyuwuniang',
-				json: true,
-				x: [0, 0.9],
-				y: [0, 0.43],
-				scale: 0.55,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zhangrang: { //张让
-			金玉满堂: {
-				name: 'JiLue/张让/金玉满堂/zhangrang_001',
-				json: true,
-				x: [0, 0.85],
-				y: [0, 0.25],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-			祸乱之源: {
-				name: 'JiLue/张让/祸乱之源/mo_zhangrang_001',
-				json: true,
-				x: [0, 0.42],
-				y: [0, 0.38],
-				scale: 0.5,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		zhangzhi: { //张芝
-			韵墨濯荷: {
-				name: '张芝/韵墨濯荷/xingxiang',
-				version: "4.0",
-				json: true,
-				x: [0, 0.48],
-				y: [0, 0.11],
-				scale: 1.0,
-				angle: 15,
-				//speed: 1,
-				beijing: {
-					name: '张芝/韵墨濯荷/beijing',
-					version: "4.0",
-					json: true,
-					scale: 0.6,
-					x: [0, 0.5],
-					y: [0, 0.5]
-				},
-			},
-		},
-		jlsgsr_zhaoyun: { //赵云
-			冲涛踏浪: {
-				name: 'JiLue/赵云/冲涛踏浪/zhaoyun_xiari',
-				json: true,
-				x: [0, 0.58],
-				y: [0, 0.2],
-				scale: 0.65,
-				angle: -5,
-				//speed: 1,
-			},
-			快意豪情: {
-				name: 'JiLue/赵云/快意豪情/zhaoyun_xing',
-				json: true,
-				x: [0, 0.4],
-				y: [0, 0.42],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_zhenji: { //甄姬
-			轻云蔽月: {
-				name: 'JiLue/甄姬/轻云蔽月/zhenji_001',
-				json: true,
-				x: [0, 0.66],
-				y: [0, 0.3],
-				scale: 0.6,
-				angle: -10,
-				//speed: 1,
-			},
-			御水沉烟: {
-				name: 'JiLue/甄姬/御水沉烟/shenzhenji_001',
-				json: true,
-				x: [0, 0.65],
-				y: [0, 0.23],
-				scale: 0.7,
-				angle: 10,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zhoufei: { //周妃
-			风清日暖: {
-				name: 'JiLue/周妃/风清日暖/zhoufei_001',
-				json: true,
-				x: [0, 0.55],
-				y: [0, 0.37],
-				scale: 0.55,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsr_zhouyu: { //周瑜
-			红莲业火: {
-				name: 'JiLue/周瑜/红莲业火/shenzhouyu_001',
-				json: true,
-				x: [0, 0.49],
-				y: [0, 0.11],
-				scale: 0.78,
-				angle: 0,
-				//speed: 1,
-			},
-			韶华轻游: {
-				name: 'JiLue/周瑜/韶华轻游/zhouyu_ql',
-				json: true,
-				x: [0, 0.08],
-				y: [0, 0.5],
-				scale: 0.45,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zhuzhi: { //朱治
-			功崇信重: {
-				name: 'JiLue/朱治/功崇信重/zhuzhi_001',
-				json: true,
-				x: [0, 0.55],
-				y: [0, 0],
-				scale: 0.7,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zhugeguo: { //诸葛果
-			御鹤登仙: {
-				name: 'JiLue/诸葛果/御鹤登仙/zhugeguo_001',
-				json: true,
-				x: [0, 0.36],
-				y: [0, 0.08],
-				scale: 0.7,
-				angle: -5,
-				//speed: 1,
-			},
-		},
-		jlsgsr_zhugeliang: { //诸葛亮
-			绝代智谋: {
-				name: 'JiLue/诸葛亮/绝代智谋/sp_zhugeliang_001',
-				json: true,
-				x: [0, 0.82],
-				y: [0, 0.1],
-				scale: 0.7,
-				angle: -5,
-				//speed: 1,
-			},
-			七星诛邪: {
-				name: 'JiLue/诸葛亮/七星诛邪/shenzhugeliang_001',
-				json: true,
-				x: [0, 0.1],
-				y: [0, -0.18],
-				scale: 0.9,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zhugezhan: { //诸葛瞻
-			坚守阵地: {
-				name: 'JiLue/诸葛瞻/坚守阵地/zhugezhan_001',
-				json: true,
-				x: [0, 0.62],
-				y: [0, 0.27],
-				scale: 0.7,
-				angle: -15,
-				//speed: 1,
-			},
-		},
-		dc_jiling: {
-			气吞山河: {
-				name: '纪灵/气吞山河/xingxiang',
-				version: "4.0",
-				json: true,
-				x: [0, 0.51],
-				y: [0, 0.13],
-				angle: 27,
-				scale: 1,
-				//speed: 1,
-				beijing: {
-					name: '纪灵/气吞山河/beijing',
-					version: "4.0",
-					json: true,
-					scale: 0.6,
-					x: [0, 0.5],
-					y: [0, 0.5]
-				},
-			},
-		},
-		re_zoushi: { //邹氏
-			娇媚暗波: {
-				name: '邹氏/娇媚暗波/xingxiang',
-				version: "4.0",
-				json: true,
-				x: [0, -0.07],
-				y: [0, 0.12],
-				angle: 14,
-				scale: 0.77,
-				//speed: 1,
-				beijing: {
-					name: '邹氏/娇媚暗波/beijing',
-					version: "4.0",
-					json: true,
-					scale: 0.6,
-					x: [0, 0.5],
-					y: [0, 0.5]
-				},
-			},
-			微风和煦: {
-				name: 'JiLue/邹氏/微风和煦/zoushi_001',
-				json: true,
-				x: [0, 0.15],
-				y: [0, 0.3],
-				scale: 0.55,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zuoci: { //左慈
-			天狼方士: {
-				name: 'JiLue/左慈/天狼方士/zuoci_001',
-				json: true,
-				x: [0, 0.04],
-				y: [0, 0.25],
-				scale: 0.65,
-				angle: 0,
-				//speed: 1,
-			},
-		},
-		jlsgsk_zuoyou: {
-			次元战姬: {
-				name: 'JiLue/左幽/次元战姬/zuoyou_002_kp',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.48],
-				y: [0, 0.35],
-				scale: 0.52,
-				angle: 5,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/次元战姬/zuoyou_002',
-					json: true,
-					scale: 0.8,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/次元战姬/zuoyou_002',
-					json: true,
-					scale: 1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/次元战姬/beijing.png"
-			},
-			光影相生: {
-				name: 'JiLue/左幽/光影相生/zuoyou_009_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.42],
-				y: [0, 0.53],
-				scale: 0.3,
-				angle: 0,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/光影相生/zuoyou_009',
-					json: true,
-					scale: 1,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/光影相生/zuoyou_009',
-					json: true,
-					scale: 1.2,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/光影相生/beijing.png"
-			},
-			鹤鸣剑影: {
-				name: 'JiLue/左幽/鹤鸣剑影/zuoyou_jx_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.48],
-				y: [0, 0.38],
-				scale: 0.53,
-				angle: 0,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/鹤鸣剑影/zuoyou_jx',
-					json: true,
-					scale: 0.8,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/鹤鸣剑影/zuoyou_jx',
-					json: true,
-					scale: 1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/鹤鸣剑影/beijing.png"
-			},
-			红尘炼心: {
-				name: 'JiLue/左幽/红尘炼心/zuoyou_004_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.4],
-				y: [0, 0.35],
-				scale: 0.52,
-				angle: -5,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/红尘炼心/zuoyou_004',
-					json: true,
-					scale: 0.8,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/红尘炼心/zuoyou_004',
-					json: true,
-					scale: 1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/红尘炼心/beijing.png"
-			},
-			秘法归虚: {
-				name: 'JiLue/左幽/秘法归虚/zuoyou_012_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.55],
-				y: [0, 0.28],
-				scale: 0.5,
-				angle: 5,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/秘法归虚/zuoyou_012',
-					json: true,
-					scale: 0.9,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/秘法归虚/zuoyou_012',
-					json: true,
-					scale: 1.1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/秘法归虚/beijing.png"
-			},
-			莫测之影: {
-				name: 'JiLue/左幽/莫测之影/zuoyou_011_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.48],
-				y: [0, 0.3],
-				scale: 0.52,
-				angle: 0,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/莫测之影/zuoyou_011',
-					json: true,
-					scale: 1.1,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/莫测之影/zuoyou_011',
-					json: true,
-					scale: 1.3,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/莫测之影/beijing.png"
-			},
-			烈焰羽凰: {
-				name: 'JiLue/左幽/烈焰羽凰/zuoyou_003_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.42],
-				y: [0, 0.36],
-				scale: 0.5,
-				angle: 0,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/烈焰羽凰/zuoyou_003',
-					json: true,
-					scale: 0.8,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/烈焰羽凰/zuoyou_003',
-					json: true,
-					scale: 1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/烈焰羽凰/beijing.png"
-			},
-			绿野仙踪: {
-				name: 'JiLue/左幽/绿野仙踪/zuoyou_008_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.55],
-				y: [0, 0.32],
-				scale: 0.46,
-				angle: 10,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/绿野仙踪/zuoyou_008',
-					json: true,
-					scale: 0.9,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/绿野仙踪/zuoyou_008',
-					json: true,
-					scale: 1.1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/绿野仙踪/beijing.png"
-			},
-			倩女幽魂: {
-				name: 'JiLue/左幽/倩女幽魂/zuoyou_006_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.45],
-				y: [0, 0.35],
-				scale: 0.48,
-				angle: 0,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/倩女幽魂/zuoyou_006',
-					json: true,
-					scale: 0.9,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/倩女幽魂/zuoyou_006',
-					json: true,
-					scale: 1.1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/倩女幽魂/beijing.png"
-			},
-			微妙玄通: {
-				name: 'JiLue/左幽/微妙玄通/zuoyou_010_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.52],
-				y: [0, 0.36],
-				scale: 0.45,
-				angle: 5,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/微妙玄通/zuoyou_010',
-					json: true,
-					scale: 1,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/微妙玄通/zuoyou_010',
-					json: true,
-					scale: 1.2,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/微妙玄通/beijing.png"
-			},
-			侠骨柔情: {
-				name: 'JiLue/左幽/侠骨柔情/zuoyou_005_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.35],
-				y: [0, 0.35],
-				scale: 0.5,
-				angle: -10,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/侠骨柔情/zuoyou_005',
-					json: true,
-					scale: 0.9,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/侠骨柔情/zuoyou_005',
-					json: true,
-					scale: 1.1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/侠骨柔情/beijing.png"
-			},
-			庄周梦蝶: {
-				name: 'JiLue/左幽/庄周梦蝶/zuoyou_007_duiju',
-				json: true,
-				shizhounian: true,
-				x: [0, 0.4],
-				y: [0, 0.35],
-				scale: 0.48,
-				angle: 2,
-				//speed: 1,
-				chuchang: {
-					name: 'JiLue/左幽/庄周梦蝶/zuoyou_007',
-					json: true,
-					scale: 0.9,
-					showTime: 2,
-					action: 'animation',
-				},
-				gongji: {
-					name: 'JiLue/左幽/庄周梦蝶/zuoyou_007',
-					json: true,
-					scale: 1.1,
-					showTime: 2,
-					action: 'animation',
-				},
-				background: "JiLue/左幽/庄周梦蝶/beijing.png"
-			},
-		},
 	};
 
 	var extend = { //共用
@@ -29500,6 +28410,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		ol_zhangrang: decadeUI.dynamicSkin.zhangrang,
 		junk_zhangrang: decadeUI.dynamicSkin.zhangrang,
 		ini_zhangrang: decadeUI.dynamicSkin.zhangrang,
+		scs_zhangrang: decadeUI.dynamicSkin.zhangrang,
 
 		ol_wangrong: decadeUI.dynamicSkin.wangrong,
 
@@ -29605,135 +28516,12 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 
 		dc_luotong: decadeUI.dynamicSkin.luotong,
 
-
-
-
-
-		//极略三国
-
-		//曹操
-		jlsgsoul_caocao: decadeUI.dynamicSkin.jlsgsr_caocao,
-
-		//董卓
-		jlsgsy_dongzhuo: decadeUI.dynamicSkin.jlsgsk_dongzhuo,
-		jlsgsy_dongzhuobaonu: decadeUI.dynamicSkin.jlsgsk_dongzhuo,
-
-		//大乔
-		jlsgsoul_daqiao: decadeUI.dynamicSkin.jlsgsr_daqiao,
-
-		//貂蝉
-		jlsgsoul_diaochan: decadeUI.dynamicSkin.jlsgsr_diaochan,
-		jlsgsy_diaochan: decadeUI.dynamicSkin.jlsgsr_diaochan,
-		jlsgsy_diaochanbaonu: decadeUI.dynamicSkin.jlsgsr_diaochan,
-
-		//黄月英
-		jlsgsr_huangyueying: decadeUI.dynamicSkin.jlsgsk_huangyueying,
-		jlsgsoul_huangyueying: decadeUI.dynamicSkin.jlsgsk_huangyueying,
-		jlsgsoul_sp_huangyueying: decadeUI.dynamicSkin.jlsgsk_huangyueying,
-
-		//刘备
-		jlsgsoul_liubei: decadeUI.dynamicSkin.jlsgsr_liubei,
-
-		//吕布
-		jlsgsoul_lvbu: decadeUI.dynamicSkin.jlsgsr_lvbu,
-		jlsgsoul_sp_lvbu: decadeUI.dynamicSkin.jlsgsr_lvbu,
-		jlsgsy_lvbu: decadeUI.dynamicSkin.jlsgsr_lvbu,
-		jlsgsy_lvbubaonu: decadeUI.dynamicSkin.jlsgsr_lvbu,
-
-		//吕蒙
-		jlsgsoul_lvmeng: decadeUI.dynamicSkin.jlsgsr_lvmeng,
-
-		//马超
-		jlsgsr_machao: decadeUI.dynamicSkin.jlsgsk_machao,
-		jlsgsoul_machao: decadeUI.dynamicSkin.jlsgsk_machao,
-
-		//甘宁
-		jlsgsoul_ganning: decadeUI.dynamicSkin.jlsgsr_ganning,
-		jlsgsoul_sp_ganning: decadeUI.dynamicSkin.jlsgsr_ganning,
-
-		//关羽
-		jlsgsoul_guanyu: decadeUI.dynamicSkin.jlsgsk_guanyu,
-		jlsgsr_guanyu: decadeUI.dynamicSkin.jlsgsk_guanyu,
-
-		//郭嘉
-		jlsgsoul_guojia: decadeUI.dynamicSkin.jlsgsr_guojia,
-
-		//华佗
-		jlsgsoul_huatuo: decadeUI.dynamicSkin.jlsgsr_huatuo,
-
-		//陆逊
-		jlsgsoul_luxun: decadeUI.dynamicSkin.jlsgsr_luxun,
-
-		//孙权
-		jlsgsoul_sunquan: decadeUI.dynamicSkin.jlsgsr_sunquan,
-
-		//孙尚香
-		jlsgsoul_sunshangxiang: decadeUI.dynamicSkin.jlsgsr_sunshangxiang,
-		jlsgsk_jdjg_sunshangxiang: decadeUI.dynamicSkin.jlsgsr_sunshangxiang,
-
-		//魏延
-		jlsgsy_weiyanbaonu: decadeUI.dynamicSkin.jlsgsy_weiyan,
-
-		//张飞
-		jlsgsoul_zhangfei: decadeUI.dynamicSkin.jlsgsr_zhangfei,
-
-		//神张角
-		jlsgsoul_sp_zhangjiao: decadeUI.dynamicSkin.jlsgsoul_zhangjiao,
-		jlsgsy_zhangjiao: decadeUI.dynamicSkin.jlsgsoul_zhangjiao,
-		jlsgsy_zhangjiaobaonu: decadeUI.dynamicSkin.jlsgsoul_zhangjiao,
-
-		//司马懿
-		jlsgsoul_simayi: decadeUI.dynamicSkin.jlsgsr_simayi,
-		jlsgsy_simayi: decadeUI.dynamicSkin.jlsgsr_simayi,
-		jlsgsy_simayibaonu: decadeUI.dynamicSkin.jlsgsr_simayi,
-
-		//孙皓
-		jlsgsy_sunhao: decadeUI.dynamicSkin.jlsgsk_sunhao,
-		jlsgsy_sunhaobaonu: decadeUI.dynamicSkin.jlsgsk_sunhao,
-
-		//张辽
-		jlsgsoul_zhangliao: decadeUI.dynamicSkin.jlsgsr_zhangliao,
-		jlsgsoul_sp_zhangliao: decadeUI.dynamicSkin.jlsgsr_zhangliao,
-
-		//张让
-		jlsgsy_zhangrang: decadeUI.dynamicSkin.jlsgsk_zhangrang,
-		jlsgsy_zhangrangbaonu: decadeUI.dynamicSkin.jlsgsk_zhangrang,
-
-		//赵云
-		jlsgsoul_zhaoyun: decadeUI.dynamicSkin.jlsgsr_zhaoyun,
-
-		//周瑜
-		jlsgsoul_zhouyu: decadeUI.dynamicSkin.jlsgsr_zhouyu,
-
-		//诸葛亮
-		jlsgsoul_zhugeliang: decadeUI.dynamicSkin.jlsgsr_zhugeliang,
-		jlsgsoul_sp_zhugeliang: decadeUI.dynamicSkin.jlsgsr_zhugeliang,
-
-		//夏侯惇
-		jlsgsoul_xiahoudun: decadeUI.dynamicSkin.jlsgsr_xiahoudun,
-
-		//甄姬
-		jlsgsoul_zhenji: decadeUI.dynamicSkin.jlsgsr_zhenji,
-
-		//张宁
-		tw_zhangning: decadeUI.dynamicSkin.zhangning,
-		//三英神蔡夫人
-		jlsgsy_caifurenbaonu: decadeUI.dynamicSkin.jlsgsy_caifuren,
-
-		//三英神袁绍
-		jlsgsy_yuanshaobaonu: decadeUI.dynamicSkin.jlsgsy_yuanshao,
-
 		jsrg_guozhao: decadeUI.dynamicSkin.guozhao,
-
-		//左幽
-		变天左幽: decadeUI.dynamicSkin.jlsgsk_zuoyou,
-		残普左幽: decadeUI.dynamicSkin.jlsgsk_zuoyou,
-		反骨左幽: decadeUI.dynamicSkin.jlsgsk_zuoyou,
-		锦囊左幽: decadeUI.dynamicSkin.jlsgsk_zuoyou,
-		神游左幽: decadeUI.dynamicSkin.jlsgsk_zuoyou,
-		苦刮左幽: decadeUI.dynamicSkin.jlsgsk_zuoyou,
-		知天左幽: decadeUI.dynamicSkin.jlsgsk_zuoyou,
-		判定左幽: decadeUI.dynamicSkin.jlsgsk_zuoyou,
+		re_guohuai: decadeUI.dynamicSkin.guohuai,
+		xin_guohuai: decadeUI.dynamicSkin.guohuai,
+		tw_guohuai: decadeUI.dynamicSkin.guohuai,
+		ol_guohuai: decadeUI.dynamicSkin.guohuai,
+		sb_guohuai: decadeUI.dynamicSkin.guohuai,
 
 
 	};

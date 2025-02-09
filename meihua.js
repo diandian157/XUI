@@ -125,7 +125,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			delete ui.cardqx;
 		}
 	});
-
 	// 选择结束时移除按钮
 	lib.hooks.uncheckBegin.add("cardqx", () => {
 		if (get.event().result?.bool) {

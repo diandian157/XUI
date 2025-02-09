@@ -9344,49 +9344,85 @@ export default async function() {
 					delete window.timer2;
 				}
 				if (document.getElementById("jindutiaopl")) {
-					document.getElementById("jindutiaopl").remove()
+					document.getElementById("jindutiaopl").remove();
 				}
-				var boxContent = document.createElement('div');
-				boxContent.setAttribute('id', 'jindutiaopl');
-				//十周年客户端进度条样式
-				if (!window.jindutiaoTeshu) {
-					window.jindutiaoTeshu = true;
+				var boxContent = document.createElement("div");
+				boxContent.setAttribute("id", "jindutiaopl");
+				//-------样式2-----//
+				if (lib.config.extension_十周年UI_jindutiaoYangshi == "2") {
+					//十周年PC端进度条样式
+					if (window.jindutiaoTeshu) {
+						delete window.jindutiaoTeshu;
+					}
+					boxContent.style.width = "500px";
+					boxContent.style.height = "24px";
+					boxContent.style.display = "block";
+					boxContent.style.left = "calc(50% - 300px)";
+					boxContent.style.position = "fixed";
+					boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
+
+					var boxTime = document.createElement("div");
+					boxTime.data = 370;
+					boxTime.style.cssText ="width:370px;height:4.3px;margin:14px 0 0 85px;background-color: #E2E20A;border-right:5px solid #FFF;position: absolute;top: -3.5px;";
+					boxContent.appendChild(boxTime);
+
+					var imgBg = document.createElement("img");
+					imgBg.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindutiao.png";
+					imgBg.style.cssText ="--w:500px;--h:calc(var(--w)*44/759);width: var(--w);height:var(--h);position: absolute;top: 0;";
+					boxContent.appendChild(imgBg);
 				}
-				boxContent.style.width = "615px";
-				boxContent.style.height = "13px";
-				boxContent.style.display = "block";
-				boxContent.style["boxShadow"] = "0 0 4px #000000";
-				boxContent.style.margin = "0 0 !important";
-				boxContent.style.position = "fixed";
-				boxContent.style.left = "calc(50% - 350px)";
-				boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
+				//-------样式3-----//
+				if (lib.config.extension_十周年UI_jindutiaoYangshi == "3") {
+					if (window.jindutiaoTeshu) {
+						delete window.jindutiaoTeshu;
+					}
+					boxContent.style.width = "500px";
+					boxContent.style.height = "13px";
+					boxContent.style.display = "block";
+					boxContent.style["boxShadow"] = "0 0 4px #000000";
+					boxContent.style.margin = "0 0 !important";
+					boxContent.style.position = "fixed";
+					boxContent.style.left = "calc(50% - 300px)";
+					boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
 
-				var boxTime = document.createElement("div");
-				boxTime.data = 610; /*黄色条长度*/
-				boxTime.style.cssText =
-					"z-index:1;width:614px;height:8px;margin:0 0 0 1px;background-color: #F4C336;border-top:3px solid #EBE1A7;border-bottom:2px solid #73640D;border-left:1px solid #73640D;position: absolute;top: 0px;border-radius:3px;";
-				boxContent.appendChild(boxTime);
+					var boxTime = document.createElement("div");
+					boxTime.data = 500; /*黄色条长度*/
+					boxTime.style.cssText =
+						"z-index:1;width:500px;height:10px;margin:0 0 0 0px;background-color: #F4C336;position: absolute;top: 1px;";
+					boxContent.appendChild(boxTime);
+					/*底图*/
+					var imgBg2 = document.createElement("img");
+					imgBg2.src = lib.assetURL +
+						"extension/十周年UI/shoushaUI/lbtn/images/uibutton/newTimeBarBg.png";
+					imgBg2.style.cssText = "width: 500px;height:12px;position: absolute;top: -3;z-index: -1;";
+					boxContent.appendChild(imgBg2);
+				}
+				if (lib.config.extension_十周年UI_jindutiaoYangshi == "4") {
+					if (window.jindutiaoTeshu) {
+						delete window.jindutiaoTeshu;
+					}
+					boxContent.style.width = "500px";
+					boxContent.style.height = "13px";
+					boxContent.style.display = "block";
+					boxContent.style["boxShadow"] = "0 0 4px #000000";
+					boxContent.style.margin = "0 0 !important";
+					boxContent.style.position = "fixed";
+					boxContent.style.left = "calc(50% - 300px)";
+					boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
 
-				var boxTime2 = document.createElement("div");
-				boxTime2.data = 599; /*白色条长度*/
-				boxTime2.style.cssText = "";
-				boxContent.appendChild(boxTime2);
-				//白条底图
-				var imgBg3 = document.createElement("img");
-				imgBg3.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindustiao2.1.png";
-				imgBg3.style.cssText = "width: 400px;height:4px;position: absolute;top: 16px;z-index: -1;";
-				boxContent.appendChild(imgBg3);
-
-				var imgBg = document.createElement("img");
-				imgBg.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindsutiao2.png";
-				imgBg.style.cssText = "width: 400px;height:13px;position: absolute;top: 0;opacity:0;";
-				boxContent.appendChild(imgBg);
-				/*底图*/
-				var imgBg2 = document.createElement("img");
-				imgBg2.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindutiao2.1.png";
-				imgBg2.style.cssText = "width: 615px;height:14px;position: absolute;top: 0;z-index: -1;";
-				boxContent.appendChild(imgBg2);
-				document.body.appendChild(boxContent)
+					var boxTime = document.createElement("div");
+					boxTime.data = 500; /*黄色条长度*/
+					boxTime.style.cssText =
+						"z-index:1;width:500px;height:10px;margin:0 0 0 0px;background-color: #A56C41;position: absolute;top: 1px;";
+					boxContent.appendChild(boxTime);
+					/*底图*/
+					var imgBg2 = document.createElement("img");
+					imgBg2.src = lib.assetURL +
+						"extension/十周年UI/shoushaUI/lbtn/images/uibutton/newTimeBarBg.png";
+					imgBg2.style.cssText = "width: 500px;height:12px;position: absolute;top: -3;z-index: -1;";
+					boxContent.appendChild(imgBg2);
+				}
+				document.body.appendChild(boxContent);
 				window.timer = setInterval(function() {
 					boxTime.style.width = boxTime.data + 'px';
 					boxTime.data--;
@@ -9404,7 +9440,7 @@ export default async function() {
 				if (window.jindutiaoTeshu == true) {
 					window.timer2 = setInterval(() => {
 						boxTime2.data--;
-						boxTime2.style.width = boxTime2.data + 'px';
+						boxTime2.style.width = boxTime2.data + "px";
 						if (boxTime2.data == 0) {
 							clearInterval(window.timer2);
 							delete window.timer2;
@@ -9414,7 +9450,7 @@ export default async function() {
 							//ui.click.cancel();//结束回合
 							//点击托管ui.click.auto();
 						}
-					}, 100 / 2); //进度条时间
+					}, parseFloat(lib.config["extension_十周年UI_jindutiaoST"]) / 2); //进度条时间
 				}
 			};
 			//-----AI进度条框架----//
@@ -9596,24 +9632,6 @@ export default async function() {
 		},
 		help: {},
 		config: {
-			'description': {
-				name: '<div class="popup pointerdiv">使用须知·查看</div>',
-				clear: true,
-				onclick: function() {
-					if (this.description == undefined) {
-						var more = ui.create.div('.description',
-							'<div class="popup pointerdiv">二改萌修十周年UI,有问题不要打扰萌新（转型中）<br>其他十周年特效请下载扩展《特效补充》<br>限定技立绘需要自行下载放到本体image里<br>全屏模式下界面缩放调至120最佳<br><br>您仍可以再次创作并分享，但是禁止售卖盈利</div>'
-						);
-						this.parentNode.insertBefore(more, this.nextSibling);
-						this.description = more;
-						this.innerHTML = '<div class="popup pointerdiv">使用须知·关闭</div>';
-					} else {
-						this.parentNode.removeChild(this.description);
-						delete this.description;
-						this.innerHTML = '<div class="popup pointerdiv">使用须知·查看</div>';
-					};
-				}
-			},
 			FL0: {
 				"name": "<img style=width:240px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/line.png>",
 				"intro": "",
@@ -9912,6 +9930,16 @@ export default async function() {
 						'extension_十周年UI_playerMarkStyle'];
 				}
 			},
+			jindutiaoYangshi: {
+				name: "进度条样式",
+				init: "1",
+				intro: "切换进度条样式，可根据个人喜好切换手杀进度条或十周年进度条，切换后重启生效",
+				item: {
+					2: "旧十周年",
+					3: "新十周年",
+					4: "一将成名",
+				},
+			},
 			jindutiaoSet: {
 				name: "进度条高度",
 				init: "26",
@@ -10001,12 +10029,38 @@ export default async function() {
 				"clear": true,
 			},
 		},
-		package: {
-			author: '萌新（转型中）<br>十周年UI原作者：短歌<br>手杀UI原名：界面美化<br>手杀UI原作者：橙续缘',
-			diskURL: '',
-			forumURL: '',
-			version: '',
-		},
+		package: (() => {
+			const pkg = {
+				character: {
+					character: {},
+					translate: {},
+				},
+				card: {
+					card: {},
+					translate: {},
+					list: [],
+				},
+				skill: {
+					skill: {},
+					translate: {},
+				},
+			};
+			const pack = {
+				...pkg,
+				...otherInfo,
+			};
+			pack.intro = (pack => {
+				let log = [
+					"二改萌修十周年UI，仅适配电脑端",
+					"主玩家名称为本体联机昵称",
+					"限定觉醒技需要下载lihui放进本体image",
+					"如果不喜欢可以覆盖回原来的effect.js",
+					"您可以再次创作并分享，但是禁止售卖盈利",
+				];
+				return `<a href=${pack.diskURL}>点击前往二改十周年Github仓库</a><br><p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">${log.join("<br>•")}</p>`;
+			})(pack);
+			return pack;
+		})(),
 		files: {
 			character: [],
 			card: [],
