@@ -259,7 +259,7 @@
 	/*选将按钮，提示之类*/
 	/*height: var(--h) !important;
 	width: calc(var(--h)*90/32) !important;*/
-	background-image: url("./images/uibutton/button1.png");
+	background-image: url("./images/uibutton/btnn12.png");
 	background-size: 100% 100%;
 	line-height: var(--h);
 	padding: 6.4px 25px !important;

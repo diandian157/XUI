@@ -6063,6 +6063,7 @@ export default async function() {
 							/*-----------------分割线-----------------*/
 							// 手牌折叠方式
 							xStart += (limitW - totalW) / 2; //居中
+							// xStart += (limitW - totalW) / 1; //靠右
 						}
 
 						var card;
@@ -7993,8 +7994,7 @@ export default async function() {
 								mark.setBackgroundImage("extension/十周年UI/shoushaUI/skill/images/" + skill +
 									"_yang.png");
 							} else {
-								mark.setBackgroundImage("extension/十周年UI/shoushaUI/skill/images/" + skill +
-									"_yang.png");
+								mark.setBackgroundImage("extension/十周年UI/shoushaUI/skill/images/ditu_yang.png");
 							}
 						} else {
 							this.yangSkill(skill);
@@ -8003,8 +8003,7 @@ export default async function() {
 								mark.setBackgroundImage("extension/十周年UI/shoushaUI/skill/images/" + skill +
 									"_ying.png");
 							} else {
-								mark.setBackgroundImage("extension/十周年UI/shoushaUI/skill/images/" + skill +
-									"_ying.png");
+								mark.setBackgroundImage("extension/十周年UI/shoushaUI/skill/images/ditu_ying.png");
 							}
 						}
 					}
@@ -9363,12 +9362,14 @@ export default async function() {
 
 					var boxTime = document.createElement("div");
 					boxTime.data = 370;
-					boxTime.style.cssText ="width:370px;height:4.3px;margin:14px 0 0 85px;background-color: #E2E20A;border-right:5px solid #FFF;position: absolute;top: -3.5px;";
+					boxTime.style.cssText =
+						"width:370px;height:4.3px;margin:14px 0 0 85px;background-color: #E2E20A;border-right:5px solid #FFF;position: absolute;top: -3.5px;";
 					boxContent.appendChild(boxTime);
 
 					var imgBg = document.createElement("img");
 					imgBg.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/jindutiao.png";
-					imgBg.style.cssText ="--w:500px;--h:calc(var(--w)*44/759);width: var(--w);height:var(--h);position: absolute;top: 0;";
+					imgBg.style.cssText =
+						"--w:500px;--h:calc(var(--w)*44/759);width: var(--w);height:var(--h);position: absolute;top: 0;";
 					boxContent.appendChild(imgBg);
 				}
 				//-------样式3-----//
@@ -9932,7 +9933,7 @@ export default async function() {
 			},
 			jindutiaoYangshi: {
 				name: "进度条样式",
-				init: "1",
+				init: "3",
 				intro: "切换进度条样式，可根据个人喜好切换手杀进度条或十周年进度条，切换后重启生效",
 				item: {
 					2: "旧十周年",
