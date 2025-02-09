@@ -148,7 +148,7 @@
 /*玩家姓名阵营*/
 .player>.camp-wrap {
 	display: block;
-	left: -25px;
+	left: -27px;
 	top: -9px;
 	width: 55px;
 	height: 170px;
@@ -403,16 +403,16 @@
 }
 
 /*玩家血量显示*/
-.player>.hp-wrap {
+.player > .hp-wrap {
 	display: block;
 	right: -2px;
 	bottom: -5px;
 	width: 12px;
-	height: 65px;
+	height: 60px;
 	border-width: 24px 5px 21px 82px;
 	border-style: solid;
 	border-color: transparent;
-	border-image-source: url('image/decoration/border1_hp.png');
+	border-image-source: url("image/decoration/border1_hp.png");
 	border-image-slice: 32 6 25 113 fill;
 	pointer-events: none;
 	transition-property: transform, opacity, height;
@@ -421,23 +421,23 @@
 	z-index: 88;
 }
 
-.player[data-max-hp="1"]>.hp-wrap {
+.player[data-max-hp="1"] > .hp-wrap {
 	height: 5px;
 }
 
-.player[data-max-hp="2"]>.hp-wrap {
+.player[data-max-hp="2"] > .hp-wrap {
 	height: 20px;
 }
 
-.player[data-max-hp="3"]>.hp-wrap {
+.player[data-max-hp="3"] > .hp-wrap {
 	height: 35px;
 }
 
-.player[data-max-hp="4"]>.hp-wrap {
+.player[data-max-hp="4"] > .hp-wrap {
 	height: 50px;
 }
 
-.player[data-max-hp="5"]>.hp-wrap {
+.player[data-max-hp="5"] > .hp-wrap {
 	height: 65px;
 }
 

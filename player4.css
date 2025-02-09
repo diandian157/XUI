@@ -443,20 +443,26 @@
 
 .hujia {
 	top: auto;
-	bottom: 43px;
-	left: -3px;
-	background-image: url("image/decoration/shield.png");
+	bottom: 80%;
+	/*上下*/
+	left: -4px;
+	/*左右*/
+	/*这些参数可能需要自己调一下*/
+	background-image: url("image/decoration/shield_decade.png");
+	/*护甲图片存放位置*/
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
-	width: 20.25px;
+	width: 25px;
+	/*图片宽*/
 	text-align: center;
 	color: white;
-	font-size: 17px;
-	font-family: kaiti;
-	line-height: 23px;
-	height: 20.5px;
-	position: relative;
-	text-shadow: 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18, 0.3px 0px 1.8px #332c18;
+	text-shadow: 0 0 2px #ffded4, 0 0 2px #ffded4, 0 0 2px #ffded4, 0 0 2px #ffded4 !important;
+	font-size: 13.5px;
+	font-weight: 500;
+	line-height: 50px;
+	height: 65px;
+	/*图片高*/
+	position: absolute;
 	z-index: 100;
 }
 
