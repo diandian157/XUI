@@ -127,7 +127,7 @@ body>.background {
 	left: 50px;
 	right: 50px;
 	color: rgb(250, 250, 200);
-	font-family: xinwei;
+	font-family: kaiti;
 	text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
 }
 
@@ -224,7 +224,7 @@ body>.background {
 	bottom: auto;
 	top: -5px;
 	right: -15px;
-	font-family: 'xinwei';
+	font-family: 'kaiti';
 	font-size: 22px;
 	text-shadow: 0 0 5px black, 0 0 10px black;
 }
@@ -254,7 +254,7 @@ body>.background {
 	right: 10px;
 	bottom: 206px;
 	/* 调整手牌数显示位置 */
-	font-family: 'xinwei';
+	font-family: 'kaiti';
 	font-size: 22px;
 	text-shadow: 0 0 5px black, 0 0 10px black;
 	z-index: 3;
@@ -628,7 +628,7 @@ body>.background {
 .touchinfo {
 	top: 9%;
 	color: rgb(250, 250, 200);
-	font-family: xinwei;
+	font-family: kaiti;
 	text-shadow: rgb(51, 51, 51) 1px 0 0, rgb(51, 51, 51) 0 1px 0, rgb(51, 51, 51) -1px 0 0, rgb(51, 51, 51) 0 -1px 0;
 	/* background: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black; */
 	z-index: 4;
@@ -846,7 +846,7 @@ body>.background {
 	width: auto;
 	height: 42px;
 	font-size: 23px;
-	font-family: xinwei;
+	font-family: kaiti;
 	transition: opacity 0.3s;
 	pointer-events: none;
 	z-index: 8;
