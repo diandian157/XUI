@@ -9,7 +9,8 @@
 
 /* 调整手牌区域的层级 */
 #arena.decadeUI .hand-wrap {
-    z-index: 3 !important; /* 确保手牌在装备栏上方 */
+	z-index: 3 !important;
+	/* 确保手牌在装备栏上方 */
 }
 
 #arena[data-right-layout='on']>.equips-wrap {
@@ -61,24 +62,92 @@
 	width: 100%;
 }
 
+.equips-wrap>.equips-back>div[data-type='4'] {
+	order: 1;
+	/* 宝物 */
+	background-image: url("image/decoration/equip5.png");
+}
+
 .equips-wrap>.equips-back>div[data-type='0'] {
+	order: 2;
+	/* 武器 */
 	background-image: url("image/decoration/equip1.png");
 }
 
 .equips-wrap>.equips-back>div[data-type='1'] {
+	order: 3;
+	/* 防具 */
 	background-image: url("image/decoration/equip2.png");
 }
 
 .equips-wrap>.equips-back>div[data-type='2'] {
+	order: 4;
+	/* -1马 */
 	background-image: url("image/decoration/equip3.png");
 }
 
 .equips-wrap>.equips-back>div[data-type='3'] {
+	order: 5;
+	/* +1马 */
 	background-image: url("image/decoration/equip4.png");
 }
 
+/* 修改装备栏顺序 */
+.player>.equips {
+	display: flex;
+	flex-direction: column;
+}
+
+/* 调整装备顺序，宝物放在第一位 */
 .equips-wrap>.equips-back>div[data-type='4'] {
+	order: 1;
+	/* 宝物 */
 	background-image: url("image/decoration/equip5.png");
+}
+
+.equips-wrap>.equips-back>div[data-type='0'] {
+	order: 2;
+	/* 武器 */
+	background-image: url("image/decoration/equip1.png");
+}
+
+.equips-wrap>.equips-back>div[data-type='1'] {
+	order: 3;
+	/* 防具 */
+	background-image: url("image/decoration/equip2.png");
+}
+
+.equips-wrap>.equips-back>div[data-type='2'] {
+	order: 4;
+	/* -1马 */
+	background-image: url("image/decoration/equip3.png");
+}
+
+.equips-wrap>.equips-back>div[data-type='3'] {
+	order: 5;
+	/* +1马 */
+	background-image: url("image/decoration/equip4.png");
+}
+
+/* 同样需要调整装备卡牌的顺序 */
+.equips-wrap>.equips>div[data-card-subtype='equip5'] {
+	order: 1;
+}
+
+.equips-wrap>.equips>div[data-card-subtype='equip1'] {
+	order: 2;
+}
+
+.equips-wrap>.equips>div[data-card-subtype='equip2'] {
+	order: 3;
+}
+
+.equips-wrap>.equips>div[data-card-subtype='equip3'] {
+	order: 4;
+}
+
+.equips-wrap>.equips>div[data-card-subtype='equip4'] {
+	order: 5;
 }
 
 .equips-wrap>.equips>div {
@@ -251,38 +320,63 @@
 	flex-direction: column;
 }
 
-/*
-.player>.equips>div,
-.player>.equips>.card {
-	position: absolute;
+/* 其他玩家装备栏顺序 */
+.player>.equips {
+	display: flex;
+	flex-direction: column;
 }
 
-.player>.equips>.card {
-	top: -16px;
+/* 调整其他玩家装备顺序 */
+.player>.equips>.card[data-card-subtype='equip5'] {
+	order: 1;
+	/* 宝物 */
 }
 
-.player>.equips>div.equip1 {
-	top: 16px;
+.player>.equips>.card[data-card-subtype='equip1'] {
+	order: 2;
+	/* 武器 */
 }
 
-.player>.equips>div.equip2 {
-	top: 32px;
+.player>.equips>.card[data-card-subtype='equip2'] {
+	order: 3;
+	/* 防具 */
 }
 
-.player>.equips>div.equip3,
-.player>.equips>div.equip6 {
-	top: 48px;
+.player>.equips>.card[data-card-subtype='equip3'] {
+	order: 4;
+	/* -1马 */
 }
 
-.player>.equips>div.equip4 {
-	top: auto;
-	bottom: 0;
+.player>.equips>.card[data-card-subtype='equip4'] {
+	order: 5;
+	/* +1马 */
 }
 
-.player>.equips>div.equip5 {
-	top: 0;
+/* 确保隐藏角色的装备栏也遵循相同顺序 */
+.player.unseen>.equips>.card[data-card-subtype='equip5'],
+.player.unseen2>.equips>.card[data-card-subtype='equip5'] {
+	order: 1;
 }
-*/
+
+.player.unseen>.equips>.card[data-card-subtype='equip1'],
+.player.unseen2>.equips>.card[data-card-subtype='equip1'] {
+	order: 2;
+}
+
+.player.unseen>.equips>.card[data-card-subtype='equip2'],
+.player.unseen2>.equips>.card[data-card-subtype='equip2'] {
+	order: 3;
+}
+
+.player.unseen>.equips>.card[data-card-subtype='equip3'],
+.player.unseen2>.equips>.card[data-card-subtype='equip3'] {
+	order: 4;
+}
+
+.player.unseen>.equips>.card[data-card-subtype='equip4'],
+.player.unseen2>.equips>.card[data-card-subtype='equip4'] {
+	order: 5;
+}
 
 #arena.decadeUI:not(.long).mobile:not(.oldlayout) .player.unseen:not([data-position="0"]) .equips:not(*:empty),
 #arena.decadeUI:not(.long):not(.mobile):not(.oldlayout) .player.unseen .equips:not(*:empty),
