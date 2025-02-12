@@ -470,14 +470,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				button.innerHTML = '确认';
 				button.objectType = 'button ok';
 				button.addEventListener('click', guanXing._click, false);
-				button.addEventListener('click', function() {
-					document.body.removeChild(hideBtn);
-				});
 			} else {
-				// 移除这行，让非当前玩家也能看到隐藏按钮
-				// document.body.removeChild(hideBtn);
-
-				// 当观星结束时移除隐藏按钮
 				guanXing.addEventListener('remove', function() {
 					if (hideBtn && hideBtn.parentNode) {
 						document.body.removeChild(hideBtn);
