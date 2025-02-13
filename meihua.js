@@ -2,6 +2,60 @@
 decadeModule.import(function(lib, game, ui, get, ai, _status) {
 	lib.translate.zhangba_skill = '丈八';
 
+	//武将背景
+	lib.skill._characterBackground = {
+		charlotte: true,
+		forced: true,
+		popup: false,
+		trigger: {
+			global: ['gameStart', 'modeSwitch'],
+			player: ['enterGame', 'showCharacterEnd'],
+		},
+		priority: 100,
+		content: function() {
+			const setBackground = (player) => {
+				if (!player) return;
+				// 检查游戏模式和双将设置
+				const mode = get.mode();
+				const isDoubleCharacter = lib.config.mode_config[mode] && lib.config.mode_config[
+					mode].double_character;
+				if (mode === 'guozhan' || isDoubleCharacter) {
+					// 国战模式或开启双将时使用bj2
+					player.style.background =
+						'url("extension/十周年UI/assets/image/bj2.png") no-repeat center center';
+					player.style.backgroundSize = '100% 100%';
+					player.setAttribute('data-mode', 'guozhan');
+				} else {
+					// 其他情况使用bj1
+					player.style.background =
+						'url("extension/十周年UI/assets/image/bj1.png") no-repeat center center';
+					player.style.backgroundSize = '100% 100%';
+					player.setAttribute('data-mode', 'normal');
+				}
+			};
+			// 为所有玩家设置背景
+			game.players.forEach(setBackground);
+			game.dead.forEach(setBackground);
+		},
+	};
+	// 添加全局技能
+	if (!_status.connectMode) {
+		game.addGlobalSkill('_characterBackground');
+	}
+
+	// 在游戏开始时检查并设置背景
+	lib.arenaReady.push(function() {
+		const mode = get.mode();
+		const isDoubleCharacter = lib.config.mode_config[mode] && lib.config.mode_config[mode]
+			.double_character;
+
+		if (mode === 'guozhan' || isDoubleCharacter) {
+			document.body.setAttribute('data-mode', 'guozhan');
+		} else {
+			document.body.setAttribute('data-mode', 'normal');
+		}
+	});
+
 	// AI随机名称
 	lib.skill._AIname = {
 		charlotte: true,

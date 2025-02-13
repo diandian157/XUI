@@ -20,7 +20,26 @@
 	animation-iteration-count: 1;
 }
 
+/* 国战模式使用bj2背景 */
+[data-mode='guozhan'] .player,
+.player[data-mode='guozhan'] {
+    background: url('assets/image/bj2.png') no-repeat center center !important;
+    background-size: 100% 100% !important;
+}
 
+/* 其他模式保持原有的单双将判断 */
+[data-mode]:not([data-mode='guozhan']) .player:not(.fullskin2):not(.double-character):not([data-double='1']) {
+    background: url('assets/image/bj1.png') no-repeat center center !important;
+    background-size: 100% 100% !important;
+}
+
+[data-mode]:not([data-mode='guozhan']) .player.fullskin2,
+[data-mode]:not([data-mode='guozhan']) .player.double-character,
+[data-mode]:not([data-mode='guozhan']) .player[data-double='1'],
+[data-mode]:not([data-mode='guozhan']) .player.double {
+    background: url('assets/image/bj2.png') no-repeat center center !important;
+    background-size: 100% 100% !important;
+}
 
 .player::before {
 	left: -14px;

@@ -20,7 +20,26 @@
 	animation-iteration-count: 1;
 }
 
+/* 国战模式使用bj2背景 */
+[data-mode='guozhan'] .player,
+.player[data-mode='guozhan'] {
+    background: url('assets/image/bj2.png') no-repeat center center !important;
+    background-size: 100% 100% !important;
+}
 
+/* 其他模式保持原有的单双将判断 */
+[data-mode]:not([data-mode='guozhan']) .player:not(.fullskin2):not(.double-character):not([data-double='1']) {
+    background: url('assets/image/bj1.png') no-repeat center center !important;
+    background-size: 100% 100% !important;
+}
+
+[data-mode]:not([data-mode='guozhan']) .player.fullskin2,
+[data-mode]:not([data-mode='guozhan']) .player.double-character,
+[data-mode]:not([data-mode='guozhan']) .player[data-double='1'],
+[data-mode]:not([data-mode='guozhan']) .player.double {
+    background: url('assets/image/bj2.png') no-repeat center center !important;
+    background-size: 100% 100% !important;
+}
 
 .player::before {
 	left: -14px;
@@ -1014,30 +1033,30 @@
 
 /*玩家号位显示*/
 .player>.seat {
-    position: absolute;
-    bottom: -25px;
-    width: 100%;
-    line-height: 20px;
-    font-family: "kaiti";
-    font-size: 16px;
-    text-align: center;
-    color: #FFE5B4;
-    text-shadow: 0 0 2px #000,
-        0 0 5px #000,
-        0 0 10px #000;
-    z-index: 89;
-    pointer-events: none;
-    transform: scale(1.2);
+	position: absolute;
+	bottom: -25px;
+	width: 100%;
+	line-height: 20px;
+	font-family: "kaiti";
+	font-size: 16px;
+	text-align: center;
+	color: #FFE5B4;
+	text-shadow: 0 0 2px #000,
+		0 0 5px #000,
+		0 0 10px #000;
+	z-index: 89;
+	pointer-events: none;
+	transform: scale(1.2);
 }
 
 /* 主玩家座位号位置调整 */
 .player[data-position="0"]>.seat {
-    bottom: -12px;
+	bottom: -12px;
 }
 
 /* 隐藏原有座位号 */
 .player>.name_seat {
-    display: none !important;
+	display: none !important;
 }
 
 /* 所有位置添加"号位"文本 */
@@ -1050,7 +1069,7 @@
 .player[data-position="6"]>.seat::after,
 .player[data-position="7"]>.seat::after,
 .player[data-position="8"]>.seat::after {
-    content: "号位";
+	content: "号位";
 }
 
 
