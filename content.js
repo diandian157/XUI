@@ -2,7 +2,7 @@
 decadeModule.import(function(lib, game, ui, get, ai, _status) {
 	decadeUI.content = {
 		//by武将美化做修改
-		chooseGuanXing: function(player, cards1, movable1, cards2, movable2, infohide) {
+		chooseGuanXing(player, cards1, movable1, cards2, movable2, infohide) {
 			// 修改参数检查逻辑
 			if (!player || get.itemtype(player) != 'player') {
 				console.error('Invalid player parameter');
@@ -72,7 +72,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				],
 				finishing: undefined,
 				finished: undefined,
-				finishTime: function(time) {
+				finishTime(time) {
 					if (this.finishing || this.finished) return;
 					if (typeof time != 'number') throw time;
 					this.finishing = true;
@@ -81,7 +81,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						dialog.finish();
 					}, time, this)
 				},
-				finish: function() {
+				finish() {
 					if (this.finishing || this.finished) return;
 					this.finishing = true;
 					if (this.callback) this.confirmed = this.callback.call(this);
@@ -135,7 +135,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					});
 					decadeUI.game.resume();
 				},
-				update: function() {
+				update() {
 					var x, y;
 					for (var i = 0; i < this.cards.length; i++) {
 						cards = this.cards[i];
@@ -164,7 +164,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						}
 					}
 				},
-				swap: function(source, target) {
+				swap(source, target) {
 					game.broadcast(function(source, target) {
 						if (!window.decadeUI && decadeUI.eventDialog) return;
 
@@ -211,7 +211,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					this.update();
 					this.onMoved();
 				},
-				switch: function(card) {
+				switch(card) {
 					game.broadcast(function(card) {
 						if (!window.decadeUI && decadeUI.eventDialog) return;
 
@@ -238,7 +238,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					this.update();
 					this.onMoved();
 				},
-				move: function(card, indexTo, moveDown) {
+				move(card, indexTo, moveDown) {
 					var dim = moveDown ? 1 : 0;
 					var dim2 = dim;
 					var index = this.cardToIndex(card, dim);
@@ -257,7 +257,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					this.onMoved();
 					this.update();
 				},
-				cardToIndex: function(card, cardArrayIndex) {
+				cardToIndex(card, cardArrayIndex) {
 					if (!(card && card.cardid)) return -1;
 					var id = card.cardid;
 					var cards = this.cards[cardArrayIndex == null ? 0 : cardArrayIndex];
@@ -267,7 +267,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 
 					return -1;
 				},
-				lockCardsOrder: function(isBottom) {
+				lockCardsOrder(isBottom) {
 					var orders;
 					var cards;
 
@@ -287,14 +287,14 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						}
 					}
 				},
-				unlockCardsOrder: function(isBottom) {
+				unlockCardsOrder(isBottom) {
 					if (isBottom) {
 						this.orderCardsList[1] = [];
 					} else {
 						this.orderCardsList[0] = [];
 					}
 				},
-				getCardArrayIndex: function(card) {
+				getCardArrayIndex(card) {
 					var cards = this.cards;
 
 					if (cards[0].indexOf(card) >= 0) {
@@ -306,7 +306,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					}
 
 				},
-				onMoved: function() {
+				onMoved() {
 					if (typeof this.callback == 'function') {
 						var ok = this.callback.call(this);
 						if (!ok) {
@@ -317,7 +317,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 
 					this.classList.remove('ok-disable');
 				},
-				_click: function(e) {
+				_click(e) {
 					if (this.finishing || this.finished) return;
 					switch (this.objectType) {
 						case 'content':
@@ -362,10 +362,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			Object.defineProperties(guanXing, {
 				selected: {
 					configurable: true,
-					get: function() {
+					get() {
 						return this._selected;
 					},
-					set: function(value) {
+					set(value) {
 						var current = this._selected;
 						if (current == value) return;
 						if (current != undefined) current.classList.remove('selected');
@@ -381,52 +381,52 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				},
 				caption: {
 					configurable: true,
-					get: function() {
+					get() {
 						return this._caption.innerHTML;
 					},
-					set: function(value) {
+					set(value) {
 						if (this._caption.innerHTML == value) return;
 						this._caption.innerHTML = value;
 					},
 				},
 				tip: {
 					configurable: true,
-					get: function() {
+					get() {
 						return this._tip.innerHTML;
 					},
-					set: function(value) {
+					set(value) {
 						if (this._tip.innerHTML == value) return;
 						this._tip.innerHTML = value;
 					},
 				},
 				header1: {
 					configurable: true,
-					get: function() {
+					get() {
 						if (this._header1) return this._header1.innerHTML;
 						return '';
 					},
-					set: function(value) {
+					set(value) {
 						if (!this._header1 || this._header1.innerHTML == value) return;
 						this._header1.innerHTML = value;
 					},
 				},
 				header2: {
 					configurable: true,
-					get: function() {
+					get() {
 						if (this._header2) return this._header2.innerHTML;
 						return '';
 					},
-					set: function(value) {
+					set(value) {
 						if (!this._header2 || this._header2.innerHTML == value) return;
 						this._header2.innerHTML = value;
 					},
 				},
 				infohide: {
 					configurable: true,
-					get: function() {
+					get() {
 						return this._infohide;
 					},
-					set: function(value) {
+					set(value) {
 						if (this._infohide == value) return;
 						this._infohide = value;
 
@@ -448,10 +448,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				},
 				callback: {
 					configurable: true,
-					get: function() {
+					get() {
 						return this._callback;
 					},
-					set: function(value) {
+					set(value) {
 						if (this._callback == value) return;
 						this._callback = value;
 						this.onMoved();

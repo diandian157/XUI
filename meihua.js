@@ -2,59 +2,187 @@
 decadeModule.import(function(lib, game, ui, get, ai, _status) {
 	lib.translate.zhangba_skill = '丈八';
 
-	//武将背景
-	lib.skill._characterBackground = {
-		charlotte: true,
-		forced: true,
-		popup: false,
-		trigger: {
-			global: ['gameStart', 'modeSwitch'],
-			player: ['enterGame', 'showCharacterEnd'],
-		},
-		priority: 100,
-		content: function() {
-			const setBackground = (player) => {
-				if (!player) return;
-				// 检查游戏模式和双将设置
-				const mode = get.mode();
-				const isDoubleCharacter = lib.config.mode_config[mode] && lib.config.mode_config[
-					mode].double_character;
-				if (mode === 'guozhan' || isDoubleCharacter) {
-					// 国战模式或开启双将时使用bj2
-					player.style.background =
-						'url("extension/十周年UI/assets/image/bj2.png") no-repeat center center';
-					player.style.backgroundSize = '100% 100%';
-					player.setAttribute('data-mode', 'guozhan');
-				} else {
-					// 其他情况使用bj1
-					player.style.background =
-						'url("extension/十周年UI/assets/image/bj1.png") no-repeat center center';
-					player.style.backgroundSize = '100% 100%';
-					player.setAttribute('data-mode', 'normal');
+	//手气卡美化
+	if (lib.config['extension_十周年UI_shouqikamh']) {
+		lib.element.content.gameDraw = function() {
+			"step 0";
+			if (_status.brawl && _status.brawl.noGameDraw) {
+				event.finish();
+				return;
+			}
+			var end = player;
+			var numx = num;
+			do {
+				if (typeof num == "function") {
+					numx = num(player);
 				}
+				if (player.getTopCards) player.directgain(player.getTopCards(numx));
+				else player.directgain(get.cards(numx));
+				if (player.singleHp === true && get.mode() != "guozhan" && (lib.config.mode != "doudizhu" ||
+						_status
+						.mode != "online")) {
+					player.doubleDraw();
+				}
+				player._start_cards = player.getCards("h");
+				player = player.next;
+			} while (player != end);
+			event.changeCard = get.config("change_card");
+			if (_status.connectMode || (lib.config.mode == "single" && _status.mode != "wuxianhuoli") || (
+					lib
+					.config
+					.mode == "doudizhu" && _status.mode == "online") || (lib.config.mode != "identity" &&
+					lib
+					.config
+					.mode != "guozhan" && lib.config.mode != "doudizhu" && lib.config.mode != "single")) {
+				event.changeCard = "disabled";
+			}
+			"step 1";
+			if (event.changeCard != "disabled" && !_status.auto) {
+				function getRandomInt(min, max) {
+					min = Math.ceil(min);
+					max = Math.floor(max);
+					return Math.floor(Math.random() * (max - min + 1)) + min;
+				};
+				event.numsl = getRandomInt(10000, 99999);
+				event.numsy = 5;
+				var str = "本场还可更换" + event.numsy + "次手牌(剩余" + event.numsl + "张手气卡)";
+				event.dialog = dui.showHandTip(str);
+				event.dialog.strokeText();
+				ui.create.confirm("oc");
+				event.custom.replace.confirm = function(bool) {
+					_status.event.bool = bool;
+					game.resume();
+				};
+			} else {
+				event.goto(4);
+			}
+			"step 2";
+			function getConfig(ext, id, def) {
+				var str = ["extension", ext, id].join("_");
+				var val = lib.config[str];
+				return typeof val !== "undefined" || val ? val : def;
 			};
-			// 为所有玩家设置背景
-			game.players.forEach(setBackground);
-			game.dead.forEach(setBackground);
-		},
+			let val = getConfig("武将美化", "shouqikasize", 28.5);
+			let elements = document.querySelectorAll('#arena>.hand-tip');
+			if (elements.length) {
+				elements[0].style.bottom = val.toFixed(1) + "%";
+				// 添加左侧位置调整
+				elements[0].style.left = '120px'; // 减小这个值会向左移动
+				elements[0].style.right = '220px'; // 保持对称，也要调整right值
+			}
+			if (event.changeCard == "once") {
+				event.changeCard = "disabled";
+			} else if (event.changeCard == "twice") {
+				event.changeCard = "once";
+			} else if (event.changeCard == "disabled") {
+				event.bool = false;
+				return;
+			}
+			_status.imchoosing = true;
+			event.switchToAuto = function() {
+				_status.event.bool = false;
+				game.resume();
+			};
+			game.pause();
+			"step 3";
+			_status.imchoosing = false;
+			if (event.bool) {
+				var hs = game.me.getCards("h");
+				game.addVideo("lose", game.me, [get.cardsInfo(hs), [],
+					[],
+					[]
+				]);
+				for (var i = 0; i < hs.length; i++) {
+					hs[i].discard(false);
+				}
+				if (true) {
+					var sound = document.createElement("audio");
+					sound.id = "shouqikaAudio";
+					sound.preload = "auto";
+					sound.style.display = "none";
+					sound.play();
+				}
+				game.me.directgain(get.cards(hs.length));
+				event.numsl--;
+				event.numsy--;
+				if (event.numsy <= 0) {
+					if (event.dialog) event.dialog.close();
+					if (event.score) event.score.remove();
+					if (ui.confirm) ui.confirm.close();
+					game.me._start_cards = game.me.getCards("h");
+					event.goto(4);
+				} else {
+					var str = "本场还可更换" + event.numsy + "次手牌(剩余" + event.numsl + "张手气卡)";
+					event.dialog.remove();
+					event.dialog = dui.showHandTip(str);
+					event.dialog.strokeText();
+					event.goto(2);
+				}
+			} else {
+				if (event.dialog) event.dialog.close();
+				if (event.score) event.score.remove();
+				if (ui.confirm) ui.confirm.close();
+				game.me._start_cards = game.me.getCards("h");
+				event.goto(4);
+			}
+			"step 4";
+			setTimeout(decadeUI.effect.gameStart, 51);
+		};
 	};
-	// 添加全局技能
-	if (!_status.connectMode) {
-		game.addGlobalSkill('_characterBackground');
-	}
 
-	// 在游戏开始时检查并设置背景
-	lib.arenaReady.push(function() {
-		const mode = get.mode();
-		const isDoubleCharacter = lib.config.mode_config[mode] && lib.config.mode_config[mode]
-			.double_character;
-
-		if (mode === 'guozhan' || isDoubleCharacter) {
-			document.body.setAttribute('data-mode', 'guozhan');
-		} else {
-			document.body.setAttribute('data-mode', 'normal');
+	//武将背景
+	if (lib.config['extension_十周年UI_wujiangbeijing']) {
+		lib.skill._wjBackground = {
+			charlotte: true,
+			forced: true,
+			popup: false,
+			trigger: {
+				global: ['gameStart', 'modeSwitch'],
+				player: ['enterGame', 'showCharacterEnd'],
+			},
+			priority: 100,
+			content() {
+				const setBackground = (player) => {
+					if (!player) return;
+					// 检查游戏模式和双将设置
+					const mode = get.mode();
+					const isDoubleCharacter = lib.config.mode_config[mode] && lib.config.mode_config[
+						mode].double_character;
+					if (mode === 'guozhan' || isDoubleCharacter) {
+						// 国战模式或开启双将时使用bj2
+						player.style.background =
+							'url("extension/十周年UI/assets/image/bj2.png") no-repeat center center';
+						player.style.backgroundSize = '100% 100%';
+						player.setAttribute('data-mode', 'guozhan');
+					} else {
+						// 其他情况使用bj1
+						player.style.background =
+							'url("extension/十周年UI/assets/image/bj1.png") no-repeat center center';
+						player.style.backgroundSize = '100% 100%';
+						player.setAttribute('data-mode', 'normal');
+					}
+				};
+				// 为所有玩家设置背景
+				game.players.forEach(setBackground);
+				game.dead.forEach(setBackground);
+			},
+		};
+		// 添加全局技能
+		if (!_status.connectMode) {
+			game.addGlobalSkill('_wjBackground');
 		}
-	});
+		// 在游戏开始时检查并设置背景
+		lib.arenaReady.push(function() {
+			const mode = get.mode();
+			const isDoubleCharacter = lib.config.mode_config[mode] && lib.config.mode_config[mode]
+				.double_character;
+			if (mode === 'guozhan' || isDoubleCharacter) {
+				document.body.setAttribute('data-mode', 'guozhan');
+			} else {
+				document.body.setAttribute('data-mode', 'normal');
+			}
+		});
+	};
 
 	// AI随机名称
 	lib.skill._AIname = {
@@ -78,7 +206,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						'<span style="color:#00ffff;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">' +
 						nickname + '</span>';
 				} else {
-					const randomNum = get.rand(1000000, 9999999);
+					const randomNum = get.rand(10000, 99999);
 					player.node.nameol.innerHTML =
 						'<span style="color:#ba30cc;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
 						randomNum + '</span>';
@@ -91,10 +219,8 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					this.node.nameol.style.display = 'none';
 				});
 			};
-
 			// 为所有现有玩家设置名称
 			game.players.forEach(player => setPlayerName(player));
-
 			// 监听新玩家加入
 			lib.element.player.$init = (function(origin) {
 				return function() {
@@ -102,7 +228,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					setPlayerName(this);
 				}
 			})(lib.element.player.$init);
-
 			// 处理换座位
 			var originSwapSeat = game.swapSeat;
 			game.swapSeat = function(player1, player2, prompt, behind, noanimate) {
@@ -127,7 +252,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		priority: 520,
 		firstDo: true,
 		direct: true,
-		filter: function(event, player) {
+		filter(event, player) {
 			// 检查是否有特定技能和状态
 			if (player.hasSkill('mbjsrgxiezheng') && !player.storage.mbjsrgxiezheng_level2)
 				return false;
@@ -138,11 +263,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			// 检查是否为双势力角色
 			return lib.character[player.name1][4].some(group => group.includes('doublegroup'));
 		},
-		content: function() {
+		content() {
 			'step 0'
 			const name = player.name1;
 			let options;
-
 			// 根据角色类型选择势力
 			if (get.is.double(name)) {
 				options = get.is.double(name, true);
@@ -151,7 +275,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				options = lib.group.filter(group => group !== 'shen');
 				player.chooseControl(options).set('prompt', '请选择神武将的势力');
 			}
-
 			'step 1'
 			if (result.control) {
 				player.changeGroup(result.control);
@@ -199,10 +322,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		trigger: {
 			player: 'recoverBegin',
 		},
-		filter: function(event, player) {
+		filter(event, player) {
 			return event.num && event.num > 0 && event.num <= 9;
 		},
-		content: function() {
+		content() {
 			var action;
 			if (trigger.num > 0 && trigger.num <= 1) action = '1';
 			else if (trigger.num > 1 && trigger.num <= 2) action = '2';
@@ -236,11 +359,11 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		trigger: {
 			player: 'damage',
 		},
-		filter: function(event, player) {
+		filter(event, player) {
 			if ((event.num != 0 && !event.num) || (event.num < 0 && event.num > 9)) return false;
 			return event.unreal; // 判断是否是虚拟伤害
 		},
-		content: function() {
+		content() {
 			var action;
 			if (trigger.num <= 0) action = "play0";
 			else if (trigger.num > 0 && trigger.num <= 1) action = 'play1';
@@ -279,10 +402,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		trigger: {
 			player: 'damageBegin4',
 		},
-		filter: function(event, player) {
+		filter(event, player) {
 			return event.num && event.num > 1 && event.num <= 9;
 		},
-		content: function() {
+		content() {
 			var action;
 			if (trigger.num > 1 && trigger.num <= 2) action = '2';
 			else if (trigger.num > 2 && trigger.num <= 3) action = '3';
@@ -315,7 +438,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		forced: true,
 		popup: false,
 		priority: -10,
-		content: function() {
+		content() {
 			let card = trigger.card;
 			let cardType = get.type(card);
 			let cardName = get.name(card);
@@ -383,7 +506,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		forced: true,
 		popup: false,
 		priority: -10,
-		content: function() {
+		content() {
 			if (player === game.me) {
 				game.playAudio('..', 'extension', '十周年UI', 'audio/seatRoundState_start');
 			}

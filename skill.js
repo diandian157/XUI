@@ -6,13 +6,13 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			trigger: {
 				global: "gameDrawAfter"
 			},
-			filter: function(event, player) {
+			filter(event, player) {
 				return lib.config.extension_十周年UI_gameAnimationEffect;
 			},
 			direct: true,
 			priority: Infinity + 114514 + 1919810,
 			firstDo: true,
-			content: function() {
+			content() {
 				game.removeGlobalSkill("mx_start");
 				if (lib.config.extension_十周年UI_newDecadeStyle == "on") {
 					game.playAudio("../extension", decadeUI.extensionName, "audio/game_start.mp3");
@@ -50,10 +50,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			popup: false,
 			priority: -100,
 			silent: true,
-			filter: function(event) {
+			filter(event) {
 				return !ui.clear.delay && event.card.name != "wuxie";
 			},
-			content: function() {
+			content() {
 				ui.clear.delay = "usecard";
 			},
 		},
@@ -67,7 +67,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			priority: -100,
 			lastDo: true,
 			silent: true,
-			content: function() {
+			content() {
 				if (!(trigger.source && trigger.player)) return;
 				game.broadcastAll(
 					function(source, player) {
@@ -85,7 +85,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			trigger: {
 				global: "gameDrawBegin"
 			},
-			filter: function() {
+			filter() {
 				return !(_status.brawl && _status.brawl.noGameDraw);
 			},
 			priority: 100,
@@ -93,7 +93,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			silent: true,
 			forced: true,
 			popup: false,
-			content: function() {
+			content() {
 				game.removeGlobalSkill("decadeUI_gameDrawDelay");
 				decadeUI.delay(250);
 			},
@@ -102,7 +102,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			trigger: {
 				global: "gameDrawEnd"
 			},
-			filter: function() {
+			filter() {
 				return !(_status.brawl && _status.brawl.noGameDraw);
 			},
 			priority: -100,
@@ -110,7 +110,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			silent: true,
 			forced: true,
 			popup: false,
-			content: function() {
+			content() {
 				game.removeGlobalSkill("decadeUI_gameDrawDelayx");
 				setTimeout(decadeUI.effect.gameStart, 51);
 			},
@@ -128,10 +128,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			popup: false,
 			silent: true,
 			priority: -100,
-			filter: function(event) {
+			filter(event) {
 				return ui.clear.delay === "usecard" && event.card.name != "wuxie";
 			},
-			content: function() {
+			content() {
 				ui.clear.delay = false;
 				game.broadcastAll(function() {
 					ui.clear();
@@ -142,14 +142,14 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			trigger: {
 				global: ["discardAfter", "loseToDiscardpileAfter", "loseAsyncAfter"],
 			},
-			filter: function(event) {
+			filter(event) {
 				return ui.todiscard[event.discardid] ? true : false;
 			},
 			forced: true,
 			silent: true,
 			popup: false,
 			priority: -100,
-			content: function() {
+			content() {
 				game.broadcastAll(function(id) {
 					if (window.decadeUI) {
 						ui.todiscard = [];
@@ -180,7 +180,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			trigger: {
 				player: "phaseDrawBegin1",
 			},
-			content: function() {
+			content() {
 				var num = get.population("qun");
 				if (player.hasSkill("huangjintianbingfu")) {
 					num += player.getExpansions("huangjintianbingfu").length;
@@ -520,7 +520,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			},
 		},
 		xinfu_pingcai: {
-			contentx: function() {
+			contentx() {
 				"step 0";
 				event.pingcai_delayed = true;
 				var name = lib.skill.xinfu_pingcai_backup.takara;
@@ -848,7 +848,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			},
 		},
 		dddfenye: {
-			$compareFenye: function(players, cards1, targets, cards2) {
+			$compareFenye(players, cards1, targets, cards2) {
 				game.broadcast(
 					function(players, cards1, targets, cards2) {
 						lib.skill.dddfenye.$compareFenye(players, cards1, targets, cards2);
@@ -1032,7 +1032,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			},
 		},
 		nk_shekong: {
-			content: function() {
+			content() {
 				"step 0";
 				event.cardsx = cards.slice(0);
 				var num = get.cnNumber(cards.length);
@@ -1136,7 +1136,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			},
 		},
 		kamome_huanmeng: {
-			content: function() {
+			content() {
 				"step 0";
 				if (player.isUnderControl()) {
 					game.modeSwapPlayer(player);
@@ -1230,11 +1230,11 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			silent: true,
 			popup: false,
 			firstDo: true,
-			filter: function(event, player) {
+			filter(event, player) {
 				return event.skill && (event.skill.indexOf("guhuo_") == 0 || event.skill.indexOf(
 					"xinfu_guhuo_") == 0);
 			},
-			content: function() {
+			content() {
 				"step 0";
 				player.addTempSkill("guhuo_phase");
 				event.fake = false;
@@ -1331,10 +1331,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			silent: true,
 			popup: false,
 			firstDo: true,
-			filter: function(event, player) {
+			filter(event, player) {
 				return event.skill && event.skill.indexOf("old_guhuo_") == 0;
 			},
-			content: function() {
+			content() {
 				"step 0";
 				event.fake = false;
 				event.goon = true;
@@ -1450,7 +1450,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		//注意：twtanfeng非版本不可用而修改，而是为了适配视为使用XX牌的转化写的以viewAs方法实现效果的技能的“示例”
 		//玩家可以以此chooseToUse为模板，对自己想要实现的“将XX牌当作XX牌使用”的技能写成支持viewAs的模板以实现萌修十周年对viewAs卡牌选中美化的支持
 		twtanfeng: {
-			content: function() {
+			content() {
 				"step 0";
 				player
 					.chooseTarget(get.prompt2("twtanfeng"), function(card, player, target) {
@@ -1488,7 +1488,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				next.set("custom", {
 					add: {},
 					replace: {
-						window: function() {}
+						window() {}
 					},
 				});
 				next.backup("twtanfeng_backup");
@@ -1562,7 +1562,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					},
 					filterCard: true,
 					position: "hes",
-					check: function(card) {
+					check(card) {
 						var player = _status.event.player,
 							target = _status.event.getParent().player;
 						var eff = get.effect(target, get.autoViewAs({

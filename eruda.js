@@ -981,20 +981,20 @@
 					}),
 					Gt = (O.memStorage = (function(t) {
 						(t = {
-							getItem: function(t) {
+							getItem(t) {
 								return (n[t] ? e[t] : this[t]) || null;
 							},
-							setItem: function(t, r) {
+							setItem(t, r) {
 								n[t] ? (e[t] = r) : (this[t] = r);
 							},
-							removeItem: function(t) {
+							removeItem(t) {
 								n[t] ? delete e[t] : delete this[t];
 							},
-							key: function(t) {
+							key(t) {
 								var e = r();
 								return t >= 0 && t < e.length ? e[t] : null;
 							},
-							clear: function() {
+							clear() {
 								for (var t, n = i(), r = 0;
 									(t = n[r]); r++) delete this[t];
 								n = o();
@@ -1005,7 +1005,7 @@
 						Object.defineProperty(t, "length", {
 							enumerable: !1,
 							configurable: !0,
-							get: function() {
+							get() {
 								return r().length;
 							},
 						});
@@ -1467,17 +1467,17 @@
 							);
 						})(Object, {
 							className: "Base",
-							callSuper: function(t, e, n) {
+							callSuper(t, e, n) {
 								return t.prototype[e].apply(this, n);
 							},
-							toString: function() {
+							toString() {
 								return this.constructor.name;
 							},
 						}));
 						return t;
 					})({})),
 					ve = (O.Enum = fe({
-						initialize: function(t) {
+						initialize(t) {
 							ot(t) ?
 								((this.size = t.length),
 									ft(
@@ -1501,21 +1501,21 @@
 					ge = (O.MutationObserver = (function(t) {
 						return (t = window.MutationObserver || window.WebKitMutationObserver ||
 							window.MozMutationObserver) || (t = fe({
-							initialize: function() {},
-							observe: function() {},
-							disconnect: function() {},
-							takeRecords: function() {}
+							initialize() {},
+							observe() {},
+							disconnect() {},
+							takeRecords() {}
 						})), t;
 					})({})),
 					me = (O.Select = (function(t) {
 						var e = new(t = fe({
 							className: "Select",
-							initialize: function(t) {
+							initialize(t) {
 								return (this.length = 0), t ? (bt(t) ? e.find(
 									t) : void(t.nodeType && ((this[0] = t),
 										(this.length = 1)))) : this;
 							},
-							find: function(e) {
+							find(e) {
 								var n = new t();
 								return (
 									this.each(function() {
@@ -1524,7 +1524,7 @@
 									n
 								);
 							},
-							each: function(t) {
+							each(t) {
 								return (
 									ft(this, function(e, n) {
 										t.call(e, n, e);
@@ -1688,27 +1688,27 @@
 						return t;
 					})({})),
 					Se = (O.Stack = fe({
-						initialize: function() {
+						initialize() {
 							this.clear();
 						},
-						clear: function() {
+						clear() {
 							(this._items = []), (this.size = 0);
 						},
-						push: function(t) {
+						push(t) {
 							return this._items.push(t), ++this.size;
 						},
-						pop: function() {
+						pop() {
 							if (this.size) return this.size--, this._items.pop();
 						},
-						peek: function() {
+						peek() {
 							return this._items[this.size - 1];
 						},
-						forEach: function(t, e) {
+						forEach(t, e) {
 							e = arguments.length > 1 ? e : this;
 							for (var n = this._items, r = this.size - 1, i = 0; r >= 0; r--,
 								i++) t.call(e, n[r], i, this);
 						},
-						toArr: function() {
+						toArr() {
 							return P(this._items);
 						},
 					})),
@@ -1758,7 +1758,7 @@
 							}), s;
 						}
 						return (t = {
-							add: function(t, e, n, i) {
+							add(t, e, n, i) {
 								var o,
 									a = {
 										selector: n,
@@ -1777,7 +1777,7 @@
 									n ? o.splice(o.delegateCount++, 0, a) : o.push(
 										a);
 							},
-							remove: function(t, e, n, r) {
+							remove(t, e, n, r) {
 								var i = t.events;
 								if (i && i[e])
 									for (var o, a = i[e], s = a.length; s--;)(o = a[
@@ -1787,25 +1787,25 @@
 							},
 							Event: fe({
 								className: "Event",
-								initialize: function(t) {
+								initialize(t) {
 									this.origEvent = t;
 								},
 								isDefaultPrevented: n,
 								isPropagationStopped: n,
 								isImmediatePropagationStopped: n,
-								preventDefault: function() {
+								preventDefault() {
 									var t = this.origEvent;
 									(this.isDefaultPrevented = e), t && t
 										.preventDefault && t
 										.preventDefault();
 								},
-								stopPropagation: function() {
+								stopPropagation() {
 									var t = this.origEvent;
 									(this.isPropagationStopped = e), t && t
 										.stopPropagation && t
 										.stopPropagation();
 								},
-								stopImmediatePropagation: function() {
+								stopImmediatePropagation() {
 									var t = this.origEvent;
 									(this.isImmediatePropagationStopped =
 									e), t && t.stopImmediatePropagation && t
@@ -1906,24 +1906,24 @@
 					Me = (O.once = Ne(D, 2)),
 					De = (O.Emitter = (function(t) {
 						return (t = fe({
-							initialize: function() {
+							initialize() {
 								this._events = this._events || {};
 							},
-							on: function(t, e) {
+							on(t, e) {
 								return (this._events[t] = this._events[t] ||
 								[]), this._events[t].push(e), this;
 							},
-							off: function(t, e) {
+							off(t, e) {
 								var n = this._events;
 								if (S(n, t)) {
 									var r = n[t].indexOf(e);
 									return r > -1 && n[t].splice(r, 1), this;
 								}
 							},
-							once: function(t, e) {
+							once(t, e) {
 								return this.on(t, Me(e)), this;
 							},
-							emit: function(t) {
+							emit(t) {
 								if (S(this._events, t)) {
 									var e = A(arguments, 1);
 									return (
@@ -1938,12 +1938,12 @@
 									);
 								}
 							},
-							removeAllListeners: function(t) {
+							removeAllListeners(t) {
 								return t ? delete this._events[t] : (this
 									._events = {}), this;
 							},
 						}, {
-							mixin: function(e) {
+							mixin(e) {
 								ft(["on", "off", "once", "emit"], function(n) {
 										e[n] = t.prototype[n];
 									}),
@@ -1953,38 +1953,38 @@
 					})({})),
 					Ie = (O.Logger = (function(t) {
 						return (t = De.extend({
-							initialize: function(e, n) {
+							initialize(e, n) {
 								(this.name = e), this.setLevel(j(n) ? t.level
 									.DEBUG : n), this.callSuper(De,
 									"initialize", arguments);
 							},
-							setLevel: function(e) {
+							setLevel(e) {
 								return bt(e) ? ((e = t.level[e
 									.toUpperCase()]) && (this._level = e), this
 										) : (_t(e) && (this._level = e), this);
 							},
-							getLevel: function() {
+							getLevel() {
 								return this._level;
 							},
-							formatter: function(t, e) {
+							formatter(t, e) {
 								return e;
 							},
-							trace: function() {
+							trace() {
 								return this._log("trace", arguments);
 							},
-							debug: function() {
+							debug() {
 								return this._log("debug", arguments);
 							},
-							info: function() {
+							info() {
 								return this._log("info", arguments);
 							},
-							warn: function() {
+							warn() {
 								return this._log("warn", arguments);
 							},
-							error: function() {
+							error() {
 								return this._log("error", arguments);
 							},
-							_log: function(e, n) {
+							_log(e, n) {
 								return 0 === (n = de(n)).length ? this : (this
 									.emit("all", e, he(n)), t.level[e
 										.toUpperCase()] < this._level || (
@@ -2006,7 +2006,7 @@
 					})({})),
 					Re = (O.MediaQuery = De.extend({
 						className: "MediaQuery",
-						initialize: function(t) {
+						initialize(t) {
 							var e = this;
 							this.callSuper(De, "initialize"),
 								(this._mql = window.matchMedia(t)),
@@ -2014,7 +2014,7 @@
 									e.emit(e.isMatch() ? "match" : "unmatch");
 								});
 						},
-						isMatch: function() {
+						isMatch() {
 							return this._mql.matches;
 						},
 					})),
@@ -2024,11 +2024,11 @@
 								return b.isMatch();
 							})),
 					Fe = (O.Store = De.extend({
-						initialize: function(t) {
+						initialize(t) {
 							this.callSuper(De, "initialize", arguments), (this._data = t ||
 							{}), this.save(this._data);
 						},
-						set: function(t, e) {
+						set(t, e) {
 							var n;
 							bt(t) ? ((n = {})[t] = e) : E(t) && (n = t);
 							var r = this;
@@ -2038,7 +2038,7 @@
 								}),
 								this.save(this._data);
 						},
-						get: function(t) {
+						get(t) {
 							var e = this._data;
 							if (bt(t)) return e[t];
 							var n = {};
@@ -2049,7 +2049,7 @@
 								n
 							);
 						},
-						remove: function(t) {
+						remove(t) {
 							t = de(t);
 							var e = this._data;
 							ft(t, function(t) {
@@ -2057,13 +2057,13 @@
 								}),
 								this.save(e);
 						},
-						clear: function() {
+						clear() {
 							(this._data = {}), this.save(this._data);
 						},
-						each: function(t) {
+						each(t) {
 							ft(this._data, t);
 						},
-						save: function(t) {
+						save(t) {
 							this._data = t;
 						},
 					})),
@@ -2071,7 +2071,7 @@
 						var e = window.screen;
 						return (
 							(t = {
-								get: function() {
+								get() {
 									if (e) {
 										var t = st(e, "orientation.type");
 										if (t) return t.split("-").shift();
@@ -2127,7 +2127,7 @@
 							return bt(t) ? t.split(/\s+/) : de(t);
 						}
 						return (t = {
-							add: function(n, r) {
+							add(n, r) {
 								n = be(n);
 								var i = e(r);
 								ft(n, function(e) {
@@ -2140,21 +2140,21 @@
 											.join(" "));
 								});
 							},
-							has: function(t, e) {
+							has(t, e) {
 								t = be(t);
 								var n = new RegExp("(^|\\s)" + e + "(\\s|$)");
 								return qe(t, function(t) {
 									return n.test(t.className);
 								});
 							},
-							toggle: function(e, n) {
+							toggle(e, n) {
 								(e = be(e)),
 								ft(e, function(e) {
 									if (!t.has(e, n)) return t.add(e, n);
 									t.remove(e, n);
 								});
 							},
-							remove: function(t, n) {
+							remove(t, n) {
 								t = be(t);
 								var r = e(n);
 								ft(t, function(t) {
@@ -2170,88 +2170,88 @@
 							return new me(t);
 						}),
 						me.methods({
-							offset: function() {
+							offset() {
 								return Oe(this);
 							},
-							hide: function() {
+							hide() {
 								return this.css("display", "none");
 							},
-							show: function() {
+							show() {
 								return Ee(this), this;
 							},
-							first: function() {
+							first() {
 								return t(this[0]);
 							},
-							last: function() {
+							last() {
 								return t($(this));
 							},
-							get: function(t) {
+							get(t) {
 								return this[t];
 							},
-							eq: function(e) {
+							eq(e) {
 								return t(this[e]);
 							},
-							on: function(t, e, n) {
+							on(t, e, n) {
 								return Te.on(this, t, e, n), this;
 							},
-							off: function(t, e, n) {
+							off(t, e, n) {
 								return Te.off(this, t, e, n), this;
 							},
-							html: function(t) {
+							html(t) {
 								var e = $e.html(this, t);
 								return j(t) ? e : this;
 							},
-							text: function(t) {
+							text(t) {
 								var e = $e.text(this, t);
 								return j(t) ? e : this;
 							},
-							val: function(t) {
+							val(t) {
 								var e = $e.val(this, t);
 								return j(t) ? e : this;
 							},
-							css: function(t, n) {
+							css(t, n) {
 								var r = we(this, t, n);
 								return e(t, n) ? r : this;
 							},
-							attr: function(t, n) {
+							attr(t, n) {
 								var r = ye(this, t, n);
 								return e(t, n) ? r : this;
 							},
-							data: function(t, n) {
+							data(t, n) {
 								var r = xe(this, t, n);
 								return e(t, n) ? r : this;
 							},
-							rmAttr: function(t) {
+							rmAttr(t) {
 								return ye.remove(this, t), this;
 							},
-							remove: function() {
+							remove() {
 								return je(this), this;
 							},
-							addClass: function(t) {
+							addClass(t) {
 								return Ue.add(this, t), this;
 							},
-							rmClass: function(t) {
+							rmClass(t) {
 								return Ue.remove(this, t), this;
 							},
-							toggleClass: function(t) {
+							toggleClass(t) {
 								return Ue.toggle(this, t), this;
 							},
-							hasClass: function(t) {
+							hasClass(t) {
 								return Ue.has(this, t);
 							},
-							parent: function() {
+							parent() {
 								return t(this[0].parentNode);
 							},
-							append: function(t) {
+							append(t) {
 								return ke.append(this, t), this;
 							},
-							prepend: function(t) {
+							prepend(t) {
 								return ke.prepend(this, t), this;
 							},
-							before: function(t) {
+							before(t) {
 								return ke.before(this, t), this;
 							},
-							after: function(t) {
+							after(t) {
 								return ke.after(this, t), this;
 							},
 						});
@@ -2344,7 +2344,7 @@
 					})()),
 					Ye = (O.query = (function(t) {
 						t = {
-							parse: function(t) {
+							parse(t) {
 								var n = {};
 								return (
 									(t = Qe(t).replace(e, "")),
@@ -2361,7 +2361,7 @@
 									n
 								);
 							},
-							stringify: function(e, n) {
+							stringify(e, n) {
 								return ie(
 									_e(e, function(e, r) {
 										return E(e) && wt(e) ? "" : ot(e) ? t
@@ -2382,11 +2382,11 @@
 					Ze = (O.Url = (function(t) {
 						t = fe({
 							className: "Url",
-							initialize: function(e) {
+							initialize(e) {
 								!e && N && (e = window.location.href), ce(this, t
 									.parse(e || ""));
 							},
-							setQuery: function(t, e) {
+							setQuery(t, e) {
 								var n = this.query;
 								return (
 									E(t) ?
@@ -2397,7 +2397,7 @@
 									this
 								);
 							},
-							rmQuery: function(t) {
+							rmQuery(t) {
 								var e = this.query;
 								return (
 									ot(t) || (t = de(t)),
@@ -2407,11 +2407,11 @@
 									this
 								);
 							},
-							toString: function() {
+							toString() {
 								return t.stringify(this);
 							},
 						}, {
-							parse: function(t) {
+							parse(t) {
 								var i = {
 										protocol: "",
 										auth: "",
@@ -2454,7 +2454,7 @@
 									1))), (o = o.slice(0, v))), (i.pathname =
 									o || "/"), i;
 							},
-							stringify: function(t) {
+							stringify(t) {
 								var e = t.protocol + (t.slashes ? "//" : "") + (t
 									.auth ? encodeURIComponent(t.auth) + "@" :
 									"") + t.hostname + (t.port ? ":" + t.port :
@@ -2543,7 +2543,7 @@
 								dataType: "json",
 								contentType: "application/x-www-form-urlencoded",
 								data: {},
-								xhr: function() {
+								xhr() {
 									return new XMLHttpRequest();
 								},
 								timeout: 0,
@@ -2645,7 +2645,7 @@
 					un = (O.LocalStore = (function(t) {
 						var e = Kt("local");
 						return Fe.extend({
-							initialize: function(t, n) {
+							initialize(t, n) {
 								(this._name = t), (n = n || {});
 								var r = e.getItem(t);
 								try {
@@ -2656,7 +2656,7 @@
 								E(r) || (r = {}), (n = ue(r, n)), this.callSuper(Fe,
 									"initialize", [n]);
 							},
-							save: function(t) {
+							save(t) {
 								if (wt(t)) return e.removeItem(this._name);
 								e.setItem(this._name, sn(t));
 							},
@@ -2805,10 +2805,10 @@
 							return j;
 						};
 						var o = fe({
-							initialize: function() {
+							initialize() {
 								(this.id = 0), (this.visited = []);
 							},
-							set: function(t) {
+							set(t) {
 								var e = this.visited,
 									n = this.id,
 									r = {
@@ -2817,7 +2817,7 @@
 									};
 								return e.push(r), this.id++, n;
 							},
-							get: function(t) {
+							get(t) {
 								for (var e = this.visited, n = 0, r = e.length; n <
 									r; n++) {
 									var i = e[n];
@@ -2841,20 +2841,20 @@
 						}
 						return (
 							(t = {
-								start: function() {
+								start() {
 									n = !0;
 								},
-								stop: function() {
+								stop() {
 									n = !1;
 								},
-								addListener: function(t) {
+								addListener(t) {
 									e.push(t);
 								},
-								rmListener: function(t) {
+								rmListener(t) {
 									var n = e.indexOf(t);
 									n > -1 && e.splice(n, 1);
 								},
-								rmAllListeners: function() {
+								rmAllListeners() {
 									e = [];
 								},
 							}),
@@ -3363,24 +3363,24 @@
 							a = n(79),
 							s = n(32);
 						(e = r({
-							initialize: function() {
+							initialize() {
 								this._events = this._events || {};
 							},
-							on: function(t, e) {
+							on(t, e) {
 								return (this._events[t] = this._events[t] || []),
 									this._events[t].push(e), this;
 							},
-							off: function(t, e) {
+							off(t, e) {
 								var n = this._events;
 								if (i(n, t)) {
 									var r = n[t].indexOf(e);
 									return r > -1 && n[t].splice(r, 1), this;
 								}
 							},
-							once: function(t, e) {
+							once(t, e) {
 								return this.on(t, s(e)), this;
 							},
-							emit: function(t) {
+							emit(t) {
 								if (i(this._events, t)) {
 									var e = a(arguments, 1);
 									return (
@@ -3395,12 +3395,12 @@
 									);
 								}
 							},
-							removeAllListeners: function(t) {
+							removeAllListeners(t) {
 								return t ? delete this._events[t] : (this
 								._events = {}), this;
 							},
 						}, {
-							mixin: function(t) {
+							mixin(t) {
 								o(["on", "off", "once", "emit"], function(n) {
 										t[n] = e.prototype[n];
 									}),
@@ -3453,10 +3453,10 @@
 								);
 							})(Object, {
 								className: "Base",
-								callSuper: function(t, e, n) {
+								callSuper(t, e, n) {
 									return t.prototype[e].apply(this, n);
 								},
-								toString: function() {
+								toString() {
 									return this.constructor.name;
 								},
 							}));
@@ -3937,88 +3937,88 @@
 							return new r(t);
 						}),
 						r.methods({
-							offset: function() {
+							offset() {
 								return i(this);
 							},
-							hide: function() {
+							hide() {
 								return this.css("display", "none");
 							},
-							show: function() {
+							show() {
 								return o(this), this;
 							},
-							first: function() {
+							first() {
 								return e(this[0]);
 							},
-							last: function() {
+							last() {
 								return e(l(this));
 							},
-							get: function(t) {
+							get(t) {
 								return this[t];
 							},
-							eq: function(t) {
+							eq(t) {
 								return e(this[t]);
 							},
-							on: function(t, e, n) {
+							on(t, e, n) {
 								return p.on(this, t, e, n), this;
 							},
-							off: function(t, e, n) {
+							off(t, e, n) {
 								return p.off(this, t, e, n), this;
 							},
-							html: function(t) {
+							html(t) {
 								var e = u.html(this, t);
 								return f(t) ? e : this;
 							},
-							text: function(t) {
+							text(t) {
 								var e = u.text(this, t);
 								return f(t) ? e : this;
 							},
-							val: function(t) {
+							val(t) {
 								var e = u.val(this, t);
 								return f(t) ? e : this;
 							},
-							css: function(t, e) {
+							css(t, e) {
 								var n = a(this, t, e);
 								return g(t, e) ? n : this;
 							},
-							attr: function(t, e) {
+							attr(t, e) {
 								var n = s(this, t, e);
 								return g(t, e) ? n : this;
 							},
-							data: function(t, e) {
+							data(t, e) {
 								var n = h(this, t, e);
 								return g(t, e) ? n : this;
 							},
-							rmAttr: function(t) {
+							rmAttr(t) {
 								return s.remove(this, t), this;
 							},
-							remove: function() {
+							remove() {
 								return c(this), this;
 							},
-							addClass: function(t) {
+							addClass(t) {
 								return _.add(this, t), this;
 							},
-							rmClass: function(t) {
+							rmClass(t) {
 								return _.remove(this, t), this;
 							},
-							toggleClass: function(t) {
+							toggleClass(t) {
 								return _.toggle(this, t), this;
 							},
-							hasClass: function(t) {
+							hasClass(t) {
 								return _.has(this, t);
 							},
-							parent: function() {
+							parent() {
 								return e(this[0].parentNode);
 							},
-							append: function(t) {
+							append(t) {
 								return d.append(this, t), this;
 							},
-							prepend: function(t) {
+							prepend(t) {
 								return d.prepend(this, t), this;
 							},
-							before: function(t) {
+							before(t) {
 								return d.before(this, t), this;
 							},
-							after: function(t) {
+							after(t) {
 								return d.after(this, t), this;
 							},
 						});
@@ -4322,17 +4322,17 @@
 							u = r(n(50)),
 							l = r(n(0)),
 							c = {
-								copy: function(t) {
+								copy(t) {
 									i.default(t) || (t = JSON.stringify(t, null, 2)), o
 										.default(t);
 								},
-								$: function(t) {
+								$(t) {
 									return document.querySelector(t);
 								},
-								$$: function(t) {
+								$$(t) {
 									return a.default(document.querySelectorAll(t));
 								},
-								$x: function(t) {
+								$x(t) {
 									return u.default(t);
 								},
 								keys: s.default,
@@ -4375,12 +4375,12 @@
 							a = n(102),
 							s = new(e = r({
 								className: "Select",
-								initialize: function(t) {
+								initialize(t) {
 									return (this.length = 0), t ? (i(t) ? s.find(
 										t) : void(t.nodeType && ((this[0] = t),
 											(this.length = 1)))) : this;
 								},
-								find: function(t) {
+								find(t) {
 									var n = new e();
 									return (
 										this.each(function() {
@@ -4389,7 +4389,7 @@
 										n
 									);
 								},
-								each: function(t) {
+								each(t) {
 									return (
 										o(this, function(e, n) {
 											t.call(e, n, e);
@@ -4516,7 +4516,7 @@
 							return a(t) ? t.split(/\s+/) : r(t);
 						}
 						(e = {
-							add: function(t, n) {
+							add(t, n) {
 								t = o(t);
 								var r = u(n);
 								s(t, function(t) {
@@ -4529,21 +4529,21 @@
 											" "));
 								});
 							},
-							has: function(t, e) {
+							has(t, e) {
 								t = o(t);
 								var n = new RegExp("(^|\\s)" + e + "(\\s|$)");
 								return i(t, function(t) {
 									return n.test(t.className);
 								});
 							},
-							toggle: function(t, n) {
+							toggle(t, n) {
 								(t = o(t)),
 								s(t, function(t) {
 									if (!e.has(t, n)) return e.add(t, n);
 									e.remove(t, n);
 								});
 							},
-							remove: function(t, e) {
+							remove(t, e) {
 								t = o(t);
 								var n = u(e);
 								s(t, function(t) {
@@ -4860,7 +4860,7 @@
 									void 0 === r && (r = n),
 										Object.defineProperty(t, r, {
 											enumerable: !0,
-											get: function() {
+											get() {
 												return e[n];
 											},
 										});
@@ -5497,10 +5497,10 @@
 					},
 					function(t, e) {
 						(e = {
-							encode: function(t) {
+							encode(t) {
 								return String.fromCodePoint.apply(String, t);
 							},
-							decode: function(t) {
+							decode(t) {
 								for (var e = [], n = 0, r = t.length; n < r;) {
 									var i = t.charCodeAt(n++);
 									if (i >= 55296 && i <= 56319 && n < r) {
@@ -5626,7 +5626,7 @@
 									o,
 									a = {
 										label: 0,
-										sent: function() {
+										sent() {
 											if (1 & i[0]) throw i[1];
 											return i[1];
 										},
@@ -6077,7 +6077,7 @@
 									void 0 === r && (r = n),
 										Object.defineProperty(t, r, {
 											enumerable: !0,
-											get: function() {
+											get() {
 												return e[n];
 											},
 										});
@@ -6231,7 +6231,7 @@
 									void 0 === r && (r = n),
 										Object.defineProperty(t, r, {
 											enumerable: !0,
-											get: function() {
+											get() {
 												return e[n];
 											},
 										});
@@ -6304,7 +6304,7 @@
 									o,
 									a = {
 										label: 0,
-										sent: function() {
+										sent() {
 											if (1 & i[0]) throw i[1];
 											return i[1];
 										},
@@ -6700,20 +6700,20 @@
 									for (var e = 0, n = o.length; e < n; e++) o[e](t);
 							}
 							(e = {
-								start: function() {
+								start() {
 									a = !0;
 								},
-								stop: function() {
+								stop() {
 									a = !1;
 								},
-								addListener: function(t) {
+								addListener(t) {
 									o.push(t);
 								},
-								rmListener: function(t) {
+								rmListener(t) {
 									var e = o.indexOf(t);
 									e > -1 && o.splice(e, 1);
 								},
-								rmAllListeners: function() {
+								rmAllListeners() {
 									o = [];
 								},
 							}),
@@ -6897,7 +6897,7 @@
 									o,
 									a = {
 										label: 0,
-										sent: function() {
+										sent() {
 											if (1 & i[0]) throw i[1];
 											return i[1];
 										},
@@ -7306,7 +7306,7 @@
 							}), u;
 						}
 						(e = {
-							add: function(t, e, n, r) {
+							add(t, e, n, r) {
 								var i,
 									o = {
 										selector: n,
@@ -7324,7 +7324,7 @@
 										)),
 									n ? i.splice(i.delegateCount++, 0, o) : i.push(o);
 							},
-							remove: function(t, e, n, r) {
+							remove(t, e, n, r) {
 								var i = t.events;
 								if (i && i[e])
 									for (var o, a = i[e], s = a.length; s--;)(o = a[s]),
@@ -7334,23 +7334,23 @@
 							},
 							Event: r({
 								className: "Event",
-								initialize: function(t) {
+								initialize(t) {
 									this.origEvent = t;
 								},
 								isDefaultPrevented: a,
 								isPropagationStopped: a,
 								isImmediatePropagationStopped: a,
-								preventDefault: function() {
+								preventDefault() {
 									var t = this.origEvent;
 									(this.isDefaultPrevented = o), t && t
 										.preventDefault && t.preventDefault();
 								},
-								stopPropagation: function() {
+								stopPropagation() {
 									var t = this.origEvent;
 									(this.isPropagationStopped = o), t && t
 										.stopPropagation && t.stopPropagation();
 								},
-								stopImmediatePropagation: function() {
+								stopImmediatePropagation() {
 									var t = this.origEvent;
 									(this.isImmediatePropagationStopped = o), t
 										&& t.stopImmediatePropagation && t
@@ -7457,19 +7457,19 @@
 																.statusText,
 															url: e
 																.responseURL,
-															clone: function() {
+															clone() {
 																return t(
 																	e
 																	);
 															},
-															text: function() {
+															text() {
 																return s
 																	.resolve(
 																		e
 																		.responseText
 																		);
 															},
-															json: function() {
+															json() {
 																return s
 																	.resolve(
 																		e
@@ -7480,14 +7480,14 @@
 																		.parse
 																		);
 															},
-															xml: function() {
+															xml() {
 																return s
 																	.resolve(
 																		e
 																		.responseXML
 																		);
 															},
-															blob: function() {
+															blob() {
 																return s
 																	.resolve(
 																		new Blob(
@@ -7497,13 +7497,13 @@
 																		);
 															},
 															headers: {
-																keys: function() {
+																keys() {
 																	return r;
 																},
-																entries: function() {
+																entries() {
 																	return i;
 																},
-																get: function(
+																get(
 																	t
 																	) {
 																	return o[
@@ -7511,7 +7511,7 @@
 																		.toLowerCase()
 																		];
 																},
-																has: function(
+																has(
 																	t
 																	) {
 																	return a(
@@ -7544,7 +7544,7 @@
 							method: "GET",
 							headers: {},
 							timeout: 0,
-							xhr: function() {
+							xhr() {
 								return new XMLHttpRequest();
 							},
 						}),
@@ -7581,11 +7581,11 @@
 							p = n(5);
 						e = r({
 							className: "Url",
-							initialize: function(t) {
+							initialize(t) {
 								!t && h && (t = window.location.href), i(this, e
 									.parse(t || ""));
 							},
-							setQuery: function(t, e) {
+							setQuery(t, e) {
 								var n = this.query;
 								return (
 									p(t) ?
@@ -7596,7 +7596,7 @@
 									this
 								);
 							},
-							rmQuery: function(t) {
+							rmQuery(t) {
 								var e = this.query;
 								return (
 									l(t) || (t = c(t)),
@@ -7606,11 +7606,11 @@
 									this
 								);
 							},
-							toString: function() {
+							toString() {
 								return e.stringify(this);
 							},
 						}, {
-							parse: function(t) {
+							parse(t) {
 								var e = {
 										protocol: "",
 										auth: "",
@@ -7653,7 +7653,7 @@
 									1))), (n = n.slice(0, m))), (e.pathname =
 									n || "/"), e;
 							},
-							stringify: function(t) {
+							stringify(t) {
 								var e = t.protocol + (t.slashes ? "//" : "") + (t
 									.auth ? encodeURIComponent(t.auth) + "@" :
 									"") + t.hostname + (t.port ? ":" + t.port :
@@ -7677,7 +7677,7 @@
 							l = n(30),
 							c = n(5);
 						e = {
-							parse: function(t) {
+							parse(t) {
 								var e = {};
 								return (
 									(t = r(t).replace(h, "")),
@@ -7694,7 +7694,7 @@
 									e
 								);
 							},
-							stringify: function(t, n) {
+							stringify(t, n) {
 								return l(
 									s(t, function(t, r) {
 										return c(t) && u(t) ? "" : a(t) ? e
@@ -7735,12 +7735,12 @@
 							s = n(1),
 							u = n(129);
 						(e = {
-							parse: function(t) {
+							parse(t) {
 								var e = [],
 									n = new i();
 								return (
 									r(t, {
-										start: function(t, e) {
+										start(t, e) {
 											(e = u(e, function(t) {
 												return (function(
 												t) {
@@ -7756,7 +7756,7 @@
 												attrs: e
 											});
 										},
-										end: function() {
+										end() {
 											var t = n.pop();
 											if (n.size) {
 												var r = n.peek();
@@ -7765,7 +7765,7 @@
 													.content.push(t);
 											} else e.push(t);
 										},
-										comment: function(t) {
+										comment(t) {
 											var r = "\x3c!--".concat(t,
 													"--\x3e"),
 												i = n.peek();
@@ -7774,7 +7774,7 @@
 													.content.push(r)) : e
 												.push(r);
 										},
-										text: function(t) {
+										text(t) {
 											var r = n.peek();
 											r ? (r.content || (r
 													.content = []), r
@@ -7785,7 +7785,7 @@
 									e
 								);
 							},
-							stringify: function t(e) {
+							stringify t(e) {
 								var n = "";
 								return (
 									o(e) ?
@@ -7915,28 +7915,28 @@
 						var r = n(17),
 							i = n(128);
 						(e = r({
-							initialize: function() {
+							initialize() {
 								this.clear();
 							},
-							clear: function() {
+							clear() {
 								(this._items = []), (this.size = 0);
 							},
-							push: function(t) {
+							push(t) {
 								return this._items.push(t), ++this.size;
 							},
-							pop: function() {
+							pop() {
 								if (this.size) return this.size--, this._items
 							.pop();
 							},
-							peek: function() {
+							peek() {
 								return this._items[this.size - 1];
 							},
-							forEach: function(t, e) {
+							forEach(t, e) {
 								e = arguments.length > 1 ? e : this;
 								for (var n = this._items, r = this.size - 1, i =
 									0; r >= 0; r--, i++) t.call(e, n[r], i, this);
 							},
-							toArr: function() {
+							toArr() {
 								return i(this._items);
 							},
 						})),
@@ -7987,7 +7987,7 @@
 									void 0 === r && (r = n),
 										Object.defineProperty(t, r, {
 											enumerable: !0,
-											get: function() {
+											get() {
 												return e[n];
 											},
 										});
@@ -8504,20 +8504,20 @@
 					function(t, e, n) {
 						var r = n(2);
 						(e = {
-							getItem: function(t) {
+							getItem(t) {
 								return (o[t] ? i[t] : this[t]) || null;
 							},
-							setItem: function(t, e) {
+							setItem(t, e) {
 								o[t] ? (i[t] = e) : (this[t] = e);
 							},
-							removeItem: function(t) {
+							removeItem(t) {
 								o[t] ? delete i[t] : delete this[t];
 							},
-							key: function(t) {
+							key(t) {
 								var e = a();
 								return t >= 0 && t < e.length ? e[t] : null;
 							},
-							clear: function() {
+							clear() {
 								for (var t, e = s(), n = 0;
 									(t = e[n]); n++) delete this[t];
 								e = u();
@@ -8528,7 +8528,7 @@
 						Object.defineProperty(e, "length", {
 							enumerable: !1,
 							configurable: !0,
-							get: function() {
+							get() {
 								return a().length;
 							},
 						});
@@ -8566,12 +8566,12 @@
 					function(t, e, n) {
 						var r = n(66);
 						e = {
-							encode: function(t) {
+							encode(t) {
 								for (var e = r.decode(t), n = "", i = 0, o = e
 									.length; i < o; i++) n += _(e[i]);
 								return n;
 							},
-							decode: function(t, e) {
+							decode(t, e) {
 								(i = r.decode(t)), (o = 0), (a = i.length), (s = 0), (
 									u = 0), (l = 0), (c = 128), (h = 191);
 								for (var n, p = []; !1 !== (n = d(e));) p.push(n);
@@ -8681,7 +8681,7 @@
 						(e = {
 							get: u,
 							set: u,
-							remove: function(t, e) {
+							remove(t, e) {
 								return ((e = e || {}).expires = -1), u(t, "", e);
 							},
 						}),
@@ -8709,7 +8709,7 @@
 									void 0 === r && (r = n),
 										Object.defineProperty(t, r, {
 											enumerable: !0,
-											get: function() {
+											get() {
 												return e[n];
 											},
 										});
@@ -9141,7 +9141,7 @@
 									void 0 === r && (r = n),
 										Object.defineProperty(t, r, {
 											enumerable: !0,
-											get: function() {
+											get() {
 												return e[n];
 											},
 										});
@@ -9275,7 +9275,7 @@
 									void 0 === r && (r = n),
 										Object.defineProperty(t, r, {
 											enumerable: !0,
-											get: function() {
+											get() {
 												return e[n];
 											},
 										});
@@ -9740,10 +9740,10 @@
 							);
 						})(Object, {
 							className: "Base",
-							callSuper: function(t, e, n) {
+							callSuper(t, e, n) {
 								return t.prototype[e].apply(this, n);
 							},
-							toString: function() {
+							toString() {
 								return this.constructor.name;
 							},
 						}));
@@ -9813,21 +9813,21 @@
 						a = n(51),
 						s = n(52);
 					(e = r({
-						initialize: function() {
+						initialize() {
 							this._events = this._events || {};
 						},
-						on: function(t, e) {
+						on(t, e) {
 							return (this._events[t] = this._events[t] || []), this
 								._events[t].push(e), this;
 						},
-						off: function(t, e) {
+						off(t, e) {
 							if (i(this._events, t)) return this._events[t].splice(this
 								._events[t].indexOf(e), 1), this;
 						},
-						once: function(t, e) {
+						once(t, e) {
 							return this.on(t, s(e)), this;
 						},
-						emit: function(t) {
+						emit(t) {
 							if (i(this._events, t)) {
 								var e = a(arguments, 1);
 								return (
@@ -9843,7 +9843,7 @@
 							}
 						},
 					}, {
-						mixin: function(t) {
+						mixin(t) {
 							o(["on", "off", "once", "emit"], function(n) {
 									t[n] = e.prototype[n];
 								}),
@@ -10015,88 +10015,88 @@
 						return new r(t);
 					}),
 					r.methods({
-						offset: function() {
+						offset() {
 							return i(this);
 						},
-						hide: function() {
+						hide() {
 							return this.css("display", "none");
 						},
-						show: function() {
+						show() {
 							return o(this), this;
 						},
-						first: function() {
+						first() {
 							return e(this[0]);
 						},
-						last: function() {
+						last() {
 							return e(l(this));
 						},
-						get: function(t) {
+						get(t) {
 							return this[t];
 						},
-						eq: function(t) {
+						eq(t) {
 							return e(this[t]);
 						},
-						on: function(t, e, n) {
+						on(t, e, n) {
 							return p.on(this, t, e, n), this;
 						},
-						off: function(t, e, n) {
+						off(t, e, n) {
 							return p.off(this, t, e, n), this;
 						},
-						html: function(t) {
+						html(t) {
 							var e = u.html(this, t);
 							return f(t) ? e : this;
 						},
-						text: function(t) {
+						text(t) {
 							var e = u.text(this, t);
 							return f(t) ? e : this;
 						},
-						val: function(t) {
+						val(t) {
 							var e = u.val(this, t);
 							return f(t) ? e : this;
 						},
-						css: function(t, e) {
+						css(t, e) {
 							var n = a(this, t, e);
 							return g(t, e) ? n : this;
 						},
-						attr: function(t, e) {
+						attr(t, e) {
 							var n = s(this, t, e);
 							return g(t, e) ? n : this;
 						},
-						data: function(t, e) {
+						data(t, e) {
 							var n = h(this, t, e);
 							return g(t, e) ? n : this;
 						},
-						rmAttr: function(t) {
+						rmAttr(t) {
 							return s.remove(this, t), this;
 						},
-						remove: function() {
+						remove() {
 							return c(this), this;
 						},
-						addClass: function(t) {
+						addClass(t) {
 							return _.add(this, t), this;
 						},
-						rmClass: function(t) {
+						rmClass(t) {
 							return _.remove(this, t), this;
 						},
-						toggleClass: function(t) {
+						toggleClass(t) {
 							return _.toggle(this, t), this;
 						},
-						hasClass: function(t) {
+						hasClass(t) {
 							return _.has(this, t);
 						},
-						parent: function() {
+						parent() {
 							return e(this[0].parentNode);
 						},
-						append: function(t) {
+						append(t) {
 							return d.append(this, t), this;
 						},
-						prepend: function(t) {
+						prepend(t) {
 							return d.prepend(this, t), this;
 						},
-						before: function(t) {
+						before(t) {
 							return d.before(this, t), this;
 						},
-						after: function(t) {
+						after(t) {
 							return d.after(this, t), this;
 						},
 					});
@@ -10111,12 +10111,12 @@
 						o = n(0),
 						a = new(e = r({
 							className: "Select",
-							initialize: function(t) {
+							initialize(t) {
 								return (this.length = 0), t ? (i(t) ? a.find(t) : void(t
 									.nodeType && ((this[0] = t), (this.length =
 										1)))) : this;
 							},
-							find: function(t) {
+							find(t) {
 								var n = new e();
 								return (
 									this.each(function() {
@@ -10130,7 +10130,7 @@
 									n
 								);
 							},
-							each: function(t) {
+							each(t) {
 								return (
 									o(this, function(e, n) {
 										t.call(e, n, e);
@@ -11113,7 +11113,7 @@
 						}), u;
 					}
 					(e = {
-						add: function(t, e, n, r) {
+						add(t, e, n, r) {
 							var i,
 								o = {
 									selector: n,
@@ -11131,7 +11131,7 @@
 									)),
 								n ? i.splice(i.delegateCount++, 0, o) : i.push(o);
 						},
-						remove: function(t, e, n, r) {
+						remove(t, e, n, r) {
 							var i = t.events;
 							if (i && i[e])
 								for (var o, a = i[e], s = a.length; s--;)(o = a[s]), (n && o
@@ -11140,23 +11140,23 @@
 						},
 						Event: r({
 							className: "Event",
-							initialize: function(t) {
+							initialize(t) {
 								this.origEvent = t;
 							},
 							isDefaultPrevented: a,
 							isPropagationStopped: a,
 							isImmediatePropagationStopped: a,
-							preventDefault: function() {
+							preventDefault() {
 								var t = this.origEvent;
 								(this.isDefaultPrevented = o), t && t
 									.preventDefault && t.preventDefault();
 							},
-							stopPropagation: function() {
+							stopPropagation() {
 								var t = this.origEvent;
 								(this.isPropagationStopped = o), t && t
 									.stopPropagation && t.stopPropagation();
 							},
-							stopImmediatePropagation: function() {
+							stopImmediatePropagation() {
 								var t = this.origEvent;
 								(this.isImmediatePropagationStopped = o), t && t
 									.stopImmediatePropagation && t
@@ -11178,7 +11178,7 @@
 						return a(t) ? t.split(/\s+/) : r(t);
 					}
 					(e = {
-						add: function(t, n) {
+						add(t, n) {
 							t = o(t);
 							var r = u(n);
 							s(t, function(t) {
@@ -11190,21 +11190,21 @@
 										" " : "") + n.join(" "));
 							});
 						},
-						has: function(t, e) {
+						has(t, e) {
 							t = o(t);
 							var n = new RegExp("(^|\\s)" + e + "(\\s|$)");
 							return i(t, function(t) {
 								return n.test(t.className);
 							});
 						},
-						toggle: function(t, n) {
+						toggle(t, n) {
 							(t = o(t)),
 							s(t, function(t) {
 								if (!e.has(t, n)) return e.add(t, n);
 								e.remove(t, n);
 							});
 						},
-						remove: function(t, e) {
+						remove(t, e) {
 							t = o(t);
 							var n = u(e);
 							s(t, function(t) {
@@ -14511,16 +14511,16 @@
 				constructor: c,
 				logger: u.default,
 				log: u.default.log,
-				registerHelper: function(t, e) {
+				registerHelper(t, e) {
 					if ("[object Object]" === i.toString.call(t)) {
 						if (e) throw new o.default("Arg not supported with multiple helpers");
 						i.extend(this.helpers, t);
 					} else this.helpers[t] = e;
 				},
-				unregisterHelper: function(t) {
+				unregisterHelper(t) {
 					delete this.helpers[t];
 				},
-				registerPartial: function(t, e) {
+				registerPartial(t, e) {
 					if ("[object Object]" === i.toString.call(t)) i.extend(this.partials, t);
 					else {
 						if (void 0 === e) throw new o.default(
@@ -14529,19 +14529,19 @@
 						this.partials[t] = e;
 					}
 				},
-				unregisterPartial: function(t) {
+				unregisterPartial(t) {
 					delete this.partials[t];
 				},
-				registerDecorator: function(t, e) {
+				registerDecorator(t, e) {
 					if ("[object Object]" === i.toString.call(t)) {
 						if (e) throw new o.default("Arg not supported with multiple decorators");
 						i.extend(this.decorators, t);
 					} else this.decorators[t] = e;
 				},
-				unregisterDecorator: function(t) {
+				unregisterDecorator(t) {
 					delete this.decorators[t];
 				},
-				resetLoggedPropertyAccesses: function() {
+				resetLoggedPropertyAccesses() {
 					l.resetLoggedProperties();
 				},
 			};
@@ -14579,14 +14579,14 @@
 				i = {
 					methodMap: ["debug", "info", "warn", "error"],
 					level: "info",
-					lookupLevel: function(t) {
+					lookupLevel(t) {
 						if ("string" == typeof t) {
 							var e = r.indexOf(i.methodMap, t.toLowerCase());
 							t = e >= 0 ? e : parseInt(t, 10);
 						}
 						return t;
 					},
-					log: function(t) {
+					log(t) {
 						if (((t = i.lookupLevel(t)), "undefined" != typeof console && i.lookupLevel(i
 								.level) <= t)) {
 							var e = i.methodMap[t];
@@ -15132,12 +15132,12 @@
 						o = n(0),
 						a = new(e = r({
 							className: "Select",
-							initialize: function(t) {
+							initialize(t) {
 								return (this.length = 0), t ? (i(t) ? a.find(t) : void(t
 									.nodeType && ((this[0] = t), (this.length =
 										1)))) : this;
 							},
-							find: function(t) {
+							find(t) {
 								var n = new e();
 								return (
 									this.each(function() {
@@ -15151,7 +15151,7 @@
 									n
 								);
 							},
-							each: function(t) {
+							each(t) {
 								return (
 									o(this, function(e, n) {
 										t.call(e, n, e);
@@ -15205,10 +15205,10 @@
 							);
 						})(Object, {
 							className: "Base",
-							callSuper: function(t, e, n) {
+							callSuper(t, e, n) {
 								return t.prototype[e].apply(this, n);
 							},
-							toString: function() {
+							toString() {
 								return this.constructor.name;
 							},
 						}));
@@ -15494,88 +15494,88 @@
 						return new r(t);
 					}),
 					r.methods({
-						offset: function() {
+						offset() {
 							return i(this);
 						},
-						hide: function() {
+						hide() {
 							return this.css("display", "none");
 						},
-						show: function() {
+						show() {
 							return o(this), this;
 						},
-						first: function() {
+						first() {
 							return e(this[0]);
 						},
-						last: function() {
+						last() {
 							return e(l(this));
 						},
-						get: function(t) {
+						get(t) {
 							return this[t];
 						},
-						eq: function(t) {
+						eq(t) {
 							return e(this[t]);
 						},
-						on: function(t, e, n) {
+						on(t, e, n) {
 							return p.on(this, t, e, n), this;
 						},
-						off: function(t, e, n) {
+						off(t, e, n) {
 							return p.off(this, t, e, n), this;
 						},
-						html: function(t) {
+						html(t) {
 							var e = u.html(this, t);
 							return f(t) ? e : this;
 						},
-						text: function(t) {
+						text(t) {
 							var e = u.text(this, t);
 							return f(t) ? e : this;
 						},
-						val: function(t) {
+						val(t) {
 							var e = u.val(this, t);
 							return f(t) ? e : this;
 						},
-						css: function(t, e) {
+						css(t, e) {
 							var n = a(this, t, e);
 							return g(t, e) ? n : this;
 						},
-						attr: function(t, e) {
+						attr(t, e) {
 							var n = s(this, t, e);
 							return g(t, e) ? n : this;
 						},
-						data: function(t, e) {
+						data(t, e) {
 							var n = h(this, t, e);
 							return g(t, e) ? n : this;
 						},
-						rmAttr: function(t) {
+						rmAttr(t) {
 							return s.remove(this, t), this;
 						},
-						remove: function() {
+						remove() {
 							return c(this), this;
 						},
-						addClass: function(t) {
+						addClass(t) {
 							return _.add(this, t), this;
 						},
-						rmClass: function(t) {
+						rmClass(t) {
 							return _.remove(this, t), this;
 						},
-						toggleClass: function(t) {
+						toggleClass(t) {
 							return _.toggle(this, t), this;
 						},
-						hasClass: function(t) {
+						hasClass(t) {
 							return _.has(this, t);
 						},
-						parent: function() {
+						parent() {
 							return e(this[0].parentNode);
 						},
-						append: function(t) {
+						append(t) {
 							return d.append(this, t), this;
 						},
-						prepend: function(t) {
+						prepend(t) {
 							return d.prepend(this, t), this;
 						},
-						before: function(t) {
+						before(t) {
 							return d.before(this, t), this;
 						},
-						after: function(t) {
+						after(t) {
 							return d.after(this, t), this;
 						},
 					});
@@ -16043,7 +16043,7 @@
 						}), u;
 					}
 					(e = {
-						add: function(t, e, n, r) {
+						add(t, e, n, r) {
 							var i,
 								o = {
 									selector: n,
@@ -16061,7 +16061,7 @@
 									)),
 								n ? i.splice(i.delegateCount++, 0, o) : i.push(o);
 						},
-						remove: function(t, e, n, r) {
+						remove(t, e, n, r) {
 							var i = t.events;
 							if (i && i[e])
 								for (var o, a = i[e], s = a.length; s--;)(o = a[s]), (n && o
@@ -16070,23 +16070,23 @@
 						},
 						Event: r({
 							className: "Event",
-							initialize: function(t) {
+							initialize(t) {
 								this.origEvent = t;
 							},
 							isDefaultPrevented: a,
 							isPropagationStopped: a,
 							isImmediatePropagationStopped: a,
-							preventDefault: function() {
+							preventDefault() {
 								var t = this.origEvent;
 								(this.isDefaultPrevented = o), t && t
 									.preventDefault && t.preventDefault();
 							},
-							stopPropagation: function() {
+							stopPropagation() {
 								var t = this.origEvent;
 								(this.isPropagationStopped = o), t && t
 									.stopPropagation && t.stopPropagation();
 							},
-							stopImmediatePropagation: function() {
+							stopImmediatePropagation() {
 								var t = this.origEvent;
 								(this.isImmediatePropagationStopped = o), t && t
 									.stopImmediatePropagation && t
@@ -16108,7 +16108,7 @@
 						return a(t) ? t.split(/\s+/) : r(t);
 					}
 					(e = {
-						add: function(t, n) {
+						add(t, n) {
 							t = o(t);
 							var r = u(n);
 							s(t, function(t) {
@@ -16120,21 +16120,21 @@
 										" " : "") + n.join(" "));
 							});
 						},
-						has: function(t, e) {
+						has(t, e) {
 							t = o(t);
 							var n = new RegExp("(^|\\s)" + e + "(\\s|$)");
 							return i(t, function(t) {
 								return n.test(t.className);
 							});
 						},
-						toggle: function(t, n) {
+						toggle(t, n) {
 							(t = o(t)),
 							s(t, function(t) {
 								if (!e.has(t, n)) return e.add(t, n);
 								e.remove(t, n);
 							});
 						},
-						remove: function(t, e) {
+						remove(t, e) {
 							t = o(t);
 							var n = u(e);
 							s(t, function(t) {
@@ -16948,11 +16948,11 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					return ' checked="checked" ';
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s = t.escapeExpression,
@@ -17296,28 +17296,28 @@
 				(t.main.decorator = t.main_d), e.VM.checkRevision(t.compiler);
 				var n = t.compiler && 7 === t.compiler[0];
 				var r = {
-					strict: function(t, e, n) {
+					strict(t, e, n) {
 						if (!t || !(e in t)) throw new a.default('"' + e + '" not defined in ' +
 							t, {
 								loc: n
 							});
 						return t[e];
 					},
-					lookupProperty: function(t, e) {
+					lookupProperty(t, e) {
 						var n = t[e];
 						return null == n || Object.prototype.hasOwnProperty.call(t, e) || c
 							.resultIsAllowed(n, r.protoAccessControl, e) ? n : void 0;
 					},
-					lookup: function(t, e) {
+					lookup(t, e) {
 						for (var n = t.length, i = 0; i < n; i++) {
 							if (null != (t[i] && r.lookupProperty(t[i], e))) return t[i][e];
 						}
 					},
-					lambda: function(t, e) {
+					lambda(t, e) {
 						return "function" == typeof t ? t.call(e) : t;
 					},
 					escapeExpression: i.escapeExpression,
-					invokePartial: function(n, r, o) {
+					invokePartial(n, r, o) {
 						o.hash && ((r = i.extend({}, r, o.hash)), o.ids && (o.ids[0] = !0)), (
 							n = e.VM.resolvePartial.call(this, n, r, o));
 						var s = i.extend({}, o, {
@@ -17338,22 +17338,22 @@
 						throw new a.default("The partial " + o.name +
 							" could not be compiled when running in runtime-only mode");
 					},
-					fn: function(e) {
+					fn(e) {
 						var n = t[e];
 						return (n.decorator = t[e + "_d"]), n;
 					},
 					programs: [],
-					program: function(t, e, n, r, i) {
+					program(t, e, n, r, i) {
 						var o = this.programs[t],
 							a = this.fn(t);
 						return e || i || r || n ? (o = h(this, t, a, e, n, r, i)) : o || (o =
 							this.programs[t] = h(this, t, a)), o;
 					},
-					data: function(t, e) {
+					data(t, e) {
 						for (; t && e--;) t = t._parent;
 						return t;
 					},
-					mergeIfNeeded: function(t, e) {
+					mergeIfNeeded(t, e) {
 						var n = t || e;
 						return t && e && t !== e && (n = i.extend({}, e, t)), n;
 					},
@@ -17518,11 +17518,11 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					return " <li>" + t.escapeExpression(t.lambda(e, e)) + "</li> ";
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s = t.escapeExpression,
@@ -17565,7 +17565,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s = t.escapeExpression,
@@ -17645,12 +17645,12 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					return ' <li style="background: ' + t.escapeExpression(t.lambda(e, e)) +
 						'"></li> ';
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s = t.escapeExpression,
@@ -17699,7 +17699,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -17737,7 +17737,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -19280,7 +19280,7 @@
 					var e = n(19),
 						r = n(20);
 					return {
-						html_beautify: function(t, n) {
+						html_beautify(t, n) {
 							return o(t, n, e.js_beautify, r.css_beautify);
 						},
 					};
@@ -19289,7 +19289,7 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -19321,7 +19321,7 @@
 						null != (o = null != e ? l(e, "headers") : e) ? l(o, "from") :
 						o, e)) + "</span></div></div> ";
 				},
-				2: function(t, e, n, r, i) {
+				2(t, e, n, r, i) {
 					var o;
 					return (
 						" <div " +
@@ -19343,7 +19343,7 @@
 						"></div> "
 					);
 				},
-				4: function(t, e, n, r, i) {
+				4(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -19368,7 +19368,7 @@
 					})) ? o : "") + "></span></div> ";
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -19464,7 +19464,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -19599,7 +19599,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -19639,7 +19639,7 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -19654,7 +19654,7 @@
 						})) ? o : "") + ">" + t.escapeExpression(t.lambda(null != e ? a(e,
 						"data") : e, e)) + "</pre> ";
 				},
-				3: function(t, e, n, r, i) {
+				3(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -19670,7 +19670,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				4: function(t, e, n, r, i) {
+				4(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s = t.escapeExpression,
@@ -19687,10 +19687,10 @@
 						})) ? o : "") + ">" + s(a(i && u(i, "key"), e)) + "</td><td>" + s(a(
 						e, e)) + "</td></tr> ";
 				},
-				6: function(t, e, n, r, i) {
+				6(t, e, n, r, i) {
 					return " <tr><td>Empty</td></tr> ";
 				},
-				8: function(t, e, n, r, i) {
+				8(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -19706,7 +19706,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				10: function(t, e, n, r, i) {
+				10(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -19722,7 +19722,7 @@
 						"resTxt") : e, e)) + "</pre> ";
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -19812,7 +19812,7 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -19828,7 +19828,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				2: function(t, e, n, r, i) {
+				2(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -19900,10 +19900,10 @@
 						"</span></li> "
 					);
 				},
-				3: function(t, e, n, r, i) {
+				3(t, e, n, r, i) {
 					return "eruda-error";
 				},
-				5: function(t, e, n, r, i) {
+				5(t, e, n, r, i) {
 					var o;
 					return (
 						" <li><span " +
@@ -19926,7 +19926,7 @@
 					);
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -19955,7 +19955,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20013,7 +20013,7 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20034,7 +20034,7 @@
 						data: i
 					})) ? o : "") + " </ul> ";
 				},
-				2: function(t, e, n, r, i) {
+				2(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -20056,7 +20056,7 @@
 							data: i
 						})) ? o : "") + "></span></li> ";
 				},
-				4: function(t, e, n, r, i) {
+				4(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20077,7 +20077,7 @@
 						data: i
 					})) ? o : "") + " </ul> ";
 				},
-				5: function(t, e, n, r, i) {
+				5(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -20104,13 +20104,13 @@
 						e, "idx") : e, e)) + '">' + (null != (o = s(null != e ? u(e,
 						"text") : e, e)) ? o : "") + "</li> ";
 				},
-				6: function(t, e, n, r, i) {
+				6(t, e, n, r, i) {
 					return "eruda-green";
 				},
-				8: function(t, e, n, r, i) {
+				8(t, e, n, r, i) {
 					return "eruda-active-effect";
 				},
-				10: function(t, e, n, r, i) {
+				10(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -20126,7 +20126,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				11: function(t, e, n, r, i) {
+				11(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s =
@@ -20139,10 +20139,10 @@
 						'</td><td class="eruda-string-color">' + (null != (o = a(null != e ? s(
 							e, "value") : e, e)) ? o : "") + "</td></tr> ";
 				},
-				13: function(t, e, n, r, i) {
+				13(t, e, n, r, i) {
 					return " <tr><td>Empty</td></tr> ";
 				},
-				15: function(t, e, n, r, i) {
+				15(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20168,7 +20168,7 @@
 							data: i
 						})) ? o : "") + " </div></div> ";
 				},
-				16: function(t, e, n, r, i) {
+				16(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20190,7 +20190,7 @@
 							data: i
 						})) ? o : "") + " <div>}</div></div> ";
 				},
-				17: function(t, e, n, r, i) {
+				17(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s =
@@ -20206,7 +20206,7 @@
 						})) ? o : "") + "><span>" + t.escapeExpression(a(i && s(i, "key"),
 						e)) + "</span>: " + (null != (o = a(e, e)) ? o : "") + ";</div> ";
 				},
-				19: function(t, e, n, r, i) {
+				19(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -20451,7 +20451,7 @@
 						" </tbody></table></div></div> "
 					);
 				},
-				20: function(t, e, n, r, i) {
+				20(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20471,7 +20471,7 @@
 							data: i
 						})) ? o : "") + "></span></div> ";
 				},
-				22: function(t, e, n, r, i) {
+				22(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20491,7 +20491,7 @@
 							data: i
 						})) ? o : "") + "></span></div> ";
 				},
-				24: function(t, e, n, r, i) {
+				24(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -20506,7 +20506,7 @@
 						})) ? o : "") + "> " + t.escapeExpression(t.lambda(null != e ? a(e,
 						"computedStyleSearchKeyword") : e, e)) + " </div> ";
 				},
-				26: function(t, e, n, r, i) {
+				26(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -20541,7 +20541,7 @@
 							"boxModel") : e) ? l(o, "position") : o) ? l(o, "left") : o,
 						e)) + "</div>";
 				},
-				28: function(t, e, n, r, i) {
+				28(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -20566,7 +20566,7 @@
 							"boxModel") : e) ? l(o, "position") : o) ? l(o, "bottom") :
 						o, e)) + "</div></div>";
 				},
-				30: function(t, e, n, r, i) {
+				30(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s =
@@ -20582,7 +20582,7 @@
 							})) ? o : "") + ">" + t.escapeExpression(a(i && s(i, "key"), e)) +
 						"</td><td>" + (null != (o = a(e, e)) ? o : "") + "</td></tr> ";
 				},
-				32: function(t, e, n, r, i) {
+				32(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20608,7 +20608,7 @@
 						data: i
 					})) ? o : "") + " </div></div> ";
 				},
-				33: function(t, e, n, r, i) {
+				33(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20639,7 +20639,7 @@
 						data: i
 					})) ? o : "") + " </ul></div> ";
 				},
-				34: function(t, e, n, r, i) {
+				34(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -20656,7 +20656,7 @@
 						})) ? o : "") + ">" + t.escapeExpression(t.lambda(null != e ? a(e,
 						"listenerStr") : e, e)) + "</li> ";
 				},
-				35: function(t, e, n, r, i) {
+				35(t, e, n, r, i) {
 					var o;
 					return null !=
 						(o = (
@@ -20673,7 +20673,7 @@
 						"";
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20761,7 +20761,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -20845,7 +20845,7 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					var o = t.lambda,
 						a = t.escapeExpression,
 						s =
@@ -20860,7 +20860,7 @@
 						a(o(null != e ? s(e, "desc") : e, e)) + " </div></div> ";
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -20890,7 +20890,7 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -20905,7 +20905,7 @@
 						})) ? o : "") + ">" + t.escapeExpression(t.lambda(null != e ? a(e,
 						"localStoreSearchKeyword") : e, e)) + "</div>";
 				},
-				3: function(t, e, n, r, i) {
+				3(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -20922,7 +20922,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				4: function(t, e, n, r, i) {
+				4(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -20955,10 +20955,10 @@
 							})) ? o : "") + ' data-key="' + u(s(null != e ? l(e, "key") : e,
 						e)) + '" data-type="local"></span></td></tr> ';
 				},
-				6: function(t, e, n, r, i) {
+				6(t, e, n, r, i) {
 					return " <tr><td>Empty</td></tr> ";
 				},
-				8: function(t, e, n, r, i) {
+				8(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -20973,7 +20973,7 @@
 						})) ? o : "") + ">" + t.escapeExpression(t.lambda(null != e ? a(e,
 						"sessionStoreSearchKeyword") : e, e)) + "</div>";
 				},
-				10: function(t, e, n, r, i) {
+				10(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -20990,7 +20990,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				11: function(t, e, n, r, i) {
+				11(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -21023,7 +21023,7 @@
 							})) ? o : "") + ' data-key="' + u(s(null != e ? l(e, "key") : e,
 						e)) + '" data-type="session"></span></td></tr> ';
 				},
-				13: function(t, e, n, r, i) {
+				13(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21038,7 +21038,7 @@
 						})) ? o : "") + ">" + t.escapeExpression(t.lambda(null != e ? a(e,
 						"cookieSearchKeyword") : e, e)) + "</div>";
 				},
-				15: function(t, e, n, r, i) {
+				15(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21054,7 +21054,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				16: function(t, e, n, r, i) {
+				16(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -21082,7 +21082,7 @@
 							})) ? o : "") + ' data-key="' + u(s(null != e ? l(e, "key") : e,
 						e)) + '"></span></td></tr> ';
 				},
-				18: function(t, e, n, r, i) {
+				18(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21098,7 +21098,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				19: function(t, e, n, r, i) {
+				19(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s = t.escapeExpression,
@@ -21115,10 +21115,10 @@
 								data: i
 							})) ? o : "") + ">" + s(a(e, e)) + "</a></li> ";
 				},
-				21: function(t, e, n, r, i) {
+				21(t, e, n, r, i) {
 					return " <li>Empty</li> ";
 				},
-				23: function(t, e, n, r, i) {
+				23(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21135,7 +21135,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				24: function(t, e, n, r, i) {
+				24(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s = t.escapeExpression,
@@ -21152,7 +21152,7 @@
 								data: i
 							})) ? o : "") + ">" + s(a(e, e)) + "</a></li> ";
 				},
-				26: function(t, e, n, r, i) {
+				26(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21168,7 +21168,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				27: function(t, e, n, r, i) {
+				27(t, e, n, r, i) {
 					var o,
 						a = t.lambda,
 						s = t.escapeExpression,
@@ -21185,7 +21185,7 @@
 								data: i
 							})) ? o : "") + ">" + s(a(e, e)) + "</a></li> ";
 				},
-				29: function(t, e, n, r, i) {
+				29(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21201,7 +21201,7 @@
 							data: i
 						})) ? o : "") + " ";
 				},
-				30: function(t, e, n, r, i) {
+				30(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -21222,7 +21222,7 @@
 							})) ? o : "") + "></li> ";
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -21641,7 +21641,7 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -21664,7 +21664,7 @@
 						o : "") + "</div></li> ";
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21694,7 +21694,7 @@
 		function(t, e, n) {
 			var r = n(7);
 			t.exports = (r.default || r).template({
-				1: function(t, e, n, r, i) {
+				1(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -21737,7 +21737,7 @@
 							data: i
 						})) ? o : "") + " </td></tr></tbody></table></div> ";
 				},
-				2: function(t, e, n, r, i) {
+				2(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21752,7 +21752,7 @@
 						})) ? o : "") + ">" + t.escapeExpression(t.lambda(null != e ? a(e,
 						"idx") : e, e)) + "</div> ";
 				},
-				4: function(t, e, n, r, i) {
+				4(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21767,7 +21767,7 @@
 						})) ? o : "") + ">" + (null != (o = t.lambda(null != e ? a(e,
 						"val") : e, e)) ? o : "") + "</pre> ";
 				},
-				6: function(t, e, n, r, i) {
+				6(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -21787,7 +21787,7 @@
 						e, e)) ? o : "") + "</pre></div> ";
 				},
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21810,7 +21810,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s = t.lambda,
@@ -21850,7 +21850,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o;
 					return (
 						"<ul " +
@@ -21879,7 +21879,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a = null != e ? e : t.nullContext || {},
 						s =
@@ -21905,7 +21905,7 @@
 			var r = n(7);
 			t.exports = (r.default || r).template({
 				compiler: [8, ">= 4.3.0"],
-				main: function(t, e, n, r, i) {
+				main(t, e, n, r, i) {
 					var o,
 						a =
 						t.lookupProperty ||
@@ -21970,16 +21970,16 @@
 				m = n(4),
 				b = n.n(m),
 				y = Object(f.b)({
-					init: function(t) {
+					init(t) {
 						this._$el = t;
 					},
-					show: function() {
+					show() {
 						return this._$el.show(), this;
 					},
-					hide: function() {
+					hide() {
 						return this._$el.hide(), this;
 					},
-					destroy: function() {
+					destroy() {
 						this._$el.remove();
 					},
 				}),
@@ -22211,14 +22211,14 @@
 							e,
 							[{
 									key: "init",
-									value: function(t) {
+									value(t) {
 										b()(c()(e.prototype), "init", this).call(this, t), this
 											._bindEvent();
 									},
 								},
 								{
 									key: "remove",
-									value: function(t, e) {
+									value(t, e) {
 										var n = this;
 										return (
 											Object(f.S)(t) ?
@@ -22239,20 +22239,20 @@
 								},
 								{
 									key: "destroy",
-									value: function() {
+									value() {
 										b()(c()(e.prototype), "destroy", this).call(this), I
 											.remove(this._style);
 									},
 								},
 								{
 									key: "clear",
-									value: function() {
+									value() {
 										(this._settings = []), this._$el.html("");
 									},
 								},
 								{
 									key: "switch",
-									value: function(t, e, n) {
+									value(t, e, n) {
 										var r = this._genId("settings");
 										return this._settings.push({
 											config: t,
@@ -22268,7 +22268,7 @@
 								},
 								{
 									key: "color",
-									value: function(t, e, n) {
+									value(t, e, n) {
 										var r = arguments.length > 3 && void 0 !== arguments[
 											3] ? arguments[3] : ["#2196f3", "#707d8b",
 												"#f44336", "#009688", "#ffc107"
@@ -22288,7 +22288,7 @@
 								},
 								{
 									key: "select",
-									value: function(t, e, n, r) {
+									value(t, e, n, r) {
 										var i = this._genId("settings");
 										return this._settings.push({
 											config: t,
@@ -22304,7 +22304,7 @@
 								},
 								{
 									key: "range",
-									value: function(t, e, n, r) {
+									value(t, e, n, r) {
 										var i = r.min,
 											o = void 0 === i ? 0 : i,
 											a = r.max,
@@ -22334,21 +22334,21 @@
 								},
 								{
 									key: "separator",
-									value: function() {
+									value() {
 										return this._$el.append(
 											'<div class="eruda-separator"></div>'), this;
 									},
 								},
 								{
 									key: "text",
-									value: function(t) {
+									value(t) {
 										return this._$el.append('<div class="eruda-text">'
 											.concat(t, "</div>")), this;
 									},
 								},
 								{
 									key: "_cleanSeparator",
-									value: function() {
+									value() {
 										var t = Object(f.j)(this._$el.get(0).children);
 
 										function e(t) {
@@ -22361,19 +22361,19 @@
 								},
 								{
 									key: "_genId",
-									value: function() {
+									value() {
 										return Object(f.xb)("eruda-settings");
 									},
 								},
 								{
 									key: "_closeAll",
-									value: function() {
+									value() {
 										this._$el.find(".eruda-open").rmClass("eruda-open");
 									},
 								},
 								{
 									key: "_getSetting",
-									value: function(t) {
+									value(t) {
 										var e;
 										return (
 											Object(f.t)(this._settings, function(n) {
@@ -22385,7 +22385,7 @@
 								},
 								{
 									key: "_bindEvent",
-									value: function() {
+									value() {
 										var t = this;
 										this._$el
 											.on("click", ".eruda-checkbox", function() {
@@ -22464,7 +22464,7 @@
 							],
 							[{
 								key: "createCfg",
-								value: function(t, e) {
+								value(t, e) {
 									return new f.d("eruda-" + t, e);
 								},
 							}, ]
@@ -22486,19 +22486,19 @@
 						p()(e, t),
 						a()(e, [{
 								key: "hide",
-								value: function() {
+								value() {
 									this._$el.hide();
 								},
 							},
 							{
 								key: "show",
-								value: function() {
+								value() {
 									this._$el.show();
 								},
 							},
 							{
 								key: "setPos",
-								value: function(t) {
+								value(t) {
 									this._isOutOfRange(t) && (t = this._getDefPos()), this
 										._$el.css({
 											left: t.x,
@@ -22508,20 +22508,20 @@
 							},
 							{
 								key: "getPos",
-								value: function() {
+								value() {
 									return this.config.get("pos");
 								},
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									I.remove(this._style), this._unregisterListener(), this
 										._$el.remove();
 								},
 							},
 							{
 								key: "_isOutOfRange",
-								value: function(t) {
+								value(t) {
 									t = t || this.config.get("pos");
 									var e = this._getDefPos();
 									return t.x > e.x + 10 || t.x < 0 || t.y < 0 || t.y > e
@@ -22530,7 +22530,7 @@
 							},
 							{
 								key: "_registerListener",
-								value: function() {
+								value() {
 									var t = this;
 									(this._scaleListener = function() {
 										return Object(f.cb)(function() {
@@ -22542,13 +22542,13 @@
 							},
 							{
 								key: "_unregisterListener",
-								value: function() {
+								value() {
 									g.off(g.SCALE, this._scaleListener);
 								},
 							},
 							{
 								key: "_appendTpl",
-								value: function() {
+								value() {
 									var t = this._$container;
 									t.append(n(60)()), (this._$el = t.find(
 										".eruda-entry-btn"));
@@ -22556,7 +22556,7 @@
 							},
 							{
 								key: "_resetPos",
-								value: function(t) {
+								value(t) {
 									var e = this.config,
 										n = e.get("pos"),
 										r = this._getDefPos();
@@ -22565,7 +22565,7 @@
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this,
 										e = this._draggabilly,
 										n = this._$el;
@@ -22595,7 +22595,7 @@
 							},
 							{
 								key: "_makeDraggable",
-								value: function() {
+								value() {
 									this._draggabilly = new d.a(this._$el.get(0), {
 										containment: !0
 									});
@@ -22603,7 +22603,7 @@
 							},
 							{
 								key: "initCfg",
-								value: function(t) {
+								value(t) {
 									var e = (this.config = R.createCfg("entry-button", {
 										rememberPos: !0,
 										pos: this._getDefPos()
@@ -22615,7 +22615,7 @@
 							},
 							{
 								key: "_getDefPos",
-								value: function() {
+								value() {
 									var t = this._$el.get(0).offsetWidth + 10;
 									return {
 										x: window.innerWidth - t,
@@ -22638,7 +22638,7 @@
 						p()(e, t),
 						a()(e, [{
 								key: "add",
-								value: function(t) {
+								value(t) {
 									var e = this._$el;
 									this._len++;
 									var n = e.find(".eruda-nav-bar-item").last(),
@@ -22650,7 +22650,7 @@
 							},
 							{
 								key: "remove",
-								value: function(t) {
+								value(t) {
 									this._len--,
 										this._$el.find(".eruda-nav-bar-item").each(
 										function() {
@@ -22663,7 +22663,7 @@
 							},
 							{
 								key: "activateTool",
-								value: function(t) {
+								value(t) {
 									var e = this;
 									this._$el.find(".eruda-nav-bar-item").each(function() {
 										var n = Object(f.a)(this);
@@ -22676,13 +22676,13 @@
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									I.remove(this._style), this._$el.remove();
 								},
 							},
 							{
 								key: "_scrollItemToView",
-								value: function() {
+								value() {
 									var t,
 										e = this._$el,
 										n = e.find(".eruda-active").get(0),
@@ -22697,7 +22697,7 @@
 							},
 							{
 								key: "resetBottomBar",
-								value: function() {
+								value() {
 									var t = this._$bottomBar,
 										e = this._$el,
 										n = e.find(".eruda-active").get(0);
@@ -22709,7 +22709,7 @@
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this,
 										e = this;
 									this._$el
@@ -22751,7 +22751,7 @@
 						p()(e, t),
 						a()(e, [{
 								key: "show",
-								value: function() {
+								value() {
 									var t = this;
 									return (
 										(this._isShow = !0),
@@ -22767,7 +22767,7 @@
 							},
 							{
 								key: "hide",
-								value: function() {
+								value() {
 									var t = this;
 									return (
 										(this._isShow = !1),
@@ -22784,13 +22784,13 @@
 							},
 							{
 								key: "toggle",
-								value: function() {
+								value() {
 									return this._isShow ? this.hide() : this.show();
 								},
 							},
 							{
 								key: "add",
-								value: function(t) {
+								value(t) {
 									if (!(t instanceof y)) {
 										var e = new y(),
 											n = e.init,
@@ -22819,7 +22819,7 @@
 							},
 							{
 								key: "remove",
-								value: function(t) {
+								value(t) {
 									var e = this._tools;
 									if (!e[t]) return B.warn("Tool ".concat(t,
 										" doesn't exist"));
@@ -22835,7 +22835,7 @@
 							},
 							{
 								key: "removeAll",
-								value: function() {
+								value() {
 									var t = this;
 									return (
 										Object(f.t)(this._tools, function(e) {
@@ -22847,14 +22847,14 @@
 							},
 							{
 								key: "get",
-								value: function(t) {
+								value(t) {
 									var e = this._tools[t];
 									if (e) return e;
 								},
 							},
 							{
 								key: "showTool",
-								value: function(t) {
+								value(t) {
 									if (this._curTool === t) return this;
 									this._curTool = t;
 									var e = this._tools,
@@ -22877,7 +22877,7 @@
 							},
 							{
 								key: "initCfg",
-								value: function(t) {
+								value(t) {
 									var e = this,
 										n = (this.config = R.createCfg("dev-tools", this
 											._defCfg));
@@ -22909,20 +22909,20 @@
 							},
 							{
 								key: "notify",
-								value: function(t, e) {
+								value(t, e) {
 									this._notification.notify(t, e);
 								},
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									I.remove(this._style), this.removeAll(), this._navBar
 										.destroy(), this._$el.remove();
 								},
 							},
 							{
 								key: "_setTransparency",
-								value: function(t) {
+								value(t) {
 									Object(f.O)(t) && ((this._opacity = t), this._isShow &&
 										this._$el.css({
 											opacity: t
@@ -22931,7 +22931,7 @@
 							},
 							{
 								key: "_setDisplaySize",
-								value: function(t) {
+								value(t) {
 									Object(f.O)(t) && this._$el.css({
 										height: t + "%"
 									});
@@ -22939,7 +22939,7 @@
 							},
 							{
 								key: "_appendTpl",
-								value: function() {
+								value() {
 									var t = this.$container;
 									t.append(n(63)()), (this._$el = t.find(
 										".eruda-dev-tools")), (this._$tools = this._$el
@@ -22948,7 +22948,7 @@
 							},
 							{
 								key: "_initNavBar",
-								value: function() {
+								value() {
 									var t = this;
 									(this._navBar = new z(this._$el.find(
 										".eruda-nav-bar-container"))),
@@ -22959,7 +22959,7 @@
 							},
 							{
 								key: "_initNotification",
-								value: function() {
+								value() {
 									this._notification = new q.a(this._$el.get(0), {
 										position: {
 											x: "center",
@@ -22970,7 +22970,7 @@
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this,
 										e = this._$el.find(".eruda-nav-bar"),
 										n = function(n) {
@@ -23064,7 +23064,7 @@
 						p()(e, t),
 						a()(e, [{
 								key: "checkGroup",
-								value: function() {
+								value() {
 									for (var t = this.group, e = !1; t;) {
 										if (t.collapsed) {
 											e = !0;
@@ -23078,7 +23078,7 @@
 							},
 							{
 								key: "updateIcon",
-								value: function(t) {
+								value(t) {
 									return (
 										this._$el
 										.find(".eruda-icon")
@@ -23091,7 +23091,7 @@
 							},
 							{
 								key: "addCount",
-								value: function() {
+								value() {
 									this.count++;
 									var t = this.count,
 										e = this._$el,
@@ -23104,7 +23104,7 @@
 							},
 							{
 								key: "groupEnd",
-								value: function() {
+								value() {
 									return this._$el.find(
 											".eruda-nesting-level:not(.eruda-group-closed)")
 										.last().addClass("eruda-group-closed"), this;
@@ -23112,7 +23112,7 @@
 							},
 							{
 								key: "updateTime",
-								value: function(t) {
+								value(t) {
 									var e = this._$el.find(".eruda-time-container");
 									return this.time && (e.find("span").eq(0).text(t), (this
 										.time = t)), this;
@@ -23120,13 +23120,13 @@
 							},
 							{
 								key: "isAttached",
-								value: function() {
+								value() {
 									return !!this.el.parentNode;
 								},
 							},
 							{
 								key: "updateSize",
-								value: function() {
+								value() {
 									var t = !(arguments.length > 0 && void 0 !== arguments[
 											0]) || arguments[0],
 										e = this.el.offsetHeight,
@@ -23138,19 +23138,19 @@
 							},
 							{
 								key: "html",
-								value: function() {
+								value() {
 									return this.el.outerHTML;
 								},
 							},
 							{
 								key: "text",
-								value: function() {
+								value() {
 									return this._content.textContent;
 								},
 							},
 							{
 								key: "_needSrc",
-								value: function() {
+								value() {
 									var t = this.type,
 										e = this.args;
 									if ("html" === t) return !1;
@@ -23161,7 +23161,7 @@
 							},
 							{
 								key: "extractObj",
-								value: function() {
+								value() {
 									var t = this,
 										e = arguments.length > 0 && void 0 !== arguments[
 										0] ? arguments[0] : f.db,
@@ -23176,7 +23176,7 @@
 							},
 							{
 								key: "click",
-								value: function(t) {
+								value(t) {
 									var n = this,
 										r = this.type,
 										i = this.src,
@@ -23236,7 +23236,7 @@
 							},
 							{
 								key: "_formatMsg",
-								value: function() {
+								value() {
 									var t = this.args,
 										n = this.type,
 										r = this.id,
@@ -23751,28 +23751,28 @@
 								r._renderViewport(t);
 							}, 16)),
 							(r._global = {
-								copy: function(t) {
+								copy(t) {
 									Object(f.S)(t) || (t = JSON.stringify(t, null, 2)),
 										Object(f.n)(t);
 								},
-								$: function() {
+								$() {
 									return document.querySelector.apply(document,
 									arguments);
 								},
-								$$: function() {
+								$$() {
 									return Object(f.rb)(document.querySelectorAll.apply(
 										document, arguments));
 								},
-								$x: function(t) {
+								$x(t) {
 									return Object(f.Cb)(t);
 								},
-								clear: function() {
+								clear() {
 									r.clear();
 								},
-								dir: function(t) {
+								dir(t) {
 									r.dir(t);
 								},
-								table: function(t, e) {
+								table(t, e) {
 									r.table(t, e);
 								},
 								keys: f.V,
@@ -23785,25 +23785,25 @@
 						p()(e, t),
 						a()(e, [{
 								key: "renderAsync",
-								value: function(t) {
+								value(t) {
 									this._asyncRender = t;
 								},
 							},
 							{
 								key: "setGlobal",
-								value: function(t, e) {
+								value(t, e) {
 									this._global[t] = e;
 								},
 							},
 							{
 								key: "displayHeader",
-								value: function(t) {
+								value(t) {
 									this._displayHeader = t;
 								},
 							},
 							{
 								key: "maxNum",
-								value: function(t) {
+								value(t) {
 									var e = this._logs;
 									(this._maxNum = t), Object(f.O)(t) && e.length > t && ((
 											this._logs = e.slice(e.length - t)), this
@@ -23812,44 +23812,44 @@
 							},
 							{
 								key: "displayUnenumerable",
-								value: function(t) {
+								value(t) {
 									it.showUnenumerable = t;
 								},
 							},
 							{
 								key: "displayGetterVal",
-								value: function(t) {
+								value(t) {
 									it.showGetterVal = t;
 								},
 							},
 							{
 								key: "lazyEvaluation",
-								value: function(t) {
+								value(t) {
 									it.lazyEvaluation = t;
 								},
 							},
 							{
 								key: "viewLogInSources",
-								value: function(t) {
+								value(t) {
 									it.showSrcInSources = t;
 								},
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									this._style && I.remove(this._style);
 								},
 							},
 							{
 								key: "filter",
-								value: function(t) {
+								value(t) {
 									return (this._filter = t), this.emit("filter", t), this
 										.render();
 								},
 							},
 							{
 								key: "count",
-								value: function() {
+								value() {
 									var t = arguments.length > 0 && void 0 !== arguments[
 										0] ? arguments[0] : "default",
 										e = this._count;
@@ -23859,7 +23859,7 @@
 							},
 							{
 								key: "countReset",
-								value: function() {
+								value() {
 									var t = arguments.length > 0 && void 0 !== arguments[
 										0] ? arguments[0] : "default";
 									return (this._count[t] = 0), this;
@@ -23867,7 +23867,7 @@
 							},
 							{
 								key: "assert",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									if (!Object(f.H)(e)) {
@@ -23881,7 +23881,7 @@
 							},
 							{
 								key: "log",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									if (!Object(f.H)(e)) return this.insert("log", e);
@@ -23889,7 +23889,7 @@
 							},
 							{
 								key: "debug",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									if (!Object(f.H)(e)) return this.insert("debug", e);
@@ -23897,13 +23897,13 @@
 							},
 							{
 								key: "dir",
-								value: function(t) {
+								value(t) {
 									if (!Object(f.T)(t)) return this.insert("dir", [t]);
 								},
 							},
 							{
 								key: "table",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									if (!Object(f.H)(e)) return this.insert("table", e);
@@ -23911,7 +23911,7 @@
 							},
 							{
 								key: "time",
-								value: function() {
+								value() {
 									var t = arguments.length > 0 && void 0 !== arguments[
 										0] ? arguments[0] : "default";
 									return this._timer[t] ? this.insert("warn", ["Timer '"
@@ -23921,7 +23921,7 @@
 							},
 							{
 								key: "timeLog",
-								value: function() {
+								value() {
 									var t = arguments.length > 0 && void 0 !== arguments[
 										0] ? arguments[0] : "default",
 										e = this._timer[t];
@@ -23933,7 +23933,7 @@
 							},
 							{
 								key: "timeEnd",
-								value: function() {
+								value() {
 									var t = arguments.length > 0 && void 0 !== arguments[
 										0] ? arguments[0] : "default";
 									return this.timeLog(t), delete this._timer[t], this;
@@ -23941,7 +23941,7 @@
 							},
 							{
 								key: "clear",
-								value: function() {
+								value() {
 									return this.silentClear(), this.insert("log", [
 										"%cConsole was cleared",
 										"color:#808080;font-style:italic;"
@@ -23950,7 +23950,7 @@
 							},
 							{
 								key: "silentClear",
-								value: function() {
+								value() {
 									return (this._logs = []), (this._displayLogs = []), (
 										this._lastLog = {}), (this._count = {}), (this
 										._timer = {}), (this._groupStack = new f.g()), (
@@ -23961,7 +23961,7 @@
 							},
 							{
 								key: "info",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									if (!Object(f.H)(e)) return this.insert("info", e);
@@ -23969,7 +23969,7 @@
 							},
 							{
 								key: "error",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									if (!Object(f.H)(e)) return this.insert("error", e);
@@ -23977,7 +23977,7 @@
 							},
 							{
 								key: "warn",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									if (!Object(f.H)(e)) return this.insert("warn", e);
@@ -23985,7 +23985,7 @@
 							},
 							{
 								key: "group",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									return this.insert({
@@ -23997,7 +23997,7 @@
 							},
 							{
 								key: "groupCollapsed",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									return this.insert({
@@ -24009,13 +24009,13 @@
 							},
 							{
 								key: "groupEnd",
-								value: function() {
+								value() {
 									this.insert("groupEnd");
 								},
 							},
 							{
 								key: "input",
-								value: function(t) {
+								value(t) {
 									this.insert({
 										type: "input",
 										args: [t],
@@ -24035,7 +24035,7 @@
 							},
 							{
 								key: "output",
-								value: function(t) {
+								value(t) {
 									return this.insert({
 										type: "output",
 										args: [t],
@@ -24045,7 +24045,7 @@
 							},
 							{
 								key: "html",
-								value: function() {
+								value() {
 									for (var t = arguments.length, e = new Array(t), n =
 										0; n < t; n++) e[n] = arguments[n];
 									return this.insert("html", e);
@@ -24053,7 +24053,7 @@
 							},
 							{
 								key: "render",
-								value: function() {
+								value() {
 									var t = this._logs;
 									this._$el.html(""), (this._isAtBottom = !0), this
 										._updateBottomSpace(0), this._updateTopSpace(0), (
@@ -24065,7 +24065,7 @@
 							},
 							{
 								key: "insert",
-								value: function(t, e) {
+								value(t, e) {
 									var n;
 									this._displayHeader && (n = {
 											time: jt(),
@@ -24076,14 +24076,14 @@
 							},
 							{
 								key: "insertAsync",
-								value: function(t, e, n) {
+								value(t, e, n) {
 									this._asyncList.push([t, e, n]), this
 								._handleAsyncList();
 								},
 							},
 							{
 								key: "insertSync",
-								value: function(t, e, n) {
+								value(t, e, n) {
 									var r = this,
 										i = this._logs,
 										o = this._groupStack;
@@ -24128,34 +24128,34 @@
 							},
 							{
 								key: "toggleGroup",
-								value: function(t) {
+								value(t) {
 									t.targetGroup.collapsed ? this._openGroup(t) : this
 										._collapseGroup(t);
 								},
 							},
 							{
 								key: "_updateTopSpace",
-								value: function(t) {
+								value(t) {
 									(this._topSpaceHeight = t), (this._el.style.top = t +
 										"px");
 								},
 							},
 							{
 								key: "_updateBottomSpace",
-								value: function(t) {
+								value(t) {
 									this._bottomSpaceHeight = t;
 								},
 							},
 							{
 								key: "_updateSpace",
-								value: function(t) {
+								value(t) {
 									this._spaceHeight !== t && ((this._spaceHeight = t), (
 										this._space.style.height = t + "px"));
 								},
 							},
 							{
 								key: "_updateLogSize",
-								value: function(t) {
+								value(t) {
 									var e = this._fakeEl;
 									if (!Object(f.K)(this._fakeEl)) return t.isAttached() ?
 										void t.updateSize() : (e.appendChild(t.el), t
@@ -24165,7 +24165,7 @@
 							},
 							{
 								key: "_detachLog",
-								value: function(t) {
+								value(t) {
 									var e = this._displayLogs,
 										n = e.indexOf(t);
 									n > -1 && (e.splice(n, 1), this.renderViewport());
@@ -24173,7 +24173,7 @@
 							},
 							{
 								key: "_attachLog",
-								value: function(t) {
+								value(t) {
 									if (this._filterLog(t) && !t.collapsed) {
 										var e = this._displayLogs;
 										if (0 === e.length) return e.push(t), void this
@@ -24193,7 +24193,7 @@
 							},
 							{
 								key: "_handleAsyncList",
-								value: function() {
+								value() {
 									var t = this,
 										e = arguments.length > 0 && void 0 !== arguments[
 										0] ? arguments[0] : 20,
@@ -24230,7 +24230,7 @@
 							},
 							{
 								key: "_injectGlobal",
-								value: function() {
+								value() {
 									Object(f.t)(this._global, function(t, e) {
 										window[e] || (window[e] = t);
 									});
@@ -24238,7 +24238,7 @@
 							},
 							{
 								key: "_clearGlobal",
-								value: function() {
+								value() {
 									Object(f.t)(this._global, function(t, e) {
 										window[e] && window[e] === t &&
 											delete window[e];
@@ -24247,7 +24247,7 @@
 							},
 							{
 								key: "_evalJs",
-								value: function(t) {
+								value(t) {
 									var e;
 									this._injectGlobal();
 									try {
@@ -24260,7 +24260,7 @@
 							},
 							{
 								key: "_filterLog",
-								value: function(t) {
+								value(t) {
 									var e = this._filter;
 									if ("all" === e) return !0;
 									var n = Object(f.R)(e),
@@ -24271,7 +24271,7 @@
 							},
 							{
 								key: "_getLog",
-								value: function(t) {
+								value(t) {
 									for (var e, n = this._logs, r = 0, i = n.length; r <
 										i && (e = n[r]).id !== t; r++);
 									return e;
@@ -24279,21 +24279,21 @@
 							},
 							{
 								key: "_collapseGroup",
-								value: function(t) {
+								value(t) {
 									(t.targetGroup.collapsed = !0), t.updateIcon(
 										"caret-right"), this._updateGroup(t);
 								},
 							},
 							{
 								key: "_openGroup",
-								value: function(t) {
+								value(t) {
 									(t.targetGroup.collapsed = !1), t.updateIcon(
 										"caret-down"), this._updateGroup(t);
 								},
 							},
 							{
 								key: "_updateGroup",
-								value: function(t) {
+								value(t) {
 									for (var e = t.targetGroup, n = this._logs, r = n
 											.length, i = n.indexOf(t) + 1; i < r;) {
 										var o = n[i];
@@ -24305,7 +24305,7 @@
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this,
 										e = this;
 									this._$el
@@ -24363,7 +24363,7 @@
 							},
 							{
 								key: "_renderViewport",
-								value: function() {
+								value() {
 									var t = arguments.length > 0 && void 0 !== arguments[
 										0] ? arguments[0] : {},
 										e = t.topTolerance,
@@ -24453,7 +24453,7 @@
 						p()(e, t),
 						a()(e, [{
 								key: "init",
-								value: function(t, n) {
+								value(t, n) {
 									b()(c()(e.prototype), "init", this).call(this, t), (this
 											._container = n), this._appendTpl(), this
 										._initLogger(), this._exposeLogger(), this
@@ -24462,14 +24462,14 @@
 							},
 							{
 								key: "show",
-								value: function() {
+								value() {
 									b()(c()(e.prototype), "show", this).call(this), this
 										._handleShow();
 								},
 							},
 							{
 								key: "overrideConsole",
-								value: function() {
+								value() {
 									var t = this,
 										e = (this._origConsole = {}),
 										n = window.console;
@@ -24489,13 +24489,13 @@
 							},
 							{
 								key: "setGlobal",
-								value: function(t, e) {
+								value(t, e) {
 									this._logger.setGlobal(t, e);
 								},
 							},
 							{
 								key: "restoreConsole",
-								value: function() {
+								value() {
 									var t = this;
 									return this._origConsole ?
 										(At.forEach(function(e) {
@@ -24509,19 +24509,19 @@
 							},
 							{
 								key: "catchGlobalErr",
-								value: function() {
+								value() {
 									return f.wb.addListener(this._handleErr), this;
 								},
 							},
 							{
 								key: "ignoreGlobalErr",
-								value: function() {
+								value() {
 									return f.wb.rmListener(this._handleErr), this;
 								},
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									this._logger.destroy(), b()(c()(e.prototype), "destroy",
 											this).call(this), this._container.off("show",
 											this._handleShow), this._style && I.remove(this
@@ -24532,7 +24532,7 @@
 							},
 							{
 								key: "_enableJsExecution",
-								value: function(t) {
+								value(t) {
 									var e = this._$el,
 										n = e.find(".eruda-console-container"),
 										r = e.find(".eruda-js-input");
@@ -24542,7 +24542,7 @@
 							},
 							{
 								key: "_registerListener",
-								value: function() {
+								value() {
 									var t = this;
 									(this._scaleListener = function(e) {
 										return (t._scale = e);
@@ -24552,13 +24552,13 @@
 							},
 							{
 								key: "_unregisterListener",
-								value: function() {
+								value() {
 									g.off(g.SCALE, this._scaleListener);
 								},
 							},
 							{
 								key: "_appendTpl",
-								value: function() {
+								value() {
 									var t = this._$el;
 									(this._style = I(n(71))), t.append(n(72)());
 									var e = t.find(".eruda-js-input"),
@@ -24577,7 +24577,7 @@
 							},
 							{
 								key: "_initLogger",
-								value: function() {
+								value() {
 									var t = this._$control.find(".eruda-filter");
 									(this._logger = new $t(this._$logs)).on("filter",
 										function(e) {
@@ -24592,7 +24592,7 @@
 							},
 							{
 								key: "_exposeLogger",
-								value: function() {
+								value() {
 									var t = this,
 										e = this._logger;
 									["filter", "html"].concat(At).forEach(function(n) {
@@ -24609,7 +24609,7 @@
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this,
 										e = this._container,
 										n = this._$input,
@@ -24655,21 +24655,21 @@
 							},
 							{
 								key: "_hideInput",
-								value: function() {
+								value() {
 									this._$inputContainer.rmClass("eruda-active"), this
 										._$inputBtns.hide();
 								},
 							},
 							{
 								key: "_showInput",
-								value: function() {
+								value() {
 									this._$inputContainer.addClass("eruda-active"), this
 										._$inputBtns.show();
 								},
 							},
 							{
 								key: "_rmCfg",
-								value: function() {
+								value() {
 									var t = this.config,
 										e = this._container.get("settings");
 									e && e.remove(t, "asyncRender").remove(t, "jsExecution")
@@ -24683,7 +24683,7 @@
 							},
 							{
 								key: "_initCfg",
-								value: function() {
+								value() {
 									var t = this,
 										e = this._container,
 										n = this._logger,
@@ -24827,7 +24827,7 @@
 					p()(e, t),
 					a()(e, [{
 							key: "init",
-							value: function(t, n) {
+							value(t, n) {
 								b()(c()(e.prototype), "init", this).call(this, t), (this
 										._container = n), this._bindEvent(), this
 									._appendTpl();
@@ -24835,20 +24835,20 @@
 						},
 						{
 							key: "show",
-							value: function() {
+							value() {
 								b()(c()(e.prototype), "show", this).call(this), this
 									._render();
 							},
 						},
 						{
 							key: "clear",
-							value: function() {
+							value() {
 								(this._requests = {}), this._render();
 							},
 						},
 						{
 							key: "requests",
-							value: function() {
+							value() {
 								var t = [];
 								return (
 									Object(f.t)(this._requests, function(e) {
@@ -24860,7 +24860,7 @@
 						},
 						{
 							key: "_updateType",
-							value: function(t) {
+							value(t) {
 								var e = (function(t) {
 										if (!t) return "unknown";
 										var e = t.split(";")[0].split("/");
@@ -24876,7 +24876,7 @@
 						},
 						{
 							key: "_bindEvent",
-							value: function() {
+							value() {
 								var t = this,
 									e = this._$el,
 									n = this._container,
@@ -24926,7 +24926,7 @@
 						},
 						{
 							key: "destroy",
-							value: function() {
+							value() {
 								b()(c()(e.prototype), "destroy", this).call(this), I
 									.remove(this._style);
 								var t = Ct.a.domain("Network");
@@ -24939,7 +24939,7 @@
 						},
 						{
 							key: "_showDetail",
-							value: function(t) {
+							value(t) {
 								t.resTxt && "" === Object(f.vb)(t.resTxt) && delete t
 									.resTxt, Object(f.H)(t.resHeaders) && delete t
 									.resHeaders, Object(f.H)(t.reqHeaders) && delete t
@@ -24949,13 +24949,13 @@
 						},
 						{
 							key: "_hideDetail",
-							value: function() {
+							value() {
 								this._$detail.hide();
 							},
 						},
 						{
 							key: "_appendTpl",
-							value: function() {
+							value() {
 								var t = this._$el;
 								t.html(this._tpl()), (this._$detail = t.find(
 									".eruda-detail")), (this._$requests = t.find(
@@ -24964,7 +24964,7 @@
 						},
 						{
 							key: "_render",
-							value: function() {
+							value() {
 								if (this.active) {
 									var t = {};
 									Object(f.H)(this._requests) || (t.requests = this
@@ -24975,7 +24975,7 @@
 						},
 						{
 							key: "_renderHtml",
-							value: function(t) {
+							value(t) {
 								t !== this._lastHtml && ((this._lastHtml = t), this
 									._$requests.html(t));
 							},
@@ -24992,7 +24992,7 @@
 				}
 				return (function(t) {
 					return Object(f.nb)(t, {
-						comparator: function(t, e) {
+						comparator(t, e) {
 							for (var n = t.length, r = e.length, i = n > r ? r : n, o =
 									0; o < i; o++) {
 								var a = Rt(t.charCodeAt(o), e.charCodeAt(o));
@@ -25022,13 +25022,13 @@
 				return (
 					a()(t, [{
 							key: "getComputedStyle",
-							value: function() {
+							value() {
 								return Nt(window.getComputedStyle(this._el));
 							},
 						},
 						{
 							key: "getMatchedCSSRules",
-							value: function() {
+							value() {
 								var t = this,
 									e = [];
 								return (
@@ -25058,7 +25058,7 @@
 						},
 						{
 							key: "_elMatchesSel",
-							value: function(t) {
+							value(t) {
 								return Dt(this._el, t);
 							},
 						},
@@ -25082,31 +25082,31 @@
 				return (
 					a()(t, [{
 							key: "setEl",
-							value: function(t) {
+							value(t) {
 								(this._$target = Object(f.a)(t)), (this._target = t);
 							},
 						},
 						{
 							key: "show",
-							value: function() {
+							value() {
 								(this._isShow = !0), this.render(), this._$el.show();
 							},
 						},
 						{
 							key: "destroy",
-							value: function() {
+							value() {
 								I.remove(this._style);
 							},
 						},
 						{
 							key: "hide",
-							value: function() {
+							value() {
 								(this._isShow = !1), this._$el.hide();
 							},
 						},
 						{
 							key: "render",
-							value: function() {
+							value() {
 								var t = this._$target.offset(),
 									e = t.left,
 									n = t.width,
@@ -25228,7 +25228,7 @@
 						},
 						{
 							key: "_bindEvent",
-							value: function() {
+							value() {
 								var t = this;
 								window.addEventListener(
 									"scroll",
@@ -25241,7 +25241,7 @@
 						},
 						{
 							key: "_appendTpl",
-							value: function(t) {
+							value(t) {
 								t.append(n(78)());
 								var e = (this._$el = t.find(
 									".eruda-elements-highlight"));
@@ -25293,7 +25293,7 @@
 						p()(e, t),
 						a()(e, [{
 								key: "enable",
-								value: function() {
+								value() {
 									function t(t, e) {
 										document.body.addEventListener(t, e, !0);
 									}
@@ -25307,7 +25307,7 @@
 							},
 							{
 								key: "disable",
-								value: function() {
+								value() {
 									function t(t, e) {
 										document.body.removeEventListener(t, e, !0);
 									}
@@ -25336,7 +25336,7 @@
 						p()(e, t),
 						a()(e, [{
 								key: "init",
-								value: function(t, r) {
+								value(t, r) {
 									var i = this;
 									b()(c()(e.prototype), "init", this).call(this, t),
 										(this._container = r),
@@ -25357,7 +25357,7 @@
 							},
 							{
 								key: "show",
-								value: function() {
+								value() {
 									b()(c()(e.prototype), "show", this).call(this), this
 										._observeElement && this._enableObserver(), this
 										._curEl || this._setEl(this._htmlEl), this
@@ -25366,14 +25366,14 @@
 							},
 							{
 								key: "hide",
-								value: function() {
+								value() {
 									return this._disableObserver(), b()(c()(e.prototype),
 										"hide", this).call(this);
 								},
 							},
 							{
 								key: "set",
-								value: function(t) {
+								value(t) {
 									if (t !== this._curEl) return this._setEl(t), this
 										.scrollToTop(), this._render(), this
 										._updateHistory(), this.emit("change", t), this;
@@ -25381,7 +25381,7 @@
 							},
 							{
 								key: "overrideEventTarget",
-								value: function() {
+								value() {
 									var t = te(),
 										e = (this._origAddEvent = t.addEventListener),
 										n = (this._origRmEvent = t.removeEventListener);
@@ -25395,13 +25395,13 @@
 							},
 							{
 								key: "scrollToTop",
-								value: function() {
+								value() {
 									this._$showArea.get(0).scrollTop = 0;
 								},
 							},
 							{
 								key: "restoreEventTarget",
-								value: function() {
+								value() {
 									var t = te();
 									this._origAddEvent && (t.addEventListener = this
 										._origAddEvent), this._origRmEvent && (t
@@ -25410,7 +25410,7 @@
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									b()(c()(e.prototype), "destroy", this).call(this), I
 										.remove(this._style), this._select.disable(), this
 										._highlight.destroy(), this._disableObserver(), this
@@ -25419,7 +25419,7 @@
 							},
 							{
 								key: "_back",
-								value: function() {
+								value() {
 									if (this._curEl !== this._htmlEl) {
 										for (var t = this._curParentQueue, e = t.shift(); !
 											Kt(e);) e = t.shift();
@@ -25429,7 +25429,7 @@
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this,
 										e = this,
 										n = this._container,
@@ -25505,14 +25505,14 @@
 							},
 							{
 								key: "_toggleAllComputedStyle",
-								value: function() {
+								value() {
 									(this._rmDefComputedStyle = !this._rmDefComputedStyle),
 									this._render();
 								},
 							},
 							{
 								key: "_enableObserver",
-								value: function() {
+								value() {
 									this._observer.observe(this._htmlEl, {
 										attributes: !0,
 										childList: !0,
@@ -25522,13 +25522,13 @@
 							},
 							{
 								key: "_disableObserver",
-								value: function() {
+								value() {
 									this._observer.disconnect();
 								},
 							},
 							{
 								key: "_toggleHighlight",
-								value: function() {
+								value() {
 									this._selectElement || (this._$el.find(
 										".eruda-highlight").toggleClass(
 										"eruda-active"), (this._highlightElement = !
@@ -25537,7 +25537,7 @@
 							},
 							{
 								key: "_toggleSelect",
-								value: function() {
+								value() {
 									var t = this._select;
 									this._$el.find(".eruda-select").toggleClass(
 											"eruda-active"), this._selectElement || this
@@ -25549,7 +25549,7 @@
 							},
 							{
 								key: "_setEl",
-								value: function(t) {
+								value(t) {
 									(this._curEl = t), (this._curCssStore = new It(t)), this
 										._highlight.setEl(t), (this._rmDefComputedStyle = !
 											0);
@@ -25560,7 +25560,7 @@
 							},
 							{
 								key: "_getData",
-								value: function() {
+								value() {
 									var t = {},
 										e = this._curEl,
 										n = this._curCssStore,
@@ -25700,7 +25700,7 @@
 							},
 							{
 								key: "_render",
-								value: function() {
+								value() {
 									if (!Kt(this._curEl)) return this._back();
 									this._highlight[this._highlightElement ? "show" :
 										"hide"](), this._renderHtml(this._tpl(this
@@ -25709,14 +25709,14 @@
 							},
 							{
 								key: "_renderHtml",
-								value: function(t) {
+								value(t) {
 									t !== this._lastHtml && ((this._lastHtml = t), this
 										._$showArea.html(t));
 								},
 							},
 							{
 								key: "_updateHistory",
-								value: function() {
+								value() {
 									var t = this._container.get("console");
 									if (t) {
 										var e = this._history;
@@ -25728,7 +25728,7 @@
 							},
 							{
 								key: "_initObserver",
-								value: function() {
+								value() {
 									var t = this;
 									this._observer = new f.f(function(e) {
 										Object(f.t)(e, function(e) {
@@ -25739,7 +25739,7 @@
 							},
 							{
 								key: "_handleMutation",
-								value: function(t) {
+								value(t) {
 									var e, n;
 									if (!zt(t.target))
 										if ("attributes" === t.type) {
@@ -25760,7 +25760,7 @@
 							},
 							{
 								key: "_rmCfg",
-								value: function() {
+								value() {
 									var t = this.config,
 										e = this._container.get("settings");
 									e && e.remove(t, "overrideEventTarget").remove(t,
@@ -25769,7 +25769,7 @@
 							},
 							{
 								key: "_initCfg",
-								value: function() {
+								value() {
 									var t = this,
 										e = (this.config = R.createCfg("elements", {
 											overrideEventTarget: !0,
@@ -25910,7 +25910,7 @@
 			var re = null,
 				ie = [{
 						name: "Border All",
-						fn: function() {
+						fn() {
 							if (re) return I.remove(re), void(re = null);
 							re = I("* { outline: 2px dashed #707d8b; outline-offset: -3px; }", document
 								.head);
@@ -25919,7 +25919,7 @@
 					},
 					{
 						name: "Refresh Page",
-						fn: function() {
+						fn() {
 							var t = new f.h();
 							t.setQuery("timestamp", Object(f.eb)()), window.location.replace(t
 							.toString());
@@ -25928,7 +25928,7 @@
 					},
 					{
 						name: "Search Text",
-						fn: function() {
+						fn() {
 							var t,
 								e,
 								n,
@@ -25962,7 +25962,7 @@
 					},
 					{
 						name: "Edit Page",
-						fn: function() {
+						fn() {
 							var t = document.body;
 							t.contentEditable = "true" !== t.contentEditable;
 						},
@@ -25970,7 +25970,7 @@
 					},
 					{
 						name: "Fit Screen",
-						fn: function() {
+						fn() {
 							var t = document.body,
 								e = document.documentElement,
 								n = Object(f.a)(t);
@@ -25990,77 +25990,77 @@
 					},
 					{
 						name: "Load Fps Plugin",
-						fn: function() {
+						fn() {
 							ae("fps");
 						},
 						desc: "Display page fps",
 					},
 					{
 						name: "Load Features Plugin",
-						fn: function() {
+						fn() {
 							ae("features");
 						},
 						desc: "Browser feature detections",
 					},
 					{
 						name: "Load Timing Plugin",
-						fn: function() {
+						fn() {
 							ae("timing");
 						},
 						desc: "Show performance and resource timing",
 					},
 					{
 						name: "Load Memory Plugin",
-						fn: function() {
+						fn() {
 							ae("memory");
 						},
 						desc: "Display memory",
 					},
 					{
 						name: "Load Code Plugin",
-						fn: function() {
+						fn() {
 							ae("code");
 						},
 						desc: "Edit and run JavaScript",
 					},
 					{
 						name: "Load Benchmark Plugin",
-						fn: function() {
+						fn() {
 							ae("benchmark");
 						},
 						desc: "Run JavaScript benchmarks",
 					},
 					{
 						name: "Load Geolocation Plugin",
-						fn: function() {
+						fn() {
 							ae("geolocation");
 						},
 						desc: "Test geolocation",
 					},
 					{
 						name: "Load Dom Plugin",
-						fn: function() {
+						fn() {
 							ae("dom");
 						},
 						desc: "Navigate dom tree",
 					},
 					{
 						name: "Load Orientation Plugin",
-						fn: function() {
+						fn() {
 							ae("orientation");
 						},
 						desc: "Test orientation api",
 					},
 					{
 						name: "Load Touches Plugin",
-						fn: function() {
+						fn() {
 							ae("touches");
 						},
 						desc: "Visualize screen touches",
 					},
 					{
 						name: "Restore Settings",
-						fn: function() {
+						fn() {
 							var t = Object(f.lb)("local"),
 								e = JSON.parse(JSON.stringify(t));
 							Object(f.t)(e, function(e, n) {
@@ -26118,21 +26118,21 @@
 						p()(e, t),
 						a()(e, [{
 								key: "init",
-								value: function(t) {
+								value(t) {
 									b()(c()(e.prototype), "init", this).call(this, t), this
 										._bindEvent(), this._addDefSnippets();
 								},
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									b()(c()(e.prototype), "destroy", this).call(this), I
 										.remove(this._style);
 								},
 							},
 							{
 								key: "add",
-								value: function(t, e, n) {
+								value(t, e, n) {
 									return this._snippets.push({
 										name: t,
 										fn: e,
@@ -26142,7 +26142,7 @@
 							},
 							{
 								key: "remove",
-								value: function(t) {
+								value(t) {
 									for (var e = this._snippets, n = 0, r = e.length; n <
 										r; n++) e[n].name === t && e.splice(n, 1);
 									return this._render(), this;
@@ -26150,7 +26150,7 @@
 							},
 							{
 								key: "run",
-								value: function(t) {
+								value(t) {
 									for (var e = this._snippets, n = 0, r = e.length; n <
 										r; n++) e[n].name === t && this._run(n);
 									return this;
@@ -26158,13 +26158,13 @@
 							},
 							{
 								key: "clear",
-								value: function() {
+								value() {
 									return (this._snippets = []), this._render(), this;
 								},
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this;
 									this._$el.on("click", ".eruda-run", function() {
 										var e = Object(f.a)(this).data("idx");
@@ -26174,13 +26174,13 @@
 							},
 							{
 								key: "_run",
-								value: function(t) {
+								value(t) {
 									this._snippets[t].fn.call(null);
 								},
 							},
 							{
 								key: "_addDefSnippets",
-								value: function() {
+								value() {
 									var t = this;
 									Object(f.t)(ie, function(e) {
 										t.add(e.name, e.fn, e.desc);
@@ -26189,7 +26189,7 @@
 							},
 							{
 								key: "_render",
-								value: function() {
+								value() {
 									this._renderHtml(this._tpl({
 										snippets: this._snippets
 									}));
@@ -26197,7 +26197,7 @@
 							},
 							{
 								key: "_renderHtml",
-								value: function(t) {
+								value(t) {
 									t !== this._lastHtml && ((this._lastHtml = t), this._$el
 										.html(t));
 								},
@@ -26221,7 +26221,7 @@
 						p()(e, t),
 						a()(e, [{
 								key: "init",
-								value: function(t, n) {
+								value(t, n) {
 									b()(c()(e.prototype), "init", this).call(this, t), (this
 											._container = n), this.refresh(), this
 										._bindEvent(), this._initObserver(), this
@@ -26230,7 +26230,7 @@
 							},
 							{
 								key: "refresh",
-								value: function() {
+								value() {
 									return this.refreshLocalStorage()
 										.refreshSessionStorage().refreshCookie()
 										.refreshScript().refreshStylesheet().refreshIframe()
@@ -26239,7 +26239,7 @@
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									b()(c()(e.prototype), "destroy", this).call(this), this
 										._disableObserver(), I.remove(this._style), this
 										._rmCfg();
@@ -26247,7 +26247,7 @@
 							},
 							{
 								key: "refreshScript",
-								value: function() {
+								value() {
 									var t = [];
 									return (
 										Object(f.a)("script").each(function() {
@@ -26262,7 +26262,7 @@
 							},
 							{
 								key: "refreshStylesheet",
-								value: function() {
+								value() {
 									var t = [];
 									return (
 										Object(f.a)("link").each(function() {
@@ -26277,7 +26277,7 @@
 							},
 							{
 								key: "refreshIframe",
-								value: function() {
+								value() {
 									var t = [];
 									return (
 										Object(f.a)("iframe").each(function() {
@@ -26292,19 +26292,19 @@
 							},
 							{
 								key: "refreshLocalStorage",
-								value: function() {
+								value() {
 									return this._refreshStorage("local"), this;
 								},
 							},
 							{
 								key: "refreshSessionStorage",
-								value: function() {
+								value() {
 									return this._refreshStorage("session"), this;
 								},
 							},
 							{
 								key: "_refreshStorage",
-								value: function(t) {
+								value(t) {
 									var e = this,
 										n = Object(f.lb)(t, !1);
 									if (n) {
@@ -26327,7 +26327,7 @@
 							},
 							{
 								key: "refreshCookie",
-								value: function() {
+								value() {
 									var t = Ct.a.domain("Network").getCookies().cookies,
 										e = Object(f.ab)(t, function(t) {
 											return {
@@ -26340,7 +26340,7 @@
 							},
 							{
 								key: "refreshImage",
-								value: function() {
+								value() {
 									var t = [],
 										e = (this._performance = window.webkitPerformance ||
 											window.performance);
@@ -26360,7 +26360,7 @@
 							},
 							{
 								key: "show",
-								value: function() {
+								value() {
 									return b()(c()(e.prototype), "show", this).call(this),
 										this._observeElement && this._enableObserver(), this
 										.refresh();
@@ -26368,14 +26368,14 @@
 							},
 							{
 								key: "hide",
-								value: function() {
+								value() {
 									return this._disableObserver(), b()(c()(e.prototype),
 										"hide", this).call(this);
 								},
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this,
 										e = this,
 										n = this._$el,
@@ -26396,7 +26396,7 @@
 														.href, n) ?
 													Object(f.i)({
 														url: n,
-														success: function(e) {
+														success(e) {
 															i(t, e);
 														},
 														dataType: "raw",
@@ -26516,7 +26516,7 @@
 							},
 							{
 								key: "_rmCfg",
-								value: function() {
+								value() {
 									var t = this.config,
 										e = this._container.get("settings");
 									e && e.remove(t, "hideErudaSetting").remove(t,
@@ -26525,7 +26525,7 @@
 							},
 							{
 								key: "_initCfg",
-								value: function() {
+								value() {
 									var t = this,
 										e = (this.config = R.createCfg("resources", {
 											hideErudaSetting: !0,
@@ -26554,7 +26554,7 @@
 							},
 							{
 								key: "_render",
-								value: function() {
+								value() {
 									var t = this._cookieData,
 										e = this._scriptData,
 										n = this._stylesheetData,
@@ -26596,14 +26596,14 @@
 							},
 							{
 								key: "_renderHtml",
-								value: function(t) {
+								value(t) {
 									t !== this._lastHtml && ((this._lastHtml = t), this._$el
 										.html(t));
 								},
 							},
 							{
 								key: "_initObserver",
-								value: function() {
+								value() {
 									var t = this;
 									this._observer = new f.f(function(e) {
 										var n = !1;
@@ -26617,7 +26617,7 @@
 							},
 							{
 								key: "_handleMutation",
-								value: function(t) {
+								value(t) {
 									var e = this;
 									if (!zt(t.target)) {
 										var n = function(t) {
@@ -26667,7 +26667,7 @@
 							},
 							{
 								key: "_enableObserver",
-								value: function() {
+								value() {
 									this._observer.observe(document.documentElement, {
 										attributes: !0,
 										childList: !0,
@@ -26677,7 +26677,7 @@
 							},
 							{
 								key: "_disableObserver",
-								value: function() {
+								value() {
 									this._observer.disconnect();
 								},
 							},
@@ -26716,7 +26716,7 @@
 				fe = Object(f.r)(),
 				ve = [{
 						name: "Location",
-						val: function() {
+						val() {
 							return Object(f.v)(location.href);
 						},
 					},
@@ -26754,21 +26754,21 @@
 						p()(e, t),
 						a()(e, [{
 								key: "init",
-								value: function(t) {
+								value(t) {
 									b()(c()(e.prototype), "init", this).call(this, t), this
 										._addDefInfo();
 								},
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									b()(c()(e.prototype), "destroy", this).call(this), I
 										.remove(this._style);
 								},
 							},
 							{
 								key: "add",
-								value: function(t, e) {
+								value(t, e) {
 									var n = this._infos,
 										r = !1;
 									return (
@@ -26786,7 +26786,7 @@
 							},
 							{
 								key: "get",
-								value: function(t) {
+								value(t) {
 									var e,
 										n = this._infos;
 									return Object(f.T)(t) ?
@@ -26799,7 +26799,7 @@
 							},
 							{
 								key: "remove",
-								value: function(t) {
+								value(t) {
 									for (var e = this._infos, n = e.length - 1; n >= 0; n--)
 										e[n].name === t && e.splice(n, 1);
 									return this._render(), this;
@@ -26807,13 +26807,13 @@
 							},
 							{
 								key: "clear",
-								value: function() {
+								value() {
 									return (this._infos = []), this._render(), this;
 								},
 							},
 							{
 								key: "_addDefInfo",
-								value: function() {
+								value() {
 									var t = this;
 									Object(f.t)(ve, function(e) {
 										return t.add(e.name, e.val);
@@ -26822,7 +26822,7 @@
 							},
 							{
 								key: "_render",
-								value: function() {
+								value() {
 									var t = [];
 									Object(f.t)(this._infos, function(e) {
 											var n = e.name,
@@ -26839,7 +26839,7 @@
 							},
 							{
 								key: "_renderHtml",
-								value: function(t) {
+								value(t) {
 									t !== this._lastHtml && ((this._lastHtml = t), this._$el
 										.html(t));
 								},
@@ -26859,7 +26859,7 @@
 						p()(e, t),
 						a()(e, [{
 								key: "init",
-								value: function(t, n) {
+								value(t, n) {
 									b()(c()(e.prototype), "init", this).call(this, t), (this
 											._container = n), this._bindEvent(), this
 										._initCfg();
@@ -26867,14 +26867,14 @@
 							},
 							{
 								key: "destroy",
-								value: function() {
+								value() {
 									b()(c()(e.prototype), "destroy", this).call(this), I
 										.remove(this._style), this._rmCfg();
 								},
 							},
 							{
 								key: "set",
-								value: function(t, e) {
+								value(t, e) {
 									if ("img" === t) {
 										this._isFetchingData = !0;
 										var n = new Image(),
@@ -26905,7 +26905,7 @@
 							},
 							{
 								key: "show",
-								value: function() {
+								value() {
 									return b()(c()(e.prototype), "show", this).call(this),
 										this._data || this._isFetchingData || this
 										._renderDef(), this;
@@ -26913,7 +26913,7 @@
 							},
 							{
 								key: "_renderDef",
-								value: function() {
+								value() {
 									var t = this;
 									if (this._html) return (this._data = {
 										type: "html",
@@ -26923,15 +26923,15 @@
 										((this._isGettingHtml = !0),
 											Object(f.i)({
 												url: location.href,
-												success: function(e) {
+												success(e) {
 													return (t._html = e);
 												},
-												error: function() {
+												error() {
 													return (t._html =
 														"Sorry, unable to fetch source code:("
 														);
 												},
-												complete: function() {
+												complete() {
 													(t._isGettingHtml = !1), t
 														._renderDef();
 												},
@@ -26941,7 +26941,7 @@
 							},
 							{
 								key: "_bindEvent",
-								value: function() {
+								value() {
 									var t = this;
 									this._container.on("showTool", function(e, n) {
 										e !== t.name && n.name === t.name &&
@@ -26951,7 +26951,7 @@
 							},
 							{
 								key: "_loadTpl",
-								value: function() {
+								value() {
 									(this._codeTpl = n(90)), (this._imgTpl = n(91)), (this
 										._objTpl = n(92)), (this._rawTpl = n(93)), (this
 										._iframeTpl = n(94));
@@ -26959,7 +26959,7 @@
 							},
 							{
 								key: "_rmCfg",
-								value: function() {
+								value() {
 									var t = this.config,
 										e = this._container.get("settings");
 									e && e.remove(t, "showLineNum").remove(t, "formatCode")
@@ -26968,7 +26968,7 @@
 							},
 							{
 								key: "_initCfg",
-								value: function() {
+								value() {
 									var t = this,
 										e = (this.config = R.createCfg("sources", {
 											showLineNum: !0,
@@ -26997,7 +26997,7 @@
 							},
 							{
 								key: "_render",
-								value: function() {
+								value() {
 									switch (((this._isInit = !0), this._data.type)) {
 										case "html":
 										case "js":
@@ -27016,13 +27016,13 @@
 							},
 							{
 								key: "_renderImg",
-								value: function() {
+								value() {
 									this._renderHtml(this._imgTpl(this._data.val));
 								},
 							},
 							{
 								key: "_renderCode",
-								value: function() {
+								value() {
 									var t = this._data,
 										e = this._indentSize,
 										n = t.val,
@@ -27074,7 +27074,7 @@
 							},
 							{
 								key: "_renderObj",
-								value: function() {
+								value() {
 									this._renderHtml(this._objTpl(), !1);
 									var t = this._data.val;
 									try {
@@ -27088,7 +27088,7 @@
 							},
 							{
 								key: "_renderRaw",
-								value: function() {
+								value() {
 									this._renderHtml(this._rawTpl({
 										val: this._data.val
 									}));
@@ -27096,7 +27096,7 @@
 							},
 							{
 								key: "_renderIframe",
-								value: function() {
+								value() {
 									this._renderHtml(this._iframeTpl({
 										src: this._data.val
 									}));
@@ -27104,7 +27104,7 @@
 							},
 							{
 								key: "_renderHtml",
-								value: function(t) {
+								value(t) {
 									var e = this,
 										n = !(arguments.length > 1 && void 0 !== arguments[
 											1]) || arguments[1];
@@ -27123,7 +27123,7 @@
 				be = 1e5,
 				ye = 4e5;
 			e.default = {
-				init: function() {
+				init() {
 					var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
 						e = t.container,
 						n = t.tool,
@@ -27151,46 +27151,46 @@
 				Info: ge,
 				Snippets: ue,
 				Settings: R,
-				get: function(t) {
+				get(t) {
 					if (this._checkInit()) {
 						if ("entryBtn" === t) return this._entryBtn;
 						var e = this._devTools;
 						return t ? e.get(t) : e;
 					}
 				},
-				add: function(t) {
+				add(t) {
 					if (this._checkInit()) return Object(f.J)(t) && (t = t(this)), this._devTools
 						.add(t), this;
 				},
-				remove: function(t) {
+				remove(t) {
 					return this._devTools.remove(t), this;
 				},
-				show: function(t) {
+				show(t) {
 					if (this._checkInit()) {
 						var e = this._devTools;
 						return t ? e.showTool(t) : e.show(), this;
 					}
 				},
-				hide: function() {
+				hide() {
 					if (this._checkInit()) return this._devTools.hide(), this;
 				},
-				destroy: function() {
+				destroy() {
 					this._devTools.destroy(), delete this._devTools, this._entryBtn.destroy(),
 						delete this._entryBtn, this._unregisterListener(), this._$el.remove(), I
 						.clear(), (this._isInit = !1);
 				},
-				scale: function(t) {
+				scale(t) {
 					return Object(f.O)(t) ? ((this._scale = t), g.emit(g.SCALE, t), this) : this
 						._scale;
 				},
-				position: function(t) {
+				position(t) {
 					var e = this._entryBtn;
 					return Object(f.P)(t) ? (e.setPos(t), this) : e.getPos();
 				},
-				_autoScale: function() {
+				_autoScale() {
 					Object(f.L)() && this.scale(1 / Object(f.Ab)());
 				},
-				_registerListener: function() {
+				_registerListener() {
 					var t = this;
 					(this._addListener = function() {
 						return t.add.apply(t, arguments);
@@ -27202,15 +27202,15 @@
 						g.on(g.SHOW, this._showListener),
 						g.on(g.SCALE, I.setScale);
 				},
-				_unregisterListener: function() {
+				_unregisterListener() {
 					g.off(g.ADD, this._addListener), g.off(g.SHOW, this._showListener), g.off(g
 						.SCALE, I.setScale);
 				},
-				_checkInit: function() {
+				_checkInit() {
 					return this._isInit || B.error('Please call "eruda.init()" first'), this
 					._isInit;
 				},
-				_initContainer: function(t, e) {
+				_initContainer(t, e) {
 					var r;
 					t || ((t = document.createElement("div")), document.documentElement.appendChild(
 						t), (t.style.all = "initial")), e && (t.attachShadow ? (r = t
@@ -27226,12 +27226,12 @@
 					}), "ios" === Object(f.r)().name && t.setAttribute("ontouchstart", ""), (
 						this._$el = Object(f.a)(t));
 				},
-				_initDevTools: function(t) {
+				_initDevTools(t) {
 					this._devTools = new U(this._$el, {
 						defaults: t
 					});
 				},
-				_initStyle: function() {
+				_initStyle() {
 					var t = this._$el;
 					this._shadowRoot ? ((I.container = this._shadowRoot), I(
 						":host { all: initial }")) : (t.append('<div class="'.concat(
@@ -27239,19 +27239,19 @@
 						.concat("eruda-style-container")).get(0))), I(n(95) + n(96) + n(97) + n(
 						98) + n(26));
 				},
-				_initEntryBtn: function() {
+				_initEntryBtn() {
 					var t = this;
 					(this._entryBtn = new F(this._$el)),
 					this._entryBtn.on("click", function() {
 						return t._devTools.toggle();
 					});
 				},
-				_initSettings: function() {
+				_initSettings() {
 					var t = this._devTools,
 						e = new R();
 					t.add(e), this._entryBtn.initCfg(e), t.initCfg(e);
 				},
-				_initTools: function() {
+				_initTools() {
 					var t = this,
 						e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [
 							"console", "elements", "network", "resources", "sources", "info",

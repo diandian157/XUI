@@ -79,7 +79,7 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 		var head = ui.create.node('img');
 		head.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/zhengli1.png"
 		head.style.cssText =
-			"cursor: pointer;display: block;--w: 50px;--h: calc(var(--w) * 81/247);width: var(--w);height: var(--h)+4px;position: absolute;top: calc(100% - 50px);left: calc(100% - 370px);background-color: transparent;z-index:4"
+			"cursor: pointer;display: block;--w: 50px;--h: calc(var(--w) * 81/247);width: var(--w);height: var(--h)+4px;position: absolute;top: calc(100% - 60px);left: calc(100% - 350px);background-color: transparent;z-index:4"
 		head.onclick = function() {
 			//head.onclick=ui.click.sortCard;
 			if (!game.me || game.me.hasSkillTag('noSortCard')) return;
@@ -110,10 +110,10 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 
 	var plugin = {
 		name: 'lbtn',
-		filter: function() {
+		filter() {
 			return !['chess', 'tafang'].includes(get.mode());
 		},
-		content: function(next) {
+		content(next) {
 			lib.skill._uicardupdate = {
 				trigger: {
 					player: 'phaseJieshuBegin'
@@ -126,29 +126,29 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 				noGain: true,
 				noDeprive: true,
 				priority: -Infinity,
-				filter: function(event, player) {
+				filter(event, player) {
 					return player == game.me
 				},
-				content: function() {
+				content() {
 					if (ui.updateSkillControl) ui.updateSkillControl(game.me, true);
 				}
 			}
 		},
-		precontent: function() {
+		precontent() {
 			Object.assign(game.videoContent, {
-				createCardRoundTime: function() {
+				createCardRoundTime() {
 					ui.cardRoundTime = plugin.create.cardRoundTime();
 				},
-				createhandcardNumber: function() {
+				createhandcardNumber() {
 					ui.handcardNumber = plugin.create.handcardNumber();
 				},
-				updateCardRoundTime: function(opts) {
+				updateCardRoundTime(opts) {
 					if (!ui.cardRoundTime) return;
 					ui.cardRoundTime.node.roundNumber.innerHTML = '<span>第' + game
 						.roundNumber + '轮</span>';
 					ui.cardRoundTime.setNumberAnimation(opts.cardNumber);
 				},
-				updateCardnumber: function(opts) {
+				updateCardnumber(opts) {
 					if (!ui.handcardNumber) return;
 					// ui.handcardNumber.setNumberAnimation(opts.cardNumber);
 				},
@@ -213,10 +213,10 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 			};
 		},
 		create: {
-			control: function() {
+			control() {
 
 			},
-			confirm: function() {
+			confirm() {
 
 				var confirm = ui.create.control('<span>确定</span>', 'cancel');
 				confirm.classList.add('lbtn-confirm');
@@ -303,7 +303,7 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 			},
 
 
-			handcardNumber: function() {
+			handcardNumber() {
 				var node3 = ui.create.div('.settingButton', ui.arena, plugin.click.setting);
 
 				/*ui.create.div('.lbtn-controls', ui.arena);*/
@@ -324,13 +324,22 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 				} else {
 					//-------新版----------//
 					var node63 = ui.create.div('.bujianbjButton_new', ui.arena);
+					var node623 = ui.create.div('.bujianSbjButton_new', ui.arena);
+					var node633 = ui.create.div('.fanhuibjButton_new', ui.arena);
+					var node6 = ui.create.div('.huanfuButton_new', ui.arena, function() {
+						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
+						ui.click.auto();
+					});
+					// 设置提示
+					node6.title = '托管';
 					var node61 = ui.create.div('.huanfuButton1_new', ui.arena, function() {
 						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
 						ui.click.auto();
 					});
+					// 设置提示
+					node61.title = '托管';
 					var node641 = ui.create.div('.huanfuButton12_new', ui.arena, function() {
 						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
-						
 						// 切换全屏状态
 						if (window.node && window.node.gui) {
 							// NW.js环境
@@ -373,10 +382,50 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 							}
 						}
 					});
+					// 设置提示
+					node641.title = '全屏';
+					var node7 = ui.create.div('.jiluButton_new', ui.arena, function() {
+						game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
+						ui.click.pause();
+					});
+					// 设置提示
+					node7.title = '记录';
+					var node8 = ui.create.div('.meiguiButton_new', ui.arena);
+					// 背景图片列表
+					var backgroundList = [
+						'extension/十周年UI/shoushaUI/lbtn/images/background/十周年UI.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/上兵伐谋.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/一将成名.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/旧十周年.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/周年华灯.jpg',
+						// 可以继续添加更多背景
+					];
+
+					// 当前背景索引
+					var currentBgIndex = 0;
+
+					// 添加更换背景功能
+					node8.listen(function(e) {
+						e.stopPropagation();
+
+						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
+
+						// 切换到下一个背景
+						currentBgIndex = (currentBgIndex + 1) % backgroundList.length;
+
+						// 更新背景
+						ui.background.style.backgroundImage =
+							`url('${backgroundList[currentBgIndex]}')`;
+
+						// 保存当前背景设置
+						game.saveConfig('background', currentBgIndex);
+					});
+					// 设置提示
+					node8.title = '背景';
 					var node81 = ui.create.div('.meiguiButton1_new', ui.arena);
 					// 背景图片列表
 					var backgroundList = [
-						'extension/十周年UI/shoushaUI/lbtn/images/background/新十周年.jpg',
+						'extension/十周年UI/shoushaUI/lbtn/images/background/十周年UI.jpg',
 						'extension/十周年UI/shoushaUI/lbtn/images/background/上兵伐谋.jpg',
 						'extension/十周年UI/shoushaUI/lbtn/images/background/一将成名.jpg',
 						'extension/十周年UI/shoushaUI/lbtn/images/background/旧十周年.jpg',
@@ -404,6 +453,32 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 						// 保存当前背景设置
 						game.saveConfig('background', currentBgIndex);
 					});
+					// 设置提示
+					node81.title = '背景';
+					var node9 = ui.create.div('.xiaolianButton_new', ui.arena);
+					// 添加打开武将资料卡功能
+					node9.listen(function(e) {
+						e.stopPropagation();
+
+						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
+
+						// 打开武将资料卡
+						if (game.me && game.me.name && game.me.name2) {
+							// 双将模式
+							var name1 = game.me.name;
+							var name2 = game.me.name2;
+							ui.click.charactercard(name1, null, null, true);
+							setTimeout(() => {
+								ui.click.charactercard(name2, null, null, true);
+							}, 100);
+						} else if (game.me && game.me.name) {
+							// 单将模式
+							var name = game.me.name;
+							ui.click.charactercard(name, null, null, true);
+						}
+					});
+					// 设置提示
+					node9.title = '武将信息';
 					var node91 = ui.create.div('.xiaolianButton1_new', ui.arena);
 					// 添加打开武将资料卡功能
 					node91.listen(function(e) {
@@ -426,6 +501,23 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 							ui.click.charactercard(name, null, null, true);
 						}
 					});
+					// 设置提示
+					node91.title = '武将信息';
+					var node61 = ui.create.div('.juliButton_new', ui.arena);
+					var node72 = ui.create.div('.luxiangButton_new', ui.arena);
+					// 添加打开选项功能
+					node72.listen(function(e) {
+						e.stopPropagation();
+
+						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
+
+						// 直接打开游戏选项
+						ui.click.configMenu();
+						// 或者使用
+						// game.pause2();
+					});
+					// 设置提示
+					node72.title = '菜单';
 					var node712 = ui.create.div('.luxiangButton1_new', ui.arena);
 					// 添加打开选项功能
 					node712.listen(function(e) {
@@ -438,6 +530,32 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 						// 或者使用
 						// game.pause2();
 					});
+					// 设置提示
+					node712.title = '菜单';
+					var node83 = ui.create.div('.touxiangButton_new', ui.arena);
+					// 添加投降功能
+					node83.listen(function(e) {
+						e.stopPropagation();
+
+						// 播放音效
+						game.playAudio("../extension/十周年UI/audio/XianxianEnter.mp3");
+
+						// 直接投降
+						game.over(false);
+					});
+					// 添加按钮状态检查
+					game.checkSurrenderButton = function() {
+						// 只在游戏进行中且为自己回合时可用
+						if (game.me && game.me.isAlive() && !game.over) {
+							node83.classList.remove('disabled');
+							node83.style.opacity = '1';
+						} else {
+							node83.classList.add('disabled');
+							node83.style.opacity = '0.5';
+						}
+					};
+					// 设置提示
+					node83.title = '投降';
 					var node813 = ui.create.div('.touxiang1Button_new', ui.arena);
 					// 添加重开功能
 					node813.listen(function(e) {
@@ -449,7 +567,6 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 						// 直接重新开始游戏
 						game.reload();
 					});
-
 					// 添加按钮状态检查
 					game.checkRestartButton = function() {
 						if (game.me && !game.over) {
@@ -460,15 +577,7 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 							node813.style.opacity = '0.5';
 						}
 					};
-					var node623 = ui.create.div('.bujianSbjButton_new', ui.arena);
-					var node633 = ui.create.div('.fanhuibjButton_new', ui.arena);
-					var node6 = ui.create.div('.huanfuButton_new', ui.arena, ui.click.auto);
-					var node7 = ui.create.div('.jiluButton_new', ui.arena, ui.click.pause);
-					var node8 = ui.create.div('.meiguiButton_new', ui.arena);
-					var node9 = ui.create.div('.xiaolianButton_new', ui.arena);
-					var node61 = ui.create.div('.juliButton_new', ui.arena);
-					var node72 = ui.create.div('.luxiangButton_new', ui.arena);
-					var node83 = ui.create.div('.touxiangButton_new', ui.arena);
+					node813.title = '重开';
 					var node94 = ui.create.div('.huatongButton_new', ui.arena);
 					//---------------------//
 				}
@@ -506,13 +615,15 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 				game.addVideo('createhandcardNumber');
 				return node;
 			},
-			cardRoundTime: function() {
+			cardRoundTime() {
 				var node = ui.create.div('.cardRoundNumber', ui.arena);
 				node.listen(function(e) {
 					e.stopPropagation();
 					game.playAudio('..', 'extension', '十周年UI', 'audio/XianxianEnter');
 					ui.click.pause();
 				});
+				// 设置提示
+				node.title = '记录';
 				node.hide();
 				node.node = {
 					cardPileNumber: ui.create.div('.cardPileNumber', node),
@@ -589,13 +700,13 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 			},
 		},
 		click: {
-			huanfu: function() {
+			huanfu() {
 				game.playAudio('../extension/十周年UI/shoushaUI/lbtn/images/CD/huanfu.mp3');
 				window.zyile_charactercard ? window.zyile_charactercard(player, false) : ui.click
 					.charactercard(game.me.name, game.zhu, lib.config.mode == 'mode_guozhan' ?
 						'guozhan' : true);
 			},
-			confirm: function(link, target) {
+			confirm(link, target) {
 				if (link === 'ok') {
 					ui.click.ok(target);
 				} else if (link === 'cancel') {
@@ -606,26 +717,26 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 			},
 		},
 		compare: {
-			type: function(a, b) {
+			type(a, b) {
 				if (a === b) return 0;
 				var types = ['basic', 'trick', 'delay', 'equip'].addArray([a, b]);
 				return types.indexOf(a) - types.indexOf(b);
 			},
-			name: function(a, b) {
+			name(a, b) {
 				if (a === b) return 0;
 				return a > b ? 1 : -1;
 			},
-			nature: function(a, b) {
+			nature(a, b) {
 				if (a === b) return 0;
 				var nature = [undefined, 'fire', 'thunder'].addArray([a, b]);
 				return nature.indexOf(a) - nature.indexOf(b);
 			},
-			suit: function(a, b) {
+			suit(a, b) {
 				if (a === b) return 0;
 				var suit = ['diamond', 'heart', 'club', 'spade'].addArray([a, b]);
 				return suit.indexOf(a) - suit.indexOf(b);
 			},
-			number: function(a, b) {
+			number(a, b) {
 				return a - b;
 			},
 		},

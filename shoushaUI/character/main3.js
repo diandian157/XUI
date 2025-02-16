@@ -1,11 +1,11 @@
 app.import(function(lib, game, ui, get, ai, _status, app) {
 	var plugin = {
 		name: 'character',
-		filter: function() {
+		filter() {
 			return !['chess', 'tafang'].includes(get.mode());
 		},
-		content: function(next) {},
-		precontent: function() {
+		content(next) {},
+		precontent() {
 			app.reWriteFunction(lib, {
 				setIntro: [function(args, node) {
 					if (get.itemtype(node) === 'player') {
@@ -25,7 +25,7 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 		},
 
 		click: {
-			identity: function(e) {
+			identity(e) {
 				e.stopPropagation();
 				var player = this.parentNode;
 				if (!game.getIdentityList) return;
@@ -41,7 +41,7 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 					player.node.guessDialog = guessDialog;
 				}
 			},
-			playerIntro: function(e) {
+			playerIntro(e) {
 				e.stopPropagation();
 
 				if (plugin.playerDialog) {
@@ -92,14 +92,29 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 					//主将立绘
 					var playerSkin;
 					if (name != 'unknown') {
-					    playerSkin = 'url("' + lib.assetURL + 'image/lihui/' + name + '.jpg")';
-					    skin1.style.backgroundImage = playerSkin;
-					    skin1.style.cssText += `
-					        background-size: auto 100% !important;
-					        background-position: center center !important;
-					        transform: scale(1.2);
-					        transform-origin: center center;
-					    `;
+					    // 尝试从lihui文件夹读取，如果不存在则使用原始路径
+					    var lihuiPath = lib.assetURL + 'image/lihui/' + name + '.jpg';
+					    var originalPath = player.style.backgroundImage;
+					    
+					    // 检查lihui图片是否存在
+					    var img = new Image();
+					    img.onload = function() {
+					        playerSkin = 'url("' + lihuiPath + '")';
+					        skin1.style.backgroundImage = playerSkin;
+					        skin1.style.cssText += `
+					            background-size: auto 100% !important;
+					            background-position: center center !important;
+					            transform: scale(1.2);
+					            transform-origin: center center;
+					        `;
+					    };
+					    img.onerror = function() {
+					        // lihui图片不存在，使用原始路径
+					        playerSkin = player.style.backgroundImage;
+					        if (!playerSkin) playerSkin = player.childNodes[0].style.backgroundImage;
+					        skin1.style.backgroundImage = playerSkin;
+					    };
+					    img.src = lihuiPath;
 					} else {
 					    var url = extensionPath + 'character/images/unknown.png';
 					    skin1.style.backgroundImage = 'url("' + url + '")';
@@ -109,14 +124,29 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 					if (name2) {
 					    var playerSkin2;
 					    if (name2 != 'unknown') {
-					        playerSkin2 = 'url("' + lib.assetURL + 'image/lihui/' + name2 + '.jpg")';
-					        skin2.style.backgroundImage = playerSkin2;
-					        skin2.style.cssText += `
-					            background-size: auto 100% !important;
-					            background-position: center center !important;
-					            transform: scale(1.2);
-					            transform-origin: center center;
-					        `;
+					        // 尝试从lihui文件夹读取，如果不存在则使用原始路径
+					        var lihuiPath2 = lib.assetURL + 'image/lihui/' + name2 + '.jpg';
+					        var originalPath = player.style.backgroundImage;
+					        
+					        // 检查lihui图片是否存在
+					        var img2 = new Image();
+					        img2.onload = function() {
+					            playerSkin2 = 'url("' + lihuiPath2 + '")';
+					            skin2.style.backgroundImage = playerSkin2;
+					            skin2.style.cssText += `
+					                background-size: auto 100% !important;
+					                background-position: center center !important;
+					                transform: scale(1.2);
+					                transform-origin: center center;
+					            `;
+					        };
+					        img2.onerror = function() {
+					            // lihui图片不存在，使用原始路径
+					            playerSkin = player.style.backgroundImage;
+					            if (!playerSkin) playerSkin = player.childNodes[0].style.backgroundImage;
+					            skin1.style.backgroundImage = playerSkin;
+					        };
+					        img2.src = lihuiPath2;
 					    } else {
 					        var url = extensionPath + 'character/images/unknown.png';
 					        skin2.style.backgroundImage = 'url("' + url + '")';

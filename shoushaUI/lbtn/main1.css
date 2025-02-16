@@ -26,7 +26,7 @@
 }
 
 /*---------新版小配件--------*/
-.fanhuibjButton_new {
+/* .fanhuibjButton_new {
 	display: block;
 	--w: 30px;
 	--h: 35px;
@@ -41,7 +41,7 @@
 	z-index: 4;
 	margin-left: 10px;
 
-}
+} */
 
 .huanfuButton1_new {
 	display: block;
@@ -138,7 +138,7 @@
 	/* 鼠标悬停时显示为手型 */
 }
 
-.jiluButton_new {
+/* .jiluButton_new {
 	display: block;
 	--w: 70px;
 	--h: 35px;
@@ -219,7 +219,7 @@
 	z-index: 4;
 	margin-left: 10px;
 
-}
+} */
 
 .bujianSbjButton_new {
 	position: fixed;
@@ -386,7 +386,7 @@
 }
 
 .handcardNumber>.cardPicture {
-	left: -1px;
+	left: 15px;
 	bottom: 1px;
 	--w: 80px;
 	--h: 70px;
@@ -398,7 +398,7 @@
 
 /*手牌数参数*/
 .handcardNumber>.cardNumber {
-	left: 20px;
+	left: 35px;
 	bottom: 30px;
 	height: 8px;
 	line-height: 25px;

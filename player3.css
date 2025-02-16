@@ -168,7 +168,7 @@
 .player>.camp-wrap {
 	display: block;
 	left: -27px;
-	top: -9px;
+	top: -15px;
 	width: 55px;
 	height: 170px;
 	transition: none;
@@ -1425,10 +1425,10 @@
 }
 /* 主玩家判定区位置调整 */
 #arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges {
-	top: 60px;
+	top: 140px;
 	/* 调整到装备栏上方 */
 	left: auto;
-	right: 700%;
+	right: 110%;
 	width: 100%;
 	text-align: center;
 }

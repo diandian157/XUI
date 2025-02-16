@@ -303,6 +303,43 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					},
 				},
 			},
+			枕梦南柯: {
+				name: "周宣/枕梦南柯/daiji2",
+				x: [0, 0.56],
+				y: [0, 0.38],
+				scale: 1.2,
+				shizhounian: true,
+				beijing: {
+					name: "周宣/枕梦南柯/beijing",
+					x: [0, 1.51],
+					y: [0, 0.43],
+					scale: 0.37,
+				},
+				chuchang: {
+					name: "周宣/枕梦南柯/chuchang",
+					scale: 0.7,
+				},
+				gongji: {
+					name: "周宣/枕梦南柯/chuchang2",
+					scale: 0.7,
+				},
+				teshu: {
+					name: "周宣/枕梦南柯/chuchang2",
+					scale: 0.7,
+				},
+				zhishixian: {
+					name: "周宣/枕梦南柯/shouji2",
+					scale: 0.7,
+					delay: 0.3,
+					speed: 0.8,
+					effect: {
+						name: "周宣/枕梦南柯/shouji",
+						scale: 0.7,
+						delay: 0.3,
+						speed: 0.8,
+					},
+				},
+			},
 		},
 		re_lidian: {
 			战场荣耀: {
@@ -1601,7 +1638,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			战场荣耀: {
 				name: '蔡文姬/战场荣耀/daiji2',
 				shan: 'play3',
-
 				x: [0, 0.34],
 				y: [0, 0.41],
 				scale: 1,
@@ -1645,6 +1681,43 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						scale: 0.5,
 						speed: 0.8,
 						delay: 0.25,
+					},
+				},
+			},
+			姝丽风华: {
+				name: "蔡文姬/姝丽风华/daiji2",
+				x: [0, 0.56],
+				y: [0, 0.38],
+				scale: 1.2,
+				shizhounian: true,
+				beijing: {
+					name: "蔡文姬/姝丽风华/beijing",
+					x: [0, 1.51],
+					y: [0, 0.43],
+					scale: 0.37,
+				},
+				chuchang: {
+					name: "蔡文姬/姝丽风华/chuchang",
+					scale: 0.7,
+				},
+				gongji: {
+					name: "蔡文姬/姝丽风华/chuchang2",
+					scale: 0.7,
+				},
+				teshu: {
+					name: "蔡文姬/姝丽风华/chuchang2",
+					scale: 0.7,
+				},
+				zhishixian: {
+					name: "蔡文姬/姝丽风华/shouji2",
+					scale: 0.7,
+					delay: 0.3,
+					speed: 0.8,
+					effect: {
+						name: "蔡文姬/姝丽风华/shouji",
+						scale: 0.7,
+						delay: 0.3,
+						speed: 0.8,
 					},
 				},
 			},
@@ -27841,6 +27914,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		//蔡文姬
 		ol_caiwenji: decadeUI.dynamicSkin.caiwenji,
 		re_caiwenji: decadeUI.dynamicSkin.caiwenji,
+		yue_caiwenji: decadeUI.dynamicSkin.caiwenji,
 
 		//蔡邕
 		re_caiyong: decadeUI.dynamicSkin.caiyong,
