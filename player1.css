@@ -136,12 +136,6 @@
 	background-position-x: center;
 }
 
-/*隐藏玩家手牌显示以及降低玩家血量标记位置—咸鱼大佬的代码*/
-/*需要配合扩展手杀ui使用，如果不开启手杀ui，需要把以下两段代码注释掉*/
-/*.player[data-position='0']>.hp-wrap {
-	bottom: -6px;
-}*/
-
 .player[data-position='0']>.card-count {
 	visibility: hidden;
 }
@@ -317,7 +311,6 @@
 	font-size: 18px;
 	text-align: center;
 	text-shadow: none;
-	/*#000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;*/
 	left: 26%;
 	top: 26%;
 	right: 26%;
@@ -400,7 +393,6 @@
 	height: 96px;
 	font-size: 16px;
 	text-shadow: none;
-	/*#000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;*/
 	background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 20%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.4) 80%, transparent 100%);
 	z-index: 89;
 }
@@ -475,7 +467,7 @@
 
 .hujia {
 	top: auto;
-	bottom: 80%;
+	bottom: 85%;
 	/*上下*/
 	left: -4px;
 	/*左右*/
@@ -484,7 +476,7 @@
 	/*护甲图片存放位置*/
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
-	width: 25px;
+	width: 27px;
 	/*图片宽*/
 	text-align: center;
 	color: white;
@@ -495,7 +487,7 @@
 	height: 65px;
 	/*图片高*/
 	position: absolute;
-	z-index: 100;
+	z-index: 300;
 }
 
 .player.connect>div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).hp-wrap {
@@ -530,12 +522,6 @@
 	line-height: 14px;
 	flex-direction: column;
 }
-
-/*
-.player>.hp-wrap>.hp.textstyle {
-	flex-direction: column;
-}
-*/
 
 .player>.hp-wrap>.hp.hidden {
 	opacity: 1 !important;
@@ -715,7 +701,6 @@
 	margin: 0;
 	text-align: center;
 }
-
 
 /*玩家标记显示-灯笼*/
 .player>.dui-marks {
@@ -1185,28 +1170,6 @@
 	z-index: -1;
 }
 
-/* .player>.damage[data-nature='metal']::before { */
-/* -webkit-text-stroke: 4px #FFCB00; */
-/* } */
-/* .player>.damage[data-nature='wood']::before { */
-/* -webkit-text-stroke: 4px #5D832C; */
-/* } */
-/* .player>.damage[data-nature='water']::before { */
-/* -webkit-text-stroke: 4px #355CA1; */
-/* } */
-/* .player>.damage[data-nature='fire']::before { */
-/* -webkit-text-stroke: 4px #EE7F01; */
-/* } */
-/* .player>.damage[data-nature='soil']::before { */
-/* -webkit-text-stroke: 4px #803B02; */
-/* } */
-/* .player>.damage[data-nature='thunder']::before { */
-/* -webkit-text-stroke: 4px #644A8B; */
-/* } */
-
-
-
-
 /*联机用牌时限*/
 .player>.timerbar {
 	display: block;
@@ -1448,12 +1411,6 @@
 	margin: 0 2px;
 	transform-origin: center bottom;
 	transition: transform 0.3s;
-}
-
-/* 判定区卡牌hover效果 */
-#arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges>.card:hover {
-	transform: translateY(-10px);
-	z-index: 2;
 }
 
 /* 确保判定区不会被其他元素遮挡 */

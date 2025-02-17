@@ -3,19 +3,11 @@
 @import "card.css";
 @import "icon.css";
 @import "effect.css";
-/*@import 'equip.css';*/
 
 
 html {
 	background: rgb(60, 60, 60);
 }
-
-
-/* #arena>.dialog { */
-/* display: none; */
-/* } */
-
-
 
 body>.background {
 	animation: anime-opacity 1s ease-in-out;
@@ -76,17 +68,12 @@ body>.background {
 	bottom: 1%;
 	width: auto;
 	height: auto;
-	/* pointer-events: none; */
 	transition-property: opacity;
 }
 
 #arena.phone {
 	top: 2%;
 }
-
-/* #arena.dragging { */
-/* cursor: default; */
-/* } */
 
 #window.leftbar #arena:not(.chess) {
 	width: auto;
@@ -131,60 +118,6 @@ body>.background {
 	text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
 }
 
-
-/* 手牌区域布局 */
-#arena>.handcards {
-	position: absolute;
-	left: auto;
-	bottom: 0%;
-	right: 256px;
-	transform: none;
-	width: calc(100% - 400px);
-	justify-content: flex-end;
-	-webkit-mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
-	perspective: 1000px;
-	transform-style: preserve-3d;
-	transition: all 0.3s;
-}
-
-/* 手牌样式 */
-#arena>.handcards>.card {
-	position: relative;
-	margin: 0 -27px 0 0;
-	/* 调整卡牌重叠程度 */
-	transform-origin: center bottom;
-	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-	will-change: transform, margin;
-}
-
-/* hover效果 */
-#arena>.handcards:hover>.card {
-	margin-right: -15px;
-	/* hover时减少重叠 */
-}
-
-/* hover展开 */
-#arena>.handcards>.card:not(.selected):not(.removing):hover {
-	transform: translateY(-20px) translateZ(20px);
-	margin: 0 3px;
-	/* hover时完全展开 */
-	z-index: 2;
-}
-
-/* 选中状态 */
-#arena>.handcards>.card.selected {
-	transform: translateY(-30px) translateZ(30px) scale(1.05);
-	margin: 0 5px;
-	/* 选中时完全展开 */
-	z-index: 3;
-	box-shadow: 0 0 15px rgba(255, 230, 0, 0.4);
-}
-
-/* 获得手牌动画 */
-#arena>.handcards>.card.gaining {
-	animation: gain-card 0.5s ease-out;
-}
-
 @keyframes gain-card {
 	0% {
 		transform: translateY(-50px) scale(1.1);
@@ -202,11 +135,6 @@ body>.background {
 	}
 }
 
-/* 失去手牌动画 */
-#arena>.handcards>.card.removing {
-	animation: remove-card 0.4s ease-in;
-}
-
 @keyframes remove-card {
 	0% {
 		transform: translateY(0) scale(1);
@@ -217,89 +145,6 @@ body>.background {
 		transform: translateY(50px) scale(0.9);
 		opacity: 0;
 	}
-}
-
-/* 手牌数量提示 */
-#arena>.handcards>.card-count {
-	bottom: auto;
-	top: -5px;
-	right: -15px;
-	font-family: 'kaiti';
-	font-size: 22px;
-	text-shadow: 0 0 5px black, 0 0 10px black;
-}
-
-/* 滚动条样式优化 */
-#arena>.handcards::-webkit-scrollbar,
-#arena[data-right-layout='on']>.handcards::-webkit-scrollbar {
-	height: 4px;
-	background: transparent;
-}
-
-#arena>.handcards::-webkit-scrollbar-thumb,
-#arena[data-right-layout='on']>.handcards::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, 0.2);
-	border-radius: 2px;
-	transition: background 0.3s;
-}
-
-#arena>.handcards::-webkit-scrollbar-thumb:hover,
-#arena[data-right-layout='on']>.handcards::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.3);
-	/* 滚动条hover效果 */
-}
-
-#arena>.card-number {
-	position: absolute;
-	right: 10px;
-	bottom: 206px;
-	/* 调整手牌数显示位置 */
-	font-family: 'kaiti';
-	font-size: 22px;
-	text-shadow: 0 0 5px black, 0 0 10px black;
-	z-index: 3;
-}
-
-/* 修改普通手牌位置 */
-#arena>.hand-wrap,
-#arena>.hand-back {
-	left: 50%;
-	bottom: 0%;
-	transform: translateX(-50%);
-	width: calc(100% - 400px);
-	/* 调整手牌区域宽度 */
-	justify-content: center;
-	-webkit-mask-image: linear-gradient(90deg,
-			transparent 0%,
-			black 2%,
-			black 98%,
-			transparent 100%);
-}
-
-/* 调整手牌区大小 */
-#handcards1 {
-	height: 150px !important;
-	width: calc(100% - 160px) !important;
-	bottom: 0px !important;
-	border-radius: 0 !important;
-}
-
-/* 调整手牌大小和间距 */
-#handcards1>.card {
-	height: 120px !important;
-	width: 90px !important;
-	margin: 0 -10px !important;
-	border-radius: 8px !important;
-}
-
-/* 调整手牌悬浮效果 */
-#handcards1>.card:hover {
-	transform: translateY(-15px) !important;
-}
-
-/* 调整手牌数量显示位置 */
-#handcards1>.number {
-	top: -15px !important;
 }
 
 /* 修改右手布局手牌位置 */
@@ -868,11 +713,6 @@ body>.background {
 	user-select: none;
 }
 
-/* 按钮hover效果 */
-#arena>#dui-controls>div:hover {
-	transform: translateY(-2px);
-}
-
 /* 按钮点击效果 */
 #arena>#dui-controls>div:active {
 	transform: scale(0.95);
@@ -911,30 +751,6 @@ body>.background {
 	box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
 }
 
-/* 卡牌可用状态 */
-.card.available {
-	animation: card-available 0.8s ease-in-out;
-	box-shadow: 0 0 15px rgba(255, 230, 0, 0.6);
-}
-
-/* 卡牌可用动画 */
-@keyframes card-available {
-	0% {
-		transform: translateY(0);
-		box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
-	}
-
-	50% {
-		transform: translateY(-10px);
-		box-shadow: 0 0 20px rgba(255, 230, 0, 0.6);
-	}
-
-	100% {
-		transform: translateY(0);
-		box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
-	}
-}
-
 /* 按钮点击反馈 */
 .control:active {
 	transform: scale(0.95);
@@ -950,12 +766,6 @@ body>.background {
 .confirm:hover {
 	transform: scale(1.05);
 	box-shadow: 0 0 15px rgba(255, 230, 0, 0.4);
-}
-
-/* 目标选择提示 */
-.player.selectable {
-	cursor: pointer;
-	animation: target-available 1.5s ease-in-out infinite;
 }
 
 @keyframes target-available {

@@ -203,21 +203,6 @@
 	text-shadow: 0 0 5px lightblue, 0 0 10px lightblue;
 }
 
-/* .card>.temp-name[data-nature='thunder']::before { */
-/* content:''; */
-/* display: block; */
-/* position: absolute; */
-/* left: calc(50% - 50px); */
-/* top: calc(50% - 30px); */
-/* width: 100px; */
-/* height: 60px; */
-/* text-shadow: 0 0 10px white !important; */
-/* background: linear-gradient(to bottom, white, blue 15%, white 30%, blue 50%, white 70%, blue 85%, white);; */
-/* clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%); */
-/* -webkit-clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%); */
-/* transform: scale(0.8); */
-/* } */
-
 .card>.temp-name:empty {
 	display: none;
 }
@@ -362,22 +347,6 @@
 	/* hover时减少重叠 */
 }
 
-/* 装备区hover效果 */
-.equips>.card:not(.selected):not(.removing):not(.thrown):hover {
-	transform: translateY(-10px) translateZ(10px);
-	box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
-	z-index: 2;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 判定区hover效果 */
-.judges>.card:not(.selected):not(.removing):not(.thrown):hover {
-	transform: translateY(-10px) translateZ(10px);
-	box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
-	z-index: 2;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* 可选状态的hover效果 */
 .card.selectable:not(.selected):hover {
 	transform: translateY(-25px) translateZ(25px);
@@ -390,22 +359,6 @@
 .card:active {
 	transform: scale(0.96);
 	transition: transform 0.1s ease-out;
-}
-
-/* 禁用状态 */
-.card.unselectable {
-	filter: grayscale(40%);
-	opacity: 0.8;
-	transform: none !important;
-	box-shadow: none !important;
-	cursor: not-allowed;
-}
-
-/* 禁用状态的hover效果 */
-.card.unselectable:hover {
-	transform: none;
-	box-shadow: none;
-	cursor: not-allowed;
 }
 
 /* 确保动画流畅 */

@@ -462,7 +462,7 @@
 
 .hujia {
 	top: auto;
-	bottom: 80%;
+	bottom: 85%;
 	/*上下*/
 	left: -4px;
 	/*左右*/
@@ -471,7 +471,7 @@
 	/*护甲图片存放位置*/
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
-	width: 25px;
+	width: 27px;
 	/*图片宽*/
 	text-align: center;
 	color: white;
@@ -482,7 +482,7 @@
 	height: 65px;
 	/*图片高*/
 	position: absolute;
-	z-index: 100;
+	z-index: 200;
 }
 
 .player.connect>div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).hp-wrap {
@@ -1482,12 +1482,6 @@
 	margin: 0 2px;
 	transform-origin: center bottom;
 	transition: transform 0.3s;
-}
-
-/* 判定区卡牌hover效果 */
-#arena[data-layout='nova']>.player[data-position='0']:not(.minskin)>.judges>.card:hover {
-	transform: translateY(-10px);
-	z-index: 2;
 }
 
 /* 确保判定区不会被其他元素遮挡 */

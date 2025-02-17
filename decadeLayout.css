@@ -59,23 +59,10 @@
 	top: 15%;
 }
 
-
-
-
-
 #arena[data-layout='nova']:not(*[data-player_height=''])>.player {
 	width: 120px;
 	height: 180px;
 }
-
-/*
-#arena[data-layout='nova']:not(*[data-player_height=''])>.player[data-position='0']:not(.miniskin) {
-	left: 0;
-	top: auto;
-	right: auto;
-	bottom: 0;
-}
-*/
 /* * * * * 默认布局 * * * * */
 
 /*8人座*/
@@ -238,12 +225,7 @@
 	top: 9px;
 }
 
-
-
-
 /* * * * * 新版布局 * * * * */
-
-
 /*--------------------分割线--------------------*/
 #arena[data-new-decade-style='on']>.player {
 	--w: 120px;
@@ -258,7 +240,6 @@
 }
 
 /*--------------------分割线--------------------*/
-
 /*8人座*/
 #arena[data-layout='nova'][data-decade-layout='on'][data-number='8']>.player[data-position='1'] {
 	left: auto;
@@ -419,7 +400,6 @@
 	left: 45%;
 	top: 5%;
 }
-
 
 /*--------------------分割线--------------------*/
 /*8人座*/

@@ -277,14 +277,15 @@
 
 /*界面文本提示框*/
 #arena.decadeUI>.dialog.prompt {
-	left: calc(50% - 360px);
+	left: calc(50% - 300px);
+	width: 500px;
+	/* 设置固定宽度，与进度条一致 */
 	top: auto;
 	height: auto;
 	background: none;
 	transform: none;
 	box-shadow: none;
 	bottom: calc(23% + 40px);
-	/*技能描述框高度*/
 }
 
 #arena.decadeUI>.dialog.prompt>.content-container,
@@ -301,8 +302,33 @@
 	padding-top: 3px;
 	padding-bottom: 3px;
 	color: rgb(250, 250, 200);
-	background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 10%, rgba(0, 0, 0, 0.2) 90%, transparent 100%);
+	background: linear-gradient(to right,
+			transparent 0%,
+			rgba(0, 0, 0, 0.2) 40%,
+			rgba(0, 0, 0, 0.2) 60%,
+			transparent 100%);
 	font-family: kaiti;
+	text-shadow: rgb(51, 51, 51) 1px 0 0, rgb(51, 51, 51) 0 1px 0, rgb(51, 51, 51) -1px 0 0, rgb(51, 51, 51) 0 -1px 0;
+	width: 100%;
+	/* 确保文字容器占满宽度 */
+	text-align: center;
+	/* 文字居中 */
+}
+
+/* 手气卡提示文字样式 */
+#arena>.hand-tip {
+	left: calc(50% - 310px) !important;
+	/* 与提示框对齐 */
+	width: 550px !important;
+	/* 与提示框同宽 */
+	text-align: center;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	background: linear-gradient(to right,
+			transparent 0%,
+			rgba(0, 0, 0, 0.2) 40%,
+			rgba(0, 0, 0, 0.2) 60%,
+			transparent 100%);
 	text-shadow: rgb(51, 51, 51) 1px 0 0, rgb(51, 51, 51) 0 1px 0, rgb(51, 51, 51) -1px 0 0, rgb(51, 51, 51) 0 -1px 0;
 }
 

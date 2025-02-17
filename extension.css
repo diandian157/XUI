@@ -100,18 +100,6 @@
 	left: 50%;
 }
 
-/*-----去除透明背景框----*/
-/*
-.dialog.scroll1,
-.dialog.scroll2,
-.dialog.withbg {
-	background: none;
-	box-shadow: none;
-	border-radius: 8px;
-	min-height: 200px;
-}
-*/
-
 /*-----更改无懈蓝框-------*/
 .glow:not(.button):not(.card) {
 	box-shadow: none !important;
@@ -120,44 +108,6 @@
 	z-index: 89;
 	pointer-events: none;
 }
-
-/*-------文本颜色------*/
-/*
-.firetext {
-	color: rgb(255,119,63);
-}
-.yellowtext {
-	color: #bd6420;
-}
-.bluetext {
-	color: #25c523;
-}
-.greentext {
-	color: #25c523;
-}
-.icetext {
-	color: rgb(59, 98, 115);
-}
-.thundertext,
-.controlthundertext {
-	color: rgb(117,186,255);
-}
-.kamitext {
-	color: rgb(90,118,99);
-}
-.whitetext .thundertext {
-	color: #d6d0af;
-}
-.poisontext {
-	color: rgb(104,221,127);
-}
-.browntext {
-	color: rgb(195,161,223);
-}
-.legendtext {
-	color: rgb(233, 131, 255);
-}
-*/
 
 .shousha_menu {
 	width: 100%;
