@@ -168,19 +168,6 @@
 	box-shadow: none !important;
 }
 
-/*
-.buttons.guanxing,
-.dialog.addNewRow .item-container:not(:has(.caption)) {
-	border-image-source: url('assets/image/cardcontain_bg.png');
-	border-image-slice: 26 fill;
-	border-image-width: 26px;
-	border-image-outset: 4px 0px 0px 0px;
-	background: none;
-	box-shadow: none;
-	border-radius: 0;
-}
-*/
-
 .dialog.addNewRow .item-container {
 	height: 100%;
 }
@@ -321,15 +308,13 @@
 	/* 与提示框对齐 */
 	width: 550px !important;
 	/* 与提示框同宽 */
-	text-align: center;
-	padding-top: 3px;
-	padding-bottom: 3px;
+	color: rgb(250, 250, 200);
+	font-family: kaiti;
 	background: linear-gradient(to right,
 			transparent 0%,
 			rgba(0, 0, 0, 0.2) 40%,
 			rgba(0, 0, 0, 0.2) 60%,
 			transparent 100%);
-	text-shadow: rgb(51, 51, 51) 1px 0 0, rgb(51, 51, 51) 0 1px 0, rgb(51, 51, 51) -1px 0 0, rgb(51, 51, 51) 0 -1px 0;
 }
 
 /*基本技能框*/
