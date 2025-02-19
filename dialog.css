@@ -304,7 +304,7 @@
 
 /* 手气卡提示文字样式 */
 #arena>.hand-tip {
-	left: calc(50% - 310px) !important;
+	left: calc(50% - 320px) !important;
 	/* 与提示框对齐 */
 	width: 550px !important;
 	/* 与提示框同宽 */

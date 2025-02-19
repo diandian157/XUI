@@ -168,9 +168,13 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 					if (node) return;
 					if (item.type === 'enable') {
 						node = ui.create.div(lib.skill[item.id].limited ? '.xiandingji' :
-							'.skillitem', self.node.enable, get.translation(item
-							.name) /*.slice(0, 2)*/ ); //咸鱼大佬提供代码
+							'.skillitem', self.node.enable, get.translation(item.name));
 						node.dataset.id = item.id;
+
+						node.addEventListener('click', function() {
+							game.playAudio('..', 'extension', '十周年UI', 'audio/SkillBtn');
+						});
+
 						app.listen(node, plugin.clickSkill);
 						return;
 					}

@@ -1,6 +1,14 @@
 'use strict';
 decadeModule.import(function(lib, game, ui, get, ai, _status) {
+	//装备名字简化
 	lib.translate.zhangba_skill = '丈八';
+
+	//强制触屏布局开启
+	if (lib.config.phonelayout != 'on') game.saveConfig('phonelayout', 'on');
+	//强制布局为新版
+	if (lib.config.layout != 'nova') game.saveConfig('layout', 'nova');
+	//强制主题为音乐
+	if (lib.config.theme != 'music') game.saveConfig('theme', 'music');
 
 	//手气卡美化
 	if (lib.config['extension_十周年UI_shouqikamh']) {
@@ -44,7 +52,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					return Math.floor(Math.random() * (max - min + 1)) + min;
 				};
 				event.numsl = getRandomInt(10000, 99999);
-				event.numsy = 5;
+				event.numsy = 5; //手气卡次数改这里
 				var str = "本场还可更换" + event.numsy + "次手牌(剩余" + event.numsl + "张手气卡)";
 				event.dialog = dui.showHandTip(str);
 				event.dialog.strokeText();
@@ -57,7 +65,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				event.goto(4);
 			}
 			"step 2";
-
 			function getConfig(ext, id, def) {
 				var str = ["extension", ext, id].join("_");
 				var val = lib.config[str];
@@ -303,7 +310,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			delete ui.cardqx;
 		}
 	});
-	// 选择结束时移除按钮
 	lib.hooks.uncheckBegin.add("cardqx", () => {
 		if (get.event().result?.bool) {
 			ui.cardqx?.remove();

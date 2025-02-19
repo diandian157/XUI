@@ -67,7 +67,6 @@ export default async function() {
 			if (lib.config.extension_十周年UI_duijuetwo) {
 				versus();
 			}
-
 			//布局
 			switch (lib.config.layout) {
 				case "long2":
@@ -1031,8 +1030,9 @@ export default async function() {
 									if (showDynamic && _status.mode != null) {
 										var skins;
 										var dskins = decadeUI.dynamicSkin;
-										var avatars = this.doubleAvatar ? [character, character2] :
-											[character];
+										var avatars = this.doubleAvatar ? [character, character2] : [
+											character
+										];
 										var increased;
 
 										for (var i = 0; i < avatars.length; i++) {
@@ -6558,10 +6558,10 @@ export default async function() {
 										break;
 									case "juedou":
 										decadeUI.animation.cap.playSpineTo(card,
-										"SF_eff_jiangling_juedou", {
-											x: [10, 0.4],
-											scale: 1
-										});
+											"SF_eff_jiangling_juedou", {
+												x: [10, 0.4],
+												scale: 1
+											});
 										break;
 									case "nanman":
 										decadeUI.animation.cap.playSpineTo(card, "effect_nanmanruqin", {
@@ -8820,7 +8820,7 @@ export default async function() {
 						});
 						return;
 					}
-					setText = typeof setText === "function" ? setText() : function () {};
+					setText = typeof setText === "function" ? setText() : function() {};
 					var zip = new JSZip(data);
 					var dirList = [],
 						fileList = [];
@@ -9164,7 +9164,7 @@ export default async function() {
 					boxContent.style.width = "500px";
 					boxContent.style.height = "24px";
 					boxContent.style.display = "block";
-					boxContent.style.left = "calc(50% - 300px)";
+					boxContent.style.left = "calc(50% - 305px)";
 					boxContent.style.position = "fixed";
 					boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
 
@@ -9191,7 +9191,7 @@ export default async function() {
 					boxContent.style["boxShadow"] = "0 0 4px #000000";
 					boxContent.style.margin = "0 0 !important";
 					boxContent.style.position = "fixed";
-					boxContent.style.left = "calc(50% - 300px)";
+					boxContent.style.left = "calc(50% - 305px)";
 					boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
 
 					var boxTime = document.createElement("div");
@@ -9216,7 +9216,7 @@ export default async function() {
 					boxContent.style["boxShadow"] = "0 0 4px #000000";
 					boxContent.style.margin = "0 0 !important";
 					boxContent.style.position = "fixed";
-					boxContent.style.left = "calc(50% - 300px)";
+					boxContent.style.left = "calc(50% - 305px)";
 					boxContent.style.bottom = parseFloat(lib.config["extension_十周年UI_jindutiaoSet"]) + "%";
 
 					var boxTime = document.createElement("div");
@@ -9660,7 +9660,7 @@ export default async function() {
 				init: false,
 				intro: '开启后，还原pc端十周年22新布局，重启生效。',
 			},
-			wujiangbeijing:{
+			wujiangbeijing: {
 				name: '武将背景',
 				init: false,
 				intro: '开启后，单双将和国战模式将用设置好的武将背景，但是会与武将信息冲突',
@@ -9670,7 +9670,7 @@ export default async function() {
 				intro: "自己回合内显示对应阶段图片提示",
 				name: "阶段提示",
 			},
-			shouqikamh:{
+			shouqikamh: {
 				name: '手气卡美化',
 				init: false,
 				intro: '开启后，手气卡锁定五次',
@@ -9877,8 +9877,7 @@ export default async function() {
 					"二改萌修十周年UI，仅适配电脑端",
 					"主玩家名称为本体联机昵称",
 					"限定觉醒技需要下载lihui放进本体image",
-					"如果不喜欢可以覆盖回原来的effect.js",
-					"阶段图片调整在ext搜阶段提示改[]里的数字",
+					"强制触屏布局等其他，不需要可以进meihua.js删掉",
 					"前面带有●符号的开关勿动",
 					"您可以再次创作并分享，但是禁止售卖盈利",
 				];
