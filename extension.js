@@ -3514,12 +3514,6 @@ export default async function() {
 						return result;
 					};
 
-					game.linexy = function(path) {
-						if (!decadeUI.config.playerLineEffect) return gameLinexyFunction.apply(this,
-							arguments);
-						decadeUI.effect.line(path);
-					};
-
 					ui.click.intro = function(e) {
 						if (this.classList.contains("infohidden") || _status.dragged) return;
 						_status.clicked = true;
@@ -9239,10 +9233,6 @@ export default async function() {
 						clearInterval(window.timer);
 						delete window.timer;
 						boxContent.remove();
-						if (lib.config.extension_十周年UI_jindutiaotuoguan == true && _status.auto ==
-							false) {
-							ui.click.auto();
-						}
 					}
 				}, 100); //进度条间隔时间100 
 				//-------------//
@@ -9256,8 +9246,6 @@ export default async function() {
 							delete window.jindutiaoTeshu;
 							boxTime2.remove();
 							imgBg3.remove();
-							//ui.click.cancel();//结束回合
-							//点击托管ui.click.auto();
 						}
 					}, parseFloat(lib.config["extension_十周年UI_jindutiaoST"]) / 2); //进度条时间
 				}
@@ -9582,14 +9570,6 @@ export default async function() {
 					if (window.decadeUI) decadeUI.config.cardUseEffect = value;
 				},
 			},
-			playerLineEffect: {
-				name: '玩家指示线特效',
-				init: false,
-				onclick(value) {
-					game.saveConfig('extension_十周年UI_playerLineEffect', value);
-					if (window.decadeUI) decadeUI.config.playerLineEffect = value;
-				},
-			},
 			outcropSkin: {
 				name: "十周年样式露头",
 				init: false,
@@ -9874,14 +9854,13 @@ export default async function() {
 			};
 			pack.intro = (pack => {
 				let log = [
-					"二改萌修十周年UI，仅适配电脑端",
+					`二改十周年${pack.version}仅适配电脑端`,
+					"前面带有●符号的开关勿动",
 					"主玩家名称为本体联机昵称",
 					"限定觉醒技需要下载lihui放进本体image",
-					"强制触屏布局等其他，不需要可以进meihua.js删掉",
-					"前面带有●符号的开关勿动",
 					"您可以再次创作并分享，但是禁止售卖盈利",
 				];
-				return `<a href=${pack.diskURL}>点击前往二改十周年Github仓库</a><br><p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">${log.join("<br>•")}</p>`;
+				return `<a href=${pack.diskURL}>点击前往Github仓库</a><br><p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">${log.join("<br>•")}</p>`;
 			})(pack);
 			return pack;
 		})(),

@@ -164,15 +164,6 @@ body>.background {
 			transparent 100%);
 }
 
-/* 调整手牌区域的渐隐效果 */
-#arena>.hand-wrap {
-	-webkit-mask-image: linear-gradient(90deg,
-			transparent 0%,
-			black 2%,
-			black 98%,
-			transparent 100%);
-}
-
 #arena[data-alone-equip='off'][data-right-layout='off']>.hand-wrap,
 #arena[data-alone-equip='off'][data-right-layout='off']>.hand-back {
 	/*左手布局+非单独装备栏*/
