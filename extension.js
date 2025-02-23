@@ -9731,7 +9731,7 @@ export default async function() {
 			},
 			cardkmh: {
 				name: "卡牌边框",
-				intro: '参考扩展十周年UI，重启生效。',
+				intro: '参考扩展武将美化做适配，重启生效。',
 				init: "off",
 				item: {
 					"off": "关闭",
