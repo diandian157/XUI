@@ -170,11 +170,9 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
 						node = ui.create.div(lib.skill[item.id].limited ? '.xiandingji' :
 							'.skillitem', self.node.enable, get.translation(item.name));
 						node.dataset.id = item.id;
-
 						node.addEventListener('click', function() {
 							game.playAudio('..', 'extension', '十周年UI', 'audio/SkillBtn');
 						});
-
 						app.listen(node, plugin.clickSkill);
 						return;
 					}

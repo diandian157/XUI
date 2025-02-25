@@ -205,9 +205,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			// 初始化时设置名称
 			const setPlayerName = (player) => {
 				if (!player || !player.node || !player.node.nameol) return;
-
 				player.node.nameol.style.display = 'none';
-
 				if (player == game.me) {
 					const nickname = get.connectNickname() || '无名玩家';
 					player.node.nameol.innerHTML =
@@ -219,7 +217,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						'<span style="color:#ba30cc;font-family:kaiti;font-size:15px;padding:2px 12px;backdrop-filter:blur(53px);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">小杀-' +
 						randomNum + '</span>';
 				}
-
 				player.addEventListener('mouseenter', function() {
 					this.node.nameol.style.display = '';
 				});
@@ -290,32 +287,36 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		}
 	};
 
-	// 全选按钮
-	lib.hooks.checkBegin.add("cardqx", () => {
-		const event = get.event();
-		// 只在需要选择多张牌且没有全选按钮时创建
-		if (event.selectCard?.[1] > 1 && !ui.cardqx) {
-			ui.cardqx = ui.create.control("全选", () => {
-				// 选择所有手牌
-				ai.basic.chooseCard(card => get.position(card) == "h" ? 114514 : 0);
-				// 执行自定义添加卡牌函数
-				_status.event.custom?.add.card?.();
-				// 更新选中卡牌的显示
-				ui.selected.cards.forEach(card => card.updateTransform(true));
-			});
-		}
-		// 当不需要选择多张牌时移除按钮
-		else if (!event.selectCard?.[1] || event.selectCard[1] <= 1) {
-			ui.cardqx?.remove();
-			delete ui.cardqx;
-		}
+	// 全选按钮功能 by奇妙工具做修改
+	lib.hooks.checkBegin.add("Selectall", () => {
+	    const event = get.event();
+	    const needMultiSelect = event.selectCard?.[1] > 1;
+	    // 创建或移除全选按钮
+	    if (needMultiSelect && !ui.Selectall) {
+	        ui.Selectall = ui.create.control("全选", () => {
+	            // 选择所有手牌
+	            ai.basic.chooseCard(card => get.position(card) === "h" ? 114514 : 0);
+	            // 执行自定义添加卡牌函数
+	            event.custom?.add?.card?.();
+	            // 更新选中卡牌显示
+	            ui.selected.cards?.forEach(card => card.updateTransform(true));
+	        });
+	    } else if (!needMultiSelect) {
+	        removeCardQX();
+	    }
 	});
-	lib.hooks.uncheckBegin.add("cardqx", () => {
-		if (get.event().result?.bool) {
-			ui.cardqx?.remove();
-			delete ui.cardqx;
-		}
+	lib.hooks.uncheckBegin.add("Selectall", () => {
+	    if (get.event().result?.bool) {
+	        removeCardQX();
+	    }
 	});
+	// 抽取移除按钮的公共函数
+	const removeCardQX = () => {
+	    if (ui.Selectall) {
+	        ui.Selectall.remove();
+	        delete ui.Selectall;
+	    }
+	};
 
 	// 伤害恢复优化
 	window._WJMHHUIFUSHUZITEXIAO = {
@@ -555,12 +556,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 	lib.element.player.inits = [].concat(lib.element.player.inits || [])
 		.concat(player => {
 			if (player.ChupaizhishiXObserver) return;
-
 			const ChupaizhishiX = {
 				attributes: true,
 				attributeFilter: ['class']
 			};
-
 			let timer = null;
 			const animations = {
 				'jiangjun': 'SF_xuanzhong_eff_jiangjun',
@@ -570,7 +569,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				'dajiangjun': 'SF_xuanzhong_eff_dajiangjun',
 				'dasima': 'SF_xuanzhong_eff_dasima'
 			};
-
 			const ChupaizhishiXObserver = new globalThis.MutationObserver(mutationRecords => {
 				for (let mutationRecord of mutationRecords) {
 					if (mutationRecord.attributeName !== 'class') continue;

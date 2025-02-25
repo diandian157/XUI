@@ -6253,7 +6253,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					condition: {
 						lowhp: {
 							transform: ['变身'],
-							recover: false,
+							recover: true,
 							effect: 'juexing_guansuo',
 						},
 					},
@@ -24898,7 +24898,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 					condition: {
 						lowhp: {
 							transform: ['变身'],
-							recover: false,
+							recover: true,
 							effect: 'juexing_zhaoxiang',
 							play: 'play',
 						},

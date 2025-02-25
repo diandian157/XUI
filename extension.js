@@ -9854,13 +9854,13 @@ export default async function() {
 			};
 			pack.intro = (pack => {
 				let log = [
-					`二改十周年${pack.version}仅适配电脑端`,
+					`二改十周年 ${pack.version}仅适配电脑端`,
 					"前面带有●符号的开关勿动",
 					"主玩家名称为本体联机昵称",
 					"限定觉醒技需要下载lihui放进本体image",
 					"您可以再次创作并分享，但是禁止售卖盈利",
 				];
-				return `<a href=${pack.diskURL}>点击前往Github仓库</a><br><p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">${log.join("<br>•")}</p>`;
+				return `<a href=${pack.diskURL}>点击前往十周年Github仓库</a><br><p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">${log.join("<br>•")}</p>`;
 			})(pack);
 			return pack;
 		})(),

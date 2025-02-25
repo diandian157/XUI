@@ -301,32 +301,29 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			};
 
 			image.onerror = function() {
-				image.onerror = void 0;
-				// 修改默认头像路径
-				image.src = "image/characters/default_silhouette_" + (player.sex == "female" ?
-					"female" : "male") + ".jpg";
+			    image.onerror = void 0;
+			    // 如果是从 lihui 加载失败，尝试原始路径
+			    if (image.src.includes('image/lihui')) {
+			        // 还原到原始路径
+			        if (url.indexOf('url("') == 0) {
+			            image.src = url.slice(5, url.indexOf('")'));
+			        } else if (url.indexOf("url('") == 0) {
+			            image.src = url.slice(5, url.indexOf("')"));
+			        }
+			    } else {
+			        // 如果原始路径也失败，使用默认图片
+			        image.src = lib.assetURL + "image/character/default_silhouette_" + 
+			            (player.sex == "female" ? "female" : "male") + ".jpg";
+			    }
 			};
-
-			// 获取武将立绘路径的新逻辑
-			if (url.indexOf('url("') == 0 || url.indexOf("url('") == 0) {
-				let imgPath = url.slice(5, url.indexOf(url.indexOf('url("') == 0 ? '")' : "')"));
-
-				// 检查是否有皮肤
-				if (player.skin) {
-					// 如果有皮肤，使用皮肤立绘路径
-					let skinName = player.skin[vice === 'vice' ? player.name2 : player.name];
-					if (skinName) {
-						image.src = 'image/skin/' + skinName + '.jpg';
-					} else {
-						// 没有对应皮肤时使用默认立绘
-						image.src = imgPath.includes('extension/') ? imgPath : "image/lihui/" +
-							imgPath.split('/').pop();
-					}
-				} else {
-					// 没有皮肤时使用默认立绘
-					image.src = imgPath.includes('extension/') ? imgPath : "image/lihui/" + imgPath
-						.split('/').pop();
-				}
+			
+			// 优先尝试 lihui 路径
+			if (url.indexOf('url("') == 0) {
+			    let originalPath = url.slice(5, url.indexOf('")'));
+			    image.src = originalPath.replace(/image\/character/, 'image/lihui');
+			} else if (url.indexOf("url('") == 0) {
+			    let originalPath = url.slice(5, url.indexOf("')"));
+			    image.src = originalPath.replace(/image\/character/, 'image/lihui');
 			}
 		},
 	};

@@ -63,7 +63,6 @@
 	width: 120px;
 	height: 180px;
 }
-
 /* * * * * 默认布局 * * * * */
 
 /*8人座*/
@@ -257,17 +256,17 @@
 #arena[data-layout='nova'][data-decade-layout='on'][data-number='8']>.player[data-position='3'] {
 	left: auto;
 	top: 5%;
-	right: 25%;
+	right: 21%;
 }
 
 #arena[data-layout='nova'][data-decade-layout='on'][data-number='8']>.player[data-position='4'] {
 	left: auto;
 	top: 5%;
-	right: 43.5%;
+	right: 41.5%;
 }
 
 #arena[data-layout='nova'][data-decade-layout='on'][data-number='8']>.player[data-position='5'] {
-	left: 25%;
+	left: 24%;
 	top: 5%;
 }
 
