@@ -158,15 +158,9 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 						mode].double_character;
 					if (mode === 'guozhan' || isDoubleCharacter) {
 						// 国战模式或开启双将时使用bj2
-						player.style.background =
-							'url("extension/十周年UI/assets/image/bj2.png") no-repeat center center';
-						player.style.backgroundSize = '100% 100%';
 						player.setAttribute('data-mode', 'guozhan');
 					} else {
 						// 其他情况使用bj1
-						player.style.background =
-							'url("extension/十周年UI/assets/image/bj1.png") no-repeat center center';
-						player.style.backgroundSize = '100% 100%';
 						player.setAttribute('data-mode', 'normal');
 					}
 				};
