@@ -1378,9 +1378,6 @@ if (decadeModule)
 				{
 					name: 'SF_xuanzhong_eff_dasima'
 				},
-
-
-
 				{
 					name: "effect_youxikaishi"
 				},

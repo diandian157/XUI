@@ -5226,91 +5226,100 @@ export default async function() {
 							if (this != node.parentNode) this.appendChild(node);
 
 							var player = this;
-							if (typeof node.popupNumber == 'number') {
+							if (typeof node.popupNumber == "number") {
 								var popupNum = node.popupNumber;
 								if (popupNum < 0) {
 									switch (node.nature) {
-										case 'thunder':
+										case "thunder":
 											if (popupNum <= -2) {
 												decadeUI.animation.playSpine({
-													name: 'effect_shoujidonghua',
-													action: 'play6'
+													name: "effect_shoujidonghua",
+													action: "play6"
 												}, {
-													scale: 0.8,
+													scale: 1.8,
 													parent: player
 												});
 											} else {
 												decadeUI.animation.playSpine({
-													name: 'effect_shoujidonghua',
-													action: 'play5'
+													name: "effect_shoujidonghua",
+													action: "play5"
 												}, {
-													scale: 0.8,
+													scale: 1.8,
 													parent: player
 												});
 											}
 											break;
-										case 'fire':
+										case "fire":
 											if (popupNum <= -2) {
 												decadeUI.animation.playSpine({
-													name: 'effect_shoujidonghua',
-													action: 'play4'
+													name: "effect_shoujidonghua",
+													action: "play4"
 												}, {
-													scale: 0.8,
+													scale: 1.8,
 													parent: player
 												});
 											} else {
 												decadeUI.animation.playSpine({
-													name: 'effect_shoujidonghua',
-													action: 'play3'
+													name: "effect_shoujidonghua",
+													action: "play3"
 												}, {
-													scale: 0.8,
+													scale: 1.8,
 													parent: player
 												});
 											}
 											break;
-										case 'water':
+										case "water":
 											break;
 										default:
 											if (popupNum <= -2) {
 												decadeUI.animation.playSpine({
-													name: 'effect_shoujidonghua',
-													action: 'play2'
+													name: "effect_shoujidonghua",
+													action: "play2"
 												}, {
-													scale: 0.8,
+													scale: 1.8,
 													parent: player
 												});
 											} else {
 												decadeUI.animation.playSpine({
-													name: 'effect_shoujidonghua',
-													action: 'play1'
+													name: "effect_shoujidonghua",
+													action: "play1"
 												}, {
-													scale: 0.8,
+													scale: 1.8,
 													parent: player
 												});
 											}
 											break;
 									}
 								} else {
-									if (node.nature == 'wood') {
-										decadeUI.animation.playSpine('effect_zhiliao', {
+									if (node.nature == "wood") {
+										decadeUI.animation.playSpine("effect_zhiliao", {
 											scale: 0.7,
-											parent: player
+											parent: player,
 										});
 									}
 								}
 							}
 
-							node.style.animation = 'open-fade-in-out 1.2s';
-							setTimeout(function(player, node) {
-								if (!player.popupNodeCache) player.popupNodeCache = [];
-								node.style.animation = '';
-								player.popupNodeCache.push(node);
-							}, 1210, player, node);
+							node.style.animation = "open-fade-in-out 1.2s";
+							setTimeout(
+								function(player, node) {
+									if (!player.popupNodeCache) player.popupNodeCache = [];
+									node.style.animation = "";
+									player.popupNodeCache.push(node);
+								},
+								1210,
+								player,
+								node
+							);
 
-							setTimeout(function(player) {
-								player.damagepopLocked = false;
-								player.$damagepop();
-							}, 500, player);
+							setTimeout(
+								function(player) {
+									player.damagepopLocked = false;
+									player.$damagepop();
+								},
+								500,
+								player
+							);
 						}
 					};
 
@@ -9740,6 +9749,26 @@ export default async function() {
 					'kuang3': '国都护',
 				},
 			},
+			cardbj:{
+				name:'卡牌背景',
+				intro:'可以根据自己的喜好选择卡背样式，重启生效',
+				init:"kb1",
+				item:{
+					"kb1":"默认",
+					"kb2":"国都护",
+					"kb3":"大将军",
+					"kb4":"大司马",
+				},
+				onclick:function (item){
+					game.saveConfig("extension_十周年UI_cardbj",item);
+				},
+				"visualMenu":function(node,link){
+					node.style.height=node.offsetWidth*1.4+"px";
+					node.style.backgroundSize='100% 100%';
+					node.className='button character incardback';
+					node.setBackgroundImage('extension/十周年UI/assets/image/'+link+'.png');
+				},
+			},
 			chupaizhishi: {
 				name: '出牌指示特效',
 				intro: '此选项可以切换目标指示特效，根据个人喜好自行切换，重启生效',
@@ -9857,7 +9886,7 @@ export default async function() {
 					`二改十周年 ${pack.version}仅适配电脑端`,
 					"前面带有●符号的开关勿动",
 					"主玩家名称为本体联机昵称",
-					"限定觉醒技需要下载lihui放进本体image",
+					"技能动画武将信息优先读取千幻立绘",
 					"您可以再次创作并分享，但是禁止售卖盈利",
 				];
 				return `<a href=${pack.diskURL}>点击前往十周年Github仓库</a><br><p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">${log.join("<br>•")}</p>`;

@@ -90,19 +90,26 @@
 	padding: 0px;
 	position: absolute;
 	left: 0px;
-	bottom: 0px;
+	bottom: 20px;
 	text-align: center;
-	/* background-color: rgba(0, 0, 0, 0.4); */
-	background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 20%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0.1) 100%);
-	color: rgb(255, 255, 200);
-	font-size: 17px;
+	/*	-webkit-text-stroke: 0.5px #392f22;*/
+	text-shadow: -1px 0px 1px #392f22, 0px -1px 1px #392f22, 1px 0px 1px #392f22, 0px 1px 1px #392f22;
+	color: #eddac3;
+	font-size: 20px;
+	font-weight: normal;
+	letter-spacing: 2px;
 	width: 100%;
 	height: 33%;
-	display: flex;
+	display: block;
+	filter: drop-shadow(0.5px 0 0 #453325) drop-shadow(-0.5px 0 0 #453325)
+		/*drop-shadow(0 0.5px 0 #453325) drop-shadow(0 -0.5px 0 #453325)*/
+	;
 	align-items: center;
+	/*属性定义项目在交叉轴上如何对齐。stretch | flex-start | flex-end | center | baseline*/
 	align-content: center;
+	/*只适用于"多行"的  flex 容器，并且当交叉轴上有多余空间使flex容器内的flex线对齐*/
 	justify-content: center;
-	font-family: "STHeiti", "SimHei", "Microsoft JhengHei", "Microsoft YaHei", "WenQuanYi Micro Hei", Helvetica, Arial, sans-serif !important;
+	font-family: xinwei;
 	z-index: 4;
 }
 
@@ -129,6 +136,33 @@
 	background-size: cover;
 	border-radius: 2px;
 	border: 1px solid black;
+	pointer-events: none;
+	z-index: 2;
+}
+
+/*拿牌提示*/
+.card.button>.gaintag.info {
+	position: absolute;
+	--w: 106px;
+	--h: calc(var(--w) * 63/212);
+	/*高和长*/
+	width: var(--w);
+	/*按比例调节*/
+	height: var(--h);
+	/*同理*/
+	left: 1px;
+	top: calc(50% - 22px);
+	right: 4px;
+	color: #7aeb1c;
+	font-size: 20px;
+	line-height: 35px;
+	font-family: shousha;
+	white-space: nowrap;
+	text-shadow: -1.7px 0px 3px #A01358, 0px -1.7px 3px #A01358, 1.7px 0px 3px #A01358, 0px 1.7px 3px #A01358;
+	background-image: url("image/vcard/wugunapai.png");
+	background-size: 100% 100%;
+	/*background: rgba(228, 207, 166, 0.8);*/
+	border-radius: 0px;
 	pointer-events: none;
 	z-index: 2;
 }

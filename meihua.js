@@ -65,6 +65,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				event.goto(4);
 			}
 			"step 2";
+
 			function getConfig(ext, id, def) {
 				var str = ["extension", ext, id].join("_");
 				var val = lib.config[str];
@@ -266,14 +267,8 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 			'step 0'
 			const name = player.name1;
 			let options;
-			// 根据角色类型选择势力
-			if (get.is.double(name)) {
-				options = get.is.double(name, true);
-				player.chooseControl(options).set('prompt', '请选择你的势力');
-			} else if (lib.character[name][1] === 'shen') {
-				options = lib.group.filter(group => group !== 'shen');
-				player.chooseControl(options).set('prompt', '请选择神武将的势力');
-			}
+			options = lib.group.filter(group => group !== 'shen');
+			player.chooseControl(options).set('prompt', '请选择神武将的势力');
 			'step 1'
 			if (result.control) {
 				player.changeGroup(result.control);
@@ -283,33 +278,33 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 
 	// 全选按钮功能 by奇妙工具做修改
 	lib.hooks.checkBegin.add("Selectall", () => {
-	    const event = get.event();
-	    const needMultiSelect = event.selectCard?.[1] > 1;
-	    // 创建或移除全选按钮
-	    if (needMultiSelect && !ui.Selectall) {
-	        ui.Selectall = ui.create.control("全选", () => {
-	            // 选择所有手牌
-	            ai.basic.chooseCard(card => get.position(card) === "h" ? 114514 : 0);
-	            // 执行自定义添加卡牌函数
-	            event.custom?.add?.card?.();
-	            // 更新选中卡牌显示
-	            ui.selected.cards?.forEach(card => card.updateTransform(true));
-	        });
-	    } else if (!needMultiSelect) {
-	        removeCardQX();
-	    }
+		const event = get.event();
+		const needMultiSelect = event.selectCard?.[1] > 1;
+		// 创建或移除全选按钮
+		if (needMultiSelect && !ui.Selectall) {
+			ui.Selectall = ui.create.control("全选", () => {
+				// 选择所有手牌
+				ai.basic.chooseCard(card => get.position(card) === "h" ? 114514 : 0);
+				// 执行自定义添加卡牌函数
+				event.custom?.add?.card?.();
+				// 更新选中卡牌显示
+				ui.selected.cards?.forEach(card => card.updateTransform(true));
+			});
+		} else if (!needMultiSelect) {
+			removeCardQX();
+		}
 	});
 	lib.hooks.uncheckBegin.add("Selectall", () => {
-	    if (get.event().result?.bool) {
-	        removeCardQX();
-	    }
+		if (get.event().result?.bool) {
+			removeCardQX();
+		}
 	});
 	// 抽取移除按钮的公共函数
 	const removeCardQX = () => {
-	    if (ui.Selectall) {
-	        ui.Selectall.remove();
-	        delete ui.Selectall;
-	    }
+		if (ui.Selectall) {
+			ui.Selectall.remove();
+			delete ui.Selectall;
+		}
 	};
 
 	// 伤害恢复优化
@@ -1069,5 +1064,87 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 				}
 			},
 		};
+	};
+
+	//取消按钮
+	//主要是为了在出牌阶段，拿起牌时，取消是取消拿牌，而不是结束回合
+	ui.click.cancel = function(node) {
+		var event = _status.event;
+		if (event.custom.replace.confirm) {
+			event.custom.replace.confirm(false);
+			return;
+		}
+		if (event.skill && !event.norestore) {
+			if (event.skillDialog && get.objtype(event.skillDialog) == 'div') {
+				event.skillDialog.close();
+			}
+			if (typeof event.dialog == 'string' && event.isMine()) {
+				event.dialog = ui.create.dialog(event.dialog);
+			}
+			if (_status.event.type == 'phase' && ui.confirm) {
+				ui.confirm.classList.add('removing');
+			}
+			// ui.control.animate('nozoom',100);
+			event.restore();
+			var cards = event.player.getCards('hej');
+			for (var i = 0; i < cards.length; i++) {
+				cards[i].recheck('useSkill');
+			}
+			game.uncheck();
+			game.check();
+			return;
+			//这里是对取消按钮的修改，在选中卡牌时，如果是回合内那么就变为取消效果
+		} else if (_status.event.type == 'phase' && ui.confirm && (ui.selected.cards.length !=
+				0 || ui.selected.targets.length != 0)) {
+			ui.confirm.classList.add('removing');
+			event.restore();
+			var cards = event.player.getCards('hej');
+			for (var i = 0; i < cards.length; i++) {
+				cards[i].recheck('useSkill');
+			}
+			game.uncheck();
+			game.check();
+			return;
+		}
+		event.result = {
+			confirm: 'cancel',
+			bool: false
+		};
+		if (node) {
+			node.parentNode.close();
+		}
+		if (ui.skills) ui.skills.close();
+		if (ui.skills2) ui.skills2.close();
+		if (ui.skills3) ui.skills3.close();
+		game.uncheck();
+		if (event.custom.add.confirm) {
+			event.custom.add.confirm(true);
+
+		}
+		game.resume();
+	};
+
+	//去掉按钮卡牌上的【类别】字样
+	ui.create.buttonPresets['vcard'] = function(item, type, position, noclick, node) {
+		if (typeof item == "string") {
+			item = ["", "", item];
+		} else item[0] = "";
+		node = ui.create.card(position, "noclick", noclick);
+		node.classList.add("button");
+		node.init(item);
+		node.link = item;
+		return node;
+	}
+
+	//卡牌背景
+	if (lib.config.extension_十周年UI_cardbj && lib.config.extension_十周年UI_cardbj != "kb1") {
+		var KPcss = document.createElement("style");
+		KPcss.innerHTML = ".card:empty,.card.infohidden{background:url('" + lib.assetURL +
+			"extension/十周年UI/assets/image/" + lib.config.extension_十周年UI_cardbj + ".png" +
+			"');background-size:100% 100% !important;}";
+		document.head.appendChild(KPcss);
+	};
+	window.kpimport = function(func) {
+		func(lib, game, ui, get, ai, _status);
 	};
 })
