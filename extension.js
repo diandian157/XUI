@@ -5951,26 +5951,22 @@ export default async function() {
 						var expand;
 
 						if (totalW > limitW) {
-							xMargin = csw - Math.abs(limitW - csw * cards.length) / (cards.length - 1);
-							if (lib.config.fold_card) {
-								var foldCardMinWidth = lib.config.extension_十周年UI_foldCardMinWidth;
-								var min = cs;
-								if (foldCardMinWidth == "cardWidth") {
-									min *= cw;
-								} else {
-									min *= foldCardMinWidth && foldCardMinWidth.length ? parseInt(
-										foldCardMinWidth) : 9;
-								}
-								if (xMargin < min) {
-									expand = true;
-									xMargin = min;
-								}
-							}
+						    xMargin = csw - Math.abs(limitW - csw * cards.length) / (cards.length - 1);
+						    if (lib.config.fold_card) {
+						        var min = 27 * cs;
+						        if (xMargin < min) {
+						            expand = true;
+						            xMargin = min;
+						        }
+						    }
 						} else {
-							/*-----------------分割线-----------------*/
-							// 手牌折叠方式
-							xStart += (limitW - totalW) / 2; //居中
-							// xStart += (limitW - totalW) / 1; //靠右
+						    /*-----------------分割线-----------------*/
+						    // 手牌折叠方式
+						    if (lib.config.extension_十周年UI_newDecadeStyle == 'off') {
+						        xStart += 0; //靠左
+						    } else {
+						        xStart += (limitW - totalW) / 2; // 其他样式居中
+						    }
 						}
 
 						var card;
@@ -8559,16 +8555,22 @@ export default async function() {
 				decadeModule.init = function() {
 					//原十周年UI内容加载
 					this.css(decadeUIPath + "extension.css");
-					this.css(decadeUIPath + "decadeLayout.css");
+					// 根据样式选择加载不同的layout css
+					if (lib.config.extension_十周年UI_newDecadeStyle == "off") {
+					    this.css(decadeUIPath + "decadeLayout2.css");
+						this.css(decadeUIPath + "layout_OL.css");
+					} else {
+					    this.css(decadeUIPath + "decadeLayout.css");
+					}
 					this.css(decadeUIPath + "card.css");
 					// 当且仅当初次载入时，newDecadeStyle == void 0
 					// 所以加载了不存在的css: player0.css
 					if (lib.config.extension_十周年UI_newDecadeStyle != void 0) {
-						this.css(decadeUIPath + "player" + parseFloat(["on", "off", "othersOn",
-							"othersOff"
-						].indexOf(lib.config.extension_十周年UI_newDecadeStyle) + 1) + ".css");
+					    this.css(decadeUIPath + "player" + parseFloat(["on", "off", "othersOn",
+					        "othersOff"
+					    ].indexOf(lib.config.extension_十周年UI_newDecadeStyle) + 1) + ".css");
 					} else {
-						this.css(decadeUIPath + "player2.css");
+					    this.css(decadeUIPath + "player2.css");
 					}
 					if (lib.config.extension_十周年UI_newDecadeStyle == "othersOff") {
 						this.css(decadeUIPath + "equip_new_new.css");
@@ -8597,39 +8599,42 @@ export default async function() {
 					//避免提示是否下载图片和字体素材
 					if (!lib.config.asset_version) game.saveConfig("asset_version", "无");
 					var layoutPath = decadeUIPath + "shoushaUI/";
-					if (lib.config.extension_十周年UI_KGMH == "1") this.css(layoutPath + "KGMH/" +
-						"kaiguan.css");
-					if (lib.config.extension_十周年UI_KGMH == "2") this.css(layoutPath + "KGMH/" +
-						"kaiguan_new.css");
-					var listmap = {
-						on: 2,
-						off: 1,
-						othersOn: 1,
-						othersOff: 3,
-					} [lib.config.extension_十周年UI_newDecadeStyle] || 2;
-					if (!(get.mode() == "chess" || get.mode() == "tafang" || get.mode ==
-							"hs_hearthstone")) {
-						var list = ["character", "lbtn", "skill"];
-						list.forEach(pack => {
-							//css加载
-							switch (pack) {
-								case "character":
-									this.css(layoutPath + pack + "/main" + listmap + ".css");
-									break;
-
-								default:
-									this.css(layoutPath + pack + "/main" + listmap + (lib.config
-										.touchscreen ? "" : "_window") + ".css");
-									break;
-							}
-							//js加载
-							this.js(
-								layoutPath + pack + "/" + pack + "/main" + listmap + ".js",
-								null,
-								function() {},
-								function() {}
-							);
-						});
+					if (lib.config.extension_十周年UI_KGMH == "1") this.css(layoutPath + "KGMH/" + "kaiguan.css");
+					if (lib.config.extension_十周年UI_KGMH == "2") this.css(layoutPath + "KGMH/" + "kaiguan_new.css");
+					
+					// 修改样式映射
+					var listmap;
+					if (lib.config.extension_十周年UI_newDecadeStyle == 'off') {
+					    listmap = 4;  // off样式固定使用4
+					} else {
+					    listmap = {
+					        on: 2,
+					        othersOn: 1,
+					        othersOff: 3,
+					    }[lib.config.extension_十周年UI_newDecadeStyle] || 2;
+					}
+					
+					if (!(get.mode() == "chess" || get.mode() == "tafang" || get.mode == "hs_hearthstone")) {
+					    var list = ["character", "lbtn", "skill"];
+					    list.forEach(pack => {
+					        //css加载
+					        switch (pack) {
+					            case "character":
+					                this.css(layoutPath + pack + "/main" + listmap + ".css");
+					                break;
+					
+					            default:
+					                this.css(layoutPath + pack + "/main" + listmap + (lib.config.touchscreen ? "" : "_window") + ".css");
+					                break;
+					        }
+					        //js加载
+					        this.js(
+					            layoutPath + pack + "/" + pack + "/main" + listmap + ".js",
+					            null,
+					            function() {},
+					            function() {}
+					        );
+					    });
 					}
 					return this;
 				};
@@ -9118,28 +9123,34 @@ export default async function() {
 			if (lib.config.extension_十周年UI_KGMH == "1") lib.init.css(layoutPath, "KGMH/kaiguan");
 			if (lib.config.extension_十周年UI_KGMH == "2") lib.init.css(layoutPath, "KGMH/kaiguan_new");
 			if (!(get.mode() == "chess" || get.mode() == "tafang" || get.mode == "hs_hearthstone")) {
-				for (var pack of ["character", "lbtn", "skill"]) {
-					var listmap = {
-						on: 2,
-						othersOn: 1,
-						othersOff: 3,
-					} [lib.config.extension_十周年UI_newDecadeStyle] || 2;
-					lib.init.js(
-						layoutPath + pack + "/main" + listmap + ".js",
-						null,
-						function() {},
-						function() {}
-					);
-					switch (pack) {
-						case "character":
-							lib.init.css(layoutPath + pack + "/main" + listmap + ".css");
-
-							break;
-						default:
-							lib.init.css(layoutPath + pack + "/main" + listmap + ".css");
-							break;
-					}
-				}
+			    for (var pack of ["character", "lbtn", "skill"]) {
+			        // 修改样式映射逻辑
+			        var listmap;
+			        if (lib.config.extension_十周年UI_newDecadeStyle == 'off') {
+			            listmap = 4;  // off样式固定使用4
+			        } else {
+			            listmap = {
+			                on: 2,
+			                othersOn: 1,
+			                othersOff: 3,
+			            }[lib.config.extension_十周年UI_newDecadeStyle] || 2;
+			        }
+			        
+			        lib.init.js(
+			            layoutPath + pack + "/main" + listmap + ".js",
+			            null,
+			            function() {},
+			            function() {}
+			        );
+			        switch (pack) {
+			            case "character":
+			                lib.init.css(layoutPath + pack + "/main" + listmap + ".css");
+			                break;
+			            default:
+			                lib.init.css(layoutPath + pack + "/main" + listmap + ".css");
+			                break;
+			        }
+			    }
 			}
 			//函数框架
 			/*进度条框架*/
@@ -9495,6 +9506,7 @@ export default async function() {
 					othersOn: "旧十周年",
 					on: "新十周年",
 					othersOff: "一将成名",
+					off: "OLUI",
 				},
 				onclick(control) {
 					const origin = lib.config.extension_十周年UI_newDecadeStyle;

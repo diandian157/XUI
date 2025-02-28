@@ -1066,76 +1066,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 		};
 	};
 
-	//取消按钮
-	//主要是为了在出牌阶段，拿起牌时，取消是取消拿牌，而不是结束回合
-	ui.click.cancel = function(node) {
-		var event = _status.event;
-		if (event.custom.replace.confirm) {
-			event.custom.replace.confirm(false);
-			return;
-		}
-		if (event.skill && !event.norestore) {
-			if (event.skillDialog && get.objtype(event.skillDialog) == 'div') {
-				event.skillDialog.close();
-			}
-			if (typeof event.dialog == 'string' && event.isMine()) {
-				event.dialog = ui.create.dialog(event.dialog);
-			}
-			if (_status.event.type == 'phase' && ui.confirm) {
-				ui.confirm.classList.add('removing');
-			}
-			// ui.control.animate('nozoom',100);
-			event.restore();
-			var cards = event.player.getCards('hej');
-			for (var i = 0; i < cards.length; i++) {
-				cards[i].recheck('useSkill');
-			}
-			game.uncheck();
-			game.check();
-			return;
-			//这里是对取消按钮的修改，在选中卡牌时，如果是回合内那么就变为取消效果
-		} else if (_status.event.type == 'phase' && ui.confirm && (ui.selected.cards.length !=
-				0 || ui.selected.targets.length != 0)) {
-			ui.confirm.classList.add('removing');
-			event.restore();
-			var cards = event.player.getCards('hej');
-			for (var i = 0; i < cards.length; i++) {
-				cards[i].recheck('useSkill');
-			}
-			game.uncheck();
-			game.check();
-			return;
-		}
-		event.result = {
-			confirm: 'cancel',
-			bool: false
-		};
-		if (node) {
-			node.parentNode.close();
-		}
-		if (ui.skills) ui.skills.close();
-		if (ui.skills2) ui.skills2.close();
-		if (ui.skills3) ui.skills3.close();
-		game.uncheck();
-		if (event.custom.add.confirm) {
-			event.custom.add.confirm(true);
-
-		}
-		game.resume();
-	};
-
-	//去掉按钮卡牌上的【类别】字样
-	ui.create.buttonPresets['vcard'] = function(item, type, position, noclick, node) {
-		if (typeof item == "string") {
-			item = ["", "", item];
-		} else item[0] = "";
-		node = ui.create.card(position, "noclick", noclick);
-		node.classList.add("button");
-		node.init(item);
-		node.link = item;
-		return node;
-	}
-
 	//卡牌背景
 	if (lib.config.extension_十周年UI_cardbj && lib.config.extension_十周年UI_cardbj != "kb1") {
 		var KPcss = document.createElement("style");
@@ -1147,4 +1077,6 @@ decadeModule.import(function(lib, game, ui, get, ai, _status) {
 	window.kpimport = function(func) {
 		func(lib, game, ui, get, ai, _status);
 	};
+	
+	
 })
