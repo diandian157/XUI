@@ -195,7 +195,7 @@ body>.background {
 	height: 100%;
 	transition: none;
 	z-index: 3;
-	background-color:none;
+	background-color: none;
 	background-image: url(assets/image/cardbjk.png);
 	background-size: contain;
 }

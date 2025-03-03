@@ -707,10 +707,7 @@
 	bottom: 0;
 	width: 100%;
 	height: 100%;
-	border-top-left-radius: 100px 40px;
-	border-top-right-radius: 100px 40px;
-	border-bottom-right-radius: 8px;
-	border-bottom-left-radius: 8px;
+	border-radius: 8px;
 	background-size: cover;
 	background-repeat: no-repeat;
 	pointer-events: none;
@@ -903,10 +900,10 @@
 	left: auto;
 	top: 40px;
 	/*下移*/
-	right: 0px;
+	right: 100px;
 	/*左移*/
 	width: auto;
-	max-width: 80px;
+	max-width: 60px;
 	/*最大宽度*/
 }
 
@@ -917,7 +914,7 @@
 	height: 25px;
 	/*高度*/
 	white-space: nowrap;
-	background-image: url("assets/image/new_player_mark.png");
+	background-image: url("assets/image/markOL.png");
 	animation: fade-in 0.5s;
 	margin-bottom: 1px;
 	/*标记纵向间隔*/

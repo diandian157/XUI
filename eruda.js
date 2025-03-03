@@ -1,4 +1,4 @@
-/*! eruda v2.4.1 https://eruda.liriliri.io/ */ !(function(t, e) {
+!(function(t, e) {
 	"object" == typeof exports && "object" == typeof module ? (module.exports = e()) : "function" ==
 		typeof define && define.amd ? define([], e) : "object" == typeof exports ? (exports.eruda = e()) : (t
 			.eruda = e());
@@ -27281,4 +27281,3 @@
 		},
 	]);
 });
-//# sourceMappingURL=eruda.js.map
